@@ -1,7 +1,7 @@
 #!/bin/sh -e
 cd D:/Workspaces/GameEngine
 echo "Insert Commit message:"
-read 1
+read message
 git add --all .
-git commit -m '$1'
-git push
+git commit -m '$message'
+git push origin
