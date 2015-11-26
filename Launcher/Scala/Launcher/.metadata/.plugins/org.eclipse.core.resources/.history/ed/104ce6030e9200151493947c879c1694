@@ -1,0 +1,153 @@
+/*
+* CSS Style document for Scala/JavaFX GUI
+* @see FXLauncherGUI
+*
+*/
+
+/* Styles the scene */
+.root {
+	-fx-background-color: #0B4466;
+	-fx-cursor: "none"
+}
+
+#maximizeButton {
+	-fx-background-image: url("/images/maximize_nh.png");
+	-fx-background-repeat: stretch;
+	-fx-background-size: stretch;
+	-fx-background-color: transparent;
+}
+
+#maximizeButton:hover {
+	-fx-background-image: url("/images/maximize.png");
+	-fx-background-color: #45C4EB
+}
+
+#minimizeButton {
+	-fx-background-image: url("/images/minimize_nh.png");
+	-fx-background-repeat: stretch;
+	-fx-background-size: stretch;
+	-fx-background-color: transparent;
+}
+
+#minimizeButton:hover {
+	-fx-background-image: url("/images/minimize.png");
+	-fx-background-color: #45C4EB
+}
+
+#closeButton {
+	-fx-background-image: url("/images/close_nh.png");
+	-fx-background-repeat: stretch;
+	-fx-background-size: stretch;
+	-fx-background-color: transparent;
+	-fx-background-repeat: stretch;
+}
+
+#closeButton:hover {
+	-fx-background-image: url("/images/close.png");
+	-fx-background-color: #EC3221
+}
+
+.toolbar {
+	-fx-font: 19px "Arial";
+	-fx-text-fill: white;
+	-fx-font-family: "Helvetica";
+	-fx-font-size: 18px;
+	-fx-font-weight: bold;
+	-fx-background-color: linear-gradient(#0B4466 0%, #000000 100%);
+}
+
+.button {
+	-fx-font: 19px "sans-serif";
+	-fx-text-fill: white;
+	-fx-font-size: 18px;
+	-fx-font-weight: bold;
+	-fx-background-color: transparent;
+}
+
+.button:hover {
+	-fx-text-fill: rgb(209, 209, 209);
+	-fx-background-color: transparent;
+}
+
+#toolbarIcon {
+	-fx-background-image: url("/images/icon_nh.png");
+	-fx-background-repeat: stretch;
+	-fx-background-size: stretch;
+	-fx-background-repeat: stretch;
+	-fx-background-size: stretch;
+	-fx-background-color: transparent;
+}
+
+#toolbarIcon:hover {
+	-fx-background-image: url("/images/icon.png");
+	-fx-background-color: white;
+}
+
+.combo-box .arrow, .combo-box .arrow-button {
+	-fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view .list-cell:filled {
+	-fx-background-color: rgba(11, 68, 102, 1);
+	-fx-border-width: 3px;
+	-fx-border-width: 1px;
+	-fx-border-color: black;
+	-fx-border-margin: 5px
+}
+
+}
+.resizeElement {
+	-fx-cursor: "nw-resize";
+	-fx-background-color: #0B4466;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+}
+
+.list-view {
+	-fx-background-color: transparent;
+	-fx-margin: 5px;
+}
+
+.list-cell {
+	-fx-background-color: transparent;
+	-fx-font: 19px "Arial";
+	-fx-cell-size: 65;
+	-fx-text-fill: white;
+	-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+}
+
+.combo-box {
+	-fx-font: 19px "sans-serif";
+	-fx-text-fill: white;
+	-fx-font-size: 18px;
+	-fx-font-weight: bold;
+	-fx-background-color: transparent;
+}
+
+.combo-box:hover {
+	-fx-text-fill: black;
+	-fx-background-color: white;
+}
+
+.list-cell:filled {
+	-fx-background-color: rgba(11, 68, 102, .1);
+	-fx-border-width: 3px;
+	-fx-border-width: 1px;
+	-fx-border-color: black;
+	-fx-border-margin: 5px
+}
+
+.list-cell:filled:selected {
+	-fx-background-color: rgba(252, 214, 1, 1);
+	-fx-text-fill: black;
+}
+
+.list-cell:filled:hover {
+	-fx-background-color: rgba(69, 196, 235, 1);
+	-fx-text-fill: black;
+	-fx-effect: dropshadow(gaussian, white, 2, 0.1, 0, 0);
+}
+
+.content {
+	-fx-cursor: "default";
+	-fx-background-color: transparent;
+}

@@ -1,0 +1,15 @@
+package gui.fx
+
+import scalafx.stage.Stage
+import scalafx.scene.Scene
+
+class FxCreateProjectDialog extends Stage {
+        // Remove standard window border
+      initStyle(scalafx.stage.StageStyle.TRANSPARENT)
+     
+      scene = new Scene {
+        stylesheets += this.getClass.getResource("/fx/css/dialog.css").toExternalForm
+        fill = "#0B4466"
+        content = new Group(mainElementLayout)
+      }
+}

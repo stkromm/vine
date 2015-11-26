@@ -1,0 +1,7 @@
+package gui.fx
+
+import scalafx.stage.Stage
+
+class FxCreateProjectDialog extends Stage {
+
+}

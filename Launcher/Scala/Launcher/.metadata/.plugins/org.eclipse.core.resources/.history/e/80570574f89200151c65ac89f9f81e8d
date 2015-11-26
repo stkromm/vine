@@ -1,0 +1,16 @@
+package gui.fx
+
+import scalafx.stage.Stage
+import scalafx.scene.Scene
+
+class FxCreateProjectDialog extends Stage {
+  // Remove standard window border
+  initStyle(scalafx.stage.StageStyle.TRANSPARENT)
+
+  // outer =>
+  title = "Stand-Alone Dialog"
+  scene = new Scene {
+    fill = "#0B4466"
+    root = null
+  }
+}
