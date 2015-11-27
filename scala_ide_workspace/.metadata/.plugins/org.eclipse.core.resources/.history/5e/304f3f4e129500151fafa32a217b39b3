@@ -1,0 +1,5 @@
+name := "myproject"
+
+organization := "com.kromm"
+
+version := "0.1.0-SNAPSHOT"
