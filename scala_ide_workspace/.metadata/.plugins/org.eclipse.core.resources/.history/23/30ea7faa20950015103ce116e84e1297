@@ -1,0 +1,7 @@
+package main
+
+object Appp {
+  override def main(args: Array[String]) {
+    println("ddd")
+  }
+}

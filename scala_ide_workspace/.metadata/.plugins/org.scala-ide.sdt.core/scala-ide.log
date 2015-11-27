@@ -8729,3 +8729,619 @@ scala.reflect.internal.FatalError: ThisType(method init) for sym which is not a 
 2015-11-27 15:50:28,355  WARN [Worker-4] - ScalaProject - Project TestProject runs on platform default installation.
 2015-11-27 15:50:28,371  WARN [Worker-4] - ScalaProject - Project TestProject has platform default sourceLevel.
 2015-11-27 15:50:28,371  WARN [Worker-4] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:00,412  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject has platform default sourceLevel.
+2015-11-27 16:27:00,415  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:00,432  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject has platform default sourceLevel.
+2015-11-27 16:27:00,432  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:00,438  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject has platform default sourceLevel.
+2015-11-27 16:27:00,438  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:00,453  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject has platform default sourceLevel.
+2015-11-27 16:27:00,453  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:00,457  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject has platform default sourceLevel.
+2015-11-27 16:27:00,457  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:00,461  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject has platform default sourceLevel.
+2015-11-27 16:27:00,461  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:01,235 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Error thrown while initializing the presentation compiler.
+Java Model Exception: Java Model Status [TestProject does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2344)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1909)
+	at org.eclipse.jdt.internal.core.JavaProject.getRawClasspath(JavaProject.java:1931)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.jdkPaths(ClasspathManagement.scala:147)
+	at org.scalaide.core.internal.project.ScalaProject.jdkPaths(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.scalaClasspath(ClasspathManagement.scala:134)
+	at org.scalaide.core.internal.project.ScalaProject.scalaClasspath(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ScalaProject.setupCompilerClasspath(ScalaProject.scala:488)
+	at org.scalaide.core.internal.project.ScalaProject.initializeCompilerSettings(ScalaProject.scala:474)
+	at org.scalaide.core.internal.project.ScalaProject.org$scalaide$core$internal$project$ScalaProject$$prepareCompilerSettings(ScalaProject.scala:423)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.liftedTree1$1(PresentationCompilerProxy.scala:158)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.create(PresentationCompilerProxy.scala:157)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.initialize(PresentationCompilerProxy.scala:122)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.obtainPc$1(PresentationCompilerProxy.scala:84)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.internal(PresentationCompilerProxy.scala:104)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.apply(PresentationCompilerProxy.scala:62)
+	at org.scalaide.core.compiler.InteractiveCompilationUnit$class.initialReconcile(InteractiveCompilationUnit.scala:164)
+	at org.scalaide.core.internal.jdt.model.ScalaSourceFile.initialReconcile(ScalaSourceFile.scala:83)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.initialReconcile(ScalaReconcilingStrategy.scala:58)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+2015-11-27 16:27:01,241 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Error thrown while initializing the presentation compiler.
+Java Model Exception: Java Model Status [TestProject does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2344)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1909)
+	at org.eclipse.jdt.internal.core.JavaProject.getRawClasspath(JavaProject.java:1931)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.jdkPaths(ClasspathManagement.scala:147)
+	at org.scalaide.core.internal.project.ScalaProject.jdkPaths(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.scalaClasspath(ClasspathManagement.scala:134)
+	at org.scalaide.core.internal.project.ScalaProject.scalaClasspath(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ScalaProject.setupCompilerClasspath(ScalaProject.scala:488)
+	at org.scalaide.core.internal.project.ScalaProject.initializeCompilerSettings(ScalaProject.scala:474)
+	at org.scalaide.core.internal.project.ScalaProject.org$scalaide$core$internal$project$ScalaProject$$prepareCompilerSettings(ScalaProject.scala:423)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.liftedTree1$1(PresentationCompilerProxy.scala:158)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.create(PresentationCompilerProxy.scala:157)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.initialize(PresentationCompilerProxy.scala:122)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.obtainPc$1(PresentationCompilerProxy.scala:84)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.internal(PresentationCompilerProxy.scala:104)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.apply(PresentationCompilerProxy.scala:62)
+	at org.scalaide.core.compiler.InteractiveCompilationUnit$class.forceReconcile(InteractiveCompilationUnit.scala:151)
+	at org.scalaide.core.internal.jdt.model.ScalaSourceFile.forceReconcile(ScalaSourceFile.scala:73)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.reconcile(ScalaReconcilingStrategy.scala:43)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.initialReconcile(ScalaReconcilingStrategy.scala:59)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+2015-11-27 16:27:01,244 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Error thrown while initializing the presentation compiler.
+Java Model Exception: Java Model Status [TestProject does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2344)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1909)
+	at org.eclipse.jdt.internal.core.JavaProject.getRawClasspath(JavaProject.java:1931)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.jdkPaths(ClasspathManagement.scala:147)
+	at org.scalaide.core.internal.project.ScalaProject.jdkPaths(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.scalaClasspath(ClasspathManagement.scala:134)
+	at org.scalaide.core.internal.project.ScalaProject.scalaClasspath(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ScalaProject.setupCompilerClasspath(ScalaProject.scala:488)
+	at org.scalaide.core.internal.project.ScalaProject.initializeCompilerSettings(ScalaProject.scala:474)
+	at org.scalaide.core.internal.project.ScalaProject.org$scalaide$core$internal$project$ScalaProject$$prepareCompilerSettings(ScalaProject.scala:423)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.liftedTree1$1(PresentationCompilerProxy.scala:158)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.create(PresentationCompilerProxy.scala:157)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.initialize(PresentationCompilerProxy.scala:122)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.obtainPc$1(PresentationCompilerProxy.scala:84)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.internal(PresentationCompilerProxy.scala:104)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.apply(PresentationCompilerProxy.scala:62)
+	at org.scalaide.core.compiler.InteractiveCompilationUnit$class.currentProblems(InteractiveCompilationUnit.scala:184)
+	at org.scalaide.core.internal.jdt.model.ScalaSourceFile.currentProblems(ScalaSourceFile.scala:73)
+	at org.scalaide.core.compiler.InteractiveCompilationUnit$class.forceReconcile(InteractiveCompilationUnit.scala:152)
+	at org.scalaide.core.internal.jdt.model.ScalaSourceFile.forceReconcile(ScalaSourceFile.scala:73)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.reconcile(ScalaReconcilingStrategy.scala:43)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.initialReconcile(ScalaReconcilingStrategy.scala:59)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+2015-11-27 16:27:01,248 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Error thrown while initializing the presentation compiler.
+Java Model Exception: Java Model Status [TestProject does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2344)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1909)
+	at org.eclipse.jdt.internal.core.JavaProject.getRawClasspath(JavaProject.java:1931)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.jdkPaths(ClasspathManagement.scala:147)
+	at org.scalaide.core.internal.project.ScalaProject.jdkPaths(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.scalaClasspath(ClasspathManagement.scala:134)
+	at org.scalaide.core.internal.project.ScalaProject.scalaClasspath(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ScalaProject.setupCompilerClasspath(ScalaProject.scala:488)
+	at org.scalaide.core.internal.project.ScalaProject.initializeCompilerSettings(ScalaProject.scala:474)
+	at org.scalaide.core.internal.project.ScalaProject.org$scalaide$core$internal$project$ScalaProject$$prepareCompilerSettings(ScalaProject.scala:423)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.liftedTree1$1(PresentationCompilerProxy.scala:158)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.create(PresentationCompilerProxy.scala:157)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.initialize(PresentationCompilerProxy.scala:122)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.obtainPc$1(PresentationCompilerProxy.scala:84)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.internal(PresentationCompilerProxy.scala:104)
+	at org.scalaide.ui.internal.editor.decorators.BaseSemanticAction.apply(BaseSemanticAction.scala:112)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply$mcV$sp(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.util.eclipse.EclipseUtils$$anon$3.run(EclipseUtils.scala:216)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.scalaide.util.eclipse.EclipseUtils$.withSafeRunner(EclipseUtils.scala:212)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1.apply(ScalaSourceFileEditor.scala:101)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1.apply(ScalaSourceFileEditor.scala:100)
+	at scala.collection.mutable.ArraySeq.foreach(ArraySeq.scala:74)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3.reconciled(ScalaSourceFileEditor.scala:100)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners$$anonfun$reconciled$3.apply(ScalaSourceFileEditor.scala:469)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners$$anonfun$reconciled$3.apply(ScalaSourceFileEditor.scala:469)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners.reconciled(ScalaSourceFileEditor.scala:469)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor.reconciled(ScalaSourceFileEditor.scala:369)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy$$anonfun$reconcile$3.apply(ScalaReconcilingStrategy.scala:53)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy$$anonfun$reconcile$3.apply(ScalaReconcilingStrategy.scala:53)
+	at scala.Option.foreach(Option.scala:257)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.reconcile(ScalaReconcilingStrategy.scala:53)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.initialReconcile(ScalaReconcilingStrategy.scala:59)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+2015-11-27 16:27:01,251 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Error thrown while initializing the presentation compiler.
+Java Model Exception: Java Model Status [TestProject does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2344)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1909)
+	at org.eclipse.jdt.internal.core.JavaProject.getRawClasspath(JavaProject.java:1931)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.jdkPaths(ClasspathManagement.scala:147)
+	at org.scalaide.core.internal.project.ScalaProject.jdkPaths(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.scalaClasspath(ClasspathManagement.scala:134)
+	at org.scalaide.core.internal.project.ScalaProject.scalaClasspath(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ScalaProject.setupCompilerClasspath(ScalaProject.scala:488)
+	at org.scalaide.core.internal.project.ScalaProject.initializeCompilerSettings(ScalaProject.scala:474)
+	at org.scalaide.core.internal.project.ScalaProject.org$scalaide$core$internal$project$ScalaProject$$prepareCompilerSettings(ScalaProject.scala:423)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.liftedTree1$1(PresentationCompilerProxy.scala:158)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.create(PresentationCompilerProxy.scala:157)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.initialize(PresentationCompilerProxy.scala:122)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.obtainPc$1(PresentationCompilerProxy.scala:84)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.internal(PresentationCompilerProxy.scala:104)
+	at org.scalaide.ui.internal.editor.decorators.BaseSemanticAction.apply(BaseSemanticAction.scala:112)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply$mcV$sp(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.util.eclipse.EclipseUtils$$anon$3.run(EclipseUtils.scala:216)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.scalaide.util.eclipse.EclipseUtils$.withSafeRunner(EclipseUtils.scala:212)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1.apply(ScalaSourceFileEditor.scala:101)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1.apply(ScalaSourceFileEditor.scala:100)
+	at scala.collection.mutable.ArraySeq.foreach(ArraySeq.scala:74)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3.reconciled(ScalaSourceFileEditor.scala:100)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners$$anonfun$reconciled$3.apply(ScalaSourceFileEditor.scala:469)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners$$anonfun$reconciled$3.apply(ScalaSourceFileEditor.scala:469)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners.reconciled(ScalaSourceFileEditor.scala:469)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor.reconciled(ScalaSourceFileEditor.scala:369)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy$$anonfun$reconcile$3.apply(ScalaReconcilingStrategy.scala:53)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy$$anonfun$reconcile$3.apply(ScalaReconcilingStrategy.scala:53)
+	at scala.Option.foreach(Option.scala:257)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.reconcile(ScalaReconcilingStrategy.scala:53)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.initialReconcile(ScalaReconcilingStrategy.scala:59)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+2015-11-27 16:27:01,255 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Error thrown while initializing the presentation compiler.
+Java Model Exception: Java Model Status [TestProject does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2344)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1909)
+	at org.eclipse.jdt.internal.core.JavaProject.getRawClasspath(JavaProject.java:1931)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.jdkPaths(ClasspathManagement.scala:147)
+	at org.scalaide.core.internal.project.ScalaProject.jdkPaths(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.scalaClasspath(ClasspathManagement.scala:134)
+	at org.scalaide.core.internal.project.ScalaProject.scalaClasspath(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ScalaProject.setupCompilerClasspath(ScalaProject.scala:488)
+	at org.scalaide.core.internal.project.ScalaProject.initializeCompilerSettings(ScalaProject.scala:474)
+	at org.scalaide.core.internal.project.ScalaProject.org$scalaide$core$internal$project$ScalaProject$$prepareCompilerSettings(ScalaProject.scala:423)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.liftedTree1$1(PresentationCompilerProxy.scala:158)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.create(PresentationCompilerProxy.scala:157)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.initialize(PresentationCompilerProxy.scala:122)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.obtainPc$1(PresentationCompilerProxy.scala:84)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.internal(PresentationCompilerProxy.scala:104)
+	at org.scalaide.ui.internal.editor.decorators.BaseSemanticAction.apply(BaseSemanticAction.scala:112)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply$mcV$sp(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1$$anonfun$apply$1.apply(ScalaSourceFileEditor.scala:102)
+	at org.scalaide.util.eclipse.EclipseUtils$$anon$3.run(EclipseUtils.scala:216)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.scalaide.util.eclipse.EclipseUtils$.withSafeRunner(EclipseUtils.scala:212)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1.apply(ScalaSourceFileEditor.scala:101)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3$$anonfun$reconciled$1.apply(ScalaSourceFileEditor.scala:100)
+	at scala.collection.mutable.ArraySeq.foreach(ArraySeq.scala:74)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$$anon$3.reconciled(ScalaSourceFileEditor.scala:100)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners$$anonfun$reconciled$3.apply(ScalaSourceFileEditor.scala:469)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners$$anonfun$reconciled$3.apply(ScalaSourceFileEditor.scala:469)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor$ReconcilingListeners.reconciled(ScalaSourceFileEditor.scala:469)
+	at org.scalaide.ui.internal.editor.ScalaSourceFileEditor.reconciled(ScalaSourceFileEditor.scala:369)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy$$anonfun$reconcile$3.apply(ScalaReconcilingStrategy.scala:53)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy$$anonfun$reconcile$3.apply(ScalaReconcilingStrategy.scala:53)
+	at scala.Option.foreach(Option.scala:257)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.reconcile(ScalaReconcilingStrategy.scala:53)
+	at org.scalaide.ui.internal.reconciliation.ScalaReconcilingStrategy.initialReconcile(ScalaReconcilingStrategy.scala:59)
+	at org.eclipse.jdt.internal.ui.text.CompositeReconcilingStrategy.initialReconcile(CompositeReconcilingStrategy.java:114)
+	at org.eclipse.jface.text.reconciler.MonoReconciler.initialProcess(MonoReconciler.java:105)
+	at org.eclipse.jface.text.reconciler.AbstractReconciler$BackgroundThread.run(AbstractReconciler.java:173)
+2015-11-27 16:27:13,756  WARN [Worker-1] - ScalaProject - Project TestProject has platform default sourceLevel.
+2015-11-27 16:27:13,756  WARN [Worker-1] - ScalaProject - Project TestProject runs on platform default installation.
+2015-11-27 16:27:13,758 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Error thrown while initializing the presentation compiler.
+Java Model Exception: Java Model Status [TestProject does not exist]
+	at org.eclipse.jdt.internal.core.JavaElement.newNotPresentException(JavaElement.java:556)
+	at org.eclipse.jdt.internal.core.JavaModelManager.getPerProjectInfoCheckExistence(JavaModelManager.java:2344)
+	at org.eclipse.jdt.internal.core.JavaProject.getPerProjectInfo(JavaProject.java:1909)
+	at org.eclipse.jdt.internal.core.JavaProject.getRawClasspath(JavaProject.java:1931)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.jdkPaths(ClasspathManagement.scala:147)
+	at org.scalaide.core.internal.project.ScalaProject.jdkPaths(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ClasspathManagement$class.scalaClasspath(ClasspathManagement.scala:134)
+	at org.scalaide.core.internal.project.ScalaProject.scalaClasspath(ScalaProject.scala:136)
+	at org.scalaide.core.internal.project.ScalaProject.setupCompilerClasspath(ScalaProject.scala:488)
+	at org.scalaide.core.internal.project.ScalaProject.initializeCompilerSettings(ScalaProject.scala:474)
+	at org.scalaide.core.internal.project.ScalaProject.org$scalaide$core$internal$project$ScalaProject$$prepareCompilerSettings(ScalaProject.scala:423)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.project.ScalaProject$$anonfun$3.apply(ScalaProject.scala:148)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.liftedTree1$1(PresentationCompilerProxy.scala:158)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.create(PresentationCompilerProxy.scala:157)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.initialize(PresentationCompilerProxy.scala:122)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.obtainPc$1(PresentationCompilerProxy.scala:84)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.internal(PresentationCompilerProxy.scala:104)
+	at org.scalaide.core.internal.compiler.PresentationCompilerProxy.apply(PresentationCompilerProxy.scala:62)
+	at org.scalaide.core.compiler.InteractiveCompilationUnit$class.withSourceFile(InteractiveCompilationUnit.scala:202)
+	at org.scalaide.core.internal.jdt.model.ScalaSourceFile.withSourceFile(ScalaSourceFile.scala:73)
+	at org.scalaide.ui.internal.editor.decorators.semantichighlighting.Presenter$SemanticHighlightingJob$$anonfun$performSemanticHighlighting$1.apply(Presenter.scala:119)
+	at org.scalaide.ui.internal.editor.decorators.semantichighlighting.Presenter$SemanticHighlightingJob$$anonfun$performSemanticHighlighting$1.apply(Presenter.scala:119)
+	at scala.Option.flatMap(Option.scala:171)
+	at org.scalaide.ui.internal.editor.decorators.semantichighlighting.Presenter$SemanticHighlightingJob.performSemanticHighlighting(Presenter.scala:119)
+	at org.scalaide.ui.internal.editor.decorators.semantichighlighting.Presenter$SemanticHighlightingJob.run(Presenter.scala:115)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+2015-11-27 16:27:15,175 ERROR [Worker-4] - System.err - SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2015-11-27 16:27:15,175 ERROR [Worker-4] - System.err - SLF4J: Defaulting to no-operation (NOP) logger implementation
+2015-11-27 16:27:15,175 ERROR [Worker-4] - System.err - SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2015-11-27 16:36:41,469  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:41,484  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:41,641  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:41,641  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:41,672  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:41,672  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:46,047 ERROR [main] - System.err - SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2015-11-27 16:36:46,047 ERROR [main] - System.err - SLF4J: Defaulting to no-operation (NOP) logger implementation
+2015-11-27 16:36:46,047 ERROR [main] - System.err - SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2015-11-27 16:36:51,299  WARN [Worker-1] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:51,299  WARN [Worker-1] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:51,330  WARN [Worker-1] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:51,330  WARN [Worker-1] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:51,345  WARN [Worker-1] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:51,345  WARN [Worker-1] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:54,533  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:54,533  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:54,549  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:54,549  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:54,580  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:54,580  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:54,783  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:54,783  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:55,096  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:55,096  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:55,127  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:55,127  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:55,424  WARN [Worker-0] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:55,440  WARN [Worker-0] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:55,455  WARN [Worker-0] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:55,455  WARN [Worker-0] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:55,471  WARN [Worker-0] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:55,471  WARN [Worker-0] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:56,737  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:56,737  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:56,830  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:56,830  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:56,846  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:56,846  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:58,018  WARN [Worker-1] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:58,034  WARN [Worker-1] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:58,049  WARN [Worker-1] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:58,049  WARN [Worker-1] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:36:58,065  WARN [Worker-1] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:36:58,065  WARN [Worker-1] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:38:10,485  WARN [Worker-7] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:38:10,485  WARN [Worker-7] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:38:10,501  WARN [Worker-7] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:38:10,501  WARN [Worker-7] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:38:10,517  WARN [Worker-7] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:38:10,517  WARN [Worker-7] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:41:43,479  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:41:43,479  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:41:43,506  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:41:43,507  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:41:43,526  WARN [Worker-6] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:41:43,526  WARN [Worker-6] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:41:45,909  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:41:45,909  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:41:45,938  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:41:45,938  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:41:45,956  WARN [Worker-3] - ScalaProject - Project Test has platform default sourceLevel.
+2015-11-27 16:41:45,957  WARN [Worker-3] - ScalaProject - Project Test runs on platform default installation.
+2015-11-27 16:47:45,497  WARN [Worker-5] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:47:45,497  WARN [Worker-5] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:47:45,520  WARN [Worker-5] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:47:45,520  WARN [Worker-5] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:47:45,538  WARN [Worker-5] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:47:45,538  WARN [Worker-5] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:23,397  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:23,397  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:23,414  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:23,414  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:23,429  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:23,429  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:32,352  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:32,352  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:32,366  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:32,366  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:32,380  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:32,380  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:32,868 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,868 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,868 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,868 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,868 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,868 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,868 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,869 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,869 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,871 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:32,873 ERROR [Text Viewer Hover Presenter] - IScalaPresentationCompiler$ - Ignoring InterruptException
+2015-11-27 16:49:33,955  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - CallByNameParamAtCreationPresenter - Timeout while waiting for `askLoadedTyped` during semantic highlighting.
+2015-11-27 16:49:46,174  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:46,174  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:51,310  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:51,311  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:51,498  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:51,499  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:51,517  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:51,517  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:49:55,233  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:49:55,233  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:53:27,513  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:53:27,513  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:53:27,528  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:53:27,528  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:53:36,916  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:53:36,916  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:53:36,932  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:53:36,932  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:54:37,415  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:54:37,415  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:54:37,430  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:54:37,430  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:54:47,687  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:54:47,687  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:54:47,687  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:54:47,687  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:54:51,015  WARN [Worker-9] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:54:51,015  WARN [Worker-9] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:54:51,031  WARN [Worker-9] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:54:51,031  WARN [Worker-9] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:04,384  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:04,384  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:04,384  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:04,384  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:11,434  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:11,434  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:11,450  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:11,450  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:19,826  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:19,826  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:19,842  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:19,842  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:32,067  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:32,067  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:32,067  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:32,067  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:41,967  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:41,967  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:41,967  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:41,967  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:46,590 ERROR [main] - org.scala-ide.sdt.core - org.scala-ide.sdt.core - org.scala-ide.sdt.core - 0 - Throwable during asyncExec
+scala.reflect.internal.FatalError: ThisType(method init) for sym which is not a class
+	at scala.reflect.internal.Reporting$class.abort(Reporting.scala:59)
+	at scala.reflect.internal.SymbolTable.abort(SymbolTable.scala:16)
+	at scala.reflect.internal.Types$ThisType.<init>(Types.scala:1167)
+	at scala.reflect.internal.Types$UniqueThisType.<init>(Types.scala:1187)
+	at scala.reflect.internal.Types$ThisType$.apply(Types.scala:1191)
+	at scala.tools.nsc.interactive.Global.scala$tools$nsc$interactive$Global$$findMirrorSymbol(Global.scala:873)
+	at scala.tools.nsc.interactive.Global$$anonfun$getDocComment$2$$anonfun$apply$16$$anonfun$apply$18.apply(Global.scala:946)
+	at scala.tools.nsc.interactive.Global$$anonfun$getDocComment$2$$anonfun$apply$16$$anonfun$apply$18.apply(Global.scala:945)
+	at scala.collection.TraversableLike$WithFilter$$anonfun$foreach$1.apply(TraversableLike.scala:778)
+	at scala.collection.immutable.List.foreach(List.scala:381)
+	at scala.collection.TraversableLike$WithFilter.foreach(TraversableLike.scala:777)
+	at scala.tools.nsc.interactive.Global$$anonfun$getDocComment$2$$anonfun$apply$16.apply(Global.scala:945)
+	at scala.tools.nsc.interactive.Global$$anonfun$getDocComment$2$$anonfun$apply$16.apply(Global.scala:944)
+	at scala.tools.nsc.interactive.Global.scala$tools$nsc$interactive$Global$$withTempUnits(Global.scala:853)
+	at scala.tools.nsc.interactive.Global$$anonfun$getDocComment$2.apply(Global.scala:944)
+	at scala.tools.nsc.interactive.Global$$anonfun$getDocComment$2.apply(Global.scala:944)
+	at scala.tools.nsc.interactive.Global$$anonfun$respond$1.apply(Global.scala:699)
+	at scala.tools.nsc.interactive.Global$$anonfun$respond$1.apply(Global.scala:699)
+	at scala.tools.nsc.interactive.Global.respondGradually(Global.scala:706)
+	at scala.tools.nsc.interactive.Global.respond(Global.scala:699)
+	at scala.tools.nsc.interactive.Global.getDocComment(Global.scala:943)
+	at scala.tools.nsc.interactive.CompilerControl$AskDocCommentItem.apply$mcV$sp(CompilerControl.scala:376)
+	at scala.tools.nsc.interactive.Global$$anonfun$pollForWork$1.apply$mcV$sp(Global.scala:504)
+	at scala.util.control.Breaks.breakable(Breaks.scala:38)
+	at scala.tools.nsc.interactive.Global.pollForWork(Global.scala:429)
+	at scala.tools.nsc.interactive.PresentationCompilerThread.run(PresentationCompilerThread.scala:22)
+2015-11-27 16:55:50,935  WARN [Worker-5] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:50,935  WARN [Worker-5] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:55:50,950  WARN [Worker-5] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:55:50,950  WARN [Worker-5] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:02,461  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:02,461  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:02,461  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:02,461  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:23,574  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:23,574  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:23,590  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:23,590  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:35,479  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:35,479  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:35,494  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:35,494  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:36,979  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:36,979  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:54,102  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:54,102  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:54,117  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:54,117  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:54,477  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:54,477  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:56:55,086  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:56:55,086  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:57:04,164  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:57:04,164  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:57:04,164  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:57:04,164  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:57:04,180  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:57:04,180  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:34,775  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:34,775  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:34,790  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:34,790  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:34,806  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:34,806  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:35,494  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:35,494  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:38,260  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:38,260  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:38,276  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:38,276  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:38,620  WARN [Java indexing] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:38,620  WARN [Java indexing] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:58:42,341  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:58:42,341  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 16:59:00,527  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 16:59:00,527  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:01:02,626  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:01:02,626  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:01:02,641  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:01:02,641  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:01:03,082  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:01:03,082  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:01:07,151  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:01:07,151  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:17,470  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:17,470  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:17,689  WARN [Worker-10] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:17,689  WARN [Worker-10] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:17,720  WARN [Worker-10] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:17,720  WARN [Worker-10] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:18,111  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:18,111  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:28,427  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:28,427  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:28,443  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:28,443  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:28,646  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:28,646  WARN [org.scalaide.ui.internal.reconciliation.ScalaReconciler] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:02:29,271  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:02:29,271  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:32,122  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:32,122  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:32,251  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:32,251  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:32,266  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:32,266  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:33,099  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:33,099  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:48,268  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:48,268  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:48,283  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:48,283  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:58,079  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:58,079  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:04:58,088  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:04:58,088  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:05,169  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:05,169  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:05,185  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:05,185  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:09,720  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:09,720  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:09,720  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:09,720  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:10,295  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:10,295  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:21,709  WARN [Worker-10] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:21,709  WARN [Worker-10] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:21,709  WARN [Worker-10] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:21,709  WARN [Worker-10] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:23,793  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:23,793  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:23,809  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:23,809  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:24,214  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:24,214  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:52,522  WARN [Worker-10] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:52,522  WARN [Worker-10] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:52,522  WARN [Worker-10] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:52,522  WARN [Worker-10] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:05:53,159  WARN [Worker-10] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:05:53,159  WARN [Worker-10] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:06:16,153  WARN [Worker-9] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:06:16,153  WARN [Worker-9] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:06:16,153  WARN [Worker-9] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:06:16,169  WARN [Worker-9] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:06:18,523  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:06:18,523  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:06:18,523  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:06:18,539  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:06:18,556  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:06:18,556  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:07:18,659  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:07:18,659  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:07:18,659  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:07:18,659  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:22,077  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:22,077  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:22,077  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:22,077  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:22,690  WARN [Worker-12] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:22,690  WARN [Worker-12] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:28,863  WARN [Worker-14] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:28,863  WARN [Worker-14] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:28,863  WARN [Worker-14] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:28,863  WARN [Worker-14] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:29,285  WARN [Worker-14] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:29,285  WARN [Worker-14] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:59,281  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:59,281  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:59,296  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:59,296  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:09:59,859  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:09:59,859  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:10:17,891  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:10:17,891  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:10:17,891  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:10:17,891  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:10:18,438  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:10:18,438  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:11,563  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:11,563  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:11,907  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:11,907  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:11,922  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:11,922  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:12,579  WARN [Worker-8] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:12,579  WARN [Worker-8] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:26,902  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:26,902  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:26,918  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:26,918  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:27,449  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:27,449  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:32,200  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:32,200  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:32,200  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:32,200  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:32,590  WARN [Java indexing] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:32,590  WARN [Java indexing] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:32,622  WARN [Worker-6] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:32,622  WARN [Worker-6] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:51,376  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:51,376  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:51,392  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:51,392  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-27 17:11:51,806  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-27 17:11:51,806  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.

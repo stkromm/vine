@@ -1,14 +1,5 @@
 INDEX VERSION 1.127+D:\Workspaces\GameEngine\scala_ide_workspace\.metadata\.plugins\org.eclipse.jdt.core
-4187875683.index
-2057069206.index
-3454422283.index
-1612822300.index
-668983973.index
-1070134089.index
-3859778076.index
 2997201922.index
-731388109.index
+668983973.index
 2510761702.index
-559670790.index
-1034703879.index
-1540581315.index
+1070134089.index

@@ -1,0 +1,8 @@
+package main
+
+object Appp {
+  def main(args: Array[String]) {
+     val m = new Main()
+     
+  }
+}
