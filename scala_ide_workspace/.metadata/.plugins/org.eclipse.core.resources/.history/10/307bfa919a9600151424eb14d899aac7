@@ -1,0 +1,28 @@
+package main
+
+class FPSManager {
+  private var frames = List()
+  private var avgFps = 30;
+
+  def getFps: Int = {
+    frames match {
+      case x :: List() => x
+      case x :: list => {
+        (list.sum / list.length)
+      }
+      case List() => 0
+      case _      => 0
+    }
+    frames.tail.sum
+  }
+
+  def tick(duration: Long) {
+    if (frames.length >= 100) {
+      val HundretFpsDuration = frames.sum
+      avgFps = (frames.sum) / frames.length
+      frames = List(duration)
+    } else {
+      duration :: frames
+    }
+  }
+}

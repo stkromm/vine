@@ -1,0 +1,59 @@
+package main
+
+import java.util.Calendar
+import java.util.concurrent.TimeUnit
+
+import scala.util.Try
+import scala.math
+
+class Game {
+
+  private var lastFrameDuration = 0.0
+
+  val maxFrameDuration = 8
+  val renderer = new GLRenderer()
+
+  def loop(previous: Long) {
+    pollInput()
+    update()
+    render()
+    // Only needed, when vsync disabled
+    if (vsync != 0 && maxFrameDuration != 0) {
+      val frameDuration = math.max(0L, maxFrameDuration * 1000000L - java.lang.System.nanoTime + previous)
+      if (frameDuration >= 500) {
+        TimeUnit.NANOSECONDS.sleep(frameDuration);
+      }
+    }
+    lastFrameDuration = 1000000000 / (java.lang.System.nanoTime - previous);
+    println(lastFrameDuration)
+    if (!renderer.exit) {
+      loop(java.lang.System.nanoTime)
+    }
+  }
+  def run() {
+
+    try {
+      init();
+
+      loop(java.lang.System.nanoTime);
+      renderer.close()
+    } finally {
+      renderer.finish()
+    }
+  }
+
+  def init() {
+
+  }
+  def update() {
+
+  }
+  def render() {
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+    glfwSwapBuffers(glfwGetCurrentContext); // swap the color buffers
+
+  }
+  def pollInput() {
+    glfwPollEvents();
+  }
+}

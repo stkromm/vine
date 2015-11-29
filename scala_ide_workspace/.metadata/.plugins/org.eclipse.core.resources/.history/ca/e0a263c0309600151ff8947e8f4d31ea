@@ -1,0 +1,55 @@
+package main
+
+import java.util.concurrent.TimeUnit
+
+class Game {
+
+  private var lastFrameDuration = 0.0
+
+  val maxFrameDuration = 8
+  val renderer = new GLRenderer()
+  val effortableSleepTime = 500
+  val MS_IN_NS = 1000000L
+  val SEC_IN_NS = 1000000000L
+
+  def tick(previous: Long) {
+    pollInput()
+    update()
+    render()
+    // Only needed, when vsync disabled
+    if (renderer.vsync != 0 && maxFrameDuration != 0) {
+      val frameDuration = maxFrameDuration * MS_IN_NS - java.lang.System.nanoTime + previous
+      if (frameDuration >= effortableSleepTime) {
+        TimeUnit.NANOSECONDS.sleep(frameDuration);
+      }
+    }
+    lastFrameDuration = SEC_IN_NS / (java.lang.System.nanoTime - previous);
+    println(lastFrameDuration)
+    if (!renderer.exit) {
+      tick(java.lang.System.nanoTime)
+    }
+  }
+  def run() {
+
+    try {
+      init();
+      tick(java.lang.System.nanoTime);
+      renderer.close()
+    } finally {
+      renderer.finish()
+    }
+  }
+
+  def init() {
+    renderer.init()
+  }
+  def update() {
+
+  }
+  def render() {
+    renderer.render()
+  }
+  def pollInput() {
+    renderer.pollInput()
+  }
+}

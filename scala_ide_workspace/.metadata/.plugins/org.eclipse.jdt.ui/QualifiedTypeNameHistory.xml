@@ -7,4 +7,5 @@
 <fullyQualifiedTypeName name="scalafx.geometry.Insets"/>
 <fullyQualifiedTypeName name="scalafx.event.ActionEvent"/>
 <fullyQualifiedTypeName name="javafx.scene.shape.Rectangle"/>
+<fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
 </qualifiedTypeNameHistroy>

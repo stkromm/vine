@@ -1,0 +1,11 @@
+package main
+
+class GLRenderer extends Renderer {
+  def render() {
+
+  }
+
+  def init() {
+
+  }
+}

@@ -1,0 +1,17 @@
+package main
+
+class FPSManager {
+  private var frames = List(0L)
+  private var avgFps = 30;
+
+  def getFps: Int = {
+    fps
+  }
+
+  def tick(duration: Long) {
+    duration :: frames
+    if (frames.length > 100) {
+      frames = List(duration)
+    }
+  }
+}
