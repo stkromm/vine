@@ -11530,3 +11530,116 @@ scala.reflect.internal.FatalError: ThisType(method init) for sym which is not a 
 2015-11-29 14:29:02,032  WARN [Worker-20] - ScalaProject - Project Engine runs on platform default installation.
 2015-11-29 14:29:03,260  WARN [Worker-20] - ScalaProject - Project Engine has platform default sourceLevel.
 2015-11-29 14:29:03,261  WARN [Worker-20] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:20:13,385  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:20:13,411  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:20:13,416  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:20:13,416  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:37:24,861  WARN [Worker-14] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:37:24,861  WARN [Worker-14] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:37:25,017  WARN [Worker-14] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:37:25,017  WARN [Worker-14] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:37:29,502  WARN [Worker-14] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:37:29,502  WARN [Worker-14] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:37:29,711  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:37:29,711  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:37:29,729  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:37:29,729  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:37:30,917  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:37:30,917  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:46:56,709  WARN [main] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:46:56,709  WARN [main] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:46:56,954  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:46:56,954  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:46:56,980  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:46:56,980  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:47:00,263  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:47:00,263  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:48:42,213  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:48:42,213  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:48:42,229  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:48:42,229  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:48:42,276  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:48:42,276  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:56:14,423  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:56:14,423  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:56:14,439  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:56:14,439  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:56:49,805  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:56:49,805  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:56:49,820  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:56:49,820  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:56:51,648  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:56:51,648  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:57:23,396  WARN [Worker-19] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:57:23,396  WARN [Worker-19] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:57:23,411  WARN [Worker-19] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:57:23,411  WARN [Worker-19] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:57:24,489  WARN [Worker-19] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:57:24,489  WARN [Worker-19] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:57:24,833 ERROR [Worker-15] - System.err - SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2015-11-29 19:57:24,833 ERROR [Worker-15] - System.err - SLF4J: Defaulting to no-operation (NOP) logger implementation
+2015-11-29 19:57:24,833 ERROR [Worker-15] - System.err - SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2015-11-29 19:58:08,540  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:08,540  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:08,556  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:08,556  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:20,369  WARN [Worker-23] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:20,369  WARN [Worker-23] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:20,385  WARN [Worker-23] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:20,385  WARN [Worker-23] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:23,409  WARN [Worker-15] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:23,409  WARN [Worker-15] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:23,425  WARN [Worker-15] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:23,425  WARN [Worker-15] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:28,847  WARN [Worker-19] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:28,847  WARN [Worker-19] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:28,863  WARN [Worker-19] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:28,863  WARN [Worker-19] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:59,878  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:59,878  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:58:59,894  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:58:59,894  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:06,942  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:06,942  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:06,957  WARN [Worker-7] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:06,957  WARN [Worker-7] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:09,959  WARN [Worker-22] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:09,959  WARN [Worker-22] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:09,975  WARN [Worker-22] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:09,975  WARN [Worker-22] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:11,397  WARN [Worker-22] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:11,397  WARN [Worker-22] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:31,240  WARN [Worker-23] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:31,240  WARN [Worker-23] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:31,256  WARN [Worker-23] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:31,256  WARN [Worker-23] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 19:59:32,178  WARN [Worker-23] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 19:59:32,178  WARN [Worker-23] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:11:36,299  WARN [Worker-25] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:11:36,299  WARN [Worker-25] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:11:36,318  WARN [Worker-25] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:11:36,318  WARN [Worker-25] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:12:45,538  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:12:45,539  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:12:45,554  WARN [Worker-11] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:12:45,554  WARN [Worker-11] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:12:51,647  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:12:51,648  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:12:51,665  WARN [Worker-4] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:12:51,665  WARN [Worker-4] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:12:59,571  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:12:59,571  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:12:59,583  WARN [Worker-0] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:12:59,583  WARN [Worker-0] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:13:06,497  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:13:06,497  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:13:06,509  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:13:06,509  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:13:08,162  WARN [Worker-13] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:13:08,162  WARN [Worker-13] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:13:46,961  WARN [Worker-25] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:13:46,962  WARN [Worker-25] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:13:46,981  WARN [Worker-25] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:13:46,981  WARN [Worker-25] - ScalaProject - Project Engine runs on platform default installation.
+2015-11-29 20:13:50,565  WARN [Worker-25] - ScalaProject - Project Engine has platform default sourceLevel.
+2015-11-29 20:13:50,566  WARN [Worker-25] - ScalaProject - Project Engine runs on platform default installation.

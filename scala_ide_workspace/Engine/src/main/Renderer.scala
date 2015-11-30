@@ -7,7 +7,7 @@ abstract class Renderer {
   val vsync = 2
 
   def init
-  def render
+  def render(lastTimeRendered: Long)
   def exit: Boolean
   def finish
   def close

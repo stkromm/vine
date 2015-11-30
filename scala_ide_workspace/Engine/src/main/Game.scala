@@ -14,10 +14,10 @@ class Game {
   val SEC_IN_NS = 1000000000L
 
   def tick(previous: Long) {
-    pollInput()
+    renderer.pollInput()
     update()
-    render()
-    // Only needed, when vsync disabled
+    renderer.render(previous)
+    // Only needed, when vsync disabled and framerate capped
     if (renderer.vsync != 0 && maxFrameDuration != 0) {
       val frameDuration = maxFrameDuration * MS_IN_NS - java.lang.System.nanoTime + previous
       if (frameDuration >= MIN_SLEEP_TIME) {
@@ -47,11 +47,5 @@ class Game {
   }
   def update() {
 
-  }
-  def render() {
-    renderer.render()
-  }
-  def pollInput() {
-    renderer.pollInput()
   }
 }

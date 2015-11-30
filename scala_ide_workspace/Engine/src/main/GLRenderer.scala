@@ -27,9 +27,27 @@ class GLRenderer extends Renderer {
     glfwTerminate();
     Try(errorCallback.get.release());
   }
-  def render() {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
+  def render(lastTimeRendered: Long) {
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
     glfwSwapBuffers(glfwGetCurrentContext); // swap the color buffers
+    glBegin(GL_QUADS);
+    // Bottom left
+    glTexCoord2f(.0f, 1.0f);
+    glVertex2i(0, 10);
+
+    // Top left
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex2i(0, 0);
+
+    // Top right
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex2i(10, 0);
+
+    // Bottom right
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex2i(10, 10);
+    glEnd();
+
   }
   def exit: Boolean = {
     glfwWindowShouldClose(glfwGetCurrentContext) == GLFW_TRUE
@@ -45,8 +63,6 @@ class GLRenderer extends Renderer {
 
     // Configure our window
     glfwDefaultWindowHints(); // optional, the current window hints are already the default
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE); // the window will stay hidden after creation
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE); // the window will be resizable
 
     // Create the window
     val window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
@@ -54,12 +70,12 @@ class GLRenderer extends Renderer {
       throw new RuntimeException("Failed to create the GLFW window");
 
     // Get the resolution of the primary monitor
-    val vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+    val vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor);
     // Center our window
     glfwSetWindowPos(
       window,
-      (vidmode.width() - WIDTH) / 2,
-      (vidmode.height() - HEIGHT) / 2);
+      (vidmode.width - WIDTH) / 2,
+      (vidmode.height - HEIGHT) / 2);
 
     // Make the OpenGL context current
     glfwMakeContextCurrent(window);
