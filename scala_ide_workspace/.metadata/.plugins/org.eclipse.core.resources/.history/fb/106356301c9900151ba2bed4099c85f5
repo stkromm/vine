@@ -1,0 +1,11 @@
+package core
+
+import util.UnitSpec
+import main.Game
+
+class GameSpec extends UnitSpec {
+      it should "throw NegativeDurationException" in {
+        val game = new Game()
+        game.t
+      }
+}

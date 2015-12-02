@@ -8,4 +8,6 @@
 <fullyQualifiedTypeName name="scalafx.event.ActionEvent"/>
 <fullyQualifiedTypeName name="javafx.scene.shape.Rectangle"/>
 <fullyQualifiedTypeName name="java.util.concurrent.TimeUnit"/>
+<fullyQualifiedTypeName name="scala.actors.threadpool.TimeUnit"/>
+<fullyQualifiedTypeName name="scala.util.Try"/>
 </qualifiedTypeNameHistroy>
