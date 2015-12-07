@@ -1,0 +1,14 @@
+package com.vine.engine.core.game;
+
+public class WindowInitializeException extends Exception {
+
+	public WindowInitializeException(String message) {
+		super(message);
+	}
+
+	/**
+	 * Default serial id.
+	 */
+	private static final long serialVersionUID = 1L;
+
+}

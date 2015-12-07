@@ -1,0 +1,18 @@
+package com.vine.math;
+
+import junit.framework.TestCase;
+
+public class MatrixTest extends TestCase {
+
+    public void testTranspose() {
+        Matrix3f matrix = new Matrix3f(
+                1.f,-2.f,0.f,
+                0.f,1.f,1.f,
+                2.f,1.f,0.f
+                )
+    }
+
+    public static void main(String[] args) {
+        junit.swingui.TestRunner.run(MatrixTest.class);
+    }
+}

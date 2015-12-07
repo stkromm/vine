@@ -1,7 +1,7 @@
 package core
 
-import util.UnitSpec
-import main.Game
+import UnitSpec
+import core.Game
 
 class GameSpec extends UnitSpec {
 }

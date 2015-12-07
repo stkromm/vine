@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<checkstyle-configurations file-format-version="5.0.0" default-check-configuration="Vine_Checks">
+  <check-configuration name="Vine_Checks" location="internal_config_1449143577549.xml" type="internal" description="Based on Checkstyle configurartion that checks the Google coding conventions (https://google-styleguide.googlecode.com/svn-history/r130/trunk/javaguide.html). Made some configuration, mainly to identation and whitespace style rules."/>
+</checkstyle-configurations>

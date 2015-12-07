@@ -1,0 +1,21 @@
+package com.vine.math;
+
+public interface MatrixOperations<MAT extends Matrix> {
+    void inverse();
+
+    void add(MAT matrix);
+
+    void rotate(MAT matrix);
+    
+    void makeIdentity();
+    
+    void uniformScale(float scale);
+    
+    void translate(MAT matrix);
+    
+    float determinant();
+    
+    void transpose();
+    
+    void multiply(MAT matrix);
+}
