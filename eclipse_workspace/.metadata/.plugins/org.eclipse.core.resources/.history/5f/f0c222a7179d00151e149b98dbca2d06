@@ -1,0 +1,11 @@
+package com.vine.math;
+
+public class Matrix4 extends Matrix {
+
+    @Override
+    protected int getSize() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+}

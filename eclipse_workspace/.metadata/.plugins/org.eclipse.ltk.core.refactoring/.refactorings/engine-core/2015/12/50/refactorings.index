@@ -1,3 +1,18 @@
 1449496554276	Rename method 'equal'
 1449496808372	Rename method 'equals'
 1449497051054	Rename method 'testMatrixMultiply'
+1449504589804	Rename type variable 'MAT'
+1449505198555	Delete elements
+1449511707176	Rename local variable 'invertedMatrix'
+1449511764571	Rename method 'testMultiplay'
+1449525342003	Delete element
+1449525546116	Delete element
+1449525549309	Delete element
+1449526512432	Rename type 'Matrix'
+1449527902735	Delete element
+1449527908375	Delete elements
+1449528073737	Extract interface 'MatrixOperations'
+1449529463469	Move compilation units
+1449529573673	Rename package 'com.vine.math.matrix'
+1449529586513	Delete element
+1449529989374	Move compilation unit

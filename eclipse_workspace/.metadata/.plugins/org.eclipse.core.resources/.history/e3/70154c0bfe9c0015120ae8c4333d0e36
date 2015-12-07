@@ -1,0 +1,7 @@
+package com.vine.math;
+
+public class Quartion implements QuartionOperations {
+    public Quartion(float pitch, float roll, float yaw) {
+
+    }
+}

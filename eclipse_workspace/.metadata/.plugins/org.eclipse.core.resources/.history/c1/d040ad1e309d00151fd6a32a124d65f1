@@ -1,0 +1,45 @@
+package com.vine.math;
+
+public class Matrix4 extends Matrixf {
+    /**
+     * Quadratic size of Matrix4f. 4...
+     */
+    protected static final int SIZE = 4;
+ 
+    @Override
+    protected int getSize() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public float determinant() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void transpose() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected float getElement(int row, int column) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    protected void setElement(int row, int column, float value) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void inverse() {
+        // TODO Auto-generated method stub
+
+    }
+
+}

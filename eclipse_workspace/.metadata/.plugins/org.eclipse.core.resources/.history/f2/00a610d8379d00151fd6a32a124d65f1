@@ -1,0 +1,40 @@
+package com.vine.math;
+
+import org.junit.Test;
+
+public class VectorTest {
+    @Test
+    public void testAdd() {
+
+    }
+
+    @Test
+    public void testDotProduct() {
+
+    }
+
+    @Test
+    public void testCrossProduct() {
+
+    }
+
+    @Test
+    public void testGetElement() {
+
+    }
+
+    @Test
+    public void testScaling() {
+
+    }
+
+    @Test
+    public void testAngleBetween() {
+
+    }
+
+    @Test
+    public void testLength() {
+
+    }
+}
