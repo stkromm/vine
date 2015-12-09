@@ -1,0 +1,37 @@
+package com.vine.math;
+
+public interface VectorOperations<V extends Vectorf> {
+
+    boolean equalTo(final V vector);
+
+    void add(final V vector);
+
+    /**
+     * Returns the dot product of this Vector2f and the given. Callers guarantee
+     * that the given vector is a valid object.
+     */
+    double dot(final V vector);
+
+    /**
+     * Multiplies the elements of this vector with the given scale float value.
+     */
+    void scale(final float factor);
+
+    /**
+     * Returns the length of this Vector2f.
+     */
+    double length();
+
+    /**
+     * Calculates the inner angle between this and the given vector.
+     * 
+     * @return The cosine of the radian angle between the two vectors. use
+     *         acosine to get the actual radian value. Returns 13 on error.
+     */
+    double getAngle(final V vector);
+
+    /**
+     * Normalizes this vector.
+     */
+    void normalize();
+}

@@ -1,0 +1,9 @@
+package com.vine.math;
+
+public abstract class Vectorf {
+    public static final float EPSILON = 0.000000000000000000000001f;
+
+    protected Vectorf() {
+
+    }
+}

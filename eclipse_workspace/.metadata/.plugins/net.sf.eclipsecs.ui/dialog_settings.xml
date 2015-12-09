@@ -4,6 +4,22 @@
 		<item value="false" key="maximized"/>
 		<item value="false" key="minimized"/>
 	</section>
+	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#MethodName">
+		<item value="false" key="maximized"/>
+		<item value="false" key="minimized"/>
+	</section>
+	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#MemberName">
+		<item value="false" key="maximized"/>
+		<item value="false" key="minimized"/>
+	</section>
+	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#ParameterName">
+		<item value="false" key="maximized"/>
+		<item value="false" key="minimized"/>
+	</section>
+	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#AbbreviationAsWordInName">
+		<item value="false" key="maximized"/>
+		<item value="false" key="minimized"/>
+	</section>
 	<section name="net.sf.eclipsecs.ui.config.CheckConfigurationConfigureDialog">
 		<item value="false" key="maximized"/>
 		<item value="93" key="colWidth2"/>

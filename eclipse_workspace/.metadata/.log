@@ -6530,3 +6530,2139 @@ Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\
 	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
 	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
 	... 17 more
+!SESSION 2015-12-08 22:14:42.827 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-12-08 22:15:15.192
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-08 22:44:45.092
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:44:9: expecting EOF, found 'assertTrue'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 22:44:45.095
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:44:9: expecting EOF, found 'assertTrue'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 22:44:45.095
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:44:9: expecting EOF, found 'assertTrue'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-08 22:44:45.355
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-08 22:44:45.355
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:44:9: expecting EOF, found 'assertTrue'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-08 22:44:45.355
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:44:9: expecting EOF, found 'assertTrue'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 22:44:45.355
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:44:9: expecting EOF, found 'assertTrue'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-08 23:03:41.630
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:15:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:03:41.630
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:15:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:03:41.630
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:15:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-08 23:03:41.641
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-08 23:03:41.641
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:15:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-08 23:03:41.641
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:15:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:03:41.641
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:15:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-08 23:40:12.493
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:16:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:40:12.493
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:16:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:40:12.494
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:16:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-08 23:40:12.501
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-08 23:40:12.501
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:16:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-08 23:40:12.501
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:16:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:40:12.501
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\test\java\com\vine\math\VectorTest.java:16:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-08 23:57:19.011
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java:15:8: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:57:19.012
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java:15:8: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:57:19.012
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java:15:8: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-08 23:57:19.023
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-08 23:57:19.023
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java:15:8: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-08 23:57:19.023
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java:15:8: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-08 23:57:19.023
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\VectorOperations.java:15:8: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SESSION 2015-12-09 16:23:10.138 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-12-09 16:23:27.448
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-09 16:42:44.295
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java:20:9: expecting EOF, found 'elements'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 16:42:44.297
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java:20:9: expecting EOF, found 'elements'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 16:42:44.298
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java:20:9: expecting EOF, found 'elements'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-09 16:42:44.419
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-09 16:42:44.419
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java:20:9: expecting EOF, found 'elements'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-09 16:42:44.419
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java:20:9: expecting EOF, found 'elements'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 16:42:44.419
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector3f.java:20:9: expecting EOF, found 'elements'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-09 17:31:20.945
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:192:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 17:31:20.945
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:192:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 17:31:20.945
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:192:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-09 17:31:20.961
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-09 17:31:20.961
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:192:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-09 17:31:20.962
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:192:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 17:31:20.962
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:192:5: expecting EOF, found '}'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SESSION 2015-12-09 22:08:51.931 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-12-09 22:09:13.411
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-09 22:23:32.189
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:32.190
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:32.190
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-09 22:23:32.375
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-09 22:23:32.375
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:32.376
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:32.376
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-09 22:23:59.948
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:59.948
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:59.949
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-09 22:23:59.966
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-09 22:23:59.966
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:59.966
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:23:59.967
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-09 22:25:22.224
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:25:22.224
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:25:22.225
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-09 22:25:22.238
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-09 22:25:22.238
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-09 22:25:22.238
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-09 22:25:22.239
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Matrix3f.java:197:10: expecting EOF, found 'tempMatrix'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SESSION 2015-12-09 23:50:07.218 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2015-12-09 23:50:21.830
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.core.resources 4 2 2015-12-10 00:06:34.348
+!MESSAGE Problems occurred when invoking code from plug-in: "org.eclipse.core.resources".
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:55:9: expecting EOF, found 'this'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-10 00:06:34.350
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:55:9: expecting EOF, found 'this'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-10 00:06:34.350
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:55:9: expecting EOF, found 'this'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+
+!ENTRY org.eclipse.core.resources 4 75 2015-12-10 00:06:34.432
+!MESSAGE Errors occurred during the build.
+!SUBENTRY 1 net.sf.eclipsecs.core 4 75 2015-12-10 00:06:34.432
+!MESSAGE Errors running builder 'Checkstyle Builder' on project 'engine-core'.
+!STACK 1
+org.eclipse.core.runtime.CoreException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:307)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	... 13 more
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:55:9: expecting EOF, found 'this'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 2 net.sf.eclipsecs.core 4 4 2015-12-10 00:06:34.432
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:55:9: expecting EOF, found 'this'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more
+!SUBENTRY 1 net.sf.eclipsecs.core 4 4 2015-12-10 00:06:34.432
+!MESSAGE MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+!STACK 0
+net.sf.eclipsecs.core.util.CheckstylePluginException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:66)
+	at net.sf.eclipsecs.core.util.CheckstylePluginException.rethrow(CheckstylePluginException.java:77)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:166)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.handleBuildSelection(CheckstyleBuilder.java:300)
+	at net.sf.eclipsecs.core.builder.CheckstyleBuilder.build(CheckstyleBuilder.java:171)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: com.puppycrawl.tools.checkstyle.api.CheckstyleException: MismatchedTokenException occurred during the analysis of file D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java.
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:216)
+	at com.puppycrawl.tools.checkstyle.api.AbstractFileSetCheck.process(AbstractFileSetCheck.java:79)
+	at com.puppycrawl.tools.checkstyle.Checker.process(Checker.java:265)
+	at net.sf.eclipsecs.core.builder.Auditor.runAudit(Auditor.java:159)
+	... 14 more
+Caused by: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\src\main\java\com\vine\math\Vector2f.java:55:9: expecting EOF, found 'this'
+	at antlr.Parser.match(Parser.java:211)
+	at com.puppycrawl.tools.checkstyle.grammars.GeneratedJavaRecognizer.compilationUnit(GeneratedJavaRecognizer.java:210)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.parse(TreeWalker.java:466)
+	at com.puppycrawl.tools.checkstyle.TreeWalker.processFiltered(TreeWalker.java:199)
+	... 17 more

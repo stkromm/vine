@@ -1,0 +1,20 @@
+package com.vine.math;
+
+public interface VectorOperations<V extends Vectorf> {
+
+    boolean equalTo(final Vector2f vector);
+
+    void add(final float first, final float second);
+
+    void add(final Vector2f vector);
+
+    double dot(final Vector2f vector);
+
+    Vector2f getPerpendicular();
+
+    void scale(final float factor);
+
+    double length();
+
+    double getAngle(final V vector);
+}

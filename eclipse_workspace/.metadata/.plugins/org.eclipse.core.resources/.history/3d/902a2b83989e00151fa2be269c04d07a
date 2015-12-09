@@ -1,0 +1,104 @@
+package com.vine.math;
+
+public class Vector3f extends Vectorf implements VectorOperations<Vector3f> {
+    private float xele;
+    private float yele;
+    private float zele;
+
+    /**
+     * Creates a new vector with the given x, y, z elements.
+     */
+    public Vector3f(float xele, float yele, float zele) {
+        this.xele = xele;
+        this.yele = yele;
+        this.zele = zele;
+    }
+
+    public float getX() {
+        return xele;
+    }
+
+    public void setX(float xele) {
+        this.xele = xele;
+    }
+
+    public float getY() {
+        return yele;
+    }
+
+    public void setY(float yele) {
+        this.yele = yele;
+    }
+
+    public float getZ() {
+        return zele;
+    }
+
+    public void setZ(float zele) {
+        this.zele = zele;
+    }
+
+    @Override
+    public boolean equalTo(final Vector3f vector) {
+        if (vector == null) {
+            return false;
+        }
+        return Math.abs(vector.getX() - xele + vector.getY() - yele + vector.getZ() - zele) <= 3 * EPSILON;
+    }
+
+    public void add(float first, float second, float third) {
+        xele += first;
+        yele += second;
+        zele += third;
+    }
+
+    @Override
+    public void add(Vector3f vector) {
+        if (vector == null) {
+            return;
+        }
+        xele += vector.getX();
+        yele += vector.getY();
+        zele += vector.getZ();
+    }
+
+    @Override
+    public strictfp double dot(Vector3f vector) {
+        if (vector == null) {
+            return 0;
+        }
+        return Math.sqrt(vector.getX() * xele + vector.getY() * yele + zele * vector.getZ());
+    }
+
+    @Override
+    public void scale(float factor) {
+        xele *= factor;
+        yele *= factor;
+        zele *= factor;
+
+    }
+
+    @Override
+    public double length() {
+        return dot(this);
+    }
+
+    @Override
+    public double getAngle(Vector3f vector) {
+        return this.dot(vector) / (this.length() * vector.length());
+    }
+
+    public Vector3f cross(Vector3f vector) {
+        if (vector == null) {
+            return new Vector3f(0, 0, 0);
+        }
+        return new Vector3f(yele * vector.getZ() - zele * vector.getY(), zele * vector.getX() - xele * vector.getZ(),
+                xele * vector.getY() - yele * vector.getX());
+    }
+
+    @Override
+    public void normalize() {
+        scale((float) length());
+    }
+
+}

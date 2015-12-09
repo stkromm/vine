@@ -1,0 +1,18 @@
+package com.vine.math;
+
+public interface MatrixOperations<M extends Matrixf> {
+    
+    void inverse();
+
+    void transpoe();
+    
+    void add(M matrix);
+
+    void scale(float scale);
+
+    float determinant();
+
+    void rightMultiply(M matrix);
+
+    boolean isEqualTo(M matrix);
+}

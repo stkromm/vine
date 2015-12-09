@@ -1,0 +1,122 @@
+/**
+ * 
+ */
+package com.vine.math;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Matrix4f extends Matrixf implements MatrixOperations<Matrixf> {
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#inverse()
+     */
+    @Override
+    public void inverse() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#add(com.vine.math.Matrixf)
+     */
+    @Override
+    public void add(Matrixf matrix) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#makeIdentity()
+     */
+    @Override
+    public void makeIdentity() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#uniformScale(float)
+     */
+    @Override
+    public void uniformScale(float scale) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#determinant()
+     */
+    @Override
+    public float determinant() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#transpose()
+     */
+    @Override
+    public void transpose() {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#multiply(com.vine.math.Matrixf)
+     */
+    @Override
+    public void multiply(Matrixf matrix) {
+        // TODO Auto-generated method stub
+
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.MatrixOperations#equalTo(com.vine.math.Matrixf)
+     */
+    @Override
+    public boolean equalTo(Matrixf matrix) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.Matrixf#getElement(int, int)
+     */
+    @Override
+    protected float getElement(int row, int column) {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see com.vine.math.Matrixf#getSize()
+     */
+    @Override
+    protected int getSize() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+}
