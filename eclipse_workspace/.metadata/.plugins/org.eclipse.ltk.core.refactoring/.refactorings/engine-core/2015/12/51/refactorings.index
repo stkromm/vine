@@ -1,0 +1,25 @@
+1450350414184	Rename local variable 'inversedLength'
+1450350418893	Rename local variable 'lenght'
+1450351653835	Rename local variable 'count'
+1450352172367	Rename local variable 'length'
+1450621811793	Delete element
+1450622385120	Rename package 'util'
+1450623679824	Rename field 'texture'
+1450623729351	Rename local variable 'a'
+1450623732855	Rename local variable 'r'
+1450623736888	Rename local variable 'g'
+1450624344179	Rename field 'ID'
+1450625023639	Rename local variable 'vertID'
+1450625026667	Rename local variable 'fragID'
+1450626251106	Delete element
+1450637150596	Delete element
+1450638886171	Rename local variable 'r'
+1450640944747	Rename type 'Quartion'
+1450641459100	Rename package 'com.vine.math.shapes'
+1450641463168	Move compilation unit
+1450641465657	Delete element
+1450645916154	Delete element
+1450646148179	Move compilation units
+1450647095865	Rename type 'Matrix4f'
+1450647679407	Rename method 'rotate'
+1450647770520	Rename method 'addRotation'

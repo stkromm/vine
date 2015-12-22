@@ -1,0 +1,8 @@
+package com.vine.ray;
+
+import com.vine.math.Vector3f;
+
+public class Ray {
+    Vector3f origin;
+    Vector3f direction;
+}

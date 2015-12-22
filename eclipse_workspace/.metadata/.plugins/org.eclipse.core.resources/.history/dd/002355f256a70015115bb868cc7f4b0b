@@ -1,0 +1,7 @@
+package com.vine.math.geometry;
+
+import com.vine.math.Vector2f;
+
+abstract class Shape {
+    abstract void contains(Vector2f point);
+}

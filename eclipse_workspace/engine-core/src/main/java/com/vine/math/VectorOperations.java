@@ -16,7 +16,7 @@ public interface VectorOperations<V> {
      * Returns the dot product of this Vector2f and the given. Callers guarantee
      * that the given vector is a valid object.
      */
-    double dot(final V vector);
+    float dot(final V vector);
 
     /**
      * Multiplies the elements of this vector with the given scale float value.

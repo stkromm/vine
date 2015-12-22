@@ -1,0 +1,22 @@
+package com.vine.math.geometry;
+
+import com.vine.math.Vector2f;
+
+public class Circle extends Shape {
+    float x;
+    float y;
+    float radius;
+
+    public Circle(float x, float y, float radius) {
+
+    }
+
+    @Override
+    public boolean contains(Vector2f point) {
+        if (point == null) {
+            return false;
+        }
+        Vector2f distanceVector = new Vector2f(point.getX() - origin.getX(), point.getY() - origin.getY());
+        return Math.abs(distanceVector.length()) <= radius;
+    }
+}

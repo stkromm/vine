@@ -1,0 +1,250 @@
+package com.vine.math;
+
+import com.vine.util.BufferUtils;
+
+import java.nio.FloatBuffer;
+
+public class Transformation {
+    private float a11;
+    private float a12;
+    private float a13;
+    private float a14;
+    //
+    private float a21;
+    private float a22;
+    private float a23;
+    private float a24;
+    //
+    private float a31;
+    private float a32;
+    private float a33;
+    private float a34;
+    //
+    private float a41;
+    private float a42;
+    private float a43;
+    private float a44;
+
+    public float getA11() {
+        return a11;
+    }
+
+    public float getA12() {
+        return a12;
+    }
+
+    public float getA13() {
+        return a13;
+    }
+
+    public float getA14() {
+        return a14;
+    }
+
+    public float getA21() {
+        return a21;
+    }
+
+    public float getA22() {
+        return a22;
+    }
+
+    public float getA23() {
+        return a23;
+    }
+
+    public float getA24() {
+        return a24;
+    }
+
+    public float getA31() {
+        return a31;
+    }
+
+    public float getA32() {
+        return a32;
+    }
+
+    public float getA33() {
+        return a33;
+    }
+
+    public float getA34() {
+        return a34;
+    }
+
+    public float getA41() {
+        return a41;
+    }
+
+    public float getA42() {
+        return a42;
+    }
+
+    public float getA43() {
+        return a43;
+    }
+
+    public float getA44() {
+        return a44;
+    }
+
+    public void setA11(float a11) {
+        this.a11 = a11;
+    }
+
+    public void setA12(float a12) {
+        this.a12 = a12;
+    }
+
+    public void setA13(float a13) {
+        this.a13 = a13;
+    }
+
+    public void setA14(float a14) {
+        this.a14 = a14;
+    }
+
+    public void setA21(float a21) {
+        this.a21 = a21;
+    }
+
+    public void setA22(float a22) {
+        this.a22 = a22;
+    }
+
+    public void setA23(float a23) {
+        this.a23 = a23;
+    }
+
+    public void setA24(float a24) {
+        this.a24 = a24;
+    }
+
+    public void setA31(float a31) {
+        this.a31 = a31;
+    }
+
+    public void setA32(float a32) {
+        this.a32 = a32;
+    }
+
+    public void setA33(float a33) {
+        this.a33 = a33;
+    }
+
+    public void setA34(float a34) {
+        this.a34 = a34;
+    }
+
+    public void setA41(float a41) {
+        this.a41 = a41;
+    }
+
+    public void setA42(float a42) {
+        this.a42 = a42;
+    }
+
+    public void setA43(float a43) {
+        this.a43 = a43;
+    }
+
+    public void setA44(float a44) {
+        this.a44 = a44;
+    }
+
+    /**
+     * Returns an 4x4 identity matrix.
+     */
+    public void identity() {
+        a11 = 1.f;
+        a12 = 0.f;
+        a13 = 0.f;
+        a14 = 0.f;
+        a21 = 0.f;
+        a22 = 1.f;
+        a23 = 0.f;
+        a24 = 0.f;
+        a31 = 0.f;
+        a32 = 0.f;
+        a33 = 1.f;
+        a34 = 0.f;
+        a41 = 0.f;
+        a42 = 0.f;
+        a43 = 0.f;
+        a44 = 1.f;
+    }
+
+    /**
+     * Creates an orthographic transformation matrix.
+     */
+    public void orthographic(float left, float right, float bottom, float top, float near, float far) {
+        a11 = 2.0f / (right - left);
+        a12 = 0.f;
+        a13 = 0.f;
+        a14 = 0.f;
+        a21 = 2.0f / (top - bottom);
+        a22 = 0.f;
+        a23 = 0.f;
+        a24 = 0.f;
+        a31 = 0.f;
+        a32 = 2.0f / (near - far);
+        a33 = 0.f;
+        a34 = 0.f;
+        a41 = (left + right) / (left - right);
+        a42 = (bottom + top) / (bottom - top);
+        a43 = (far + near) / (far - near);
+        a44 = 0.f;
+    }
+
+    /**
+     * Creates a translation matrix from the given vector.
+     */
+    public static Transformation translate(Vector3f vector) {
+        Transformation result = identity();
+        result.elements[0 + 3 * 4] = vector.getX();
+        result.elements[1 + 3 * 4] = vector.getY();
+        result.elements[2 + 3 * 4] = vector.getZ();
+        return result;
+    }
+
+    /**
+     * Creates a rotation matrix from the given vector.
+     */
+    public static Transformation rotate(float angle) {
+        Transformation result = identity();
+        float rotation = (float) Math.toRadians(angle);
+        float cos = (float) Math.cos(rotation);
+        float sin = (float) Math.sin(rotation);
+
+        result.elements[0 + 0 * 4] = cos;
+        result.elements[1 + 0 * 4] = sin;
+
+        result.elements[0 + 1 * 4] = -sin;
+        result.elements[1 + 1 * 4] = cos;
+
+        return result;
+    }
+
+    /**
+     * Multiplies the given matrix from the right and returns the result.
+     */
+    public Transformation multiply(Transformation matrix) {
+        Transformation result = new Transformation();
+        for (int y = 0; y < 4; y++) {
+            for (int x = 0; x < 4; x++) {
+                float sum = 0.0f;
+                for (int e = 0; e < 4; e++) {
+                    sum += this.elements[x + e * 4] * matrix.elements[e + y * 4];
+                }
+                result.elements[x + y * 4] = sum;
+            }
+        }
+        return result;
+    }
+
+    public FloatBuffer toFloatBuffer() {
+        return BufferUtils.createFloatBuffer(elements);
+    }
+
+}

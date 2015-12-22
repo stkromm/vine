@@ -51,3 +51,7 @@
 1449701699669	Rename local variable 'second'
 1449701747845	Rename local variable 'second'
 1449701752384	Rename local variable 'first'
+1449736585211	Rename local variable 'length'
+1449738874072	Change method 'dot'
+1449760400977	Delete elements
+1449761049610	Delete element

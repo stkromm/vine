@@ -9,4 +9,11 @@
 <fullyQualifiedTypeName name="java.util.stream.Stream.Builder"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="org.junit.Assert"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GLXARBCreateContext"/>
+<fullyQualifiedTypeName name="org.lwjgl.opengl.GL"/>
+<fullyQualifiedTypeName name="com.vine.math.Vector3f"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="com.vine.util.BufferUtils"/>
+<fullyQualifiedTypeName name="com.vine.input.Input"/>
+<fullyQualifiedTypeName name="com.vine.math.geometry.Shape"/>
 </qualifiedTypeNameHistroy>

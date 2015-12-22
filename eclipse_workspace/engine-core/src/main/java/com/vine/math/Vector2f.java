@@ -5,7 +5,7 @@ public class Vector2f implements VectorOperations<Vector2f> {
      * Maximum difference two floating point values can differ and still count
      * as equal.
      */
-    protected static final float EPSILON = 0.000000000000000000000001f;
+    protected static final float EPSILON = 0.000001f;
     private float x;
     private float y;
 
@@ -60,11 +60,7 @@ public class Vector2f implements VectorOperations<Vector2f> {
     }
 
     @Override
-    public final strictfp double dot(final Vector2f vector) {
-        return Math.sqrt(squaredDot(vector));
-    }
-
-    private final float squaredDot(final Vector2f vector) {
+    public final strictfp float dot(final Vector2f vector) {
         return vector == null ? 0 : x * vector.getX() + y * vector.getY();
     }
 
@@ -76,17 +72,23 @@ public class Vector2f implements VectorOperations<Vector2f> {
 
     @Override
     public final double length() {
-        return dot(this);
+        return Math.sqrt(dot(this));
     }
 
     @Override
     public final strictfp double getAngle(final Vector2f vector) {
-        if (vector == null || squaredDot(vector) <= EPSILON) {
+        if (vector == null) {
             return 0;
         }
-        final double sin = x * vector.getY() - vector.getX() * y;
-        final double cos = x * vector.getX() + y * vector.getY();
-        return Math.atan2(sin, cos) * (180 / Math.PI);
+        final double length = length();
+        if (length <= EPSILON) {
+            return 0;
+        }
+        final double vectorLength = vector.length();
+        if (vectorLength <= EPSILON) {
+            return 0;
+        }
+        return this.dot(vector) / (length * vectorLength);
     }
 
     @Override

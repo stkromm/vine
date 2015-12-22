@@ -1,5 +1,0 @@
-package com.vine.engine.core.game;
-
-public class WindowInitializeException extends Exception {
-
-}

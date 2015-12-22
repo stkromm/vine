@@ -1,0 +1,8 @@
+package com.vine.math.geometry.ray;
+
+public class Intersection {
+    float directionMultiplier;
+    Ray ray;
+    Shape shape;
+    Vector2f intersection;
+}

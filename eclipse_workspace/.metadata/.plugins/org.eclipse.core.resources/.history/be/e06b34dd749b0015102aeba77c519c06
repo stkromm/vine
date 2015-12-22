@@ -1,7 +1,0 @@
-package com.vine.math;
-
-public interface MatrixOperations<Mat extends Matrix> {
-    void inverse();
-    void add(Mat matrix);
-    void rotate(Mat matrix);
-}

@@ -5,7 +5,7 @@ public class Vector3f implements VectorOperations<Vector3f> {
      * Maximum difference two floating point values can differ and still count
      * as equal.
      */
-    protected static final float EPSILON = 0.000000000000000000000001f;
+    protected static final float EPSILON = 0.0000001f;
     private float x;
     private float y;
     private float z;
@@ -45,10 +45,8 @@ public class Vector3f implements VectorOperations<Vector3f> {
 
     @Override
     public boolean equalTo(final Vector3f vector) {
-        if (vector == null) {
-            return false;
-        }
-        return Math.abs(vector.getX() - x + vector.getY() - y + vector.getZ() - z) <= 3 * EPSILON;
+        return vector == null ? false
+                : Math.abs(vector.getX() - x + vector.getY() - y + vector.getZ() - z) <= 3 * EPSILON;
     }
 
     /**
@@ -65,17 +63,12 @@ public class Vector3f implements VectorOperations<Vector3f> {
         if (vector == null) {
             return;
         }
-        x += vector.getX();
-        y += vector.getY();
-        z += vector.getZ();
+        add(vector.getX(), vector.getY(), vector.getZ());
     }
 
     @Override
-    public strictfp double dot(Vector3f vector) {
-        if (vector == null) {
-            return 0;
-        }
-        return Math.sqrt(vector.getX() * x + vector.getY() * y + z * vector.getZ());
+    public strictfp float dot(Vector3f vector) {
+        return vector == null ? 0 : vector.getX() * x + vector.getY() * y + z * vector.getZ();
     }
 
     @Override
@@ -83,17 +76,27 @@ public class Vector3f implements VectorOperations<Vector3f> {
         x *= factor;
         y *= factor;
         z *= factor;
-
     }
 
     @Override
     public double length() {
-        return dot(this);
+        return Math.sqrt(dot(this));
     }
 
     @Override
     public double getAngle(Vector3f vector) {
-        return this.dot(vector) / (this.length() * vector.length());
+        if (vector == null) {
+            return 0;
+        }
+        final double length = length();
+        if (length <= EPSILON) {
+            return 0;
+        }
+        final double vectorLength = vector.length();
+        if (vectorLength <= EPSILON) {
+            return 0;
+        }
+        return this.dot(vector) / (length * vectorLength);
     }
 
     /**
@@ -109,7 +112,12 @@ public class Vector3f implements VectorOperations<Vector3f> {
 
     @Override
     public void normalize() {
-        scale((float) length());
+        final float length = dot(this);
+        if (length <= EPSILON) {
+            return;
+        }
+        final float inversedLength = (float) (1 / Math.sqrt(dot(this)));
+        scale(inversedLength);
     }
 
 }

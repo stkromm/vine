@@ -1,7 +1,0 @@
-package com.vine.math;
-
-public abstract class Vector {
-    protected Vector() {
-
-    }
-}

@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 public class Vector2fTest {
     @Test
     public void testAdd() {
@@ -18,6 +20,34 @@ public class Vector2fTest {
         assertTrue(!vector.equalTo(new Vector2f(-1, 5)));
         assertTrue(!vector.equalTo(new Vector2f(-1, 6)));
         assertTrue(!vector.equalTo(new Vector2f(-2, 6)));
+    }
+
+    @Test
+    public void testNormalize() {
+        Vector2f vector = new Vector2f(3, 0);
+        vector.normalize();
+        assertTrue(Math.abs(Math.abs(vector.getX()) - 1.f) <= Vector2f.EPSILON);
+        assertTrue(Math.abs(vector.getY()) <= Vector2f.EPSILON);
+        assertTrue(Math.abs(Math.abs(vector.length()) - 1) <= Vector2f.EPSILON);
+        Vector2f nullVector = new Vector2f(0, 0);
+        nullVector.normalize();
+        assertTrue(nullVector.length() == 0);
+        Random rn = new Random();
+        for (int i = 0; i <= 100; i++) {
+            Vector2f vec = new Vector2f(rn.nextFloat() * (float) System.currentTimeMillis() - 12345,
+                    (float) System.nanoTime());
+            vec.normalize();
+            assertTrue(Math.abs(vec.length() - 1) <= Vector2f.EPSILON);
+        }
+    }
+
+    @Test
+    public void testPropertyAccess() {
+        Vector2f vector = new Vector2f(0, 0);
+        vector.setX(1);
+        assertTrue(vector.getX() == 1);
+        vector.setY(1);
+        assertTrue(vector.getY() == 1);
     }
 
     @Test
@@ -51,8 +81,12 @@ public class Vector2fTest {
     public void testAngleBetween() {
         Vector2f vector = new Vector2f(3.f, 4.f);
         Vector2f vector2 = new Vector2f(-8.f, 6.f);
-        assertTrue(vector.getAngle(vector2) == 90.f);
+        assertTrue(Math.toDegrees(Math.acos(vector.getAngle(vector2))) == 90.f);
         assertTrue(vector.getAngle(null) == 0);
+        vector2 = new Vector2f(0, 0);
+        assertTrue(vector.getAngle(vector2) == 0);
+        vector = new Vector2f(0, 0);
+        assertTrue(vector2.getAngle(vector) == 0);
     }
 
     @Test

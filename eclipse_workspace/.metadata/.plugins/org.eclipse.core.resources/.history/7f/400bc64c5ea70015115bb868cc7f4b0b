@@ -1,0 +1,11 @@
+package com.vine.math.geometry;
+
+public class Triangle extends Shape {
+
+    @Override
+    boolean contains(float x, float y) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+}

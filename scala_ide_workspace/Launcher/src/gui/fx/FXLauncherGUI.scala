@@ -108,7 +108,7 @@ object FXLauncherGUI extends JFXApp {
   stage = createStage
 
   private def createStage(): JFXApp.PrimaryStage = {
-    val resizeIcon = new ImageView("resources/images/resize.png") {
+    val resizeIcon = new ImageView("images/resize.png") {
       fitHeight = 10
       preserveRatio = true
       styleClass += "resizeElement"
@@ -145,7 +145,7 @@ object FXLauncherGUI extends JFXApp {
       // Remove standard window border
       initStyle(scalafx.stage.StageStyle.TRANSPARENT)
       // Set taskbar icon
-      icons += new Image("resources/images/icon.png")
+      icons += new Image("images/icon.png")
       // Init Elements
       width.onChange {
         toolbar.setPrefWidth(stage.width.get)
@@ -155,7 +155,7 @@ object FXLauncherGUI extends JFXApp {
       }
 
       scene = new Scene {
-        stylesheets += this.getClass.getResource("resources/css/launcher.css").toExternalForm
+        stylesheets += this.getClass.getResource("css/launcher.css").toExternalForm
         fill = "#0B4466"
         content = new Group(mainElementLayout)
       }

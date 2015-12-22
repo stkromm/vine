@@ -1,5 +1,0 @@
-package com.vine.math;
-
-public interface VectorOperations {
-
-}
