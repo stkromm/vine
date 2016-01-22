@@ -1,0 +1,36 @@
+package vine.event;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import vine.event.Event.Type;
+
+public class EventDispatcher {
+    private Map<EventListener, List<EventHandler>> listeners = new HashMap<>();
+    private Map<Integer, EventListener> listenerIDs = new HashMap<>();
+    private Event event;
+
+    @FunctionalInterface
+    interface EventHandler {
+        public boolean onEvent(Event event, Type type);
+    }
+
+    @FunctionalInterface
+    interface EventListener {
+        public void onEvent(Event event, Type type);
+    }
+
+    public void registerHandler(int layer, EventHandler handler) {
+        listeners.get(listenerIDs.get(new Integer(layer))).add(handler);
+    }
+
+    public void dispatch(Type type, EventHandler listener) {
+        if (event.isHandled()) {
+            return;
+        }
+        if (event.getType() == type) {
+            event.setHandled(listener.onEvent(event, type));
+        }
+    }
+}

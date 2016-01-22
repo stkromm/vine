@@ -1,0 +1,23 @@
+package vine.event;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+import vine.event.Event.Type;
+
+public class EventDispatcher {
+    private static Deque<EventListener> listeners = new ArrayDeque<>();
+
+    @FunctionalInterface
+    public interface EventHandler {
+        public boolean onEvent(Event event);
+    }
+
+    public static void registerListener(EventListener listener) {
+        listeners.addLast(listener);
+    }
+
+    public static void dispatch(Event event) {
+        listeners.stream().filter(e -> e.onEvent(event)).findFirst();
+    }
+}

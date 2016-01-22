@@ -1,0 +1,6 @@
+package vine.settings;
+
+public class GraphicSettings {
+    public final static int VSYNC = 1;
+    public final static int 
+}

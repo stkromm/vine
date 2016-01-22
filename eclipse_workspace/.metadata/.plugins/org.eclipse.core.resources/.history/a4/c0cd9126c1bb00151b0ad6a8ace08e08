@@ -1,0 +1,105 @@
+package vine.core.game;
+
+import vine.settings.GameSettings;
+
+/**
+ * @author stkromm
+ *
+ */
+abstract class GameLoop {
+    private boolean running = false;
+
+    /**
+     * Begin the game loop.
+     */
+    public void run() {
+        running = true;
+        startup();
+        int cores = Runtime.getRuntime().availableProcessors();
+        if (cores > 2) {
+            Thread rendering = new Thread(() -> {
+                // convert the time to seconds
+                double nextTime = (double) System.nanoTime() / 1000000000.0;
+                while (running) {
+                    // convert the time to seconds
+                    final double currTime = (double) System.nanoTime(); // NOSONAR
+                    render();
+                    System.out.println("FPS" + 1000000000.0 / (System.nanoTime() - currTime)); // NOSONAR
+                    int sleepTime = (int) (1000.0 * (nextTime - currTime));
+                    sleep(sleepTime);
+                    if (shouldClose()) {
+                        running = false;
+                    }
+                }
+            });
+            Thread logic = new Thread(() -> {
+                // convert the time to seconds
+                double nextTime = (double) System.nanoTime() / 1000000000.0;
+                while (running) {
+                    // convert the time to seconds
+                    final double currTime = (double) System.nanoTime(); // NOSONAR
+                    update();
+                    int sleepTime = (int) ((int) GameSettings.getMaxFrameDuration()
+                            - (1.0 * System.nanoTime() - currTime) / 1000000000.0);
+                    sleep(sleepTime);
+                    if (shouldClose()) {
+                        running = false;
+                    }
+                }
+            });
+            rendering.start();
+            logic.start();
+            try {
+                rendering.wait();
+                logic.interrupt();
+            } catch (InterruptedException e) {
+
+            }
+
+        }
+    }
+
+    private static void sleep(int sleepTime) {
+        if (sleepTime > 0) {
+            // sleep until the next update
+            try {
+                Thread.sleep(sleepTime);
+            } catch (InterruptedException e) {
+                // do nothing
+            }
+        }
+    }
+
+    /**
+     * Stops the game-loop.
+     */
+    public void close() {
+        running = false;
+    }
+
+    /**
+     * Called at startup of the game and initializes the game and starts the
+     * game-loop.
+     */
+    abstract void startup();
+
+    /**
+     * Called, to shutdown the game.
+     */
+    abstract void shutdown();
+
+    /**
+     * Updates the game logic.
+     */
+    abstract void update();
+
+    /**
+     * Called every frame. Draws the game.
+     */
+    abstract void render();
+
+    /**
+     * @return Returns true, if the user wants to close the game.
+     */
+    abstract boolean shouldClose();
+}

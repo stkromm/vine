@@ -1,0 +1,58 @@
+package vine.application;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import vine.graphics.Graphics;
+import vine.input.Input;
+import vine.window.Window;
+
+/**
+ * @author Steffen
+ *
+ */
+public class PlatformDependencyResolver {
+
+    private PlatformDependencyResolver() {
+
+    }
+
+    public static Window getPlatformWindow() {
+        try {
+            return (Window) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.DesktopWindow")
+                    .newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Auto-generated catch block", e);
+            return null;
+        }
+    }
+
+    public static Display getDisplay() {
+        try {
+            return (Display) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWDisplay")
+                    .newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Auto-generated catch block", e);
+            return null;
+        }
+    }
+
+    public static Graphics getGraphics() {
+        try {
+            return (Graphics) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLGraphics")
+                    .newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Auto-generated catch block", e);
+            return null;
+        }
+    }
+
+    public static Input getInput() {
+        try {
+            return (Input) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWInput").newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Auto-generated catch block", e);
+            return null;
+        }
+    }
+}

@@ -1,0 +1,17 @@
+package vine.event;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import vine.event.EventDispatcher.EventHandler;
+
+public class EventLayer extends EventListener {
+    public List<EventHandler> handler = new ArrayList<>();
+
+    @Override
+    public boolean onEvent(Event event) {
+        Optional<EventHandler> opt = handler.stream().filter(h -> h.onEvent(event)).findFirst();
+        return opt.isPresent();
+    }
+}

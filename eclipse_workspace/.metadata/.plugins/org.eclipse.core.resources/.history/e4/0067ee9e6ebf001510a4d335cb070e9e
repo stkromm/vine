@@ -1,0 +1,65 @@
+package vine.application;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class StatMonitor {
+    private static volatile long lastUpdateTime = System.nanoTime();
+    private static volatile long lastFrameTime = System.nanoTime();
+    private static final List<Long> frameDurations = new ArrayList<>();
+    private static final List<Long> upDurations = new ArrayList<>();
+
+    /**
+     * @return
+     */
+    public int getUps() {
+        return 0;
+    }
+
+    /**
+     * @return
+     */
+    public static float getFPS() {
+        float frames = 0;
+        for (int i = 0; i < frameDurations.size(); i++) {
+            frames += frameDurations.get(i);
+        }
+        return 10000000000000L / frames / frameDurations.size();
+    }
+
+    /**
+     * @return
+     */
+    public float getUpDuration() {
+        return 0.f;
+    }
+
+    /**
+     * @return
+     */
+    public static long getUsedMemory() {
+        return Runtime.getRuntime().totalMemory();
+    }
+
+    /**
+     * 
+     */
+    public static void newUp() {
+        if (upDurations.size() >= 100) {
+            upDurations.remove(0);
+        }
+        upDurations.add(System.nanoTime() - lastUpdateTime);
+        lastUpdateTime = System.nanoTime();
+    }
+
+    /**
+     * 
+     */
+    public static void newFrame() {
+        if (frameDurations.size() >= 100) {
+            frameDurations.remove(0);
+        }
+        frameDurations.add(System.nanoTime() - lastFrameTime);
+        lastFrameTime = System.nanoTime();
+    }
+}

@@ -1,0 +1,46 @@
+package vine.core.game;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class StatMonitor {
+    private volatile static long lastUpdateTime = System.nanoTime();
+    private volatile static long lastFrameTime = System.nanoTime();
+
+    final static List<Long> frameDurations = new ArrayList<>();
+
+    public int getUps() {
+        return 0;
+    }
+
+    public static float getFPS() {
+        float frames = 0;
+        for (int i = 0; i < frameDurations.size(); i++) {
+            frames += frameDurations.get(i);
+        }
+        return 1000000000000L / frames / frameDurations.size();
+    }
+
+    public float getUpDuration() {
+        return 0.f;
+    }
+
+    public long getUsedMemory() {
+        return Runtime.getRuntime().totalMemory();
+    }
+
+    public void printUpStackTrace() {
+    }
+
+    public static void newUp() {
+
+    }
+
+    public static void newFrame() {
+        if (frameDurations.size() >= 100) {
+            frameDurations.remove(0);
+        }
+        frameDurations.add((System.nanoTime() - lastFrameTime));
+        lastFrameTime = System.nanoTime();
+    }
+}

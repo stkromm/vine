@@ -1,0 +1,12 @@
+package vine.event;
+
+import vine.event.Event.Type;
+
+public class EventDispatcher {
+    private Event event;
+
+    @FunctionalInterface
+    interface EventHandle {
+        public void onEvent(Event event, Type type);
+    }
+}

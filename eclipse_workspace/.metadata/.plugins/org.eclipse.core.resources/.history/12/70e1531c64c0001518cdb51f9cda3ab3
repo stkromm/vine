@@ -1,0 +1,20 @@
+package vine.graphics;
+
+/**
+ * @author Steffen
+ * 
+ */
+public interface VertexArray {
+
+    /**
+     * Draws the current triangles in the buffer.
+     */
+    void draw();
+
+    /**
+     * 
+     */
+    default void render() {
+        draw();
+    }
+}

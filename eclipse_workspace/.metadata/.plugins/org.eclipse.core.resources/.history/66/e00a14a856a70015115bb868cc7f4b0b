@@ -1,6 +1,0 @@
-package com.vine.math.geometry;
-
-public class Circle extends Shape {
-    Vector2f origin;
-    float radius;
-}

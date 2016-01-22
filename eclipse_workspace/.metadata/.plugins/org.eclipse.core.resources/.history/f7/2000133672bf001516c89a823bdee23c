@@ -1,0 +1,54 @@
+package vine.game;
+
+public class Viewport {
+    private int width;
+    private int height;
+    private int originOffsetX;
+    private int originOffsetY;
+
+    /**
+     * @param posX
+     * @param posY
+     * @param width
+     * @param height
+     */
+    public void setViewport(int posX, int posY, int width, int height) {
+        this.originOffsetX = posX;
+        this.originOffsetY = posY;
+        this.width = width;
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getPosX() {
+        return originOffsetX;
+    }
+
+    public int getPosY() {
+        return originOffsetY;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setPosX(int posX) {
+        this.originOffsetX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.originOffsetY = posY;
+    }
+
+}

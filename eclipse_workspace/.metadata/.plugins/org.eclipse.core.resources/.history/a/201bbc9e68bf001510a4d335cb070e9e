@@ -1,0 +1,171 @@
+package vine.window;
+
+import vine.application.Application;
+
+public interface Window {
+
+    /**
+     * @author Steffen
+     *
+     */
+    @FunctionalInterface
+    interface CloseCallback {
+        /**
+         * @param context
+         */
+        public void onCloseRequest();
+    }
+
+    /**
+     * @author Steffen
+     *
+     */
+    @FunctionalInterface
+    interface FramebufferSizeCallback {
+        /**
+         * @param width
+         * @param height
+         */
+        public void onFramebufferSizeChange(int width, int height);
+    }
+
+    /**
+     * @author Steffen
+     *
+     */
+    @FunctionalInterface
+    interface PositionCallback {
+        /**
+         * @param x
+         * @param y
+         */
+        public void onPositionChange(int x, int y);
+    }
+
+    /**
+     * @author Steffen
+     *
+     */
+    @FunctionalInterface
+    interface SizeCallback {
+        /**
+         * @param width
+         * @param height
+         */
+        public void onSizeChange(int width, int height);
+    }
+
+    /**
+     * @return The current width of the window.
+     */
+    int getWidth();
+
+    /**
+     * @return The current height of the window.
+     */
+    int getHeight();
+
+    /**
+     * @return The current x position of the window on the display.
+     */
+    int getPosX();
+
+    /**
+     * @return The current y position of the window on the display.
+     */
+    int getPosY();
+
+    /**
+     * @param width
+     * @param height
+     */
+    void setWindowSize(int width, int height);
+
+    /**
+     * @param x
+     * @param y
+     */
+    void setWindowPosition(int x, int y);
+
+    /**
+     * @param callback
+     */
+    void setSizeCallback(SizeCallback callback);
+
+    /**
+     * @param callback
+     */
+    void setPositionCallback(PositionCallback callback);
+
+    /**
+     * @param callback
+     */
+    void setFramebufferSizeCallback(FramebufferSizeCallback callback);
+
+    /**
+     * @param callback
+     */
+    void setCloseCallback(CloseCallback callback);
+
+    /**
+     * @param title
+     */
+    void setTitle(String title);
+
+    /**
+     * @param app
+     * @throws WindowCreationException
+     */
+    void init(Application app) throws WindowCreationException;
+
+    /**
+     * @return
+     */
+    boolean isResizeable();
+
+    /**
+     * @return
+     */
+    boolean isVisible();
+
+    /**
+     * @return
+     */
+    boolean isFocused();
+
+    /**
+     * @return
+     */
+    boolean isDecorated();
+
+    /**
+     * @return
+     */
+    boolean isIconified();
+
+    /**
+     * @return
+     */
+    boolean requestedWindowClosing();
+
+    /**
+     * 
+     */
+    void close();
+
+    /**
+     * 
+     */
+    void dispose();
+
+    /**
+     * 
+     */
+    void show();
+
+    /**
+     * @return
+     */
+    long getContext();
+
+}

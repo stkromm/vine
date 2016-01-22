@@ -1,0 +1,30 @@
+package vine.game;
+
+public interface Viewport {
+    /**
+     * @return The width of the screen in game units.
+     */
+    public float getWidth();
+
+    /**
+     * @return The height of the screen in game units.
+     */
+    public float getHeight();
+
+    /**
+     * @param x
+     * @return
+     */
+    public float screenXCoordToWorldXCoord(float x);
+
+    /**
+     * @param y
+     * @return
+     */
+    public float screenYCoordToWorldYCoord(float y);
+    
+    /**
+     * @return The number of game units that fit into one window pixel.
+     */
+    public float getUnitsPerPixel();
+}

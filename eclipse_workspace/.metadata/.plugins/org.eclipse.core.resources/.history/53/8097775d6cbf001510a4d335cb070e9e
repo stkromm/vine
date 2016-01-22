@@ -1,0 +1,45 @@
+package vine.application;
+
+public interface Display {
+
+    /**
+     * @return
+     */
+    String[] getMonitorNames();
+
+    /**
+     * @return
+     */
+    int getWidth();
+
+    /**
+     * @return The bits used to display red color.
+     */
+    int getRedBits();
+
+    /**
+     * @return
+     */
+    int getHeight();
+
+    /**
+     * @return The refresh rate of the currently used monitor.
+     */
+    int getRefreshRate();
+
+    /**
+     * @return The bits used to display blue color.
+     */
+    int getBlueBits();
+
+    /**
+     * @return The bits used to display green color.
+     */
+    int getGreenBits();
+
+    /**
+     * @return The system name of the currently active monitor.
+     */
+    String getMonitorName();
+
+}

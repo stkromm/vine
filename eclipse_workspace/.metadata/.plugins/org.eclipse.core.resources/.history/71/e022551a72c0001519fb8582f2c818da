@@ -1,0 +1,22 @@
+package vine.components;
+
+import org.lwjgl.glfw.GLFW;
+
+import vine.event.KeyEvent;
+import vine.input.InputMapper;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Sprite extends Component { // NOSONAR
+  
+    private int tileWidth = 64;
+    private int tileHeight = 64;
+    float z = 0.2f;
+    private float[] vertices = new float[] { 0, 0, 0, 0, tileHeight, 0, tileWidth, tileHeight, 0, tileWidth, 0, 0, };
+
+    public float[] getVertices() {
+        return vertices;
+    }
+}

@@ -1,0 +1,43 @@
+package vine.settings;
+
+import java.util.List;
+
+public class Setting {
+    private String name;
+    private SettingOptions options;
+    private String selectedOption;
+    private SettingApplyer applyer;
+
+    @FunctionalInterface
+    interface SettingOptions {
+        public List<String> getOptions();
+    }
+
+    @FunctionalInterface
+    interface SettingApplyer {
+        public void apply();
+    }
+
+    public Setting(String name, SettingOptions options, String selectedOption, SettingApplyer applyer) {
+        this.name = name;
+        this.options = options;
+        this.selectedOption = selectedOption;
+        this.applyer = applyer;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getOptions() {
+        return options.getOptions();
+    }
+
+    public String getSelectedOption() {
+        return selectedOption;
+    }
+
+    public void apply() {
+        applyer.apply();
+    }
+}

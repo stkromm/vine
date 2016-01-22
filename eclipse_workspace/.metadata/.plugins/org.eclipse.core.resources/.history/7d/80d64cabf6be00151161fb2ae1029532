@@ -1,0 +1,61 @@
+package vine.window;
+
+public interface Window {
+
+    @FunctionalInterface
+    interface CloseCallback {
+        public void onCloseRequest(long context);
+    }
+
+    @FunctionalInterface
+    interface FramebufferSizeCallback {
+        public void onFramebufferSizeChange(long context, int width, int height);
+    }
+
+    @FunctionalInterface
+    interface PositionCallback {
+        public void onPositionChange(long context, int x, int y);
+    }
+
+    @FunctionalInterface
+    interface SizeCallback {
+        public void onSizeChange(long context, int width, int height);
+    }
+
+    void setSizeCallback(SizeCallback callback);
+
+    void setPositionCallback(PositionCallback callback);
+
+    void setFramebufferSizeCallback(FramebufferSizeCallback callback);
+
+    void setCloseCallback(CloseCallback callback);
+
+    void setTitle(String title);
+
+    void init(int height, int width, String name, long sharedContext) throws WindowCreationException;
+
+    void setResizeable(boolean resizeable);
+
+    void setDecorated(boolean decorated);
+
+    boolean isResizeable();
+
+    boolean isVisible();
+
+    boolean isFocused();
+
+    boolean isDecorated();
+
+    boolean isIconified();
+
+    boolean requestedWindowClosing();
+
+    void close();
+
+    void dispose();
+
+    void show();
+
+    long getContextID();
+
+}

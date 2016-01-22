@@ -1,0 +1,13 @@
+package vine.tilemap;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import vine.components.Sprite;
+
+public class TileMap {
+    public final int width = 20;
+    public final int height = 15;
+    public final int[][] tiles = new int[width][height];
+    public final List<Sprite> tileSprites = new ArrayList<>();
+}

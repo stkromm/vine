@@ -1,0 +1,41 @@
+package vine.game;
+
+public class Viewport {
+    private int rightOffset;
+    private int bottomOffset;
+    private int leftOffset;
+    private int topOffset;
+
+    public int getRightOffset() {
+        return rightOffset;
+    }
+
+    public int getBottomOffset() {
+        return bottomOffset;
+    }
+
+    public int getLeftOffset() {
+        return leftOffset;
+    }
+
+    public int getTopOffset() {
+        return topOffset;
+    }
+
+    public void setRightOffset(int rightOffset) {
+        this.rightOffset = rightOffset;
+    }
+
+    public void setBottomOffset(int bottomOffset) {
+        this.bottomOffset = bottomOffset;
+    }
+
+    public void setLeftOffset(int leftOffset) {
+        this.leftOffset = leftOffset;
+    }
+
+    public void setTopOffset(int topOffset) {
+        this.topOffset = topOffset;
+    }
+
+}

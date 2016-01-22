@@ -1,0 +1,18 @@
+package vine.components;
+
+import vine.game.GameObject;
+
+public class TestGameObject extends GameObject {
+
+    @Override
+    public void begin() {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    protected void construct() {
+        // TODO Auto-generated method stub
+        
+    }
+}

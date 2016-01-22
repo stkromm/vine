@@ -1,0 +1,9 @@
+package vine.game;
+
+/**
+ * @author Steffen
+ *
+ */
+public class GameObjectInstantiationException extends Exception {
+
+}

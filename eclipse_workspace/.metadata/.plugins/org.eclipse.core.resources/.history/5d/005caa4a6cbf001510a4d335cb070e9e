@@ -1,0 +1,45 @@
+package vine.application;
+
+public interface Display {
+
+    /**
+     * @return
+     */
+    String[] getMonitorNames();
+
+    /**
+     * @return
+     */
+    int getWidth();
+
+    /**
+     * @return
+     */
+    int getRedBits();
+
+    /**
+     * @return
+     */
+    int getHeight();
+
+    /**
+     * @return
+     */
+    int getRefreshRate();
+
+    /**
+     * @return
+     */
+    int getBlueBits();
+
+    /**
+     * @return
+     */
+    int getGreenBits();
+
+    /**
+     * @return
+     */
+    String getMonitorName();
+
+}

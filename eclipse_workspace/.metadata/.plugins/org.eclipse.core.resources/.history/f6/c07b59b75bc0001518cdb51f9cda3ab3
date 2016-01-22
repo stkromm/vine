@@ -1,0 +1,5 @@
+package vine.settings;
+
+public class Configurable {
+
+}

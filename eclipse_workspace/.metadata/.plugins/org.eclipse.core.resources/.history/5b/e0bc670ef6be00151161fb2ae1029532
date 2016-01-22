@@ -1,0 +1,34 @@
+package vine.window;
+
+public interface Window {
+
+    @FunctionalInterface
+    interface closeCallback {
+        public void onCloseRequest(long context);
+    }
+
+    void setTitle(String title);
+
+    void init(int height, int width, String name, long sharedContext) throws WindowCreationException;
+
+    boolean isResizeable();
+
+    boolean isVisible();
+
+    boolean isFocused();
+
+    boolean isDecorated();
+
+    boolean isIconified();
+
+    boolean requestedWindowClosing();
+
+    void close();
+
+    void dispose();
+
+    void show();
+
+    long getContextID();
+
+}

@@ -1,0 +1,83 @@
+package vine.application;
+
+import static org.lwjgl.glfw.GLFW.glfwGetMonitorName;
+import static org.lwjgl.glfw.GLFW.glfwGetMonitors;
+import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
+import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
+import static org.lwjgl.glfw.GLFW.GLFW_DISCONNECTED;
+import static org.lwjgl.glfw.GLFW.glfwSetMonitorCallback;
+
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.glfw.GLFWMonitorCallback;
+import org.lwjgl.glfw.GLFWVidMode;
+
+public class Display {
+    // Get the resolution of the primary monitor
+    private GLFWVidMode vidmode;
+    private long currentMonitor = glfwGetPrimaryMonitor();
+    private GLFWMonitorCallback monitorCallback = GLFWMonitorCallback.create((l, e) -> changeMonitor(l, e));
+
+    public Display() {
+        this(glfwGetPrimaryMonitor());
+    }
+
+    public Display(long preferredMonitor) {
+        glfwSetMonitorCallback(monitorCallback);
+        GLFWVidMode prefVidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        if (prefVidMode != null) {
+            currentMonitor = preferredMonitor;
+            vidmode = prefVidMode;
+        } else {
+            currentMonitor = glfwGetPrimaryMonitor();
+            vidmode = prefVidMode;
+
+        }
+    }
+
+    private void changeMonitor(long l, int e) {
+        if (l == currentMonitor && e == GLFW_DISCONNECTED) {
+            vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        }
+    }
+
+    public String[] getMonitorNames() {
+        PointerBuffer monitors = glfwGetMonitors();
+        String[] monitorNames = new String[monitors.capacity()];
+        for (int i = 0; i < monitors.capacity(); i++) {
+            monitorNames[i] = glfwGetMonitorName(monitors.get(i));
+        }
+        return monitorNames;
+    }
+
+    public int width() {
+        return vidmode.width();
+    }
+
+    public int getRedBits() {
+        return vidmode.redBits();
+    }
+
+    public int height() {
+        return vidmode.height();
+    }
+
+    public int getRefreshRate() {
+        return vidmode.refreshRate();
+    }
+
+    public int getBlueBits() {
+        return vidmode.blueBits();
+    }
+
+    public int getGreenBits() {
+        return vidmode.greenBits();
+    }
+
+    public String getMonitorName() {
+        return glfwGetMonitorName(glfwGetPrimaryMonitor());
+    }
+
+    public static long getPrimaryMonitor() {
+        return glfwGetPrimaryMonitor();
+    }
+}

@@ -1,0 +1,8 @@
+package vine.tilemap;
+
+public class TileMap {
+    public final int width = 20;
+    public final int height = 15;
+    public final int[][] tiles = new int[width][height];
+
+}

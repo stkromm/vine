@@ -1,0 +1,22 @@
+package vine.components;
+
+import vine.graphics.Graphics;
+import vine.math.Matrix4f;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Camera extends Component {
+    /**
+     * @return The projection matrix to render the camera perspective
+     */
+    public Matrix4f useCameraProjection(Graphics graphics) {
+        graphics.setOrthographicProjection(left, right, bottom, top, far, near);
+    }
+
+    @Override
+    public void onDestroy() {
+        this.getScene().cameras.removeCamera(this);
+    }
+}

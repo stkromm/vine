@@ -1,0 +1,14 @@
+package vine.event;
+
+public abstract class Event {
+    enum Type {
+        MOUSE_PRESSED,
+        MOUSE_RELEASED,
+        MOUSE_MOVED,
+        KEY_PRESSED,
+        KEY_HOLD,
+        KEY_RELEASED
+    }
+    
+    public abstract Type getType();
+}

@@ -1,0 +1,15 @@
+package vine.game;
+
+public class Viewport {
+    private int width;
+    private int height;
+    private int posX;
+    private int posY;
+
+    public void setViewport(int posX, int posY, int width, int height) {
+        this.posX = posX;
+        this.posY = posY;
+        this.width = width;
+        this.height = height;
+    }
+}

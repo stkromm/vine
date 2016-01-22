@@ -70,6 +70,19 @@
 			<item value="[name]"/>
 		</list>
 	</section>
+	<section name="wizardPage">
+		<list key="groupId">
+			<item value="vine-math"/>
+		</list>
+		<list key="name">
+		</list>
+		<list key="artifactId">
+			<item value="vine-math"/>
+		</list>
+		<list key="version">
+			<item value="1.0.0"/>
+		</list>
+	</section>
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
 		</list>

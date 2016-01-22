@@ -1,0 +1,5 @@
+package vine.game;
+
+public class LevelCreationException extends Exception {
+
+}

@@ -1,0 +1,31 @@
+package vine.components;
+
+import org.lwjgl.opengl.GL11;
+
+import vine.game.Game;
+import vine.graphics.Graphics;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Camera extends Component {
+    /**
+     * @return The projection matrix to render the camera perspective
+     */
+    public void useCameraProjection() {
+        GL11.glMatrixMode(GL11.GL_PROJECTION); // Select Projection
+        GL11.glPushMatrix(); // Push The Matrix
+        GL11.glLoadIdentity(); // Reset The Matrix
+        GL11.glOrtho(entity.getX() - 600, entity.getX() + 600, entity.getY() - 400, entity.getY() + 400, -1, 1); // Select
+        // Ortho Mode
+        GL11.glMatrixMode(GL11.GL_MODELVIEW); // Select Modelview Matrix
+        GL11.glPushMatrix(); // Push The Matrix
+        GL11.glLoadIdentity(); // Reset The Matrix
+    }
+
+    @Override
+    public void onDestroy() {
+        this.getScene().cameras.removeCamera(this);
+    }
+}

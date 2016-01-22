@@ -1,0 +1,22 @@
+package vine.core.game;
+
+/**
+ * @author Steffen
+ *
+ */
+public class ApplicationThreadPool {
+    private final Thread renderThread;
+    private final Thread 
+    
+    /**
+     * @author Steffen
+     *
+     */
+    public enum ApplicationThread {
+        NETWORK, AUDIO, LOGIC
+    }
+    
+    public ApplicationThreadPool() {
+        
+    }
+}

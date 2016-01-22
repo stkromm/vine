@@ -1,6 +1,0 @@
-package com.vine.math.geometry;
-
-public class Rectangle extends Shape {
-    private Vector2f origin;
-    private Vector2f extends;
-}

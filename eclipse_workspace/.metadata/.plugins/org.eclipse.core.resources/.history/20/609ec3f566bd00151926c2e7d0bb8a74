@@ -1,0 +1,21 @@
+package vine.tilemap;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import vine.components.Sprite;
+
+public class TileMap {
+    public int width = 20;
+    public int height = 15;
+    public String[] tiles = new String[width * height];
+    public final Map<String, Sprite> tileSprites = new HashMap<>();
+    public int tileWidth;
+    public int tileHeight;
+
+    public setTile(Sprite sprite, int x , int y) {
+        if(tileSprites.containsKey(sprite.getName()) ){
+            
+        }
+    }
+}

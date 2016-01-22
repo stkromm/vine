@@ -1,0 +1,27 @@
+package vine.application;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import vine.window.Display;
+
+/**
+ * @author Steffen
+ *
+ */
+public class PlatformDependencyResolver {
+
+    private PlatformDependencyResolver() {
+
+    }
+
+    public static Display getPlatformWindow() {
+        try {
+            return (Display) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.DesktopWindow")
+                    .newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Auto-generated catch block", e);
+            return null;
+        }
+    }
+}

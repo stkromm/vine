@@ -1,0 +1,50 @@
+package vine.application;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import vine.entity.GameEntity;
+
+/**
+ * Provides a unique rendering method with post processing, global screnn
+ * maniuplation for a set of gameobjects. Offers no semantic ordering of
+ * gameobjects and is not relevant for physics or audio.
+ * 
+ * @author Steffen
+ * 
+ */
+public abstract class RenderLayer {
+    /**
+     * 
+     */
+    protected List<GameEntity> entities = new ArrayList<>();
+    /**
+     * 
+     */
+    protected Renderer renderer = new Renderer();
+
+    /**
+     * @return All entities that are rendered by this layer
+     */
+    public List<GameEntity> getEntities() {
+        return entities;
+    }
+
+    /**
+     * Adds the given entity to this layer.
+     * 
+     * @param entity
+     *            Entity that will be rendered with this layer.
+     */
+    public void add(GameEntity entity) {
+        if (!entities.contains(entity)) {
+            entities.add(entity);
+        }
+    }
+
+    /**
+     * Renders all entities assigned to this layer with it renderer.
+     */
+    public abstract void render();
+
+}

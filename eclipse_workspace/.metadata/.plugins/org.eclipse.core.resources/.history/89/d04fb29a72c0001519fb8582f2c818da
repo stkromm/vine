@@ -1,0 +1,14 @@
+package vine.game;
+
+public class SpawnParam {
+    public String name;
+    public Object object;
+
+    public getName() {
+        return name;
+    }
+
+    public Object getValue() {
+        return object;
+    }
+}

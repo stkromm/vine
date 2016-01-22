@@ -1,0 +1,57 @@
+package vine.components;
+
+import org.lwjgl.glfw.GLFW;
+
+import vine.event.KeyEvent;
+import vine.input.InputMapper;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Sprite extends Component { // NOSONAR
+    private float posX;
+    private float posY;
+
+    /**
+     * @return The vertices of this sprite in screen coordinates
+     */
+    public float[] getVertices() {
+        int tileWidth = 64;
+        int tileHeight = 64;
+        return new float[] { tileWidth * posX, tileHeight * posY, 0.2f, tileWidth * posX,
+                tileHeight * posY + tileHeight, 0.2f, tileWidth * posX + tileWidth, tileHeight * posY + tileHeight,
+                0.2f, tileWidth * posX + tileWidth, tileHeight * posY, 0.2f, };
+    }
+
+    @Override
+    public void update(float delta) {
+        if (InputMapper.isKeyPressed(GLFW.GLFW_KEY_A)) {
+            posX -= 1 * delta;
+        }
+        if (InputMapper.isKeyPressed(GLFW.GLFW_KEY_D)) {
+            posX += 1 * delta;
+        }
+        if (InputMapper.isKeyPressed(GLFW.GLFW_KEY_S)) {
+            posY -= 1 * delta;
+        }
+        if (InputMapper.isKeyPressed(GLFW.GLFW_KEY_W)) {
+            posY += 1 * delta;
+        }
+    }
+
+    @Override
+    public boolean onKeyEvent(KeyEvent keyEvent) {
+        if (keyEvent.getKey() == GLFW.GLFW_KEY_SPACE && keyEvent.getAction() == 0) {
+            posX = (int) Math.round(Math.random() * 4);
+            posY = (int) Math.round(Math.random() * 4);
+        }
+        return false;
+    }
+
+    @Override
+    public void construct() {
+        super.construct();
+
+    }
+}

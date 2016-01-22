@@ -6,15 +6,35 @@
 	</section>
 	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#MethodName">
 		<item value="false" key="maximized"/>
+		<item value="584" key="width"/>
+		<item value="592" key="x"/>
+		<item value="134" key="y"/>
 		<item value="false" key="minimized"/>
+		<item value="318" key="height"/>
 	</section>
 	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#MemberName">
 		<item value="false" key="maximized"/>
+		<item value="589" key="width"/>
+		<item value="2334" key="x"/>
+		<item value="313" key="y"/>
 		<item value="false" key="minimized"/>
+		<item value="352" key="height"/>
+	</section>
+	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#LocalVariableName">
+		<item value="false" key="maximized"/>
+		<item value="634" key="width"/>
+		<item value="2311" key="x"/>
+		<item value="237" key="y"/>
+		<item value="false" key="minimized"/>
+		<item value="465" key="height"/>
 	</section>
 	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#ParameterName">
 		<item value="false" key="maximized"/>
+		<item value="605" key="width"/>
+		<item value="582" key="x"/>
+		<item value="152" key="y"/>
 		<item value="false" key="minimized"/>
+		<item value="292" key="height"/>
 	</section>
 	<section name="net.sf.eclipsecs.ui.config.RuleConfigurationEditDialog#AbbreviationAsWordInName">
 		<item value="false" key="maximized"/>
@@ -30,8 +50,8 @@
 		<item value="0" key="sortColumn"/>
 		<item value="1" key="sortDirection"/>
 		<item value="726" key="width"/>
-		<item value="521" key="x"/>
-		<item value="2" key="y"/>
+		<item value="2265" key="x"/>
+		<item value="203" key="y"/>
 		<item value="-1" key="selectedRow"/>
 		<item value="688" key="height"/>
 	</section>

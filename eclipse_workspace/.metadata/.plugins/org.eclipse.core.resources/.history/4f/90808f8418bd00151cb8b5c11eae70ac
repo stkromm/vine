@@ -1,0 +1,93 @@
+package vine.core.game.gameobjects.test;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
+
+import vine.core.game.gameobject.GameObject;
+import vine.core.game.gameobject.World;
+import vine.entity.GameEntity;
+
+/**
+ * @author Steffen
+ *
+ */
+public class GameObjectTest {
+
+    /**
+     * 
+     */
+    @Test
+    public void testEquals() {
+        GameObject object = World.instantiate(MyTestObject.class);
+        assertTrue(!object.equals(null));
+        assertTrue(object.equals(object));
+        assertTrue(!object.equals(World.instantiate(MyTestObject.class)));
+        assertTrue(!object.equals(""));
+        object.destroy();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testHideFlag() {
+        GameObject object = World.instantiate(MyTestObject.class);
+        assertTrue(!object.hideFlag());
+        object.enableFlags(GameObject.HIDE_FLAG);
+        assertTrue(object.hideFlag());
+        object.destroy();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testHashCode() {
+        GameObject object = World.instantiate(MyTestObject.class);
+        assertTrue(object.hashCode() == object.getName().hashCode());
+        object.destroy();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testActiveFlag() {
+        GameObject object = World.instantiate(MyTestObject.class);
+        object.update(0);
+        object.disableFlags(GameObject.ACTIVE_FLAG);
+        object.update(0);
+        object.destroy();
+    }
+
+    /**
+     * 
+     */
+    @Test
+    public void testObjectInstantiation() {
+        World.instantiate(MyTestObject.class, "test");
+        GameObject object = World.instantiate(MyTestObject.class);
+        MyTestObject test = (MyTestObject) World.getObjectByName("test");
+        assertTrue(test.getName().equals("test"));
+        World.instantiate(GameEntity.class);
+        test = (MyTestObject) World.getObjectByName("test?");
+        test = World.instantiate(MyTestObject.class, "test?");
+        assertTrue(test == null);
+        assertTrue(World.getObjectsByType(MyTestObject.class).size() == 2);
+        World.instantiate(MyTestObject.class);
+        assertTrue(World.getObjectsByType(MyTestObject.class).size() == 3);
+        object.update(0);
+        assertTrue(World.getObjectsByType(MyTestObject.class).size() == 3);
+        object.destroy();
+        assertTrue(World.getObjectsByType(MyTestObject.class).size() == 2);
+
+        object = World.instantiate(GameObject.class);
+        assertTrue(object == null);
+        object = World.instantiate(MyWrongTestObject.class);
+        assertTrue(object == null);
+        object = World.instantiate(MyTestObject.class, "test");
+        assertTrue(object == null);
+    }
+
+}

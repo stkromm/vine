@@ -1,9 +1,0 @@
-package com.vine.math.geometry.ray;
-
-import java.awt.Shape;
-
-public class Ray {
-    public Intersection intersect(Shape shape) {
-
-    }
-}

@@ -1,0 +1,26 @@
+package vine.event;
+
+import vine.event.Event.Type;
+
+public class EventDispatcher {
+    private Event event;
+
+    @FunctionalInterface
+    interface EventHandler {
+        public boolean onEvent(Event event, Type type);
+    }
+
+    @FunctionalInterface
+    interface EventListener {
+        public void onEvent(Event event, Type type);
+    }
+
+    public void dispatch(Type type, EventHandler listener) {
+        if (event.isHandled()) {
+            return;
+        }
+        if (event.getType() == type) {
+            event.setHandled(listener.onEvent(event, type));
+        }
+    }
+}

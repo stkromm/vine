@@ -1,0 +1,22 @@
+package vine.components;
+
+import vine.graphics.Graphics;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Camera extends Component {
+    /**
+     * @return The projection matrix to render the camera perspective
+     */
+    public void useCameraProjection() {
+        Game.game.getGraphics().setOrthographicProjection(this.entity.getX() - 550, this.entity.getX() + 550,
+                this.entity.getY() - 360, this.entity.getY() + 360, 1, -1);
+    }
+
+    @Override
+    public void onDestroy() {
+        this.getScene().cameras.removeCamera(this);
+    }
+}

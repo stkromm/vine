@@ -1,0 +1,6 @@
+package vine.components;
+
+import vine.game.GameObject;
+
+public class TestGameObject extends GameObject {
+}

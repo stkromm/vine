@@ -1,0 +1,17 @@
+package vine.settings;
+
+import java.io.FileInputStream;
+import java.util.Collection;
+
+public class Settings {
+    Collection<Setting> settings;
+
+    public Settings(Collection<Setting> settings) {
+        this.settings = settings;
+    }
+
+    public void load(FileInputStream reader) {
+
+    }
+
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Matrix4f.java&apos; to &apos;engine-core/src/main/java/com.vine.math&apos;&#x0D;&#x0A;- Original project: &apos;Flappy&apos;&#x0D;&#x0A;- Destination element: &apos;engine-core/src/main/java/com.vine.math&apos;&#x0D;&#x0A;- Original element: &apos;com.thecherno.flappy.maths.Matrix4f.java&apos;" description="Copy compilation unit" destination="=engine-core/src\/main\/java&lt;com.vine.math" element1="/src&lt;com.thecherno.flappy.maths{Matrix4f.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1450982639928" units="1" version="1.0"/>
+</session>

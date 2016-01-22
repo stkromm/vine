@@ -1,0 +1,71 @@
+package vine.game;
+
+import vine.window.Window;
+
+/**
+ * @author Steffen
+ *
+ */
+public class GameScreen implements Screen {
+
+    private final Window window;
+    private final Viewport viewport;
+    public int height;
+    public int width;
+
+    /**
+     * @param window
+     * @param viewport
+     * @param height
+     * @param width
+     */
+    public GameScreen(Window window, Viewport viewport, int height, int width) {
+        super();
+        this.window = window;
+        this.viewport = viewport;
+        this.height = height;
+        this.width = width;
+        float border = height / width * window.getHeight();
+        viewport.setLeftOffset((int) (border / 2));
+        viewport.setRightOffset((int) (border / 2));
+    }
+
+    public Window getWindow() {
+        return window;
+    }
+
+    public Viewport getViewport() {
+        return viewport;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public float worldXCoordToScreenXCoord(float x) {
+        return x * getUnitsPerPixel();
+    }
+
+    @Override
+    public float worldYCoordToScreenYCoord(float y) {
+        return y * getUnitsPerPixel();
+    }
+
+    @Override
+    public float getUnitsPerPixel() {
+        return width / window.getWidth();
+    }
+
+    @Override
+    public float getAspect() {
+        return window.getHeight() / window.getWidth();
+    }
+
+}

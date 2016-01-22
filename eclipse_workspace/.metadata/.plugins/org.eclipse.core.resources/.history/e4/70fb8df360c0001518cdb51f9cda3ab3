@@ -1,0 +1,7 @@
+package vine.reflection;
+
+public class Class {
+    public Class(String className) {
+        
+    }
+}

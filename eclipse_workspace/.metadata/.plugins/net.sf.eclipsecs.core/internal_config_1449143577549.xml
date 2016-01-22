@@ -81,15 +81,6 @@ Based on Checkstyle configurartion that checks the Google coding conventions (ht
     <module name="MemberName">
       <message key="name.invalidPattern" value="Member name ''{0}'' must match pattern ''{1}''."/>
     </module>
-    <module name="ParameterName">
-      <message key="name.invalidPattern" value="Parameter name ''{0}'' must match pattern ''{1}''."/>
-    </module>
-    <module name="LocalVariableName">
-      <property name="format" value="^[a-z][a-z0-9][a-zA-Z0-9]*$"/>
-      <property name="allowOneCharVarInForLoop" value="true"/>
-      <property name="tokens" value="VARIABLE_DEF"/>
-      <message key="name.invalidPattern" value="Local variable name ''{0}'' must match pattern ''{1}''."/>
-    </module>
     <module name="ClassTypeParameterName">
       <property name="format" value="(^[A-Z][0-9]?)$|([A-Z][a-zA-Z0-9]*[T]$)"/>
       <message key="name.invalidPattern" value="Class type name ''{0}'' must match pattern ''{1}''."/>
@@ -153,7 +144,6 @@ Based on Checkstyle configurartion that checks the Google coding conventions (ht
       <property name="allowMissingReturnTag" value="true"/>
     </module>
     <module name="MethodName">
-      <property name="format" value="^[a-z][a-zA-Z0-9_]*$"/>
       <message key="name.invalidPattern" value="Method name ''{0}'' must match pattern ''{1}''."/>
     </module>
     <module name="SingleLineJavadoc">

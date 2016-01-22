@@ -1,0 +1,26 @@
+package vine.settings;
+
+import java.util.List;
+
+public class Setting {
+    private String name;
+    private List<String> options;
+    private String selectedOption;
+
+    public Setting(String name, String selectedOption) {
+        this.name = name;
+        this.selectedOption = selectedOption;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getOptions() {
+        return options;
+    }
+
+    public String getSelectedOption() {
+        return selectedOption;
+    }
+}
