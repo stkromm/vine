@@ -7915,3 +7915,1843 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-01-22 19:19:45.512 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-22 19:19:58.959
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-01-22 19:20:14.907 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-22 19:20:28.126
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.egit.ui 4 0 2016-01-22 19:21:31.906
+!MESSAGE Exception caught during execution of add command
+!STACK 0
+org.eclipse.jgit.api.errors.JGitInternalException: Exception caught during execution of add command
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:211)
+	at org.eclipse.egit.core.op.CommitOperation.addUntracked(CommitOperation.java:222)
+	at org.eclipse.egit.core.op.CommitOperation.access$4(CommitOperation.java:210)
+	at org.eclipse.egit.core.op.CommitOperation$1.run(CommitOperation.java:195)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.CommitOperation.execute(CommitOperation.java:206)
+	at org.eclipse.egit.ui.internal.commit.CommitJob.run(CommitJob.java:98)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: The process cannot access the file because another process has locked a portion of the file
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:302)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:103)
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:187)
+	... 7 more
+
+!ENTRY org.eclipse.epp.mpc.ui 1 0 2016-01-22 19:34:19.761
+!MESSAGE Performing Marketplace install request from http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=2223473
+!SESSION 2016-01-22 19:35:42.939 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product -data file:/D:/Workspaces/VineEngine/eclipse_workspace/ -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-22 19:36:00.894
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:37:30.273
+!MESSAGE 1012 markers applied on 46 files in 100ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:37:30.305
+!MESSAGE Review code command terminated. 347 rules were executed against 44 files. Actual PMD duration is about 3128ms, that is about 71.09091 ms/file, 9.014409 ms/rule, 0.20487294 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:37:30.315
+!MESSAGE Command ReviewCode excecuted in 3459ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:39:09.217
+!MESSAGE 1085 markers applied on 56 files in 46ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:39:09.375
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1707ms, that is about 36.31915 ms/file, 4.919308 ms/rule, 0.104666136 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:39:09.380
+!MESSAGE Command ReviewCode excecuted in 2046ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:43:06.301
+!MESSAGE Command RenderReport excecuted in 336ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:44:31.909
+!MESSAGE Command RenderReport excecuted in 295ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:50:16.009
+!MESSAGE 1079 markers applied on 56 files in 27ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:50:16.072
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1605ms, that is about 34.148937 ms/file, 4.62536 ms/rule, 0.09841192 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:50:16.084
+!MESSAGE Command ReviewCode excecuted in 1840ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:50:34.000
+!MESSAGE 1077 markers applied on 56 files in 22ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:50:34.059
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1579ms, that is about 33.595745 ms/file, 4.550432 ms/rule, 0.09681771 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:50:34.072
+!MESSAGE Command ReviewCode excecuted in 1796ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:51:33.245
+!MESSAGE 1074 markers applied on 56 files in 19ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:51:33.334
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1607ms, that is about 34.19149 ms/file, 4.631124 ms/rule, 0.098534554 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:51:33.353
+!MESSAGE Command ReviewCode excecuted in 1849ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:55:05.549
+!MESSAGE 1069 markers applied on 56 files in 23ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:55:05.639
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1595ms, that is about 33.93617 ms/file, 4.596542 ms/rule, 0.097798765 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:55:05.654
+!MESSAGE Command ReviewCode excecuted in 1840ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:56:01.523
+!MESSAGE 1065 markers applied on 56 files in 19ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:56:01.625
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1403ms, that is about 29.851065 ms/file, 4.0432277 ms/rule, 0.08602612 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 19:56:01.640
+!MESSAGE Command ReviewCode excecuted in 1649ms
+!SESSION 2016-01-22 21:20:02.311 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-22 21:20:20.103
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:27:27.840
+!MESSAGE 1097 markers applied on 56 files in 77ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:27:27.942
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 3604ms, that is about 76.680855 ms/file, 10.386168 ms/rule, 0.22098228 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:27:27.957
+!MESSAGE Command ReviewCode excecuted in 4014ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:29:23.603
+!MESSAGE 1094 markers applied on 56 files in 31ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:29:23.712
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1661ms, that is about 35.340427 ms/file, 4.7867436 ms/rule, 0.10184561 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:29:23.730
+!MESSAGE Command ReviewCode excecuted in 1965ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:30:15.717
+!MESSAGE 1091 markers applied on 56 files in 5ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:30:15.826
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1571ms, that is about 33.425533 ms/file, 4.5273776 ms/rule, 0.09632718 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:30:15.848
+!MESSAGE Command ReviewCode excecuted in 1826ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:31:27.204
+!MESSAGE 1092 markers applied on 56 files in 22ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:31:27.295
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1488ms, that is about 31.659575 ms/file, 4.2881846 ms/rule, 0.09123797 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:31:27.312
+!MESSAGE Command ReviewCode excecuted in 1713ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:32:50.698
+!MESSAGE 1089 markers applied on 56 files in 17ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:32:50.781
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1472ms, that is about 31.319149 ms/file, 4.242075 ms/rule, 0.090256914 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:32:50.795
+!MESSAGE Command ReviewCode excecuted in 1712ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:36:01.808
+!MESSAGE 1083 markers applied on 56 files in 35ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:36:01.883
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1369ms, that is about 29.127659 ms/file, 3.945245 ms/rule, 0.083941385 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:36:01.897
+!MESSAGE Command ReviewCode excecuted in 1624ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:37:36.077
+!MESSAGE 1084 markers applied on 56 files in 14ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:37:36.135
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1300ms, that is about 27.659575 ms/file, 3.7463977 ms/rule, 0.07971059 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:37:36.135
+!MESSAGE Command ReviewCode excecuted in 1473ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:38:49.115
+!MESSAGE 1083 markers applied on 56 files in 12ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:38:49.177
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1331ms, that is about 28.319149 ms/file, 3.8357348 ms/rule, 0.08161138 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-22 21:38:49.197
+!MESSAGE Command ReviewCode excecuted in 1537ms
+!SESSION 2016-01-23 01:13:50.909 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-23 01:14:12.316
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 4 0 2016-01-23 01:20:45.380
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:24:47.942
+!MESSAGE 1079 markers applied on 56 files in 59ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:24:47.956
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 4601ms, that is about 97.893616 ms/file, 13.259366 ms/rule, 0.28211418 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:24:47.963
+!MESSAGE Command ReviewCode excecuted in 5007ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:30:48.845
+!MESSAGE 1079 markers applied on 56 files in 51ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:30:48.858
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 2007ms, that is about 42.70213 ms/file, 5.7838616 ms/rule, 0.12306089 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:30:48.866
+!MESSAGE Command ReviewCode excecuted in 2228ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:35:05.347
+!MESSAGE 1075 markers applied on 56 files in 22ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:35:05.361
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1796ms, that is about 38.212765 ms/file, 5.1757927 ms/rule, 0.11012325 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:35:05.372
+!MESSAGE Command ReviewCode excecuted in 1997ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:41:37.558
+!MESSAGE 1061 markers applied on 56 files in 27ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:41:37.585
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1685ms, that is about 35.851063 ms/file, 4.855908 ms/rule, 0.103317186 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:41:37.605
+!MESSAGE Command ReviewCode excecuted in 1889ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:45:04.700
+!MESSAGE 1055 markers applied on 56 files in 25ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:45:04.720
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1685ms, that is about 35.851063 ms/file, 4.855908 ms/rule, 0.103317186 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:45:04.734
+!MESSAGE Command ReviewCode excecuted in 1883ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:46:01.305
+!MESSAGE 1048 markers applied on 56 files in 17ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:46:01.328
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1636ms, that is about 34.80851 ms/file, 4.7146974 ms/rule, 0.10031271 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 01:46:01.350
+!MESSAGE Command ReviewCode excecuted in 1818ms
+!SESSION 2016-01-23 13:40:41.579 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-23 13:40:58.138
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 4 0 2016-01-23 13:43:06.559
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:43:21.679
+!MESSAGE 1046 markers applied on 56 files in 77ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:43:21.695
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 4734ms, that is about 100.723404 ms/file, 13.642652 ms/rule, 0.29026917 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:43:21.706
+!MESSAGE Command ReviewCode excecuted in 5196ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:45:02.399
+!MESSAGE 1048 markers applied on 56 files in 36ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:45:02.414
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1972ms, that is about 41.957447 ms/file, 5.682997 ms/rule, 0.12091483 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:45:02.424
+!MESSAGE Command ReviewCode excecuted in 2181ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:54:38.232
+!MESSAGE 1035 markers applied on 56 files in 19ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:54:38.246
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1839ms, that is about 39.12766 ms/file, 5.2997117 ms/rule, 0.11275983 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:54:38.258
+!MESSAGE Command ReviewCode excecuted in 2024ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:59:29.837
+!MESSAGE 1034 markers applied on 56 files in 24ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:59:29.855
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1676ms, that is about 35.659573 ms/file, 4.8299713 ms/rule, 0.102765344 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 13:59:29.869
+!MESSAGE Command ReviewCode excecuted in 1861ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:00:35.292
+!MESSAGE 1033 markers applied on 56 files in 15ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:00:35.304
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1743ms, that is about 37.085106 ms/file, 5.0230546 ms/rule, 0.106873505 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:00:35.316
+!MESSAGE Command ReviewCode excecuted in 1902ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:02:40.948
+!MESSAGE 1034 markers applied on 56 files in 19ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:02:40.970
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1544ms, that is about 32.851063 ms/file, 4.449568 ms/rule, 0.09467165 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:02:40.985
+!MESSAGE Command ReviewCode excecuted in 1711ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:08:58.438
+!MESSAGE 1031 markers applied on 56 files in 17ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:08:58.465
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1502ms, that is about 31.957447 ms/file, 4.3285303 ms/rule, 0.09209639 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:08:58.482
+!MESSAGE Command ReviewCode excecuted in 1677ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:12:34.057
+!MESSAGE 1035 markers applied on 56 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:12:34.074
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1345ms, that is about 28.617022 ms/file, 3.8760808 ms/rule, 0.0824698 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:12:34.092
+!MESSAGE Command ReviewCode excecuted in 1484ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:14:17.323
+!MESSAGE 1033 markers applied on 56 files in 11ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:14:17.342
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1383ms, that is about 29.425531 ms/file, 3.9855907 ms/rule, 0.084799804 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:14:17.365
+!MESSAGE Command ReviewCode excecuted in 1541ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:21:28.847
+!MESSAGE 1026 markers applied on 56 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:21:28.864
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1426ms, that is about 30.340425 ms/file, 4.10951 ms/rule, 0.087436385 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:21:28.885
+!MESSAGE Command ReviewCode excecuted in 1573ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:22:47.706
+!MESSAGE 1024 markers applied on 56 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:22:47.724
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1323ms, that is about 28.148935 ms/file, 3.81268 ms/rule, 0.081120856 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:22:47.740
+!MESSAGE Command ReviewCode excecuted in 1467ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:30:35.604
+!MESSAGE 1020 markers applied on 56 files in 12ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:30:35.623
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1374ms, that is about 29.234043 ms/file, 3.959654 ms/rule, 0.08424796 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:30:35.639
+!MESSAGE Command ReviewCode excecuted in 1526ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:34:31.997
+!MESSAGE 1013 markers applied on 56 files in 14ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:34:32.015
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1334ms, that is about 28.382978 ms/file, 3.8443804 ms/rule, 0.08179533 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:34:32.034
+!MESSAGE Command ReviewCode excecuted in 1489ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:35:16.921
+!MESSAGE 1012 markers applied on 56 files in 9ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:35:16.938
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1249ms, that is about 26.574469 ms/file, 3.5994236 ms/rule, 0.07658348 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:35:16.953
+!MESSAGE Command ReviewCode excecuted in 1391ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:36:29.121
+!MESSAGE 1011 markers applied on 56 files in 12ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:36:29.141
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1262ms, that is about 26.851065 ms/file, 3.6368876 ms/rule, 0.07738059 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:36:29.162
+!MESSAGE Command ReviewCode excecuted in 1416ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:38:07.882
+!MESSAGE 1006 markers applied on 56 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:38:07.901
+!MESSAGE Review code command terminated. 347 rules were executed against 47 files. Actual PMD duration is about 1270ms, that is about 27.021276 ms/file, 3.6599424 ms/rule, 0.077871114 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-23 14:38:07.915
+!MESSAGE Command ReviewCode excecuted in 1410ms
+!SESSION 2016-01-23 16:28:46.409 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-23 16:28:59.606
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-01-23 18:39:44.175 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-23 18:39:57.925
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-01-24 01:11:21.533 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-24 01:11:43.383
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-01-24 11:35:51.384 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-24 11:36:11.336
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-24 12:06:10.464
+!MESSAGE 1121 markers applied on 60 files in 62ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-24 12:06:10.480
+!MESSAGE Review code command terminated. 347 rules were executed against 51 files. Actual PMD duration is about 3689ms, that is about 72.333336 ms/file, 10.631124 ms/rule, 0.20845342 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-24 12:06:10.496
+!MESSAGE Command ReviewCode excecuted in 4016ms
+!SESSION 2016-01-24 12:45:21.654 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-24 12:45:33.814
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 4 0 2016-01-24 12:46:14.099
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-24 13:33:39.299
+!MESSAGE 1106 markers applied on 61 files in 47ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-24 13:33:39.299
+!MESSAGE Review code command terminated. 347 rules were executed against 52 files. Actual PMD duration is about 3452ms, that is about 66.38461 ms/file, 9.948127 ms/rule, 0.19131014 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-24 13:33:39.314
+!MESSAGE Command ReviewCode excecuted in 3702ms
+!SESSION 2016-01-24 14:53:47.119 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-24 14:53:59.094
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 4 0 2016-01-24 14:55:53.319
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SESSION 2016-01-24 23:07:20.515 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-24 23:07:39.699
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 4 0 2016-01-24 23:12:33.821
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SESSION 2016-01-25 17:57:47.770 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-25 17:58:07.054
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2016-01-25 18:17:45.763
+!MESSAGE Could not read pom.xml
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not read pom.xml
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:565)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:541)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:497)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:350)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:297)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.apache.maven.model.io.ModelParseException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:130)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:94)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	... 24 more
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseDependency(MavenXpp3Reader.java:1312)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2197)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3807)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:557)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:125)
+	... 26 more
+!SUBENTRY 1 org.eclipse.m2e.core 4 -1 2016-01-25 18:17:45.764
+!MESSAGE Could not read pom.xml
+!STACK 0
+org.apache.maven.model.io.ModelParseException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:130)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:94)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:541)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:497)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:350)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:297)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseDependency(MavenXpp3Reader.java:1312)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2197)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3807)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:557)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:125)
+	... 26 more
+
+!ENTRY org.eclipse.m2e.logback.appender 4 0 2016-01-25 18:17:47.515
+!MESSAGE Could not read pom.xml
+!STACK 1
+org.eclipse.core.runtime.CoreException: Could not read pom.xml
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:565)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:541)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:497)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:350)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:297)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.apache.maven.model.io.ModelParseException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:130)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:94)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	... 24 more
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseDependency(MavenXpp3Reader.java:1312)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2197)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3807)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:557)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:125)
+	... 26 more
+!SUBENTRY 1 org.eclipse.m2e.core 4 -1 2016-01-25 18:17:47.516
+!MESSAGE Could not read pom.xml
+!STACK 0
+org.apache.maven.model.io.ModelParseException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:130)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:94)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:563)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.readModel(MavenImpl.java:574)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refreshPhase2(ProjectRegistryManager.java:541)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:497)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:350)
+	at org.eclipse.m2e.core.internal.project.registry.ProjectRegistryManager.refresh(ProjectRegistryManager.java:297)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.getProjectFacade(MavenBuilder.java:154)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod$1.call(MavenBuilder.java:89)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.executeBare(MavenExecutionContext.java:176)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:151)
+	at org.eclipse.m2e.core.internal.embedder.MavenExecutionContext.execute(MavenExecutionContext.java:99)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder$BuildMethod.execute(MavenBuilder.java:86)
+	at org.eclipse.m2e.core.internal.builder.MavenBuilder.build(MavenBuilder.java:200)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: org.codehaus.plexus.util.xml.pull.XmlPullParserException: end tag name </dependencies> must match start tag name <dependency> from line 29 (position: TEXT seen ...</version>\r\n\t</dependencies>... @33:17) 
+	at org.codehaus.plexus.util.xml.pull.MXParser.parseEndTag(MXParser.java:1727)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextImpl(MXParser.java:1169)
+	at org.codehaus.plexus.util.xml.pull.MXParser.next(MXParser.java:1131)
+	at org.codehaus.plexus.util.xml.pull.MXParser.nextTag(MXParser.java:1118)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseDependency(MavenXpp3Reader.java:1312)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.parseModel(MavenXpp3Reader.java:2197)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:3807)
+	at org.apache.maven.model.io.xpp3.MavenXpp3Reader.read(MavenXpp3Reader.java:557)
+	at org.apache.maven.model.io.DefaultModelReader.read(DefaultModelReader.java:125)
+	... 26 more
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 18:47:48.593
+!MESSAGE 1188 markers applied on 64 files in 25ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 18:47:48.616
+!MESSAGE Review code command terminated. 347 rules were executed against 54 files. Actual PMD duration is about 3731ms, that is about 69.09259 ms/file, 10.752161 ms/rule, 0.1991141 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 18:47:48.635
+!MESSAGE Command ReviewCode excecuted in 4062ms
+!SESSION 2016-01-25 18:50:26.170 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-01-25 18:50:28.077
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-25 18:50:39.034
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 19:27:13.273
+!MESSAGE 955 markers applied on 64 files in 36ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 19:27:13.286
+!MESSAGE Review code command terminated. 345 rules were executed against 54 files. Actual PMD duration is about 3469ms, that is about 64.24074 ms/file, 10.055073 ms/rule, 0.18620504 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 19:27:13.294
+!MESSAGE Command ReviewCode excecuted in 3749ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 19:29:25.417
+!MESSAGE 900 markers applied on 64 files in 30ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 19:29:25.436
+!MESSAGE Review code command terminated. 344 rules were executed against 54 files. Actual PMD duration is about 1951ms, that is about 36.12963 ms/file, 5.6715117 ms/rule, 0.105027996 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 19:29:25.451
+!MESSAGE Command ReviewCode excecuted in 2194ms
+!SESSION 2016-01-25 21:48:24.534 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-25 21:48:43.463
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 4 0 2016-01-25 22:07:45.066
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui 4 0 2016-01-25 22:10:27.403
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: org.eclipse.swt.widgets.TreeColumn cannot be cast to org.eclipse.swt.widgets.TableColumn
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTableManager.sortBy(AbstractTableManager.java:276)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractRuleColumnDescriptor$1.handleEvent(AbstractRuleColumnDescriptor.java:40)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:12:01.503
+!MESSAGE 883 markers applied on 64 files in 59ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:12:01.516
+!MESSAGE Review code command terminated. 323 rules were executed against 54 files. Actual PMD duration is about 3561ms, that is about 65.94444 ms/file, 11.024768 ms/rule, 0.20416237 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:12:01.523
+!MESSAGE Command ReviewCode excecuted in 3895ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:19:40.386
+!MESSAGE 876 markers applied on 64 files in 30ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:19:40.402
+!MESSAGE Review code command terminated. 323 rules were executed against 54 files. Actual PMD duration is about 2025ms, that is about 37.5 ms/file, 6.26935 ms/rule, 0.116099074 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:19:40.414
+!MESSAGE Command ReviewCode excecuted in 2269ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:26:20.792
+!MESSAGE 877 markers applied on 64 files in 23ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:26:20.806
+!MESSAGE Review code command terminated. 323 rules were executed against 54 files. Actual PMD duration is about 1653ms, that is about 30.61111 ms/file, 5.117647 ms/rule, 0.09477124 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:26:20.819
+!MESSAGE Command ReviewCode excecuted in 1859ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:27:54.999
+!MESSAGE 863 markers applied on 64 files in 23ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:27:55.014
+!MESSAGE Review code command terminated. 322 rules were executed against 54 files. Actual PMD duration is about 1667ms, that is about 30.87037 ms/file, 5.1770186 ms/rule, 0.09587072 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:27:55.027
+!MESSAGE Command ReviewCode excecuted in 1871ms
+
+!ENTRY org.eclipse.ui 4 0 2016-01-25 22:31:21.701
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: org.eclipse.swt.widgets.TreeColumn cannot be cast to org.eclipse.swt.widgets.TableColumn
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTableManager.sortBy(AbstractTableManager.java:276)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractRuleColumnDescriptor$1.handleEvent(AbstractRuleColumnDescriptor.java:40)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:32:41.906
+!MESSAGE 856 markers applied on 64 files in 13ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:32:41.916
+!MESSAGE Review code command terminated. 308 rules were executed against 54 files. Actual PMD duration is about 1633ms, that is about 30.24074 ms/file, 5.301948 ms/rule, 0.09818422 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:32:41.924
+!MESSAGE Command ReviewCode excecuted in 1813ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:33:50.217
+!MESSAGE 768 markers applied on 64 files in 13ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:33:50.228
+!MESSAGE Review code command terminated. 306 rules were executed against 54 files. Actual PMD duration is about 1503ms, that is about 27.833334 ms/file, 4.9117646 ms/rule, 0.0909586 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:33:50.236
+!MESSAGE Command ReviewCode excecuted in 1659ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:37:44.212
+!MESSAGE 767 markers applied on 64 files in 11ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:37:44.223
+!MESSAGE Review code command terminated. 306 rules were executed against 54 files. Actual PMD duration is about 1652ms, that is about 30.592592 ms/file, 5.3986926 ms/rule, 0.099975795 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:37:44.233
+!MESSAGE Command ReviewCode excecuted in 1832ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:39:36.635
+!MESSAGE 763 markers applied on 64 files in 11ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:39:36.646
+!MESSAGE Review code command terminated. 306 rules were executed against 54 files. Actual PMD duration is about 1505ms, that is about 27.87037 ms/file, 4.9183006 ms/rule, 0.091079645 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:39:36.658
+!MESSAGE Command ReviewCode excecuted in 1679ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:40:30.617
+!MESSAGE 761 markers applied on 64 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:40:30.629
+!MESSAGE Review code command terminated. 306 rules were executed against 54 files. Actual PMD duration is about 1489ms, that is about 27.574074 ms/file, 4.866013 ms/rule, 0.09011135 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:40:30.645
+!MESSAGE Command ReviewCode excecuted in 1662ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:41:21.268
+!MESSAGE 753 markers applied on 64 files in 9ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:41:21.282
+!MESSAGE Review code command terminated. 305 rules were executed against 54 files. Actual PMD duration is about 1438ms, that is about 26.62963 ms/file, 4.714754 ms/rule, 0.08731026 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:41:21.295
+!MESSAGE Command ReviewCode excecuted in 1623ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:42:12.817
+!MESSAGE 750 markers applied on 64 files in 11ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:42:12.831
+!MESSAGE Review code command terminated. 305 rules were executed against 54 files. Actual PMD duration is about 1542ms, that is about 28.555555 ms/file, 5.0557375 ms/rule, 0.09362477 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:42:12.845
+!MESSAGE Command ReviewCode excecuted in 1717ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:47:12.141
+!MESSAGE 739 markers applied on 64 files in 15ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:47:12.158
+!MESSAGE Review code command terminated. 304 rules were executed against 54 files. Actual PMD duration is about 1453ms, that is about 26.907408 ms/file, 4.7796054 ms/rule, 0.088511206 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:47:12.174
+!MESSAGE Command ReviewCode excecuted in 1631ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:51:23.925
+!MESSAGE 739 markers applied on 64 files in 19ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:51:23.942
+!MESSAGE Review code command terminated. 304 rules were executed against 54 files. Actual PMD duration is about 1453ms, that is about 26.907408 ms/file, 4.7796054 ms/rule, 0.088511206 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:51:23.957
+!MESSAGE Command ReviewCode excecuted in 1628ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:52:22.585
+!MESSAGE 728 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:52:22.602
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1390ms, that is about 25.74074 ms/file, 4.5874586 ms/rule, 0.08495294 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:52:22.618
+!MESSAGE Command ReviewCode excecuted in 1580ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:53:08.204
+!MESSAGE 727 markers applied on 64 files in 9ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:53:08.220
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1385ms, that is about 25.648148 ms/file, 4.570957 ms/rule, 0.08464735 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:53:08.224
+!MESSAGE Command ReviewCode excecuted in 1533ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:54:42.630
+!MESSAGE 719 markers applied on 64 files in 11ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:54:42.647
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1416ms, that is about 26.222221 ms/file, 4.6732674 ms/rule, 0.08654199 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:54:42.649
+!MESSAGE Command ReviewCode excecuted in 1564ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:54:51.851
+!MESSAGE 717 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:54:51.867
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1407ms, that is about 26.055555 ms/file, 4.643564 ms/rule, 0.085991934 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:54:51.873
+!MESSAGE Command ReviewCode excecuted in 1564ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:56:48.966
+!MESSAGE 687 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:56:48.982
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1414ms, that is about 26.185184 ms/file, 4.6666665 ms/rule, 0.086419754 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:56:48.997
+!MESSAGE Command ReviewCode excecuted in 1559ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:58:07.103
+!MESSAGE 682 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:58:07.117
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1451ms, that is about 26.87037 ms/file, 4.788779 ms/rule, 0.08868109 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:58:07.134
+!MESSAGE Command ReviewCode excecuted in 1602ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:58:27.459
+!MESSAGE 680 markers applied on 64 files in 9ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:58:27.476
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1413ms, that is about 26.166666 ms/file, 4.6633663 ms/rule, 0.08635864 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 22:58:27.490
+!MESSAGE Command ReviewCode excecuted in 1581ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:02:15.037
+!MESSAGE 669 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:02:15.049
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1374ms, that is about 25.444445 ms/file, 4.5346537 ms/rule, 0.08397506 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:02:15.069
+!MESSAGE Command ReviewCode excecuted in 1585ms
+!SESSION 2016-01-25 23:06:29.896 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-25 23:06:42.500
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:07:02.684
+!MESSAGE 668 markers applied on 64 files in 83ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:07:02.712
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 3489ms, that is about 64.611115 ms/file, 11.514852 ms/rule, 0.21323799 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:07:02.726
+!MESSAGE Command ReviewCode excecuted in 4945ms
+
+!ENTRY org.eclipse.jface 4 0 2016-01-25 23:07:13.447
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:19:50.523
+!MESSAGE 653 markers applied on 64 files in 22ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:19:50.531
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 2080ms, that is about 38.51852 ms/file, 6.8646865 ms/rule, 0.12712382 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:19:50.539
+!MESSAGE Command ReviewCode excecuted in 2318ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:20:07.259
+!MESSAGE 653 markers applied on 64 files in 25ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:20:07.268
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1768ms, that is about 32.74074 ms/file, 5.8349833 ms/rule, 0.10805525 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:20:07.277
+!MESSAGE Command ReviewCode excecuted in 1993ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:27:58.442
+!MESSAGE 642 markers applied on 64 files in 14ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:27:58.454
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1613ms, that is about 29.87037 ms/file, 5.3234324 ms/rule, 0.09858208 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:27:58.469
+!MESSAGE Command ReviewCode excecuted in 1807ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:28:45.795
+!MESSAGE 641 markers applied on 64 files in 12ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:28:45.807
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1591ms, that is about 29.462963 ms/file, 5.250825 ms/rule, 0.097237505 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:28:45.816
+!MESSAGE Command ReviewCode excecuted in 1781ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:30:21.544
+!MESSAGE 640 markers applied on 64 files in 13ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:30:21.564
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1496ms, that is about 27.703703 ms/file, 4.9372935 ms/rule, 0.091431364 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:30:21.579
+!MESSAGE Command ReviewCode excecuted in 1690ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:30:35.161
+!MESSAGE 639 markers applied on 64 files in 11ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:30:35.175
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1465ms, that is about 27.12963 ms/file, 4.8349833 ms/rule, 0.089536734 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:30:35.188
+!MESSAGE Command ReviewCode excecuted in 1638ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:31:01.265
+!MESSAGE 639 markers applied on 64 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:31:01.279
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1472ms, that is about 27.25926 ms/file, 4.8580856 ms/rule, 0.08996455 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:31:01.296
+!MESSAGE Command ReviewCode excecuted in 1655ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:31:41.270
+!MESSAGE 638 markers applied on 64 files in 13ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:31:41.296
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1439ms, that is about 26.648148 ms/file, 4.749175 ms/rule, 0.08794768 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:31:41.321
+!MESSAGE Command ReviewCode excecuted in 1641ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:33:17.244
+!MESSAGE 620 markers applied on 64 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:33:17.261
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1424ms, that is about 26.37037 ms/file, 4.69967 ms/rule, 0.087030925 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:33:17.277
+!MESSAGE Command ReviewCode excecuted in 1606ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:33:48.366
+!MESSAGE 616 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:33:48.382
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1441ms, that is about 26.685184 ms/file, 4.7557755 ms/rule, 0.088069916 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:33:48.398
+!MESSAGE Command ReviewCode excecuted in 1622ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:34:05.695
+!MESSAGE 615 markers applied on 64 files in 9ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:34:05.713
+!MESSAGE Review code command terminated. 303 rules were executed against 54 files. Actual PMD duration is about 1429ms, that is about 26.462963 ms/file, 4.7161717 ms/rule, 0.08733651 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:34:05.729
+!MESSAGE Command ReviewCode excecuted in 1606ms
+
+!ENTRY org.eclipse.jdt.core 4 4 2016-01-25 23:34:42.670
+!MESSAGE JavaBuilder handling ImageBuilderInternalException while building: engine-core
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:794)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:486)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:398)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractPMDPreferencePage$1.run(AbstractPMDPreferencePage.java:93)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Could not delete '/engine-core/target/classes/vine'.
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:354)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1831)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:781)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:486)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:398)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractPMDPreferencePage$1.run(AbstractPMDPreferencePage.java:93)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test\MyTestObject.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test\MyWrongTestObject.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen\test\ScreenTest.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen\test.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test\DisplayTest.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test\WindowTest.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine.
+!SUBENTRY 1 org.eclipse.core.resources 4 273 2016-01-25 23:34:42.671
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 2 org.eclipse.core.resources 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete '/engine-core/target/classes/vine'.
+!STACK 1
+org.eclipse.core.internal.resources.ResourceException: Problems encountered while deleting resources.
+	at org.eclipse.core.internal.localstore.FileSystemResourceManager.delete(FileSystemResourceManager.java:354)
+	at org.eclipse.core.internal.resources.ResourceTree.internalDeleteFolder(ResourceTree.java:358)
+	at org.eclipse.core.internal.resources.ResourceTree.standardDeleteFolder(ResourceTree.java:810)
+	at org.eclipse.core.internal.resources.Resource.unprotectedDelete(Resource.java:1831)
+	at org.eclipse.core.internal.resources.Resource.delete(Resource.java:781)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.cleanOutputFolders(BatchImageBuilder.java:115)
+	at org.eclipse.jdt.internal.core.builder.BatchImageBuilder.build(BatchImageBuilder.java:47)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.buildAll(JavaBuilder.java:256)
+	at org.eclipse.jdt.internal.core.builder.JavaBuilder.build(JavaBuilder.java:175)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.resources.Workspace.buildInternal(Workspace.java:486)
+	at org.eclipse.core.internal.resources.Workspace.build(Workspace.java:398)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractPMDPreferencePage$1.run(AbstractPMDPreferencePage.java:93)
+	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+Contains: Problems encountered while deleting files.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test\MyTestObject.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test\MyWrongTestObject.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen\test\ScreenTest.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen\test.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test\DisplayTest.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test\WindowTest.class.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window.
+Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine.
+!SUBENTRY 3 org.eclipse.core.resources 4 273 2016-01-25 23:34:42.671
+!MESSAGE Problems encountered while deleting resources.
+!SUBENTRY 4 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Problems encountered while deleting files.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test\MyTestObject.class.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test\MyWrongTestObject.class.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game\test.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\game.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen\test\ScreenTest.class.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen\test.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\screen.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test\DisplayTest.class.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test\WindowTest.class.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window\test.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine\window.
+!SUBENTRY 5 org.eclipse.core.filesystem 4 273 2016-01-25 23:34:42.671
+!MESSAGE Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-core\target\classes\vine.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:34:48.145
+!MESSAGE 616 markers applied on 64 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:34:48.150
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1437ms, that is about 26.61111 ms/file, 4.7582784 ms/rule, 0.08811626 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:34:48.157
+!MESSAGE Command ReviewCode excecuted in 1597ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:35:26.840
+!MESSAGE 366 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:35:26.847
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1393ms, that is about 25.796297 ms/file, 4.6125827 ms/rule, 0.0854182 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:35:26.854
+!MESSAGE Command ReviewCode excecuted in 1548ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:37:15.961
+!MESSAGE 351 markers applied on 64 files in 7ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:37:15.970
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1401ms, that is about 25.944445 ms/file, 4.639073 ms/rule, 0.085908756 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:37:15.979
+!MESSAGE Command ReviewCode excecuted in 1561ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:41:41.053
+!MESSAGE 339 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:41:41.066
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1434ms, that is about 26.555555 ms/file, 4.7483444 ms/rule, 0.0879323 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:41:41.076
+!MESSAGE Command ReviewCode excecuted in 1599ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:45:37.977
+!MESSAGE 335 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:45:37.991
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1426ms, that is about 26.407408 ms/file, 4.721854 ms/rule, 0.08744175 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:45:38.005
+!MESSAGE Command ReviewCode excecuted in 1597ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:47:20.729
+!MESSAGE 333 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:47:20.744
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1445ms, that is about 26.75926 ms/file, 4.784768 ms/rule, 0.08860682 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:47:20.757
+!MESSAGE Command ReviewCode excecuted in 1615ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:48:17.256
+!MESSAGE 332 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:48:17.272
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1437ms, that is about 26.61111 ms/file, 4.7582784 ms/rule, 0.08811626 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:48:17.286
+!MESSAGE Command ReviewCode excecuted in 1608ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:51:00.206
+!MESSAGE 329 markers applied on 64 files in 5ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:51:00.223
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1419ms, that is about 26.277779 ms/file, 4.6986756 ms/rule, 0.08701251 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:51:00.238
+!MESSAGE Command ReviewCode excecuted in 1587ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:55:03.227
+!MESSAGE 319 markers applied on 64 files in 5ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:55:03.245
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1412ms, that is about 26.148148 ms/file, 4.6754966 ms/rule, 0.08658327 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:55:03.260
+!MESSAGE Command ReviewCode excecuted in 1588ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:55:31.479
+!MESSAGE 317 markers applied on 64 files in 5ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:55:31.497
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1397ms, that is about 25.87037 ms/file, 4.625828 ms/rule, 0.085663475 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:55:31.512
+!MESSAGE Command ReviewCode excecuted in 1569ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:56:55.154
+!MESSAGE 316 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:56:55.171
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1377ms, that is about 25.5 ms/file, 4.5596027 ms/rule, 0.08443709 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:56:55.186
+!MESSAGE Command ReviewCode excecuted in 1548ms

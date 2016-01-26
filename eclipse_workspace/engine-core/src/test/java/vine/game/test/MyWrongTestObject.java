@@ -1,4 +1,4 @@
-package vine.core.game.gameobjects.test;
+package vine.game.test;
 
 import vine.game.GameObject;
 
@@ -14,13 +14,13 @@ public class MyWrongTestObject extends GameObject {
     @Override
     public void begin() {
         // TODO Auto-generated method stub
-
+        super.begin();
     }
 
     @Override
     protected void construct() {
         // TODO Auto-generated method stub
-
+        super.construct();
     }
 
 }

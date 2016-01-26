@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author Steffen
  *
  */
-public class ShaderLoader {
+public final class ShaderLoader {
 
     private ShaderLoader() {
     }
@@ -36,9 +36,9 @@ public class ShaderLoader {
      *            The fragment shader text
      * @return The id of the shader programm in the graphics pipeline
      */
-    public static int load(String vertPath, String fragPath) {
-        String vert = FileUtils.loadFileAsString(vertPath);
-        String frag = FileUtils.loadFileAsString(fragPath);
+    public static int load(final String vertPath, final String fragPath) {
+        final String vert = FileUtils.loadFileAsString(vertPath);
+        final String frag = FileUtils.loadFileAsString(fragPath);
         return create(vert, frag);
     }
 
@@ -51,12 +51,11 @@ public class ShaderLoader {
      *            The fragment shader text
      * @return The id of the shader programm in the graphics pipeline
      */
-    public static int create(String vert, String frag) {
-        int vertId = glCreateShader(GL_VERTEX_SHADER);
-        int fragId = glCreateShader(GL_FRAGMENT_SHADER);
+    public static int create(final String vert, final String frag) {
+        final int vertId = glCreateShader(GL_VERTEX_SHADER);
+        final int fragId = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(vertId, vert);
         glShaderSource(fragId, frag);
-
         glCompileShader(vertId);
         if (glGetShaderi(vertId, GL_COMPILE_STATUS) == GL_FALSE) {
             // Could not load vertex shader
@@ -70,15 +69,13 @@ public class ShaderLoader {
             Logger.getGlobal().log(Level.SEVERE, "Failed to compile fragment shader!" + glGetShaderInfoLog(fragId));
             return load();
         }
-        int program = glCreateProgram();
+        final int program = glCreateProgram();
         glAttachShader(program, vertId);
         glAttachShader(program, fragId);
         glLinkProgram(program);
         glValidateProgram(program);
-
         glDeleteShader(vertId);
         glDeleteShader(fragId);
-
         return program;
     }
 
@@ -96,5 +93,4 @@ public class ShaderLoader {
                 + "vs_out.position = vec3(vw_matrix * position);}";
         return create(vert, frag);
     }
-
 }

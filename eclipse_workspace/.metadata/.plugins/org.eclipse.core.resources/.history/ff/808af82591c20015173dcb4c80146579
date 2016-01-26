@@ -1,0 +1,34 @@
+package vine.event;
+
+/**
+ * @author Steffen
+ *
+ */
+public interface Event {
+    public enum EventType {
+        /**
+         * 
+         */
+        MOUSE_BUTTON,
+        /**
+        * 
+        */
+        KEY,
+        /**
+        * 
+        */
+        SCROLL, TOUCH, MOUSE_POSITION, SENSOR
+    }
+
+    /**
+     * @return
+     */
+    EventType getType();
+
+    /**
+     * @return
+     */
+    default boolean isHandled() {
+        return false;
+    }
+}

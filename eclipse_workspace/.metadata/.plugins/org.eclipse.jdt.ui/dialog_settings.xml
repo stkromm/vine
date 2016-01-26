@@ -58,6 +58,33 @@
 		<item value="false" key="GoIntoTopLevelTypeAction.isChecked"/>
 		<item value="false" key="org.eclipse.jdt.internal.ui.text.JavaOutlineInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
 	</section>
+	<section name="javadoc">
+		<item value="public" key="access"/>
+		<item value="false" key="noindex"/>
+		<item value="D:\Workspaces\VineEngine\eclipse_workspace\engine-core\javadoc.xml" key="antpath"/>
+		<item value="false" key="nodeprecatedlist"/>
+		<item value="true" key="use"/>
+		<item value="true" key="author"/>
+		<item value="false" key="nodeprecated"/>
+		<item value="false" key="nonavbar"/>
+		<item value="" key="docletpath"/>
+		<item value="C:\Program Files\Java\jdk1.8.0_66\bin\javadoc.exe" key="javadoc_command_history"/>
+		<item value="1.8" key="source"/>
+		<item value="true" key="version"/>
+		<item value="" key="docletname"/>
+		<item value="true" key="splitindex"/>
+		<item value="true" key="fromStandard"/>
+		<item value="false" key="notree"/>
+		<item value="D:\Workspaces\VineEngine\eclipse_workspace\engine-core\doc" key="destdir"/>
+		<item value="true" key="openinbrowser"/>
+		<section name="projects">
+			<section name="engine-core">
+				<item value="D:\Workspaces\VineEngine\eclipse_workspace\engine-core\javadoc.xml" key="antpath"/>
+				<item value="D:\Workspaces\VineEngine\eclipse_workspace\engine-core\doc" key="destdir"/>
+				<item value="http://hamcrest.org/JavaHamcrest/javadoc/1.3/;https://docs.oracle.com/javase/8/docs/api/;http://junit-team.github.io/junit/javadoc/latest/;file:/D:/Workspaces/VineEngine/eclipse_workspace/engine-core/doc/;http://docs.oracle.com/javase/8/javafx/api/" key="href"/>
+			</section>
+		</section>
+	</section>
 	<section name="OverrideMethodDialog">
 		<item value="true" key="showtypes"/>
 	</section>
@@ -89,6 +116,13 @@
 			<item value="messages.properties" key="bundleName"/>
 			<item value="=engine-core/src\/main\/java&lt;com.vine.platform.desktop" key="accessorPackage"/>
 		</section>
+	</section>
+	<section name="JavadocWizardDialog">
+		<item value="616" key="DIALOG_WIDTH"/>
+		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+		<item value="567" key="DIALOG_HEIGHT"/>
+		<item value="584" key="DIALOG_X_ORIGIN"/>
+		<item value="126" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="completion_proposal_size">
 	</section>

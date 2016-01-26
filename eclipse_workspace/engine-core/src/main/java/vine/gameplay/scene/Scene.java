@@ -1,14 +1,10 @@
-package vine.graphics;
+package vine.gameplay.scene;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import vine.game.Game;
 import vine.gameplay.component.Camera;
-import vine.gameplay.component.Sprite;
-import vine.gameplay.entity.GameEntity;
 
 /**
  * @author Steffen
@@ -20,38 +16,29 @@ public class Scene extends Layer {
      */
     public final CameraManager cameras = new CameraManager();
 
-    /**
-     * Empty constructor.
-     */
-    Scene() {
-
-    }
-
     @Override
     public void render() {
         entities.stream().forEach(renderer::submit);
-        renderer.flush(this);
+        renderer.flushTiles(this);
+        renderer.flushChars(this);
     }
 
     /**
-     * @author Steffen
-     *
+     * @param level
+     *            The asset name of the level
+     * @return A newly created Scene.
+     * @throws SceneCreationException
      */
-    public static class SceneBuilder {
-        private SceneBuilder() {
+    public static Scene createScene(final String level) throws SceneCreationException {
+        return new Scene();
+    }
 
-        }
-
-        /**
-         * @param level
-         *            The asset name of the level
-         * @return A newly created Scene.
-         * @throws SceneCreationException
-         */
-        public static Scene createScene(String level) throws SceneCreationException {
-            Scene scene = new Scene();
-            return scene;
-        }
+    /**
+     * @param delta
+     *            The time that has passed since last update.
+     */
+    public void update(final float delta) {
+        entities.stream().forEach(e -> e.update(delta));
     }
 
     /**
@@ -59,13 +46,13 @@ public class Scene extends Layer {
      *
      */
     public class CameraManager {
-        private List<Camera> managedCameras = new ArrayList<>();
-        private Camera activeCamera = null;
+        private final List<Camera> managedCameras = new ArrayList<>();
+        private Camera activeCamera;
 
         /**
          * 
          */
-        CameraManager() {
+        protected CameraManager() {
             // Default Constructor visible, so only Scene can instantiate a
             // camera manager.
         }
@@ -81,7 +68,7 @@ public class Scene extends Layer {
          * @param camera
          *            Camera, that should be managed
          */
-        public void removeCamera(Camera camera) {
+        public void removeCamera(final Camera camera) {
             managedCameras.remove(camera);
         }
 
@@ -91,7 +78,7 @@ public class Scene extends Layer {
          * @return A camera that is usable in this Scene
          */
         public Camera instantiateCamera() {
-            Camera camera = Game.instantiate(Camera.class);
+            final Camera camera = Game.instantiate(Camera.class);
             managedCameras.add(camera);
             return camera;
         }
@@ -100,19 +87,11 @@ public class Scene extends Layer {
          * @param camera
          *            The camera to activate
          */
-        public void activate(Camera camera) {
+        public void activate(final Camera camera) {
             if (managedCameras.contains(camera)) {
                 activeCamera = camera;
             }
         }
-    }
-
-    /**
-     * @param delta
-     *            The time that has passed since last update.
-     */
-    public void update(float delta) {
-        entities.stream().forEach(e -> e.update(delta));
     }
 
 }

@@ -1,0 +1,16 @@
+package vine.window.test;
+
+import org.junit.Before;
+
+import vine.application.PlatformDependencyResolver;
+import vine.display.Display;
+
+public class DisplayTest {
+
+    Display display = null;
+
+    @Before
+    public void setup() {
+        display = PlatformDependencyResolver.getDisplay();
+    }
+}

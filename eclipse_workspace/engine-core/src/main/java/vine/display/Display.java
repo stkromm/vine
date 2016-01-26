@@ -27,11 +27,6 @@ public interface Display {
     String[] getMonitorNames();
 
     /**
-     * @return An array with all ids of the system connected monitors.
-     */
-    long[] getMonitors();
-
-    /**
      * @return The screen width of the currently used monitor.
      */
     int getWidth();

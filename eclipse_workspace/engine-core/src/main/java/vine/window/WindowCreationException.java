@@ -17,7 +17,7 @@ public class WindowCreationException extends Exception {
      * @param message
      *            error message
      */
-    public WindowCreationException(String message) {
+    public WindowCreationException(final String message) {
         super(message);
     }
 

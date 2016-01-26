@@ -1,0 +1,41 @@
+package vine.game.tilemap;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import vine.game.GameObject;
+import vine.gameplay.component.Sprite;
+import vine.graphics.Texture;
+
+public class TileMap extends GameObject {
+
+    private int xTiles;
+    private int yTiles;
+
+    private float[] vertices;
+    private Sprite[] tiles;
+
+    public void setTile(int x, int y, Sprite sprite) {
+        if (sprite == null || x >= xTiles || y >= yTiles) {
+            return;
+        } else {
+            tiles[x * xTiles + y] = sprite;
+        }
+    }
+
+    public void shiftY(int amount, boolean repeat) {
+
+    }
+
+    public void shiftX(int amount, boolean repeat) {
+
+    }
+
+    public void setX(int numOfTiles) {
+
+    }
+
+    public void setY(int numOfTiles) {
+
+
+}

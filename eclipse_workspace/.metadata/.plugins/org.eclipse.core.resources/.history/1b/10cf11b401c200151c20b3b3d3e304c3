@@ -1,0 +1,26 @@
+package vine.screen.test;
+
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import vine.game.screen.Viewport;
+
+public class ViewportTest {
+
+    Viewport viewport;
+
+    @Before
+    public void setup() {
+        viewport = new Viewport();
+    }
+
+    @Test
+    public void testFieldAccess() {
+        assertTrue(viewport.getBottomOffset() == 0);
+        assertTrue(viewport.getTopOffset() == 0);
+        assertTrue(viewport.getRightOffset() == 0);
+        assertTrue(viewport.getLeftOffset() == 0);
+    }
+}

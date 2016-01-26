@@ -80,6 +80,20 @@ public class GLVertexArray implements VertexArray {
         glBindVertexArray(0);
     }
 
+    public void changeVertices(float[] vertices) {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(vertices), GL_STATIC_DRAW);
+        glVertexAttribPointer(Shader.VERTEX_ATTRIB, 3, GL_FLOAT, false, 0, 0);
+        glEnableVertexAttribArray(Shader.VERTEX_ATTRIB);
+    }
+
+    public void changeTexture(float[] uvs) {
+        glBindBuffer(GL_ARRAY_BUFFER, tbo);
+        glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(uvs), GL_STATIC_DRAW);
+        glVertexAttribPointer(Shader.TCOORD_ATTRIB, 2, GL_FLOAT, false, 0, 0);
+        glEnableVertexAttribArray(Shader.TCOORD_ATTRIB);
+    }
+
     /**
      * Unbinds the current vertex array buffer.
      */

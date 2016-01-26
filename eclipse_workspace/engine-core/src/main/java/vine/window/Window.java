@@ -22,7 +22,7 @@ public interface Window {
         /**
          * Called on close request.
          */
-        public void onCloseRequest();
+        void onCloseRequest();
     }
 
     /**
@@ -39,7 +39,7 @@ public interface Window {
          * @param height
          *            The new framebuffer height.
          */
-        public void onFramebufferSizeChange(int width, int height);
+        void onFramebufferSizeChange(int width, int height);
     }
 
     /**
@@ -51,12 +51,12 @@ public interface Window {
     @FunctionalInterface
     interface PositionCallback {
         /**
-         * @param x
+         * @param xPos
          *            The new x position of the window on the display
-         * @param y
+         * @param yPos
          *            The new y position of the window on the display
          */
-        public void onPositionChange(int x, int y);
+        void onPositionChange(int xPos, int yPos);
     }
 
     /**
@@ -73,7 +73,7 @@ public interface Window {
          * @param height
          *            The new height the window changed to.
          */
-        public void onSizeChange(int width, int height);
+        void onSizeChange(int width, int height);
     }
 
     /**
@@ -115,12 +115,12 @@ public interface Window {
     void setWindowSize(int width, int height);
 
     /**
-     * @param x
+     * @param xPos
      *            The new x position of the window on the display
-     * @param y
+     * @param yPos
      *            The new y position of the window on the display
      */
-    void setWindowPosition(int x, int y);
+    void setWindowPosition(int xPos, int yPos);
 
     /**
      * Releases the current SizeCallback and sets the given.
@@ -218,5 +218,10 @@ public interface Window {
      *         the game.
      */
     long getContext();
+
+    /**
+     * @return The window title.
+     */
+    String getTitle();
 
 }

@@ -1,0 +1,9 @@
+package vine.application;
+
+public enum MetricUnits {
+    MILLI, NANO;
+    
+    public long convert() {
+        
+    }
+}       

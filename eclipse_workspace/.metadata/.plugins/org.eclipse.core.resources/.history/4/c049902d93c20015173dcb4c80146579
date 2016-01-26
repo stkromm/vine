@@ -1,0 +1,10 @@
+package vine.event;
+
+import vine.event.EventDispatcher.EventHandler;
+
+public interface EventListener {
+    public void addEventHandler(EventHandler handler);
+
+    public boolean onEvent(Event event);
+
+}

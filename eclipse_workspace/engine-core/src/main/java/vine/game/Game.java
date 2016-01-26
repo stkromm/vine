@@ -1,10 +1,15 @@
 package vine.game;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import vine.application.StatMonitor;
 import vine.event.EventDispatcher;
 import vine.game.GameObject.ReferenceManager;
 import vine.game.screen.GameScreen;
@@ -13,9 +18,9 @@ import vine.gameplay.component.Camera;
 import vine.gameplay.component.Sprite;
 import vine.gameplay.entity.GameEntity;
 import vine.gameplay.entity.PlayerPawn;
-import vine.graphics.Graphics;
-import vine.graphics.SceneCreationException;
-import vine.graphics.Scene;
+import vine.gameplay.scene.Scene;
+import vine.gameplay.scene.SceneCreationException;
+import vine.graphics.Renderer;
 import vine.settings.GameSettings;
 import vine.window.Window;
 
@@ -36,13 +41,21 @@ import vine.window.Window;
  *
  */
 public class Game {
+    /**
+     * Used logger for gameplay logs.
+     */
+    static final Logger logger = LoggerFactory.getLogger(Game.class);
     private volatile Scene scene;
     private volatile Screen screen;
-    private volatile Graphics graphics;
+    private EventDispatcher eventDispatcher;
     private static Game runningGame;
 
     private Game() {
 
+    }
+
+    protected EventDispatcher getEventDispatcher() {
+        return eventDispatcher;
     }
 
     /**
@@ -56,14 +69,7 @@ public class Game {
     }
 
     /**
-     * @return The graphics provide used by the game.
-     */
-    public Graphics getGraphics() {
-        return graphics;
-    }
-
-    /**
-     * @return Returns the games viewport.
+     * @return Returns the games screen.
      */
     public final Screen getScreen() {
         return screen;
@@ -80,42 +86,23 @@ public class Game {
      * @param delta
      *            The time that passed since the last update
      */
-    static void update(float delta) {
+    protected static void update(float delta) {
+        if (logger.isInfoEnabled()) {
+            logger.debug("Start new update at "
+                    + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date()) + "\nTime delta is:"
+                    + delta + " milliseconds\nCurrent FPS about:" + StatMonitor.getFPS() + "\n");
+        }
         runningGame.scene.update(delta);
-    }
-
-    /**
-     * @param level
-     *            The asset name of the level that should be loaded.
-     */
-    public static void changeLevel(String level) {
-        try {
-            runningGame.scene = Scene.SceneBuilder.createScene(level);
-        } catch (SceneCreationException e) {
-            Logger.getGlobal().log(Level.SEVERE, "Failed to create scene " + level, e);
+        if (logger.isInfoEnabled()) {
+            logger.debug("Ended update at "
+                    + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date()) + "\n");
         }
-        EventDispatcher.registerListener(runningGame.scene);
-        for (int i = 0; i < 500; i++) {
-            GameEntity entity = Game.instantiate(GameEntity.class);
-            Sprite sprite = Game.instantiate(Sprite.class);
-            entity.addComponent(sprite);
-            runningGame.scene.getEntities().add(entity);
-            entity.setScene(runningGame.scene);
-        }
-        PlayerPawn entity = Game.instantiate(PlayerPawn.class, new Integer(1), new Integer(2));
-        Sprite sprite = Game.instantiate(Sprite.class);
-        entity.addComponent(sprite);
-        Camera camera = runningGame.scene.cameras.instantiateCamera();
-        entity.addComponent(camera);
-        runningGame.scene.cameras.activate(camera);
-        runningGame.scene.getEntities().add(entity);
-        entity.setScene(runningGame.scene);
     }
 
     /**
      * 
      */
-    static void render() {
+    protected static void render() {
         runningGame.scene.render();
     }
 
@@ -127,12 +114,45 @@ public class Game {
      * @param graphics
      *            The graphics provider used to render the game
      */
-    static void init(Window window, Graphics graphics) {
+    protected static void init(Window window) {
         runningGame = new Game();
-        runningGame.graphics = graphics;
-        runningGame.screen = new GameScreen(window, 9.f / 16, 720);
-        getObjectsByType(GameObject.class).stream().forEach(e -> e.destroy());
+        runningGame.screen = new GameScreen(window, 1280, 720);
+        runningGame.eventDispatcher = new EventDispatcher();
+        getObjectsByType(GameObject.class).stream().forEach(GameObject::destroy);
         changeLevel(GameSettings.getStartLevelName());
+    }
+
+    /**
+     * @param level
+     *            The asset name of the level that should be loaded.
+     */
+    public static final void changeLevel(final String level) {
+        try {
+            runningGame.scene = Scene.createScene(level);
+        } catch (SceneCreationException e) {
+            logger.error("Failed to create scene " + level, e);
+        }
+        Game.getGame().getEventDispatcher().registerListener(runningGame.scene);
+        for (int i = 0; i < 5000; i++) {
+            final GameEntity entity = Game.instantiate(GameEntity.class, Integer.valueOf((i / 30) * 32),
+                    Integer.valueOf((i % 30) * 32));
+            final Sprite sprite = Game.instantiate(Sprite.class, Integer.valueOf(32), Integer.valueOf(32),
+                    Renderer.DEFAULT_CHIPSET, Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(16),
+                    Integer.valueOf(16));
+            entity.addComponent(sprite);
+            runningGame.scene.getEntities().add(entity);
+            entity.setScene(runningGame.scene);
+        }
+        final PlayerPawn entity = Game.instantiate(PlayerPawn.class, Integer.valueOf(1), Integer.valueOf(2));
+        final Sprite sprite = Game.instantiate(Sprite.class, Integer.valueOf(32), Integer.valueOf(64),
+                Renderer.DEFAULT_TEXTURE, Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(16),
+                Integer.valueOf(32));
+        entity.addComponent(sprite);
+        Camera camera = runningGame.scene.cameras.instantiateCamera();
+        entity.addComponent(camera);
+        runningGame.getScene().cameras.activate(camera);
+        runningGame.getScene().getEntities().add(entity);
+        entity.setScene(runningGame.scene);
     }
 
     /**
@@ -160,13 +180,8 @@ public class Game {
      * @return the newly created gameobject
      */
     public static final <T extends GameObject> T instantiate(Class<T> type, String name, Object... params) {
-        if (name.contains("?")) {
-            return null;
-        }
-        if (!ReferenceManager.objects.containsKey(name)) {
-            return ReferenceManager.instantiate(type, name, params);
-        }
-        return null;
+        return !GameUtils.isValidGameObjectName(name) || type == null ? null
+                : ReferenceManager.instantiate(type, name, params);
     }
 
     /**
@@ -176,11 +191,11 @@ public class Game {
      */
     public static final <T extends GameObject> List<T> getObjectsByType(Class<T> type) {
         List<T> list = new ArrayList<>();
-        ReferenceManager.objects.values().stream().forEach(obj -> {
-            if (obj.getClass() == type) {
-                list.add(type.cast(obj));
+        for (GameObject object : ReferenceManager.OBJECTS.values()) {
+            if (object.getClass() == type) {
+                list.add(type.cast(object));
             }
-        });
+        }
         return list;
     }
 
@@ -189,7 +204,7 @@ public class Game {
      *            Name identifier that is look up for a object.
      * @return The objects, that exists in the system by the given name.
      */
-    public static final GameObject getObjectByName(String name) {
-        return ReferenceManager.objects.get(name);
+    public static final GameObject getObjectByName(final String name) {
+        return ReferenceManager.OBJECTS.get(name);
     }
 }

@@ -23,6 +23,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
 import static org.lwjgl.glfw.GLFW.glfwCreateWindow;
 import static org.lwjgl.glfw.GLFW.glfwDestroyWindow;
 import static org.lwjgl.glfw.GLFW.glfwGetWindowAttrib;
+import static org.lwjgl.glfw.GLFW.glfwHideWindow;
 import static org.lwjgl.glfw.GLFW.glfwInit;
 import static org.lwjgl.glfw.GLFW.glfwSetErrorCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetFramebufferSizeCallback;
@@ -56,21 +57,25 @@ import vine.window.WindowCreationException;
  * @author Steffen
  *
  */
-public class GLFWWindow implements Window {
-    private volatile int x = 0;
-    private volatile int y = 0;
-    private volatile int width = 0;
-    private volatile int height = 0;
-    private volatile int bufferWidth = 0;
-    private volatile int bufferHeight = 0;
-    private volatile long window = NULL;
+public final class GLFWWindow implements Window {
+    private int xPos;
+    private int yPos;
+
+    private int width;
+    private int height;
+
+    private int bufferWidth;
+    private int bufferHeight;
+
+    private long window = NULL;
+
+    private String title;
+
+    // Need hard references, otherwise the callbacks get garbage collected
     private GLFWErrorCallback errorCallback;
     private GLFWFramebufferSizeCallback framebufferSizeCallback;
-
     private GLFWWindowCloseCallback closeCallback;
-
     private GLFWWindowPosCallback positionCallback;
-
     private GLFWWindowSizeCallback resizeCallback;
 
     /**
@@ -79,7 +84,7 @@ public class GLFWWindow implements Window {
     public GLFWWindow() {
         // Initialize GLFW. Most GLFW functions will not work before doing this.
         if (glfwInit() != GLFW_TRUE) {
-            throw new IllegalStateException(Messages.getString("DesktopWindow.0")); //$NON-NLS-1$
+            throw new IllegalStateException("Failed to init glfw");
         }
         errorCallback = GLFWErrorCallback.createPrint();
         glfwSetErrorCallback(errorCallback);
@@ -88,11 +93,15 @@ public class GLFWWindow implements Window {
     @Override
     public void setTitle(String title) {
         glfwSetWindowTitle(window, title);
+        this.title = title;
     }
 
     @Override
-    public void init(Display display) throws WindowCreationException {
+    public void init(final Display display) throws WindowCreationException {
 
+        if (display == null) {
+            throw new WindowCreationException("Need a valid display to embedd the window within");
+        }
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
@@ -111,12 +120,14 @@ public class GLFWWindow implements Window {
         glfwWindowHint(GLFW_REFRESH_RATE, display.getRefreshRate());
         if (window == NULL) {
             window = glfwCreateWindow(display.getWidth() / 2, display.getHeight() / 2, "My Game", NULL, NULL);
+            title = "My Game";
         } else {
             window = glfwCreateWindow(display.getWidth() / 2, display.getHeight() / 2, "My Game",
                     display.getPrimaryMonitor(), window);
+            title = "My Game";
         }
         if (window == NULL) {
-            throw new WindowCreationException(Messages.getString("DesktopWindow.1")); //$NON-NLS-1$
+            throw new WindowCreationException("Failed to create the window");
         }
         glfwSetWindowAspectRatio(window, 16, 9);
         glfwSetWindowCloseCallback(window, closeCallback);
@@ -126,9 +137,6 @@ public class GLFWWindow implements Window {
 
         // Make the window visible
         glfwShowWindow(window);
-        for (String nam : display.getMonitorNames()) {
-            System.out.println(nam);
-        }
         this.width = display.getWidth() / 2;
         this.height = display.getHeight() / 2;
     }
@@ -172,7 +180,7 @@ public class GLFWWindow implements Window {
 
     @Override
     public void hide() {
-        glfwShowWindow(0L);
+        glfwHideWindow(window);
     }
 
     @Override
@@ -181,7 +189,7 @@ public class GLFWWindow implements Window {
     }
 
     @Override
-    public void setSizeCallback(SizeCallback callback) {
+    public void setSizeCallback(final SizeCallback callback) {
         if (resizeCallback != null) {
             resizeCallback.release();
         }
@@ -194,20 +202,20 @@ public class GLFWWindow implements Window {
     }
 
     @Override
-    public void setPositionCallback(PositionCallback callback) {
+    public void setPositionCallback(final PositionCallback callback) {
         if (positionCallback != null) {
             positionCallback.release();
         }
         positionCallback = GLFWWindowPosCallback.create((win, w, h) -> {
             callback.onPositionChange(w, h);
-            this.x = w;
-            this.y = h;
+            this.xPos = w;
+            this.yPos = h;
         });
         glfwSetWindowPosCallback(window, positionCallback);
     }
 
     @Override
-    public void setFramebufferSizeCallback(FramebufferSizeCallback callback) {
+    public void setFramebufferSizeCallback(final FramebufferSizeCallback callback) {
         if (framebufferSizeCallback != null) {
             framebufferSizeCallback.release();
         }
@@ -220,7 +228,7 @@ public class GLFWWindow implements Window {
     }
 
     @Override
-    public void setCloseCallback(CloseCallback callback) {
+    public void setCloseCallback(final CloseCallback callback) {
         if (closeCallback != null) {
             closeCallback.release();
         }
@@ -245,22 +253,26 @@ public class GLFWWindow implements Window {
 
     @Override
     public int getPosX() {
-        return x;
+        return xPos;
     }
 
     @Override
     public int getPosY() {
-        return y;
+        return yPos;
     }
 
     @Override
     public void setWindowSize(int width, int height) {
         glfwSetWindowSize(window, width, height);
+        this.width = width;
+        this.height = height;
     }
 
     @Override
     public void setWindowPosition(int x, int y) {
         glfwSetWindowPos(window, x, y);
+        this.xPos = x;
+        this.yPos = y;
     }
 
     @Override
@@ -271,5 +283,10 @@ public class GLFWWindow implements Window {
     @Override
     public int getFramebufferHeight() {
         return bufferHeight;
+    }
+
+    @Override
+    public String getTitle() {
+        return title;
     }
 }

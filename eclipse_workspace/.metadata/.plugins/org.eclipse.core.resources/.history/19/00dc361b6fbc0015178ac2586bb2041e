@@ -1,8 +1,0 @@
-package vine.core.game;
-
-public class ApplicationThreadPool {
-
-    public enum ApplicationThread {
-        RENDER, NETWORK, AUDIO, LOGIC
-    }
-}

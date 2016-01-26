@@ -1,9 +1,0 @@
-package vine.tilemap;
-
-public class TileMap {
-
-    public final int[][] tiles = new int[width][height];
-
-    public int width = 20;
-    public int height = 15;
-}

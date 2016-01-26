@@ -19,25 +19,35 @@ public interface Screen {
     int getHeight();
 
     /**
-     * @param x
      * @return
      */
-    float worldXCoordToScreenXCoord(float x);
+    Viewport getViewport();
 
     /**
-     * @param y
      * @return
      */
-    float worldYCoordToScreenYCoord(float y);
+    float getAspect();
+
+    /**
+     * @return
+     */
+    Matrix4f getOrthographicProjection();
+
+    /**
+     * @param width
+     */
+    void setWidth(int width);
+
+    /**
+     * @param coord
+     * @return
+     */
+    float worldToScreenCoord(float coord);
 
     /**
      * @return The number of game units that fit into one window pixel.
      */
     float getUnitsPerPixel();
 
-    Viewport getViewport();
-
-    float getAspect();
-
-    Matrix4f getOrthographicProjection();
+    void setHeight(int height);
 }

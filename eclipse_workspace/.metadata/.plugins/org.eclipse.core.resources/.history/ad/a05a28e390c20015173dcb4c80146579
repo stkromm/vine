@@ -1,0 +1,15 @@
+package vine.event;
+
+public abstract class Event {
+    public enum EventType {
+        MOUSE_BUTTON, KEY, SCROLL, TOUCH, MOUSE_POSITION, SENSOR
+    }
+
+    public abstract EventType getType();
+
+    public boolean isHandled() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+}

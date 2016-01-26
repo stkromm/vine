@@ -1,4 +1,4 @@
-package vine.graphics;
+package vine.gameplay.scene;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,9 @@ import java.util.Optional;
 
 import vine.event.Event;
 import vine.event.EventDispatcher.EventHandler;
+import vine.event.EventLayer;
 import vine.gameplay.entity.GameEntity;
+import vine.graphics.Renderer;
 
 /**
  * Provides a unique rendering method with post processing, global screnn
@@ -16,28 +18,38 @@ import vine.gameplay.entity.GameEntity;
  * @author Steffen
  * 
  */
-public abstract class Layer {
+public abstract class Layer implements EventLayer {
     /**
      * 
      */
-    protected List<GameEntity> entities = new ArrayList<>();
+    protected final List<GameEntity> entities;
     /**
      * 
      */
-    protected Renderer renderer = new Renderer();
+    protected final Renderer renderer;
 
-    public List<EventHandler> handler = new ArrayList<>();
+    /**
+     * 
+     */
+    public final List<EventHandler> handler;
 
-    public void addKeyHandler(EventHandler handler) {
+    /**
+     * 
+     */
+    public Layer() {
+        entities = new ArrayList<>();
+        renderer = new Renderer();
+        handler = new ArrayList<>();
+    }
+
+    @Override
+    public void addEventHandler(final EventHandler handler) {
         this.handler.add(handler);
     }
 
-    public void addMouseButtonHandler(EventHandler handler) {
-        this.handler.add(handler);
-    }
-
-    public boolean onEvent(Event event) {
-        Optional<EventHandler> opt = handler.stream().filter(h -> h.onEvent(event)).findFirst();
+    @Override
+    public boolean onEvent(final Event event) {
+        final Optional<EventHandler> opt = handler.stream().filter(h -> h.onEvent(event)).findFirst();
         return opt.isPresent();
     }
 
@@ -54,7 +66,7 @@ public abstract class Layer {
      * @param entity
      *            Entity that will be rendered with this layer.
      */
-    public void add(GameEntity entity) {
+    public final void add(final GameEntity entity) {
         if (!entities.contains(entity)) {
             entities.add(entity);
         }

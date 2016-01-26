@@ -1,0 +1,25 @@
+package vine.window.test;
+
+import java.awt.GraphicsEnvironment;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import vine.display.Display;
+import vine.platform.lwjgl3.GLFWDisplay;
+
+public class DisplayTest {
+
+    Display display = null;
+
+    @Before
+    public void setup() {
+        display = new GLFWDisplay();
+    }
+
+    @Test
+    public void testRefreshRate() {
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        display.getRefreshRate();
+    }
+}

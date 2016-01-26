@@ -1,0 +1,8 @@
+package vine.game.tilemap;
+
+public class TileMap {
+
+    private float[] vertices;
+    private int[] tiles;
+    private List<Integer, Sprite> sprites = new ArrayList<>();
+}

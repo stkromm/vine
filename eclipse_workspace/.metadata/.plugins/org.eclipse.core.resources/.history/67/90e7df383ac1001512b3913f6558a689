@@ -1,0 +1,29 @@
+package vine.gameplay.component;
+
+import vine.graphics.Texture;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Sprite extends Component { // NOSONAR
+
+    private Texture texture;
+    private float tileWidth = 32;
+    private float tileHeight = 64;
+    private final float[] vertices = new float[] { 0, 0, 0, 0, tileHeight, 0, tileWidth, tileHeight, 0, tileWidth, 0,
+            0, };
+
+    /**
+     * @return The vertices array of the sprite.
+     */
+    public final float[] getVertices() {
+        return vertices;
+    }
+
+    public void construct(int worldWidth, int tileHeight, Texture texture, float texX, float texY) {
+        this.tileHeight = tileHeight;
+        this.tileWidth = worldWidth;
+        this.texture = texture;
+    }
+}

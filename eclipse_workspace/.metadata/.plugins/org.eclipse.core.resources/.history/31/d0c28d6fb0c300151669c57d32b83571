@@ -1,0 +1,33 @@
+package vine.event;
+
+/**
+ * @author Steffen
+ *
+ */
+public interface Event {
+    /**
+     * Used to identify different types of events.
+     * 
+     * @author Steffen
+     *
+     */
+    public enum EventType {
+        /**
+         * 
+         */
+        MOUSE_BUTTON,
+        /**
+        * 
+        */
+        KEY,
+        /**
+        * 
+        */
+        SCROLL, TOUCH, MOUSE_POSITION, SENSOR
+    }
+
+    /**
+     * @return
+     */
+    EventType getType();
+}

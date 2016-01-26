@@ -1,57 +1,149 @@
 package vine.input;
 
-import vine.math.Vector2f;
-
+/**
+ * @author Steffen
+ *
+ */
 public interface Input {
+    /**
+     * @author Steffen
+     *
+     */
     @FunctionalInterface
     interface ScrollCallback {
-        public void scrolled(long context, double offsetx, double offsety);
+        /**
+         * @param context
+         * @param offsetx
+         * @param offsety
+         */
+        void scrolled(long context, double offsetx, double offsety);
     }
 
+    /**
+     * @param callback
+     */
     void setScrollCallback(ScrollCallback callback);
 
+    /**
+     * @author Steffen
+     *
+     */
     @FunctionalInterface
     interface KeyCallback {
-        public void keyPressed(long context, int key, int scancode, int action, int mods);
+        /**
+         * @param context
+         * @param key
+         * @param scancode
+         * @param action
+         * @param mods
+         */
+        void keyPressed(long context, int key, int scancode, int action, int mods);
     }
 
+    /**
+     * @param callback
+     */
     void setKeyCallback(KeyCallback callback);
 
+    /**
+     * @author Steffen
+     *
+     */
     @FunctionalInterface
     interface CharCallback {
-        public void charInput(long context, int codepoint);
+        /**
+         * @param context
+         * @param codepoint
+         */
+        void charInput(long context, int codepoint);
     }
 
+    /**
+     * @param callback
+     */
     void setCharCallback(CharCallback callback);
 
+    /**
+     * @author Steffen
+     *
+     */
     @FunctionalInterface
     interface CharModCallback {
-        public void charModInput(long context, int codepoint, int mods);
+        /**
+         * @param context
+         * @param codepoint
+         * @param mods
+         */
+        void charModInput(long context, int codepoint, int mods);
     }
 
+    /**
+     * @param callback
+     */
     void setCharModCallback(CharModCallback callback);
 
+    /**
+     * @author Steffen
+     *
+     */
     @FunctionalInterface
     interface CursorPositionCallback {
-        public void changedCursorPosition(long context, double x, double y);
+        /**
+         * @param context
+         * @param x
+         * @param y
+         */
+        void changedCursorPosition(long context, double x, double y);
     }
 
+    /**
+     * @param callback
+     */
     void setCursorPositionCallback(CursorPositionCallback callback);
 
+    /**
+     * @author Steffen
+     *
+     */
     @FunctionalInterface
     interface MouseButtonCallback {
-        public void pressedMouseButton(long context, int button, int action, int mods);
+        /**
+         * @param context
+         * @param button
+         * @param action
+         * @param mods
+         */
+        void pressedMouseButton(long context, int button, int action, int mods);
     }
 
+    /**
+     * @param callback
+     */
     void setMouseButtonCallback(MouseButtonCallback callback);
 
+    /**
+     * @return
+     */
     double getCursorX();
 
+    /**
+     * @return
+     */
     double getCursorY();
 
+    /**
+     * @param context
+     */
     void listenToWindow(long context);
 
+    /**
+     * 
+     */
     void pollEvents();
 
+    /**
+     * @param action
+     * @return
+     */
     boolean isReleaseAction(int action);
 }

@@ -8,8 +8,11 @@ import vine.event.MouseButtonEvent;
  * @author Steffen
  *
  */
-public class InputMapper {
-    private static final boolean[] keys = new boolean[65536];
+public final class InputMapper {
+    /**
+     * 
+     */
+    private static final boolean[] KEYS = new boolean[65536];
 
     private InputMapper() {
 
@@ -24,15 +27,15 @@ public class InputMapper {
      * @param value
      *            Signals, that the key with the given keycode is pressed.
      */
-    private static void setKeyPressed(int keycode, boolean value) {
-        keys[keycode] = value;
+    private static void setKeyPressed(final int keycode, final boolean value) {
+        KEYS[keycode] = value;
     }
 
     /**
      * @return Returns the absolute number of possible different keys.
      */
     private static int getNumberOfKeys() {
-        return keys.length;
+        return KEYS.length;
     }
 
     /**
@@ -43,29 +46,30 @@ public class InputMapper {
      * @return Returns true, if the key, that corresponds to the keycode, is
      *         pressed.
      */
-    public static boolean isKeyPressed(int keycode) {
-        if (keys.length <= keycode || keycode < 0) {
+    public static boolean isKeyPressed(final int keycode) {
+        if (KEYS.length <= keycode || keycode < 0) {
             return false;
         } else {
-            return keys[keycode];
+            return KEYS[keycode];
         }
     }
 
-    public static void assignInput(Input input) {
+    /**
+     * @param input
+     * @param dispatcher
+     */
+    public static void initInput(final Input input, final EventDispatcher dispatcher) {
         input.setKeyCallback((win, key, scancode, action, mods) -> {
             if (getNumberOfKeys() > key && key >= 0) {
                 setKeyPressed(key, input.isReleaseAction(action));
             }
-            EventDispatcher.dispatch(new KeyEvent(key, scancode, action, mods));
+            dispatcher.dispatch(new KeyEvent(key, scancode, action, mods));
         });
         input.setMouseButtonCallback((win, key, action, mods) -> {
             if (getNumberOfKeys() > key && key >= 0) {
                 setKeyPressed(key, input.isReleaseAction(action));
             }
-            EventDispatcher.dispatch(new MouseButtonEvent(key, action, mods, input.getCursorX(), input.getCursorY()));
-        });
-        input.setCursorPositionCallback((w, x, y) -> {
+            dispatcher.dispatch(new MouseButtonEvent(key, action, mods, input.getCursorX(), input.getCursorY()));
         });
     }
-
 }

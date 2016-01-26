@@ -1,0 +1,11 @@
+1453743080781	Rename field 'logger'
+1453743791078	Rename field 'updateLogger'
+1453745238275	Rename local variable 'l'
+1453745896688	Delete element
+1453757651027	Rename field 'logger'
+1453759026322	Rename field 'keys'
+1453760301094	Rename field 'listeners'
+1453760328954	Rename type 'EventListener'
+1453760516145	Rename field 'LAYERS'
+1453760774342	Rename method 'assignInput'
+1453761894379	Rename field 'objects'

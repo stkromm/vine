@@ -1,0 +1,11 @@
+package vine.gameplay.scene;
+
+/**
+ * @author Steffen
+ *
+ */
+public class SceneCreationException extends Exception {
+    protected SceneCreationException(String message) {
+        super(message);
+    }
+}

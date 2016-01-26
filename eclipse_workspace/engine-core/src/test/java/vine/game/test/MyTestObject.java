@@ -1,4 +1,4 @@
-package vine.core.game.gameobjects.test;
+package vine.game.test;
 
 import vine.game.GameObject;
 
@@ -32,8 +32,7 @@ public class MyTestObject extends GameObject {
         super.onDestroy();
     }
 
-    @Override
-    public void construct() {
+    public void construct(int x) {
         System.out.println("Custom constructor implementation");
     }
 

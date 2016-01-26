@@ -22,15 +22,15 @@ import vine.input.Input;
  * @author Steffen
  *
  */
-public class GLFWInput implements Input {
-    private double x;
-    private double y;
+public final class GLFWInput implements Input {
+    private double mouseX;
+    private double mouseY;
     private long context;
 
     private GLFWKeyCallback keyCallback;
     private GLFWCursorPosCallback cursorPosCallback = GLFWCursorPosCallback.create((w, posx, posy) -> {
-        this.x = posx;
-        this.y = posy;
+        this.mouseX = posx;
+        this.mouseY = posy;
     });
 
     private GLFWMouseButtonCallback mouseButtonCallback;
@@ -92,36 +92,36 @@ public class GLFWInput implements Input {
     }
 
     @Override
-    public void setCursorPositionCallback(CursorPositionCallback callback) {
+    public void setCursorPositionCallback(final CursorPositionCallback callback) {
         if (cursorPosCallback != null) {
             cursorPosCallback.release();
         }
-        cursorPosCallback = GLFWCursorPosCallback.create((w, posx, posy) -> {
-            callback.changedCursorPosition(w, x, y);
-            this.x = posx;
-            this.y = posy;
+        cursorPosCallback = GLFWCursorPosCallback.create((window, posx, posy) -> {
+            this.mouseX = posx;
+            this.mouseY = posy;
+            callback.changedCursorPosition(window, posx, posy);
         });
         glfwSetCursorPosCallback(context, cursorPosCallback);
     }
 
     @Override
-    public void setMouseButtonCallback(MouseButtonCallback callback) {
+    public void setMouseButtonCallback(final MouseButtonCallback callback) {
         if (mouseButtonCallback != null) {
             mouseButtonCallback.release();
         }
         mouseButtonCallback = GLFWMouseButtonCallback
-                .create((w, button, action, mods) -> callback.pressedMouseButton(w, button, action, mods));
+                .create((window, button, action, mods) -> callback.pressedMouseButton(window, button, action, mods));
         glfwSetMouseButtonCallback(context, mouseButtonCallback);
     }
 
     @Override
     public double getCursorX() {
-        return x;
+        return mouseX;
     }
 
     @Override
     public double getCursorY() {
-        return y;
+        return mouseY;
     }
 
 }

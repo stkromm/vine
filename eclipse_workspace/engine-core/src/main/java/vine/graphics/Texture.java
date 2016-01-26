@@ -69,4 +69,12 @@ public abstract class Texture {
     public abstract void bind();
 
     public abstract void unbind();
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

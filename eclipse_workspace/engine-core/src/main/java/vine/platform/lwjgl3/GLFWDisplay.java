@@ -22,7 +22,7 @@ import vine.display.Display;
  * @author Steffen
  *
  */
-public class GLFWDisplay implements Display {
+public final class GLFWDisplay implements Display {
     // Get the resolution of the primary monitor
     private GLFWVidMode vidmode;
     private long currentMonitor = glfwGetPrimaryMonitor();
@@ -42,7 +42,7 @@ public class GLFWDisplay implements Display {
     public GLFWDisplay(long preferredMonitor) {
         // Initialize GLFW. Most GLFW functions will not work before doing this.
         if (glfwInit() != GLFW_TRUE) {
-            throw new IllegalStateException(Messages.getString("DesktopWindow.0")); //$NON-NLS-1$
+            throw new IllegalStateException("Failed to init glfw");
         }
         glfwSetMonitorCallback(monitorCallback);
         GLFWVidMode prefVidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
@@ -110,11 +110,5 @@ public class GLFWDisplay implements Display {
     @Override
     public long getPrimaryMonitor() {
         return glfwGetPrimaryMonitor();
-    }
-
-    @Override
-    public long[] getMonitors() {
-        // TODO Auto-generated method stub
-        return null;
     }
 }

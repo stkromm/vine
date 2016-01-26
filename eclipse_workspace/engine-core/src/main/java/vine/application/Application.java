@@ -1,7 +1,8 @@
 package vine.application;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import vine.display.Display;
 import vine.game.GameRunner;
@@ -15,10 +16,15 @@ import vine.window.WindowCreationException;
  *
  */
 public class Application {
+    private final Logger logger = LoggerFactory.getLogger(Application.class);
     /**
      * 
      */
     protected Display display;
+
+    private Application() {
+        // Only instantiate through main method.
+    }
 
     /**
      * @return The display of the application
@@ -33,29 +39,29 @@ public class Application {
      *            path, asset path variables, game title, config-file paths,
      *            window and graphic settings.
      */
-    public static void main(String[] args) {
-        Application app = new Application();
+    public static void main(String... args) {
+        final Application app = new Application();
+        // BasicConfigurator replaced with PropertyConfigurator.
+        PropertyConfigurator.configure("src/main/java/log4j.properties");
         app.run();
     }
 
     /**
      * Begin the game loop.
      */
-    public void run() {
-        // Don't change this order, window must be the first to initialize
-        // because of glfw dependencies
-        Window window = PlatformDependencyResolver.getPlatformWindow();
+    private void run() {
+        logger.info("Started application");
+        logger.info("Resolving application platform dependencies.");
+        logger.info("Checking display device.");
         display = PlatformDependencyResolver.getDisplay();
-        Input input = PlatformDependencyResolver.getInput();
-        // end glfw components
-        Graphics graphics = PlatformDependencyResolver.getGraphics();
-        try {
-            window.init(display);
-        } catch (WindowCreationException e) {
-            Logger.getGlobal().log(Level.SEVERE, "Failed to initialize window", e);
-        }
-        input.listenToWindow(window.getContext());
-        GameRunner runner = new GameRunner(window, input, graphics);
+        logger.info("Checking system application window.");
+        final Window window = PlatformDependencyResolver.getPlatformWindow(display);
+        logger.info("Checking input devices.");
+        final Input input = PlatformDependencyResolver.getInput(window);
+        logger.info("Assign graphics provider.");
+        final Graphics graphics = PlatformDependencyResolver.getGraphics();
+
+        GameRunner runner = new GameRunner(this, window, input, graphics);
         runner.run();
         window.close();
     }
@@ -64,6 +70,6 @@ public class Application {
      * @return The number of (virtual) processors available to the system.
      */
     public static int getProcessorCount() {
-        return 1;//Runtime.getRuntime().availableProcessors();
+        return 1;// Runtime.getRuntime().availableProcessors();
     }
 }

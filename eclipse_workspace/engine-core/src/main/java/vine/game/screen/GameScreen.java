@@ -11,63 +11,89 @@ public class GameScreen implements Screen {
 
     private final Window window;
     private final Viewport viewport;
-    public int height;
-    public int width;
-    private final Matrix4f projection;
+    private int height;
+    private int width;
+    private float aspect;
+    private Matrix4f projection;
 
     /**
      * @param window
      * @param aspectRatio
      * @param width
      */
-    public GameScreen(Window window, float aspectRatio, int width) {
+    public GameScreen(final Window window, final int width, final int height) {
         super();
+        this.aspect = (float) height / width;
         this.window = window;
         this.viewport = new Viewport();
-        this.height = (int) (width * aspectRatio);
+        this.height = height;
         this.width = width;
-        this.projection = Matrix4f.orthographic(-width / 2.f, width / 2.f, -this.height / 2.f, this.height / 2.f, -1.0f,
-                1.0f);
+        calculateViewport();
+        calculateProjection();
+    }
+
+    private final void calculateProjection() {
+        this.projection = Matrix4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
+    }
+
+    private final void calculateViewport() {
+        float widthInAspectRatio = window.getHeight() / (aspect);
+        float totalOffset = window.getWidth() - widthInAspectRatio;
+        viewport.setLeftOffset((int) (totalOffset / 2));
+        viewport.setRightOffset((int) (totalOffset / 2));
+        viewport.setBottomOffset(0);
+        viewport.setTopOffset(0);
     }
 
     @Override
-    public Viewport getViewport() {
+    public final Viewport getViewport() {
+        calculateViewport();
         return viewport;
     }
 
     @Override
-    public int getWidth() {
+    public final int getWidth() {
         return width;
     }
 
     @Override
-    public int getHeight() {
+    public final int getHeight() {
         return height;
     }
 
     @Override
-    public float worldXCoordToScreenXCoord(float x) {
+    public final float worldToScreenCoord(float x) {
         return x * getUnitsPerPixel();
     }
 
     @Override
-    public float worldYCoordToScreenYCoord(float y) {
-        return y * getUnitsPerPixel();
+    public final float getUnitsPerPixel() {
+        return ((float) window.getWidth() - viewport.getLeftOffset() * 2) / width;
     }
 
     @Override
-    public float getUnitsPerPixel() {
-        return width / (float) window.getWidth();
+    public final float getAspect() {
+        return aspect;
     }
 
     @Override
-    public float getAspect() {
-        return window.getHeight() / (float) window.getWidth();
-    }
-
-    @Override
-    public Matrix4f getOrthographicProjection() {
+    public final Matrix4f getOrthographicProjection() {
         return projection;
     }
 
+    @Override
+    public final void setWidth(final int width) {
+        this.width = width;
+        this.aspect = (float) height / width;
+        calculateViewport();
+        calculateProjection();
+    }
+
+    @Override
+    public final void setHeight(final int height) {
+        this.height = height;
+        this.aspect = (float) height / width;
+        calculateViewport();
+        calculateProjection();
+    }
 }

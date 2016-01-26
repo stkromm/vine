@@ -1,17 +1,14 @@
 package vine.game;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.ConcurrentHashMap;
 
-import vine.event.Event;
 import vine.event.Event.EventType;
 import vine.event.KeyEvent;
 import vine.event.MouseButtonEvent;
+import vine.reflection.VineClass;
+import vine.reflection.VineMethodUtils;
 
 /**
  * Base game class. Every gameplay class inherits this. Classes, that inherit
@@ -24,15 +21,15 @@ public abstract class GameObject {
     /**
      * 
      */
-    static final String CONSTRUCT_METHOD = "construct";
+    protected static final String CONSTRUCT_METHOD = "construct";
     /**
      * 
      */
-    static final String KEY_EVENT_METHOD = "onKeyEvent";
+    protected static final String KEY_EVENT_METHOD = "onKeyEvent";
     /**
      * 
      */
-    static final String MOUSE_BUTTON_EVENT_METHOD = "onMouseButtonEvent";
+    protected static final String MOUSE_BUTTON_EVENT_METHOD = "onMouseButtonEvent";
     /**
      * If this flag is set, the gameobject gets not rendered.
      */
@@ -42,14 +39,15 @@ public abstract class GameObject {
      */
     public static final byte ACTIVE_FLAG = 2;
     private static final byte DESTROYED_FLAG = 4;
-    /**
-     * The name is the unique identifier to get a gameobject throughout the
-     * game. As said, the name has to be unique. If you try to create an object,
-     * that correspond to a given name already, the instantiation fails.
-     */
-    String name;
-    private volatile byte flags = ACTIVE_FLAG;
+    private String name;
+    private byte flags = ACTIVE_FLAG;
 
+    /**
+     * @param name
+     */
+    protected void setName(final String name) {
+        this.name = name;
+    }
     /**
      * 
      */
@@ -58,7 +56,7 @@ public abstract class GameObject {
      * @param flags
      *            The flags that should be enabled for this gameobject.
      */
-    public final void enableFlags(byte flags) {
+    public final void enableFlags(final byte flags) {
         this.flags |= flags;
     }
 
@@ -69,8 +67,8 @@ public abstract class GameObject {
      * @param flags
      *            The flags, that should be disabled for this gameobject.
      */
-    public final void disableFlags(byte flags) {
-        int effectiveFlags = ~flags;
+    public final void disableFlags(final byte flags) {
+        final int effectiveFlags = ~flags;
         this.flags &= effectiveFlags;
     }
 
@@ -82,7 +80,11 @@ public abstract class GameObject {
     }
 
     /**
-     * @return The name identifier of this object.
+     * @return The name identifier of this object. The name is the unique
+     *         identifier to get a gameobject throughout the game. As said, the
+     *         name has to be unique. If you try to create an object, that
+     *         correspond to the name of an existing object, the instantiation
+     *         fails.
      */
     public final String getName() {
         return name;
@@ -92,8 +94,8 @@ public abstract class GameObject {
      * @param delta
      *            Time that passed since the last update call.
      */
-    public void update(float delta) { // NOSONAR
-        if (!((flags & ACTIVE_FLAG) == ACTIVE_FLAG)) {
+    public void update(final float delta) { // NOSONAR
+        if ((flags & ACTIVE_FLAG) != ACTIVE_FLAG) {
             return;
         }
     }
@@ -110,10 +112,12 @@ public abstract class GameObject {
      * you don't use it, the GameObject remains in memory, causing a memory
      * leak.
      */
-    public final synchronized void destroy() {
+    public final void destroy() {
         enableFlags(DESTROYED_FLAG);
         onDestroy();
-        ReferenceManager.objects.remove(this.name);
+        synchronized (this) {
+            ReferenceManager.OBJECTS.remove(name);
+        }
     }
 
     /**
@@ -153,19 +157,19 @@ public abstract class GameObject {
     }
 
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         if (object == null) {
             return false;
         }
         if (object instanceof GameObject) {
-            return getName().equals(((GameObject) object).getName());
+            return name.equals(((GameObject) object).getName());
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return getName().hashCode();
+        return name.hashCode();
     }
 
     /**
@@ -173,12 +177,16 @@ public abstract class GameObject {
      *
      */
     static class ReferenceManager {
-        private static final String ID_QUALIFIER = "?id";
+        /**
+         * 
+         */
+        protected static final String ID_QUALIFIER = "?id";
+
+        private static int nameGenCount;
         /**
          * All independent gameobjects that are currently in the game.
          */
-        static final Map<String, GameObject> objects = new HashMap<>();
-        private static volatile int nameGenCount = 0;
+        protected static final Map<String, GameObject> OBJECTS = new ConcurrentHashMap<>();
 
         private ReferenceManager() {
             /**
@@ -191,7 +199,7 @@ public abstract class GameObject {
          *            The type of the instantiate gameobject.
          * @return The instantated gameobject or null on failure
          */
-        static final synchronized <T extends GameObject> String generateObjectName(Class<T> type) {
+        protected static final synchronized <T extends GameObject> String generateObjectName(final Class<T> type) {
             final String className = type.getName() + ID_QUALIFIER + nameGenCount;
             nameGenCount++;
             return className;
@@ -203,104 +211,29 @@ public abstract class GameObject {
          * @param type
          *            The type of the instantiate gameobject.
          * @param params
-         *            The optinal arguments of the construct method of the
+         *            The optional arguments of the construct method of the
          *            instantiated type.
          * @return The instantated gameobject or null on failure
          */
-        static final synchronized <T extends GameObject> T instantiate(Class<T> type, String name, Object... params) {
-            T object = instantiateType(type);
-            if (object == null) {
-                return null;
-            }
-            object.name = name;
-            objects.put(name, object);
-            Method construct = getConstructMethod(type);
-            if (construct != null) {
-                try {
-                    construct.invoke(object, params);
-                } catch (IllegalAccessException e) {
-                    Logger.getGlobal().log(Level.SEVERE, "The construct method you've implemented in the class "
-                            + type.toString() + " is not public.", e);
-
-                } catch (IllegalArgumentException e) {
-                    String par = Arrays.toString(params);
-                    Logger.getGlobal().log(Level.SEVERE,
-                            "The supplied arguments " + par
-                                    + " don't match the defined argument list of the given class " + type.toString()
-                                    + " construct method.\n Be sure to supply the right number of arguments in the order they are declared in the construct method.",
-                            e);
-
-                } catch (InvocationTargetException e) {
-                    Logger.getGlobal().log(Level.SEVERE,
-                            "Class has not implemented construct method. Have you passed a GameObject inherited class?",
-                            e);
+        protected static final <T extends GameObject> T instantiate(final Class<T> type, final String name,
+                final Object... params) {
+            final VineClass<T> objectClass = new VineClass<>(type);
+            final T object = objectClass.instantiateType();
+            if (object != null) {
+                object.setName(name);
+                OBJECTS.put(name, object);
+                objectClass.getMethodByName(CONSTRUCT_METHOD)
+                        .ifPresent(method -> VineMethodUtils.invokeMethodOn(method, object, params));
+                if (objectClass.hasMethodImplemented(GameObject.KEY_EVENT_METHOD, KeyEvent.class)) {
+                    Game.getGame().getScene().addEventHandler(
+                            event -> event.getType() == EventType.KEY ? object.onKeyEvent((KeyEvent) event) : false);
                 }
-            }
-            if (hasImplementedMethod(GameObject.KEY_EVENT_METHOD, type, KeyEvent.class)) {
-                Game.getGame().getScene().addKeyHandler((Event e) -> {
-                    if (e.getType() != EventType.KEY) {
-                        return false;
-                    }
-                    KeyEvent keyEvent = (KeyEvent) e;
-                    return object.onKeyEvent(keyEvent);
-                });
-            }
-            if (hasImplementedMethod(GameObject.MOUSE_BUTTON_EVENT_METHOD, type, MouseButtonEvent.class)) {
-                Game.getGame().getScene().addMouseButtonHandler((Event e) -> {
-                    if (e.getType() != EventType.MOUSE_BUTTON) {
-                        return false;
-                    }
-                    MouseButtonEvent keyEvent = (MouseButtonEvent) e;
-                    return object.onMouseButtonEvent(keyEvent);
-                });
+                if (objectClass.hasMethodImplemented(GameObject.MOUSE_BUTTON_EVENT_METHOD, MouseButtonEvent.class)) {
+                    Game.getGame().getScene().addEventHandler(event -> event.getType() == EventType.MOUSE_BUTTON
+                            ? object.onMouseButtonEvent((MouseButtonEvent) event) : false);
+                }
             }
             return object;
         }
-
-        private static <T> Method getConstructMethod(Class<T> type) {
-            Method[] constructor = type.getMethods();
-            for (Method m : constructor) {
-                if (m.getName().equals(CONSTRUCT_METHOD)) {
-                    return m;
-                }
-            }
-            return null;
-        }
-
-        private static <T extends GameObject> T instantiateType(Class<T> type) {
-            T object;
-            try {
-                object = type.newInstance();
-
-            } catch (InstantiationException e) {
-                Logger.getGlobal()
-                        .log(Level.SEVERE,
-                                "Could not instantiate gameobject of class:" + type.getName()
-                                        + "\nMaybe you passed a class, that is abstract and or does not inherit Gameobject",
-                                e);
-                return null;
-            } catch (IllegalAccessException e) {
-                Logger.getGlobal().log(Level.SEVERE, "Could not instantiate gameobject of class:" + type.getName()
-                        + "\n Perhaps you made the constructor private?\n", e);
-                return null;
-            }
-            return object;
-        }
-
-        private static <T extends GameObject> boolean hasImplementedMethod(String methodName, Class<T> type,
-                Class<?>... params) {
-            Method method = null;
-            try {
-                if (params != null && params.length > 0) {
-                    method = type.getMethod(methodName, params);
-                } else {
-                    method = type.getMethod(methodName);
-                }
-            } catch (NoSuchMethodException | SecurityException e) {
-                Logger.getGlobal().log(Level.SEVERE, "Auto-generated catch block", e);
-            }
-            return method != null && method.getDeclaringClass().equals(type);
-        }
-
     }
 }

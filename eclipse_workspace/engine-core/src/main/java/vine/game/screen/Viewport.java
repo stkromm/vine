@@ -22,19 +22,19 @@ public class Viewport {
         return topOffset;
     }
 
-    void setRightOffset(int rightOffset) {
+    protected void setRightOffset(int rightOffset) {
         this.rightOffset = rightOffset;
     }
 
-    void setBottomOffset(int bottomOffset) {
+    protected void setBottomOffset(int bottomOffset) {
         this.bottomOffset = bottomOffset;
     }
 
-    void setLeftOffset(int leftOffset) {
+    protected void setLeftOffset(int leftOffset) {
         this.leftOffset = leftOffset;
     }
 
-    void setTopOffset(int topOffset) {
+    protected void setTopOffset(int topOffset) {
         this.topOffset = topOffset;
     }
 

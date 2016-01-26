@@ -1,0 +1,17 @@
+package vine.event;
+
+import vine.event.EventDispatcher.EventHandler;
+
+/**
+ * @author Steffen
+ *
+ */
+public interface EventLayer {
+    /**
+     * @param handler
+     */
+    public void addEventHandler(EventHandler handler);
+
+    @SuppressWarnings("javadoc")
+    public boolean onEvent(Event event);
+}

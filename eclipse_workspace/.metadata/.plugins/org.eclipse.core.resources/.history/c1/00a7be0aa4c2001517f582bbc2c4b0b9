@@ -1,0 +1,31 @@
+package vine.game.tilemap;
+
+import vine.graphics.Texture;
+
+public class TileMap {
+
+    private float[] vertices;
+    private int[] tiles;
+    private Texture chipset;
+
+    private TileMap() {
+
+    }
+
+    public void shiftY(int amount, boolean repeat) {
+
+    }
+
+    public void shiftX(int amount, boolean repeat) {
+
+    }
+
+    public void setX(int numOfTiles) {
+
+    }
+
+    public void setY(int numOfTiles) {
+
+    }
+
+}

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * @author Steffen
  *
  */
-public class FileUtils {
+public final class FileUtils {
 
     private FileUtils() {
     }
@@ -24,12 +24,13 @@ public class FileUtils {
      *            The file path
      * @return The file text string
      */
-    public static String loadFileAsString(String file) {
-        StringBuilder result = new StringBuilder();
+    public static String loadFileAsString(final String file) {
+        final StringBuilder result = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String buffer;
             while ((buffer = reader.readLine()) != null) {
-                result.append(buffer + '\n');
+                result.append(buffer);
+                result.append(System.lineSeparator());
             }
             reader.close();
         } catch (IOException e) {

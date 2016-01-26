@@ -1,19 +1,42 @@
 package vine.event;
 
-public abstract class Event {
-    public enum EventType {
-        MOUSE_BUTTON, KEY
+/**
+ * @author Steffen
+ * 
+ */
+public interface Event {
+    /**
+     * Used to identify different types of events.
+     * 
+     * @author Steffen
+     *
+     */
+    enum EventType {
+        /**
+         * 
+         */
+        MOUSE_BUTTON,
+        /**
+        * 
+        */
+        KEY,
+        /**
+        * 
+        */
+        SCROLL,
+        /**
+        * 
+        */
+        MOUSE_POSITION,
+        /**
+        * 
+        */
+        SENSOR
     }
 
-    public abstract EventType getType();
-
-    public void setHandled(boolean onEvent) {
-
-    }
-
-    public boolean isHandled() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
+    /**
+     * @return The type of the event
+     * @see EventType
+     */
+    EventType getType();
 }

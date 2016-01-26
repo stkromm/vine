@@ -6,7 +6,10 @@ package vine.settings;
  * @author stkromm
  *
  */
-public class GameSettings {
+public final class GameSettings {
+    /**
+     * Max frame duration.
+     */
     private static float maxFrameDuration = 1;
 
     private GameSettings() {

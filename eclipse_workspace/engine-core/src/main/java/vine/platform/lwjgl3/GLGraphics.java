@@ -27,11 +27,18 @@ import vine.graphics.Graphics;
  * @author Steffen
  *
  */
-public class GLGraphics implements Graphics {
-    private long context = 0L;
+public final class GLGraphics implements Graphics {
+    private long context;
+
+    /**
+     * 
+     */
+    public GLGraphics() {
+        // Empty, to instantiate with reflection.
+    }
 
     @Override
-    public void makeContext(long context) {
+    public void makeContext(final long context) {
         glfwMakeContextCurrent(context);
         this.context = context;
     }
@@ -56,13 +63,12 @@ public class GLGraphics implements Graphics {
     }
 
     @Override
-    public void setViewport(int x, int y, int width, int height) {
+    public void setViewport(final int x, final int y, final int width, final int height) {
         GL11.glViewport(0, 0, width, height);
     }
 
     @Override
     public void clearBuffer() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     }
 }

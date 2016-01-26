@@ -1,0 +1,49 @@
+package vine.game.tilemap;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import vine.gameplay.component.Sprite;
+import vine.graphics.Texture;
+
+public class TileMap extends GameObject {
+
+    private int xTiles;
+    private int yTiles;
+
+    private float[] vertices;
+    private Sprite[] tiles;
+    private Map<String, Texture> chipsets = new HashMap<>();
+
+    private TileMap() {
+
+    }
+
+    public void setTile(int x, int y, Sprite sprite) {
+
+    }
+
+    public void shiftY(int amount, boolean repeat) {
+
+    }
+
+    public void shiftX(int amount, boolean repeat) {
+
+    }
+
+    public void setX(int numOfTiles) {
+
+    }
+
+    public void setY(int numOfTiles) {
+
+    }
+
+    public void removeChipset(Texture chipset) {
+
+    }
+
+    public void addChipset(Texture chipset) {
+
+    }
+}

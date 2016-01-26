@@ -41,8 +41,7 @@ public class GLShader extends Shader {
         }
         int result = glGetUniformLocation(id, name);
         if (result == -1) {
-            Logger.getGlobal().log(Level.SEVERE,
-                    Messages.getString("GLShader.0") + name + Messages.getString("GLShader.1")); //$NON-NLS-1$ //$NON-NLS-2$
+            Logger.getGlobal().log(Level.SEVERE, "Failed to create shader");
         } else {
             locationCache.put(name, result);
         }

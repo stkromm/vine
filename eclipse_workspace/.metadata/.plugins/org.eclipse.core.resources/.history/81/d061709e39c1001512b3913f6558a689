@@ -1,0 +1,17 @@
+package vine.gameplay.component;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Camera extends Component {
+
+    public Camer() {
+        // use instantiate
+    }
+
+    @Override
+    public void onDestroy() {
+        this.entity.getScene().cameras.removeCamera(this);
+    }
+}

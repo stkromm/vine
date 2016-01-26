@@ -1,0 +1,13 @@
+package vine.core.game.test;
+
+import org.junit.Test;
+
+import vine.game.Game;
+
+public class GameTest {
+
+    @Test
+    public void testChangeLevel() {
+        Game.changeLevel("x");
+    }
+}

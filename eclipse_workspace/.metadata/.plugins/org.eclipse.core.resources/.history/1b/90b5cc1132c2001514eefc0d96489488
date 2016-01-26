@@ -1,0 +1,49 @@
+package vine.reflection;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import vine.game.GameObject;
+
+public class VineClass {
+
+    Class<?> type;
+
+    public VineClass(Class<?> type) {
+        this.type = type;
+    }
+
+    public final <T> Optional<Method> getConstructMethod(String methodName) {
+        return Arrays.stream(type.getMethods()).filter(method -> method.getName().equals(methodName)).findFirst();
+    }
+
+    public final T instantiateType() {
+        T object = null;
+        try {
+            object = type.newInstance();
+        } catch (InstantiationException e) {
+            Logger.getGlobal()
+                    .log(Level.SEVERE,
+                            "Could not instantiate gameobject of class:" + type.getName()
+                                    + "\nMaybe you passed a class, that is abstract and or does not inherit Gameobject",
+                            e);
+        } catch (IllegalAccessException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Could not instantiate gameobject of class:" + type.getName()
+                    + "\n Perhaps you made the constructor private?\n", e);
+        }
+        return object;
+    }
+
+    public final boolean hasImplementedMethod(final String methodName, final java.lang.Class<?>... params) {
+        Method method = null;
+        try {
+            method = type.getMethod(methodName, params);
+        } catch (NoSuchMethodException | SecurityException e) {
+            Logger.getGlobal().log(Level.SEVERE, "Auto-generated catch block", e);
+        }
+        return method != null && method.getDeclaringClass().equals(type);
+    }
+}
