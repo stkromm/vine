@@ -40,11 +40,11 @@ import vine.window.Window;
  * @author Steffen
  *
  */
-public class Game {
+public final class Game {
     /**
      * Used logger for gameplay logs.
      */
-    static final Logger logger = LoggerFactory.getLogger(Game.class);
+    public static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
     private volatile Scene scene;
     private volatile Screen screen;
     private EventDispatcher eventDispatcher;
@@ -71,7 +71,7 @@ public class Game {
     /**
      * @return Returns the games screen.
      */
-    public final Screen getScreen() {
+    public Screen getScreen() {
         return screen;
     }
 
@@ -86,15 +86,15 @@ public class Game {
      * @param delta
      *            The time that passed since the last update
      */
-    protected static void update(float delta) {
-        if (logger.isInfoEnabled()) {
-            logger.debug("Start new update at "
+    static void update(final float delta) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Start new update at "
                     + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date()) + "\nTime delta is:"
                     + delta + " milliseconds\nCurrent FPS about:" + StatMonitor.getFPS() + "\n");
         }
         runningGame.scene.update(delta);
-        if (logger.isInfoEnabled()) {
-            logger.debug("Ended update at "
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("Ended update at "
                     + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date()) + "\n");
         }
     }
@@ -102,7 +102,7 @@ public class Game {
     /**
      * 
      */
-    protected static void render() {
+    static void render() {
         runningGame.scene.render();
     }
 
@@ -114,7 +114,7 @@ public class Game {
      * @param graphics
      *            The graphics provider used to render the game
      */
-    protected static void init(Window window) {
+    static void init(final Window window) {
         runningGame = new Game();
         runningGame.screen = new GameScreen(window, 1280, 720);
         runningGame.eventDispatcher = new EventDispatcher();
@@ -126,11 +126,13 @@ public class Game {
      * @param level
      *            The asset name of the level that should be loaded.
      */
-    public static final void changeLevel(final String level) {
+    public static void changeLevel(final String level) {
         try {
             runningGame.scene = Scene.createScene(level);
         } catch (SceneCreationException e) {
-            logger.error("Failed to create scene " + level, e);
+            if (LOGGER.isErrorEnabled()) {
+                LOGGER.error("Failed to create scene " + level, e);
+            }
         }
         Game.getGame().getEventDispatcher().registerListener(runningGame.scene);
         for (int i = 0; i < 5000; i++) {
@@ -148,7 +150,7 @@ public class Game {
                 Renderer.DEFAULT_TEXTURE, Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(16),
                 Integer.valueOf(32));
         entity.addComponent(sprite);
-        Camera camera = runningGame.scene.cameras.instantiateCamera();
+        final Camera camera = runningGame.scene.cameras.instantiateCamera();
         entity.addComponent(camera);
         runningGame.getScene().cameras.activate(camera);
         runningGame.getScene().getEntities().add(entity);
@@ -163,7 +165,7 @@ public class Game {
      *            instantiated type.
      * @return Returns all GameObjects in the Game of the given type.
      */
-    public static final <T extends GameObject> T instantiate(Class<T> type, Object... params) {
+    public static <T extends GameObject> T instantiate(final Class<T> type, final Object... params) {
         return ReferenceManager.instantiate(type, ReferenceManager.generateObjectName(type), params);
     }
 
@@ -179,7 +181,7 @@ public class Game {
      *            instantiated type.
      * @return the newly created gameobject
      */
-    public static final <T extends GameObject> T instantiate(Class<T> type, String name, Object... params) {
+    public static <T extends GameObject> T instantiate(final Class<T> type, final String name, final Object... params) {
         return !GameUtils.isValidGameObjectName(name) || type == null ? null
                 : ReferenceManager.instantiate(type, name, params);
     }
@@ -189,9 +191,9 @@ public class Game {
      *            Class that is used to look for objects of.
      * @return A stream object with all gameobject of the given type.
      */
-    public static final <T extends GameObject> List<T> getObjectsByType(Class<T> type) {
-        List<T> list = new ArrayList<>();
-        for (GameObject object : ReferenceManager.OBJECTS.values()) {
+    public static <T extends GameObject> List<T> getObjectsByType(final Class<T> type) {
+        final List<T> list = new ArrayList<>();
+        for (final GameObject object : ReferenceManager.OBJECTS.values()) {
             if (object.getClass() == type) {
                 list.add(type.cast(object));
             }
@@ -204,7 +206,7 @@ public class Game {
      *            Name identifier that is look up for a object.
      * @return The objects, that exists in the system by the given name.
      */
-    public static final GameObject getObjectByName(final String name) {
+    public static GameObject getObjectByName(final String name) {
         return ReferenceManager.OBJECTS.get(name);
     }
 }

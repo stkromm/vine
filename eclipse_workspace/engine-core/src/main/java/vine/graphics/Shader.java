@@ -16,6 +16,18 @@ public abstract class Shader {
     /**
      * 
      */
+    private static final float ZOOM = 1;
+    /**
+     * 
+     */
+    private static final int VIEWPORT_WIDTH = 1024;
+    /**
+     * 
+     */
+    private static final int VIEWPORT_HEIGHT = 720;
+    /**
+     * 
+     */
     public static final int VERTEX_ATTRIB = 0;
     /**
      * 
@@ -29,7 +41,7 @@ public abstract class Shader {
     /**
      * 
      */
-    protected Map<String, Integer> locationCache = new WeakHashMap<>();
+    protected final Map<String, Integer> locationCache = new WeakHashMap<>();
 
     /**
      * @param vertPath
@@ -37,7 +49,7 @@ public abstract class Shader {
      * @param fragPath
      *            The file path to the fragment shader code
      */
-    public Shader(String vertPath, String fragPath) {
+    public Shader(final String vertPath, final String fragPath) {
         id = ShaderLoader.load(vertPath, fragPath);
         setProperties();
     }
@@ -52,10 +64,8 @@ public abstract class Shader {
 
     private void setProperties() {
         setUniform1i("tex", 1);
-        float zoom = 1;
-        int viewportWidth = 1024;
-        int viewportHeight = 720;
-        Matrix4f mat = Matrix4f.orthographic(0, zoom * viewportWidth, 0, zoom * viewportHeight, -1, 1);
+
+        final Matrix4f mat = Matrix4f.orthographic(0, ZOOM * VIEWPORT_WIDTH, 0, ZOOM * VIEWPORT_HEIGHT, -1, 1);
         setUniformMat4f("pr_matrix", mat);
         setUniformMat4f("vw_matrix", Matrix4f.translate(new Vector3f(0.f, 0.0f, 0.0f)));
     }
@@ -118,7 +128,13 @@ public abstract class Shader {
      */
     public abstract void setUniformMat4f(String name, Matrix4f matrix);
 
+    /**
+     * 
+     */
     public abstract void bind();
 
+    /**
+     * 
+     */
     public abstract void unbind();
 }

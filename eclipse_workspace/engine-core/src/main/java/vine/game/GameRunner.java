@@ -17,7 +17,7 @@ public class GameRunner {
     /**
      * 
      */
-    private volatile boolean running = true;
+    private boolean running = true;
     /**
      * 
      */
@@ -60,7 +60,7 @@ public class GameRunner {
         graphics.init();
         window.setSizeCallback((w, h) -> {
             window.setWindowSize(w, h);
-            Viewport viewport = Game.getGame().getScreen().getViewport();
+            final Viewport viewport = Game.getGame().getScreen().getViewport();
             graphics.setViewport(viewport.getLeftOffset(), viewport.getTopOffset(), w - viewport.getRightOffset(),
                     h - viewport.getBottomOffset());
         });
@@ -68,60 +68,45 @@ public class GameRunner {
         Game.init(window);
         InputMapper.initInput(input, Game.getGame().getEventDispatcher());
 
-        final int cores = Application.getProcessorCount();
+        // final int cores = Application.getProcessorCount();
 
-        if (cores == 1) {
-            long currentTime = 0;
-            while (running) {
-                StatMonitor.newUp();
-                input.pollEvents();
-                Game.update((System.nanoTime() - currentTime) / 100000000.f);
-                currentTime = System.nanoTime();
-                StatMonitor.newFrame();
-                graphics.clearBuffer();
-                Game.render();
-                graphics.swapBuffers();
-                sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 - System.nanoTime() + currentTime));
-                if (window.requestedClose()) {
-                    running = false;
-                }
+        long currentTime = 0;
+        while (running) {
+            StatMonitor.newUp();
+            input.pollEvents();
+            Game.update((System.nanoTime() - currentTime) / 100000000.f);
+            currentTime = System.nanoTime();
+            StatMonitor.newFrame();
+            graphics.clearBuffer();
+            Game.render();
+            graphics.swapBuffers();
+            sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 - System.nanoTime() + currentTime));
+            if (window.requestedClose()) {
+                running = false;
             }
-        } else if (cores >= 2) {
-            final Thread logic = logicThread();
-            logic.start();
-            long currentTime;
-            while (running) {
-                StatMonitor.newFrame();
-                currentTime = System.nanoTime();
-                input.pollEvents();
-                graphics.clearBuffer();
-                Game.render();
-                graphics.swapBuffers();
-                sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 - System.nanoTime() + currentTime));
-                if (window.requestedClose()) {
-                    running = false;
-                }
-            }
-            logic.interrupt();
-        }
+        } /*
+           * } else if (cores >= 2) { final Thread logic = logicThread();
+           * logic.start(); long currentTime; while (running) {
+           * StatMonitor.newFrame(); currentTime = System.nanoTime();
+           * input.pollEvents(); graphics.clearBuffer(); Game.render();
+           * graphics.swapBuffers(); sleep((int)
+           * (GameSettings.getMaxFrameDuration() * 1000000000 -
+           * System.nanoTime() + currentTime)); if (window.requestedClose()) {
+           * running = false; } } logic.interrupt(); }
+           */
     }
 
     /**
      * @return A thread, used to calculate the game logic.
+     * 
+     *         private Thread logicThread() { final Thread logic = new Thread(()
+     *         -> { long currentTime = System.nanoTime(); while (running) {
+     *         StatMonitor.newUp(); Game.update((System.nanoTime() -
+     *         currentTime) / 100000000.f); currentTime = System.nanoTime();
+     *         sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 -
+     *         System.nanoTime() + currentTime)); } }); logic.setName("logic");
+     *         return logic; }
      */
-    private Thread logicThread() {
-        final Thread logic = new Thread(() -> {
-            long currentTime = System.nanoTime();
-            while (running) {
-                StatMonitor.newUp();
-                Game.update((System.nanoTime() - currentTime) / 100000000.f);
-                currentTime = System.nanoTime();
-                sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 - System.nanoTime() + currentTime));
-            }
-        });
-        logic.setName("logic");
-        return logic;
-    }
 
     /**
      * @param sleepTime

@@ -10,22 +10,27 @@ import vine.window.WindowCreationException;
  * @author Steffen
  *
  */
-public class PlatformDependencyResolver {
+public final class PlatformDependencyResolver {
 
     private PlatformDependencyResolver() {
 
     }
 
     /**
+     * @param display
+     *            The display that is used to contain the window
      * @return The platform dependent implementation of window.
      */
-    public static Window getPlatformWindow(Display display) {
+    public static Window getPlatformWindow(final Display display) {
         try {
-            Window window = (Window) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWWindow")
-                    .newInstance();
+            final Window window = (Window) ClassLoader.getSystemClassLoader()
+                    .loadClass("vine.platform.lwjgl3.GLFWWindow").newInstance();
             window.init(display);
             return window;
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | WindowCreationException e) {
+            if (Application.LOGGER.isErrorEnabled()) {
+                Application.LOGGER.error("Could not load platform dependent window class", e);
+            }
             System.exit(0);
         }
         return null;
@@ -39,6 +44,9 @@ public class PlatformDependencyResolver {
             return (Display) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWDisplay")
                     .newInstance();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            if (Application.LOGGER.isErrorEnabled()) {
+                Application.LOGGER.error("Could not load platform dependent display class", e);
+            }
             System.exit(0);
         }
         return null;
@@ -52,6 +60,9 @@ public class PlatformDependencyResolver {
             return (Graphics) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLGraphics")
                     .newInstance();
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            if (Application.LOGGER.isErrorEnabled()) {
+                Application.LOGGER.error("Could not load platform dependent graphics class", e);
+            }
             System.exit(0);
         }
         return null;
@@ -59,15 +70,19 @@ public class PlatformDependencyResolver {
 
     /**
      * @param window
+     *            The window, that is used to generate input events on.
      * @return The platform dependent implementation of input.
      */
-    public static Input getInput(Window window) {
+    public static Input getInput(final Window window) {
         try {
-            Input input = (Input) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWInput")
+            final Input input = (Input) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWInput")
                     .newInstance();
             input.listenToWindow(window.getContext());
             return input;
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            if (Application.LOGGER.isErrorEnabled()) {
+                Application.LOGGER.error("Could not load platform dependent input class", e);
+            }
             System.exit(0);
         }
         return null;

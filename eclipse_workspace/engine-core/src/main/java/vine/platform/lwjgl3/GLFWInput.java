@@ -28,15 +28,22 @@ public final class GLFWInput implements Input {
     private long context;
 
     private GLFWKeyCallback keyCallback;
-    private GLFWCursorPosCallback cursorPosCallback = GLFWCursorPosCallback.create((w, posx, posy) -> {
-        this.mouseX = posx;
-        this.mouseY = posy;
-    });
+    private GLFWCursorPosCallback cursorPosCallback;
 
     private GLFWMouseButtonCallback mouseButtonCallback;
     private GLFWScrollCallback scrollCallback;
     private GLFWCharCallback charCallback;
     private GLFWCharModsCallback charModsCallback;
+
+    /**
+     * 
+     */
+    public GLFWInput() {
+        cursorPosCallback = GLFWCursorPosCallback.create((w, posx, posy) -> {
+            this.mouseX = posx;
+            this.mouseY = posy;
+        });
+    }
 
     @Override
     public void pollEvents() {
@@ -44,7 +51,7 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void setKeyCallback(KeyCallback callback) {
+    public void setKeyCallback(final KeyCallback callback) {
         if (keyCallback != null) {
             keyCallback.release();
         }
@@ -54,17 +61,17 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void listenToWindow(long context) {
+    public void listenToWindow(final long context) {
         this.context = context;
     }
 
     @Override
-    public boolean isReleaseAction(int action) {
+    public boolean isReleaseAction(final int action) {
         return action != GLFW.GLFW_RELEASE;
     }
 
     @Override
-    public void setScrollCallback(ScrollCallback callback) {
+    public void setScrollCallback(final ScrollCallback callback) {
         if (scrollCallback != null) {
             scrollCallback.release();
         }
@@ -73,7 +80,7 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void setCharCallback(CharCallback callback) {
+    public void setCharCallback(final CharCallback callback) {
         if (charCallback != null) {
             charCallback.release();
         }
@@ -82,7 +89,7 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void setCharModCallback(CharModCallback callback) {
+    public void setCharModCallback(final CharModCallback callback) {
         if (charModsCallback != null) {
             charModsCallback.release();
         }

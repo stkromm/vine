@@ -7,11 +7,12 @@ import java.util.List;
  * @author Steffen
  *
  */
-public class StatMonitor {
-    private static volatile long lastUpdateTime = System.nanoTime();
-    private static volatile long lastFrameTime = System.nanoTime();
-    private static final List<Long> frameDurations = new ArrayList<>();
-    private static final List<Long> upDurations = new ArrayList<>();
+public final class StatMonitor {
+    private static final int SAMPLE_COUNT = 100;
+    private static long lastUpdateTime = System.nanoTime();
+    private static long lastFrameTime = System.nanoTime();
+    private static final List<Long> FRAME_DURATIONS = new ArrayList<>();
+    private static final List<Long> UP_DURATIONS = new ArrayList<>();
 
     private StatMonitor() {
 
@@ -22,10 +23,10 @@ public class StatMonitor {
      */
     public static float getUps() {
         long frames = 0;
-        for (int i = 0; i < upDurations.size(); i++) {
-            frames += upDurations.get(i).longValue();
+        for (int i = 0; i < UP_DURATIONS.size(); i++) {
+            frames += UP_DURATIONS.get(i).longValue();
         }
-        return 10000000000000f / frames / upDurations.size();
+        return 10000000000000f / frames / UP_DURATIONS.size();
     }
 
     /**
@@ -33,10 +34,10 @@ public class StatMonitor {
      */
     public static float getFPS() {
         long frames = 0;
-        for (int i = 0; i < frameDurations.size(); i++) {
-            frames += frameDurations.get(i).longValue();
+        for (int i = 0; i < FRAME_DURATIONS.size(); i++) {
+            frames += FRAME_DURATIONS.get(i).longValue();
         }
-        return 10000000000000f / frames / frameDurations.size();
+        return 10000000000000f / frames / FRAME_DURATIONS.size();
     }
 
     /**
@@ -50,10 +51,10 @@ public class StatMonitor {
      * 
      */
     public static void newUp() {
-        if (upDurations.size() >= 100) {
-            upDurations.remove(0);
+        if (UP_DURATIONS.size() >= SAMPLE_COUNT) {
+            UP_DURATIONS.remove(0);
         }
-        upDurations.add(new Long(System.nanoTime() - lastUpdateTime));
+        UP_DURATIONS.add(Long.valueOf(System.nanoTime() - lastUpdateTime));
         lastUpdateTime = System.nanoTime();
     }
 
@@ -61,10 +62,10 @@ public class StatMonitor {
      * 
      */
     public static void newFrame() {
-        if (frameDurations.size() >= 100) {
-            frameDurations.remove(0);
+        if (FRAME_DURATIONS.size() >= SAMPLE_COUNT) {
+            FRAME_DURATIONS.remove(0);
         }
-        frameDurations.add(new Long(System.nanoTime() - lastFrameTime));
+        FRAME_DURATIONS.add(Long.valueOf(System.nanoTime() - lastFrameTime));
         lastFrameTime = System.nanoTime();
     }
 }

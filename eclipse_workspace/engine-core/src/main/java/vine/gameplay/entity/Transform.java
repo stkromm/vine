@@ -18,19 +18,19 @@ public final class Transform {
     /*
      * If the parent is null, then the transform is the world transform.
      */
-    private Transform parent = null;
+    private Transform parent;
     private final List<Transform> children = new ArrayList<>();
 
-    private float rotation = 0;
-    private final Vector2f scale = new Vector2f(1, 1);
-    private final Vector2f position = new Vector2f(0, 0);
-    private float worldRotation = 0;
-    private final Vector2f worldScale = new Vector2f(1, 1);
-    private final Vector2f worldPosition = new Vector2f(0, 0);
-    private boolean isDirty = false;
+    private float rotation;
+    private final Vector2f scale;
+    private final Vector2f position;
+    private float worldRotation;
+    private final Vector2f worldScale;
+    private final Vector2f worldPosition;
+    private boolean isDirty;
     @SuppressWarnings("unused")
     private Matrix3f localToWorldMatrix = Matrix3f.getIdentity(); // NOSONAR
-    private boolean isInverseDirty = false;
+    private boolean isInverseDirty;
     private Matrix3f worldToLocalMatrix = Matrix3f.getIdentity();
     private Matrix4f localToWorldMatrixUsed;
 
@@ -39,13 +39,17 @@ public final class Transform {
      */
     public Transform() {
         super();
+        scale = new Vector2f(1, 1);
+        position = new Vector2f(0, 0);
+        worldScale = new Vector2f(1, 1);
+        worldPosition = new Vector2f(0, 0);
     }
 
     private void setDirty() {
         if (!isDirty) {
             isDirty = true;
             isInverseDirty = true;
-            for (Transform transform : children) {
+            for (final Transform transform : children) {
                 transform.setDirty();
             }
         }
@@ -76,7 +80,7 @@ public final class Transform {
      * @param rotation
      *            The new rotation in angles of this transform
      */
-    public void setRotation(float rotation) {
+    public void setRotation(final float rotation) {
         this.rotation = rotation;
         setDirty();
     }
@@ -89,7 +93,7 @@ public final class Transform {
      * @param y
      *            The new y scale of this transform
      */
-    public void setScale(float x, float y) {
+    public void setScale(final float x, final float y) {
         this.scale.setX(x);
         this.scale.setY(y);
         setDirty();
@@ -103,7 +107,7 @@ public final class Transform {
      * @param y
      *            The new y position of this transform
      */
-    public void setPosition(float x, float y) {
+    public void setPosition(final float x, final float y) {
         this.position.setX(x);
         this.position.setY(y);
         setDirty();
@@ -117,7 +121,7 @@ public final class Transform {
      * @param transform
      *            The transform that should be parent of this transform
      */
-    public void setParent(Transform transform) {
+    public void setParent(final Transform transform) {
         Transform tempTrans = transform;
         while (tempTrans != null) {
             if (tempTrans.equals(this)) {
@@ -137,7 +141,7 @@ public final class Transform {
     }
 
     private void updateLocalToWorldTransformation() {
-        Deque<Transform> parentStack = new ArrayDeque<>();
+        final Deque<Transform> parentStack = new ArrayDeque<>();
         Transform temp = this;
         while (temp != null) {
             parentStack.push(temp);
@@ -216,7 +220,7 @@ public final class Transform {
      * @return True, if the transform structure is valid.
      */
     public boolean checkTransformStructure() {
-        for (Transform child : children) {
+        for (final Transform child : children) {
             if (!child.parent.equals(this)) {
                 return false;
             }

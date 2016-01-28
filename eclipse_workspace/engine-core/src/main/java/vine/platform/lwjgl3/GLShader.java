@@ -24,22 +24,14 @@ import vine.util.BufferConverter;
  */
 public class GLShader extends Shader {
 
-    private boolean enabled = false;
+    private boolean enabled;
 
-    /**
-     * 
-     */
-    public GLShader() {
-        super();
-    }
-
-    @SuppressWarnings("boxing")
     @Override
-    public int getUniform(String name) {
+    public int getUniform(final String name) {
         if (locationCache.containsKey(name)) {
             return locationCache.get(name);
         }
-        int result = glGetUniformLocation(id, name);
+        final int result = glGetUniformLocation(id, name);
         if (result == -1) {
             Logger.getGlobal().log(Level.SEVERE, "Failed to create shader");
         } else {
@@ -49,7 +41,7 @@ public class GLShader extends Shader {
     }
 
     @Override
-    public void setUniform1i(String name, int value) {
+    public void setUniform1i(final String name, final int value) {
         if (!enabled) {
             bind();
         }
@@ -57,7 +49,7 @@ public class GLShader extends Shader {
     }
 
     @Override
-    public void setUniform1f(String name, float value) {
+    public void setUniform1f(final String name, final float value) {
         if (!enabled) {
             bind();
         }
@@ -65,7 +57,7 @@ public class GLShader extends Shader {
     }
 
     @Override
-    public void setUniform3f(String name, Vector3f vector) {
+    public void setUniform3f(final String name, final Vector3f vector) {
         if (!enabled) {
             bind();
         }
@@ -73,24 +65,27 @@ public class GLShader extends Shader {
     }
 
     @Override
-    public void setUniformMat3f(String name, Matrix3f matrix) {
+    public void setUniformMat3f(final String name, final Matrix3f matrix) {
         if (!enabled) {
             bind();
         }
     }
 
     @Override
-    public void setUniformMat4f(String name, Matrix4f matrix) {
-        if (!enabled)
+    public void setUniformMat4f(final String name, final Matrix4f matrix) {
+        if (!enabled) {
             bind();
+        }
         glUniformMatrix4fv(getUniform(name), false, BufferConverter.createFloatBuffer(matrix.elements));
     }
 
+    @Override
     public void bind() {
         glUseProgram(id);
         enabled = true;
     }
 
+    @Override
     public void unbind() {
         glUseProgram(0);
         enabled = false;

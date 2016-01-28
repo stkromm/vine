@@ -35,10 +35,10 @@ public abstract class Texture {
      *            The file path of the texture
      * @return the id of the texture in the graphics provider pipeline.
      */
-    protected int load(String path) {
+    protected int load(final String path) {
         int[] pixels = null;
         try (FileInputStream stream = new FileInputStream(path)) {
-            BufferedImage image = ImageIO.read(stream);
+            final BufferedImage image = ImageIO.read(stream);
             width = image.getWidth();
             height = image.getHeight();
             pixels = new int[width * height];
@@ -49,11 +49,10 @@ public abstract class Texture {
         }
         final int[] data = new int[width * height];
         for (int i = 0; i < pixels.length; i++) {
-
-            int alpha = (pixels[i] & 0xff000000) >> 24;
-            int red = (pixels[i] & 0xff0000) >> 16;
-            int green = (pixels[i] & 0xff00) >> 8;
-            int blue = pixels[i] & 0xff;
+            final int alpha = (pixels[i] & 0xff000000) >> 24;
+            final int red = (pixels[i] & 0xff0000) >> 16;
+            final int green = (pixels[i] & 0xff00) >> 8;
+            final int blue = pixels[i] & 0xff;
             data[i] = alpha << 24 | blue << 16 | green << 8 | red;
         }
         return registrateTexture(data);
@@ -66,14 +65,26 @@ public abstract class Texture {
      */
     protected abstract int registrateTexture(int[] data);
 
+    /**
+     * 
+     */
     public abstract void bind();
 
+    /**
+     * 
+     */
     public abstract void unbind();
 
+    /**
+     * @return
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * @return
+     */
     public int getHeight() {
         return height;
     }

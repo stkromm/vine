@@ -63,7 +63,7 @@ public final class InputMapper {
             if (getNumberOfKeys() > key && key >= 0) {
                 setKeyPressed(key, input.isReleaseAction(action));
             }
-            dispatcher.dispatch(new KeyEvent(key, scancode, action, mods));
+            dispatcher.dispatch(new KeyEvent(key, scancode, InputAction.getTypeByAction(action), mods));
         });
         input.setMouseButtonCallback((win, key, action, mods) -> {
             if (getNumberOfKeys() > key && key >= 0) {

@@ -1,7 +1,0 @@
-package vine.event;
-
-public class EventListener {
-    public boolean onEvent(Event event) {
-        return false;
-    }
-}

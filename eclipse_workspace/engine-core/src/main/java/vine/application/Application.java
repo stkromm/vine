@@ -9,18 +9,20 @@ import vine.game.GameRunner;
 import vine.graphics.Graphics;
 import vine.input.Input;
 import vine.window.Window;
-import vine.window.WindowCreationException;
 
 /**
  * @author Steffen
  *
  */
-public class Application {
-    private final Logger logger = LoggerFactory.getLogger(Application.class);
+public final class Application {
+    /**
+     * vine.application package logger.
+     */
+    static final Logger LOGGER = LoggerFactory.getLogger(Application.class);
     /**
      * 
      */
-    protected Display display;
+    private Display display;
 
     private Application() {
         // Only instantiate through main method.
@@ -39,7 +41,7 @@ public class Application {
      *            path, asset path variables, game title, config-file paths,
      *            window and graphic settings.
      */
-    public static void main(String... args) {
+    public static void main(final String... args) {
         final Application app = new Application();
         // BasicConfigurator replaced with PropertyConfigurator.
         PropertyConfigurator.configure("src/main/java/log4j.properties");
@@ -50,18 +52,18 @@ public class Application {
      * Begin the game loop.
      */
     private void run() {
-        logger.info("Started application");
-        logger.info("Resolving application platform dependencies.");
-        logger.info("Checking display device.");
+        LOGGER.info("Started application");
+        LOGGER.info("Resolving application platform dependencies.");
+        LOGGER.info("Checking display device.");
         display = PlatformDependencyResolver.getDisplay();
-        logger.info("Checking system application window.");
+        LOGGER.info("Checking system application window.");
         final Window window = PlatformDependencyResolver.getPlatformWindow(display);
-        logger.info("Checking input devices.");
+        LOGGER.info("Checking input devices.");
         final Input input = PlatformDependencyResolver.getInput(window);
-        logger.info("Assign graphics provider.");
+        LOGGER.info("Assign graphics provider.");
         final Graphics graphics = PlatformDependencyResolver.getGraphics();
 
-        GameRunner runner = new GameRunner(this, window, input, graphics);
+        final GameRunner runner = new GameRunner(this, window, input, graphics);
         runner.run();
         window.close();
     }
@@ -70,6 +72,6 @@ public class Application {
      * @return The number of (virtual) processors available to the system.
      */
     public static int getProcessorCount() {
-        return 1;// Runtime.getRuntime().availableProcessors();
+        return Runtime.getRuntime().availableProcessors();
     }
 }

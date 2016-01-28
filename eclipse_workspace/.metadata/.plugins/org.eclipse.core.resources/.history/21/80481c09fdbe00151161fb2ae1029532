@@ -1,5 +1,0 @@
-package vine.application;
-
-public interface Input {
-    public void pollEvents();
-}

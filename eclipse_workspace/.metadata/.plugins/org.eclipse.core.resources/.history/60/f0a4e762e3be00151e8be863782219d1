@@ -1,8 +1,0 @@
-package vine.game;
-
-public class Viewport {
-    private int width;
-    private int height;
-    private int posX;
-    private int posY;
-}

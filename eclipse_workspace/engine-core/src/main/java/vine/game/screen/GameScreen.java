@@ -37,8 +37,8 @@ public class GameScreen implements Screen {
     }
 
     private final void calculateViewport() {
-        float widthInAspectRatio = window.getHeight() / (aspect);
-        float totalOffset = window.getWidth() - widthInAspectRatio;
+        final float widthInAspectRatio = window.getHeight() / (aspect);
+        final float totalOffset = window.getWidth() - widthInAspectRatio;
         viewport.setLeftOffset((int) (totalOffset / 2));
         viewport.setRightOffset((int) (totalOffset / 2));
         viewport.setBottomOffset(0);
@@ -62,7 +62,7 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public final float worldToScreenCoord(float x) {
+    public final float worldToScreenCoord(final float x) {
         return x * getUnitsPerPixel();
     }
 

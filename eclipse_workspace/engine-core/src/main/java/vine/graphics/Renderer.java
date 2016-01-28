@@ -36,8 +36,17 @@ public class Renderer {
     /**
      * 
      */
-    List<Sprite> tileSprites = new ArrayList<>();
-    List<Sprite> charSprites = new ArrayList<>();
+    private final List<Sprite> tileSprites = new ArrayList<>();
+    private final List<Sprite> charSprites = new ArrayList<>();
+
+    private GLVertexArray vert;
+    private GLVertexArray vertt;
+    private float[] tc;
+    private float[] verts;
+    private int[] indice;
+    private int[] indices;
+    private float[] tcs;
+    private float[] vertices;
 
     /**
      * @param entity
@@ -45,8 +54,8 @@ public class Renderer {
      * @return this, so you can use this method statically in lambda
      *         expressions.
      */
-    public Object submit(GameEntity entity) {
-        for (Sprite sprite : entity.getSprites()) {
+    public Object submit(final GameEntity entity) {
+        for (final Sprite sprite : entity.getSprites()) {
             if (sprite.getTexture().equals(DEFAULT_CHIPSET)) {
                 tileSprites.add(sprite);
             } else {
@@ -56,25 +65,17 @@ public class Renderer {
         return this;
     }
 
-    private GLVertexArray vertt = null;
-    float[] tc;
-    float[] verts;
-    int[] indice;
-    int[] indices;
-    float[] tcs;
-    float[] vertices;
-
     /**
      * @param scene
      *            The scene thats used to render
      * 
      */
-    public void flushTiles(Scene scene) {
+    public void flushTiles(final Scene scene) {
         DEFAULT_SHADER.setUniformMat4f("pr_matrix", Game.getGame().getScreen().getOrthographicProjection());
         DEFAULT_SHADER.setUniformMat4f("vw_matrix", Matrix4f.translate(
                 new Vector3f(-scene.cameras.getActiveCamera().getX(), -scene.cameras.getActiveCamera().getY(), 0)));
         if (vertt == null) {
-            int siz = tileSprites.size();
+            final int siz = tileSprites.size();
             vertices = new float[12 * siz];
             indices = new int[6 * siz];
             tcs = new float[8 * siz];
@@ -98,7 +99,7 @@ public class Renderer {
             }
             vertt = new GLVertexArray(vertices, indices, tcs);
         } else {
-            int siz = tileSprites.size();
+            final int siz = tileSprites.size();
             tcs = new float[8 * siz];
             tc = tileSprites.get(0).getUVCoordinates();
             for (int i = 0; i < tileSprites.size(); i++) {
@@ -117,19 +118,17 @@ public class Renderer {
         tileSprites.clear();
     }
 
-    private GLVertexArray vert = null;
-
     /**
      * @param scene
      *            The scene thats used to render
      * 
      */
-    public void flushChars(Scene scene) {
+    public void flushChars(final Scene scene) {
         DEFAULT_SHADER.setUniformMat4f("pr_matrix", Game.getGame().getScreen().getOrthographicProjection());
         DEFAULT_SHADER.setUniformMat4f("vw_matrix", Matrix4f.translate(
                 new Vector3f(-scene.cameras.getActiveCamera().getX(), -scene.cameras.getActiveCamera().getY(), 0)));
         if (vert == null) {
-            int siz = charSprites.size();
+            final int siz = charSprites.size();
             vertices = new float[12 * siz];
             indices = new int[6 * siz];
             tcs = new float[8 * siz];
@@ -151,7 +150,7 @@ public class Renderer {
             }
             vert = new GLVertexArray(vertices, indices, tcs);
         } else {
-            int siz = charSprites.size();
+            final int siz = charSprites.size();
             vertices = new float[12 * siz];
             tcs = new float[8 * siz];
             tc = charSprites.get(0).getUVCoordinates();

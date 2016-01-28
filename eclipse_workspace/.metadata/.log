@@ -9755,3 +9755,852 @@ Contains: Could not delete: D:\Workspaces\VineEngine\eclipse_workspace\engine-co
 
 !ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-25 23:56:55.186
 !MESSAGE Command ReviewCode excecuted in 1548ms
+!SESSION 2016-01-26 21:39:48.905 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-26 21:40:16.144
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.jface 4 0 2016-01-26 21:42:24.324
+!MESSAGE Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+!STACK 0
+org.eclipse.swt.SWTException: Unable to create font "org.eclipse.jface.textfont" in a non-UI thread. Using default font instead.
+	at org.eclipse.jface.resource.FontRegistry.getFontRecord(FontRegistry.java:685)
+	at org.eclipse.jface.resource.FontRegistry.get(FontRegistry.java:616)
+	at org.eclipse.jface.resource.JFaceResources.getFont(JFaceResources.java:304)
+	at org.eclipse.ui.console.TextConsole.getDefaultFont(TextConsole.java:224)
+	at org.eclipse.ui.console.TextConsole.getFont(TextConsole.java:213)
+	at org.eclipse.ui.console.TextConsole.setFont(TextConsole.java:235)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.initStreams(SonarLintConsole.java:82)
+	at org.sonarlint.eclipse.ui.internal.console.SonarLintConsole.<init>(SonarLintConsole.java:65)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.getSonarConsole(SonarLintUiPlugin.java:107)
+	at org.sonarlint.eclipse.ui.internal.SonarLintUiPlugin.start(SonarLintUiPlugin.java:56)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:771)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl$3.run(BundleContextImpl.java:1)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.startActivator(BundleContextImpl.java:764)
+	at org.eclipse.osgi.internal.framework.BundleContextImpl.start(BundleContextImpl.java:721)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.startWorker0(EquinoxBundle.java:941)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle$EquinoxModule.startWorker(EquinoxBundle.java:318)
+	at org.eclipse.osgi.container.Module.doStart(Module.java:571)
+	at org.eclipse.osgi.container.Module.start(Module.java:439)
+	at org.eclipse.osgi.internal.framework.EquinoxBundle.start(EquinoxBundle.java:392)
+	at org.eclipse.core.internal.runtime.InternalPlatform.start(InternalPlatform.java:916)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.doPluginActivation(PluginDescriptor.java:360)
+	at org.eclipse.core.internal.plugins.PluginDescriptor.getPlugin(PluginDescriptor.java:340)
+	at org.eclipse.core.runtime.Platform.getPlugin(Platform.java:743)
+	at org.eclipse.core.internal.preferences.legacy.InitLegacyPreferences.init(InitLegacyPreferences.java:45)
+	at org.eclipse.core.internal.preferences.PreferenceServiceRegistryHelper.applyRuntimeDefaults(PreferenceServiceRegistryHelper.java:147)
+	at org.eclipse.core.internal.preferences.PreferencesService.applyRuntimeDefaults(PreferencesService.java:368)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.applyRuntimeDefaults(DefaultPreferences.java:221)
+	at org.eclipse.core.internal.preferences.DefaultPreferences.load(DefaultPreferences.java:274)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.create(EclipsePreferences.java:409)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.internalNode(EclipsePreferences.java:670)
+	at org.eclipse.core.internal.preferences.EclipsePreferences.node(EclipsePreferences.java:812)
+	at org.eclipse.core.internal.preferences.PreferencesService$5.run(PreferencesService.java:623)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.preferences.PreferencesService.getNodes(PreferencesService.java:607)
+	at org.eclipse.core.internal.preferences.PreferencesService.getString(PreferencesService.java:676)
+	at org.sonarlint.eclipse.core.internal.PreferencesUtils.getExtraPropertiesForLocalAnalysis(PreferencesUtils.java:55)
+	at org.sonarlint.eclipse.core.internal.jobs.AnalyzeProjectJob.<init>(AnalyzeProjectJob.java:77)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.incrementalBuild(SonarLintBuilder.java:80)
+	at org.sonarlint.eclipse.core.internal.builder.SonarLintBuilder.build(SonarLintBuilder.java:46)
+	at org.eclipse.core.internal.events.BuildManager$2.run(BuildManager.java:734)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:205)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:245)
+	at org.eclipse.core.internal.events.BuildManager$1.run(BuildManager.java:300)
+	at org.eclipse.core.runtime.SafeRunner.run(SafeRunner.java:42)
+	at org.eclipse.core.internal.events.BuildManager.basicBuild(BuildManager.java:303)
+	at org.eclipse.core.internal.events.BuildManager.basicBuildLoop(BuildManager.java:359)
+	at org.eclipse.core.internal.events.BuildManager.build(BuildManager.java:382)
+	at org.eclipse.core.internal.events.AutoBuildJob.doBuild(AutoBuildJob.java:144)
+	at org.eclipse.core.internal.events.AutoBuildJob.run(AutoBuildJob.java:235)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.ui 4 0 2016-01-26 21:44:28.233
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: net.sourceforge.pmd.eclipse.ui.preferences.br.RuleFieldAccessor$12$1 cannot be cast to net.sourceforge.pmd.lang.Language
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleFieldAccessor$12$1.compareTo(RuleFieldAccessor.java:1)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleGroup.compareTo(RuleGroup.java:131)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleGroup.compareTo(RuleGroup.java:1)
+	at java.util.ComparableTimSort.countRunAndMakeAscending(Unknown Source)
+	at java.util.ComparableTimSort.sort(Unknown Source)
+	at java.util.Arrays.sort(Unknown Source)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleSetTreeItemProvider.asRuleGroups(RuleSetTreeItemProvider.java:113)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleSetTreeItemProvider.getChildren(RuleSetTreeItemProvider.java:68)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleSetTreeItemProvider.getElements(RuleSetTreeItemProvider.java:170)
+	at org.eclipse.jface.viewers.StructuredViewer.getRawChildren(StructuredViewer.java:1000)
+	at org.eclipse.jface.viewers.ColumnViewer.getRawChildren(ColumnViewer.java:700)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getRawChildren(AbstractTreeViewer.java:1349)
+	at org.eclipse.jface.viewers.TreeViewer.getRawChildren(TreeViewer.java:353)
+	at org.eclipse.jface.viewers.StructuredViewer.getFilteredChildren(StructuredViewer.java:906)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.getSortedChildren(AbstractTreeViewer.java:617)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.updateChildren(AbstractTreeViewer.java:2647)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefreshStruct(AbstractTreeViewer.java:1916)
+	at org.eclipse.jface.viewers.TreeViewer.internalRefreshStruct(TreeViewer.java:684)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefresh(AbstractTreeViewer.java:1891)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefresh(AbstractTreeViewer.java:1848)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.internalRefresh(AbstractTreeViewer.java:1834)
+	at org.eclipse.jface.viewers.StructuredViewer$7.run(StructuredViewer.java:1526)
+	at org.eclipse.jface.viewers.StructuredViewer.preservingSelection(StructuredViewer.java:1462)
+	at org.eclipse.jface.viewers.TreeViewer.preservingSelection(TreeViewer.java:366)
+	at org.eclipse.jface.viewers.StructuredViewer.preservingSelection(StructuredViewer.java:1423)
+	at org.eclipse.jface.viewers.CheckboxTreeViewer.preservingSelection(CheckboxTreeViewer.java:398)
+	at org.eclipse.jface.viewers.StructuredViewer.refresh(StructuredViewer.java:1523)
+	at org.eclipse.jface.viewers.ColumnViewer.refresh(ColumnViewer.java:522)
+	at org.eclipse.jface.viewers.StructuredViewer.refresh(StructuredViewer.java:1482)
+	at org.eclipse.jface.viewers.ContentViewer.setContentProvider(ContentViewer.java:263)
+	at org.eclipse.jface.viewers.StructuredViewer.setContentProvider(StructuredViewer.java:1676)
+	at org.eclipse.jface.viewers.AbstractTreeViewer.setContentProvider(AbstractTreeViewer.java:2378)
+	at org.eclipse.jface.viewers.TreeViewer.setContentProvider(TreeViewer.java:922)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleTableManager.setupTreeColumns(RuleTableManager.java:987)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleTableManager.groupBy(RuleTableManager.java:801)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleTableManager.redrawTable(RuleTableManager.java:850)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTreeTableManager.redrawTable(AbstractTreeTableManager.java:409)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.RuleTableManager$8.widgetSelected(RuleTableManager.java:526)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:248)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2016-01-26 21:44:32.480
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: org.eclipse.swt.widgets.TreeColumn cannot be cast to org.eclipse.swt.widgets.TableColumn
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTableManager.sortBy(AbstractTableManager.java:276)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractRuleColumnDescriptor$1.handleEvent(AbstractRuleColumnDescriptor.java:40)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:50:39.025
+!MESSAGE 288 markers applied on 64 files in 24ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:50:39.036
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 3683ms, that is about 68.203705 ms/file, 12.195364 ms/rule, 0.22584008 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:50:39.046
+!MESSAGE Command ReviewCode excecuted in 4530ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:52:05.975
+!MESSAGE 287 markers applied on 64 files in 19ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:52:05.989
+!MESSAGE Review code command terminated. 302 rules were executed against 54 files. Actual PMD duration is about 1995ms, that is about 36.944443 ms/file, 6.6059604 ms/rule, 0.122332595 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:52:05.998
+!MESSAGE Command ReviewCode excecuted in 2213ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:55:05.919
+!MESSAGE 282 markers applied on 64 files in 18ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:55:05.931
+!MESSAGE Review code command terminated. 297 rules were executed against 54 files. Actual PMD duration is about 1772ms, that is about 32.814816 ms/file, 5.96633 ms/rule, 0.110487595 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:55:05.945
+!MESSAGE Command ReviewCode excecuted in 1990ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:56:22.640
+!MESSAGE 277 markers applied on 64 files in 14ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:56:22.654
+!MESSAGE Review code command terminated. 297 rules were executed against 54 files. Actual PMD duration is about 1710ms, that is about 31.666666 ms/file, 5.757576 ms/rule, 0.10662177 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:56:22.666
+!MESSAGE Command ReviewCode excecuted in 1906ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:56:42.205
+!MESSAGE 274 markers applied on 64 files in 7ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:56:42.219
+!MESSAGE Review code command terminated. 297 rules were executed against 54 files. Actual PMD duration is about 1639ms, that is about 30.351852 ms/file, 5.5185184 ms/rule, 0.102194786 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:56:42.232
+!MESSAGE Command ReviewCode excecuted in 1825ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:57:05.638
+!MESSAGE 272 markers applied on 64 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:57:05.655
+!MESSAGE Review code command terminated. 297 rules were executed against 54 files. Actual PMD duration is about 1551ms, that is about 28.722221 ms/file, 5.2222223 ms/rule, 0.09670782 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:57:05.667
+!MESSAGE Command ReviewCode excecuted in 1743ms
+
+!ENTRY org.eclipse.ui 4 0 2016-01-26 21:57:40.449
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: org.eclipse.swt.widgets.TreeColumn cannot be cast to org.eclipse.swt.widgets.TableColumn
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTableManager.sortBy(AbstractTableManager.java:276)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractRuleColumnDescriptor$1.handleEvent(AbstractRuleColumnDescriptor.java:40)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:58:28.939
+!MESSAGE 272 markers applied on 64 files in 7ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:58:28.947
+!MESSAGE Review code command terminated. 294 rules were executed against 54 files. Actual PMD duration is about 1543ms, that is about 28.574074 ms/file, 5.248299 ms/rule, 0.09719073 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 21:58:28.953
+!MESSAGE Command ReviewCode excecuted in 1712ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:01:46.583
+!MESSAGE 264 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:01:46.592
+!MESSAGE Review code command terminated. 295 rules were executed against 54 files. Actual PMD duration is about 1522ms, that is about 28.185184 ms/file, 5.1593223 ms/rule, 0.095543 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:01:46.603
+!MESSAGE Command ReviewCode excecuted in 1693ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:02:43.807
+!MESSAGE 261 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:02:43.817
+!MESSAGE Review code command terminated. 295 rules were executed against 54 files. Actual PMD duration is about 1482ms, that is about 27.444445 ms/file, 5.023729 ms/rule, 0.09303202 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:02:43.825
+!MESSAGE Command ReviewCode excecuted in 1649ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:02:59.083
+!MESSAGE 260 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:02:59.093
+!MESSAGE Review code command terminated. 295 rules were executed against 54 files. Actual PMD duration is about 1460ms, that is about 27.037037 ms/file, 4.9491525 ms/rule, 0.09165097 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:02:59.103
+!MESSAGE Command ReviewCode excecuted in 1625ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:04:44.361
+!MESSAGE 245 markers applied on 64 files in 9ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:04:44.375
+!MESSAGE Review code command terminated. 295 rules were executed against 54 files. Actual PMD duration is about 1717ms, that is about 31.796297 ms/file, 5.820339 ms/rule, 0.107784055 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:04:44.386
+!MESSAGE Command ReviewCode excecuted in 1904ms
+
+!ENTRY org.eclipse.ui 4 0 2016-01-26 22:08:30.036
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: org.eclipse.swt.widgets.TreeColumn cannot be cast to org.eclipse.swt.widgets.TableColumn
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTableManager.sortBy(AbstractTableManager.java:276)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractRuleColumnDescriptor$1.handleEvent(AbstractRuleColumnDescriptor.java:40)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2016-01-26 22:08:30.607
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: org.eclipse.swt.widgets.TreeColumn cannot be cast to org.eclipse.swt.widgets.TableColumn
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTableManager.sortBy(AbstractTableManager.java:276)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractRuleColumnDescriptor$1.handleEvent(AbstractRuleColumnDescriptor.java:40)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY org.eclipse.ui 4 0 2016-01-26 22:08:31.013
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.ClassCastException: org.eclipse.swt.widgets.TreeColumn cannot be cast to org.eclipse.swt.widgets.TableColumn
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractTableManager.sortBy(AbstractTableManager.java:276)
+	at net.sourceforge.pmd.eclipse.ui.preferences.br.AbstractRuleColumnDescriptor$1.handleEvent(AbstractRuleColumnDescriptor.java:40)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:827)
+	at org.eclipse.jface.window.Window.open(Window.java:803)
+	at org.eclipse.ui.internal.dialogs.WorkbenchPreferenceDialog.open(WorkbenchPreferenceDialog.java:211)
+	at org.eclipse.ui.internal.OpenPreferencesAction.run(OpenPreferencesAction.java:63)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:473)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:595)
+	at org.eclipse.jface.action.ActionContributionItem.access$2(ActionContributionItem.java:511)
+	at org.eclipse.jface.action.ActionContributionItem$5.handleEvent(ActionContributionItem.java:420)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4362)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1113)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4180)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3769)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1127)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1018)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:156)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:654)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:337)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:598)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:150)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:139)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:380)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:235)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:669)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:608)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1515)
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:08:59.391
+!MESSAGE 229 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:08:59.398
+!MESSAGE Review code command terminated. 294 rules were executed against 54 files. Actual PMD duration is about 1468ms, that is about 27.185184 ms/file, 4.9931974 ms/rule, 0.092466615 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:08:59.404
+!MESSAGE Command ReviewCode excecuted in 1663ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:13:59.528
+!MESSAGE 224 markers applied on 64 files in 8ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:13:59.536
+!MESSAGE Review code command terminated. 293 rules were executed against 54 files. Actual PMD duration is about 1451ms, that is about 26.87037 ms/file, 4.9522185 ms/rule, 0.09170775 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:13:59.543
+!MESSAGE Command ReviewCode excecuted in 1587ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:14:49.135
+!MESSAGE 223 markers applied on 64 files in 5ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:14:49.145
+!MESSAGE Review code command terminated. 293 rules were executed against 54 files. Actual PMD duration is about 1549ms, that is about 28.685184 ms/file, 5.2866893 ms/rule, 0.09790166 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:14:49.154
+!MESSAGE Command ReviewCode excecuted in 1707ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:53:48.267
+!MESSAGE 203 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:53:48.278
+!MESSAGE Review code command terminated. 293 rules were executed against 54 files. Actual PMD duration is about 1484ms, that is about 27.481482 ms/file, 5.0648465 ms/rule, 0.09379345 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:53:48.288
+!MESSAGE Command ReviewCode excecuted in 1646ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:55:05.548
+!MESSAGE 197 markers applied on 64 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:55:05.567
+!MESSAGE Review code command terminated. 293 rules were executed against 54 files. Actual PMD duration is about 1476ms, that is about 27.333334 ms/file, 5.037543 ms/rule, 0.093287826 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 22:55:05.585
+!MESSAGE Command ReviewCode excecuted in 1654ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:14.896
+!MESSAGE 188 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:14.911
+!MESSAGE Review code command terminated. 293 rules were executed against 54 files. Actual PMD duration is about 1565ms, that is about 28.981482 ms/file, 5.341297 ms/rule, 0.09891291 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:14.923
+!MESSAGE Command ReviewCode excecuted in 1743ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:33.059
+!MESSAGE 191 markers applied on 64 files in 5ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:33.078
+!MESSAGE Review code command terminated. 293 rules were executed against 54 files. Actual PMD duration is about 1498ms, that is about 27.74074 ms/file, 5.112628 ms/rule, 0.0946783 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:33.102
+!MESSAGE Command ReviewCode excecuted in 1682ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:45.548
+!MESSAGE 191 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:45.573
+!MESSAGE Review code command terminated. 293 rules were executed against 54 files. Actual PMD duration is about 1455ms, that is about 26.944445 ms/file, 4.9658704 ms/rule, 0.091960564 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:00:45.599
+!MESSAGE Command ReviewCode excecuted in 1653ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:03:59.673
+!MESSAGE 189 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:03:59.690
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1516ms, that is about 28.074074 ms/file, 5.191781 ms/rule, 0.09614409 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:03:59.720
+!MESSAGE Command ReviewCode excecuted in 1706ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:06:30.928
+!MESSAGE 189 markers applied on 64 files in 7ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:06:30.945
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1464ms, that is about 27.11111 ms/file, 5.0136986 ms/rule, 0.092846274 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:06:30.961
+!MESSAGE Command ReviewCode excecuted in 1646ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:06:54.032
+!MESSAGE 186 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:06:54.048
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1455ms, that is about 26.944445 ms/file, 4.982877 ms/rule, 0.09227549 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:06:54.063
+!MESSAGE Command ReviewCode excecuted in 1626ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:07:36.320
+!MESSAGE 183 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:07:36.336
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1503ms, that is about 27.833334 ms/file, 5.14726 ms/rule, 0.095319636 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:07:36.351
+!MESSAGE Command ReviewCode excecuted in 1678ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:12:00.622
+!MESSAGE 172 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:12:00.639
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1462ms, that is about 27.074074 ms/file, 5.0068493 ms/rule, 0.09271943 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:12:00.655
+!MESSAGE Command ReviewCode excecuted in 1637ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:14:48.841
+!MESSAGE 162 markers applied on 64 files in 5ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:14:48.858
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1464ms, that is about 27.11111 ms/file, 5.0136986 ms/rule, 0.092846274 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:14:48.873
+!MESSAGE Command ReviewCode excecuted in 1647ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:16:22.207
+!MESSAGE 149 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:16:22.225
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1477ms, that is about 27.351852 ms/file, 5.058219 ms/rule, 0.093670726 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:16:22.243
+!MESSAGE Command ReviewCode excecuted in 1648ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:18:01.395
+!MESSAGE 149 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:18:01.412
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1422ms, that is about 26.333334 ms/file, 4.869863 ms/rule, 0.09018265 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:18:01.427
+!MESSAGE Command ReviewCode excecuted in 1588ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:18:21.798
+!MESSAGE 148 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:18:21.817
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1462ms, that is about 27.074074 ms/file, 5.0068493 ms/rule, 0.09271943 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:18:21.832
+!MESSAGE Command ReviewCode excecuted in 1636ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:13.523
+!MESSAGE 146 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:13.539
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1445ms, that is about 26.75926 ms/file, 4.9486303 ms/rule, 0.0916413 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:13.555
+!MESSAGE Command ReviewCode excecuted in 1621ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:32.402
+!MESSAGE 145 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:32.419
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1481ms, that is about 27.425926 ms/file, 5.071918 ms/rule, 0.0939244 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:32.434
+!MESSAGE Command ReviewCode excecuted in 1652ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:58.254
+!MESSAGE 143 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:58.273
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1460ms, that is about 27.037037 ms/file, 5.0 ms/rule, 0.09259259 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:19:58.288
+!MESSAGE Command ReviewCode excecuted in 1634ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:20:45.639
+!MESSAGE 140 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:20:45.656
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1453ms, that is about 26.907408 ms/file, 4.9760275 ms/rule, 0.092148654 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:20:45.677
+!MESSAGE Command ReviewCode excecuted in 1650ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:21:36.363
+!MESSAGE 136 markers applied on 64 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:21:36.380
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1446ms, that is about 26.777779 ms/file, 4.952055 ms/rule, 0.09170472 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:21:36.396
+!MESSAGE Command ReviewCode excecuted in 1622ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:26:28.571
+!MESSAGE 136 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:26:28.587
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1589ms, that is about 29.425926 ms/file, 5.441781 ms/rule, 0.10077372 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:26:28.602
+!MESSAGE Command ReviewCode excecuted in 1762ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:26:57.035
+!MESSAGE 131 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:26:57.051
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1426ms, that is about 26.407408 ms/file, 4.8835616 ms/rule, 0.090436324 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:26:57.070
+!MESSAGE Command ReviewCode excecuted in 1605ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:27:13.371
+!MESSAGE 129 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:27:13.388
+!MESSAGE Review code command terminated. 292 rules were executed against 54 files. Actual PMD duration is about 1413ms, that is about 26.166666 ms/file, 4.839041 ms/rule, 0.08961187 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:27:13.403
+!MESSAGE Command ReviewCode excecuted in 1582ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:28:47.425
+!MESSAGE 121 markers applied on 64 files in 3ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:28:47.441
+!MESSAGE Review code command terminated. 291 rules were executed against 54 files. Actual PMD duration is about 1390ms, that is about 25.74074 ms/file, 4.7766323 ms/rule, 0.088456154 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:28:47.456
+!MESSAGE Command ReviewCode excecuted in 1527ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:29:59.740
+!MESSAGE 117 markers applied on 64 files in 2ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:29:59.756
+!MESSAGE Review code command terminated. 291 rules were executed against 54 files. Actual PMD duration is about 1396ms, that is about 25.851852 ms/file, 4.7972507 ms/rule, 0.08883798 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-26 23:29:59.775
+!MESSAGE Command ReviewCode excecuted in 1557ms
+!SESSION 2016-01-26 23:51:30.284 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-26 23:51:49.863
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-01-27 13:27:33.897 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-27 13:27:49.284
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-01-27 23:36:09.555 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_66
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-01-27 23:36:29.561
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Steffen'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:41:34.055
+!MESSAGE 111 markers applied on 66 files in 21ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:41:34.081
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 3816ms, that is about 68.14286 ms/file, 13.113402 ms/rule, 0.23416789 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:41:34.095
+!MESSAGE Command ReviewCode excecuted in 5379ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:05.665
+!MESSAGE 107 markers applied on 66 files in 12ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:05.681
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 1891ms, that is about 33.767857 ms/file, 6.498282 ms/rule, 0.116040744 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:05.689
+!MESSAGE Command ReviewCode excecuted in 2115ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:43.975
+!MESSAGE 106 markers applied on 66 files in 14ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:44.000
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 1732ms, that is about 30.928572 ms/file, 5.95189 ms/rule, 0.106283754 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:44.015
+!MESSAGE Command ReviewCode excecuted in 1978ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:59.697
+!MESSAGE 105 markers applied on 66 files in 10ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:59.717
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 1742ms, that is about 31.107143 ms/file, 5.986254 ms/rule, 0.1068974 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:44:59.728
+!MESSAGE Command ReviewCode excecuted in 1953ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:47:33.491
+!MESSAGE 7 markers applied on 1 files in 0ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:47:33.878
+!MESSAGE Review code command terminated. 291 rules were executed against 1 files. Actual PMD duration is about 26ms, that is about 26.0 ms/file, 0.08934708 ms/rule, 0.08934708 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:47:33.889
+!MESSAGE Command ReviewCode excecuted in 435ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:49:01.977
+!MESSAGE 85 markers applied on 66 files in 6ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:49:02.031
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 1474ms, that is about 26.321428 ms/file, 5.065292 ms/rule, 0.09045164 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:49:02.045
+!MESSAGE Command ReviewCode excecuted in 1692ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:53:17.656
+!MESSAGE 83 markers applied on 66 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:53:17.730
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 1491ms, that is about 26.625 ms/file, 5.123711 ms/rule, 0.09149484 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:53:17.745
+!MESSAGE Command ReviewCode excecuted in 1731ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:54:06.030
+!MESSAGE 82 markers applied on 66 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:54:06.092
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 1393ms, that is about 24.875 ms/file, 4.7869415 ms/rule, 0.0854811 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:54:06.108
+!MESSAGE Command ReviewCode excecuted in 1616ms
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:55:25.156
+!MESSAGE 92 markers applied on 66 files in 4ms.
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:55:25.232
+!MESSAGE Review code command terminated. 291 rules were executed against 56 files. Actual PMD duration is about 1401ms, that is about 25.017857 ms/file, 4.814433 ms/rule, 0.08597202 ms/filerule
+
+!ENTRY net.sourceforge.pmd.eclipse.plugin 1 0 2016-01-27 23:55:25.247
+!MESSAGE Command ReviewCode excecuted in 1633ms

@@ -1,5 +1,7 @@
 package vine.event;
 
+import vine.input.InputAction;
+
 /**
  * @author Steffen
  *
@@ -16,7 +18,7 @@ public class KeyEvent implements Event {
     /**
      * 
      */
-    private final int action;
+    private final InputAction action;
     /**
      * 
      */
@@ -28,7 +30,7 @@ public class KeyEvent implements Event {
      * @param action
      * @param mods
      */
-    public KeyEvent(final int key, final int scancode, final int action, final int mods) {
+    public KeyEvent(final int key, final int scancode, final InputAction action, final int mods) {
         super();
         this.key = key;
         this.scancode = scancode;
@@ -53,7 +55,7 @@ public class KeyEvent implements Event {
     /**
      * @return
      */
-    public final int getAction() {
+    public final InputAction getAction() {
         return action;
     }
 

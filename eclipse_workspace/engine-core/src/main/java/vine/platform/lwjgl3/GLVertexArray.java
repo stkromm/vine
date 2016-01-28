@@ -29,20 +29,20 @@ public class GLVertexArray implements VertexArray {
     /**
      * Vertex array object.
      */
-    private int vao;
+    private final int vao;
     /**
      * Vertex buffer object.
      */
-    private int vbo;
+    private final int vbo;
     /**
      * Index buffer object.
      */
-    private int ibo;
+    private final int ibo;
     /**
      * Texture buffer object.
      */
-    private int tbo;
-    private int count;
+    private final int tbo;
+    private final int count;
 
     /**
      * Creates a new vertex array buffer.
@@ -51,10 +51,10 @@ public class GLVertexArray implements VertexArray {
      *            The vertices
      * @param indices
      *            The indices for the vertex order
-     * @param textureCoordinates
+     * @param uvs
      *            The texture coordinates for the vertices
      */
-    public GLVertexArray(float[] vertices, int[] indices, float[] textureCoordinates) {
+    public GLVertexArray(final float[] vertices, final int[] indices, final float[] uvs) {
         count = indices == null ? 0 : indices.length;
         vao = glGenVertexArrays();
         glBindVertexArray(vao);
@@ -67,7 +67,7 @@ public class GLVertexArray implements VertexArray {
 
         tbo = glGenBuffers();
         glBindBuffer(GL_ARRAY_BUFFER, tbo);
-        glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(textureCoordinates), GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(uvs), GL_STATIC_DRAW);
         glVertexAttribPointer(Shader.TCOORD_ATTRIB, 2, GL_FLOAT, false, 0, 0);
         glEnableVertexAttribArray(Shader.TCOORD_ATTRIB);
 
@@ -80,14 +80,20 @@ public class GLVertexArray implements VertexArray {
         glBindVertexArray(0);
     }
 
-    public void changeVertices(float[] vertices) {
+    /**
+     * @param vertices
+     */
+    public void changeVertices(final float[] vertices) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(vertices), GL_STATIC_DRAW);
         glVertexAttribPointer(Shader.VERTEX_ATTRIB, 3, GL_FLOAT, false, 0, 0);
         glEnableVertexAttribArray(Shader.VERTEX_ATTRIB);
     }
 
-    public void changeTexture(float[] uvs) {
+    /**
+     * @param uvs
+     */
+    public void changeTexture(final float[] uvs) {
         glBindBuffer(GL_ARRAY_BUFFER, tbo);
         glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(uvs), GL_STATIC_DRAW);
         glVertexAttribPointer(Shader.TCOORD_ATTRIB, 2, GL_FLOAT, false, 0, 0);
@@ -97,6 +103,7 @@ public class GLVertexArray implements VertexArray {
     /**
      * Unbinds the current vertex array buffer.
      */
+    @Override
     public void bind() {
         glBindVertexArray(vao);
         if (ibo > 0) {

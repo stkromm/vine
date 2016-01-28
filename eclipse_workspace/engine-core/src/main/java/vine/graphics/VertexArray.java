@@ -11,6 +11,9 @@ public interface VertexArray {
      */
     void draw();
 
+    /**
+     * 
+     */
     void bind();
 
     /**

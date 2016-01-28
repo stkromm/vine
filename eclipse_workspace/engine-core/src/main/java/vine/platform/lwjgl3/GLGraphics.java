@@ -30,13 +30,6 @@ import vine.graphics.Graphics;
 public final class GLGraphics implements Graphics {
     private long context;
 
-    /**
-     * 
-     */
-    public GLGraphics() {
-        // Empty, to instantiate with reflection.
-    }
-
     @Override
     public void makeContext(final long context) {
         glfwMakeContextCurrent(context);

@@ -21,6 +21,7 @@ public interface Input {
 
     /**
      * @param callback
+     *            Callback, to assign functionality for scroll handling.
      */
     void setScrollCallback(ScrollCallback callback);
 

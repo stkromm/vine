@@ -24,20 +24,24 @@ public class GLTexture extends Texture {
      * @param path
      *            The file path of the texture
      */
-    public GLTexture(String path) {
+    public GLTexture(final String path) {
+        super();
         textureId = load(path);
     }
 
+    @Override
     public void bind() {
         glBindTexture(GL_TEXTURE_2D, textureId);
     }
 
+    @Override
     public void unbind() {
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
-    protected int registrateTexture(int[] data) {
-        int result = glGenTextures();
+    @Override
+    protected int registrateTexture(final int[] data) {
+        final int result = glGenTextures();
         glBindTexture(GL_TEXTURE_2D, result);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

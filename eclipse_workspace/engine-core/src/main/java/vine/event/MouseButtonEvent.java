@@ -13,10 +13,15 @@ public class MouseButtonEvent implements Event {
 
     /**
      * @param button
+     *            The id of the button
      * @param action
+     *            The action of the button (pressen, released)
      * @param mods
+     *            The mod with which the button event was generated
      * @param x
+     *            The x coordinate of the cursor, when the event was generated
      * @param y
+     *            The y coordinate of the cursor, when the event was generated
      */
     public MouseButtonEvent(final int button, final int action, final int mods, final double x, final double y) {
         super();
@@ -28,35 +33,35 @@ public class MouseButtonEvent implements Event {
     }
 
     /**
-     * @return
+     * @return The mouse-button id of the event
      */
     public final int getButton() {
         return button;
     }
 
     /**
-     * @return
+     * @return The action type of the event
      */
     public final int getAction() {
         return action;
     }
 
     /**
-     * @return
+     * @return The mods of the event
      */
     public final int getMods() {
         return mods;
     }
 
     /**
-     * @return
+     * @return The x cursor coordinate of the event
      */
     public final double getX() {
         return x;
     }
 
     /**
-     * @return
+     * @return The y cursor coordinate of the event
      */
     public final double getY() {
         return y;

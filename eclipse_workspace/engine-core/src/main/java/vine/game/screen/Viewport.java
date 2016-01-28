@@ -1,40 +1,68 @@
 package vine.game.screen;
 
+/**
+ * @author Steffen
+ *
+ */
 public class Viewport {
     private int rightOffset;
     private int bottomOffset;
     private int leftOffset;
     private int topOffset;
 
+    /**
+     * @return
+     */
     public int getRightOffset() {
         return rightOffset;
     }
 
+    /**
+     * @return
+     */
     public int getBottomOffset() {
         return bottomOffset;
     }
 
+    /**
+     * @return
+     */
     public int getLeftOffset() {
         return leftOffset;
     }
 
+    /**
+     * @return
+     */
     public int getTopOffset() {
         return topOffset;
     }
 
-    protected void setRightOffset(int rightOffset) {
+    /**
+     * @param rightOffset
+     */
+    protected void setRightOffset(final int rightOffset) {
         this.rightOffset = rightOffset;
     }
 
-    protected void setBottomOffset(int bottomOffset) {
+    /**
+     * @param bottomOffset
+     */
+    protected void setBottomOffset(final int bottomOffset) {
         this.bottomOffset = bottomOffset;
     }
 
-    protected void setLeftOffset(int leftOffset) {
+    /**
+     * @param leftOffset
+     */
+    protected void setLeftOffset(final int leftOffset) {
         this.leftOffset = leftOffset;
     }
 
-    protected void setTopOffset(int topOffset) {
+    /**
+     * @param topOffset
+     */
+    protected void setTopOffset(final int topOffset) {
         this.topOffset = topOffset;
     }
 
