@@ -8,7 +8,7 @@ import java.util.List;
  *
  */
 public final class StatMonitor {
-    private static final int SAMPLE_COUNT = 100;
+    private static final int SAMPLE_COUNT = 1000;
     private static long lastUpdateTime = System.nanoTime();
     private static long lastFrameTime = System.nanoTime();
     private static final List<Long> FRAME_DURATIONS = new ArrayList<>();
@@ -37,7 +37,10 @@ public final class StatMonitor {
         for (int i = 0; i < FRAME_DURATIONS.size(); i++) {
             frames += FRAME_DURATIONS.get(i).longValue();
         }
-        return 10000000000000f / frames / FRAME_DURATIONS.size();
+        if(FRAME_DURATIONS.size()==0) {
+            return 0;
+        }
+        return (float)1e9 / ( frames / FRAME_DURATIONS.size());
     }
 
     /**

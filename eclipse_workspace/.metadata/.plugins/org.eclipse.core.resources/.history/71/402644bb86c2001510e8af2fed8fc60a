@@ -1,7 +1,0 @@
-package vine.gameplay.scene;
-
-public class SceneCreationException extends Exception {
-    protected SceneCreationException(String message) {
-        super(message);
-    }
-}

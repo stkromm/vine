@@ -8,7 +8,6 @@ import static org.lwjgl.glfw.GLFW.glfwSetKeyCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetMouseButtonCallback;
 import static org.lwjgl.glfw.GLFW.glfwSetScrollCallback;
 
-import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWCharCallback;
 import org.lwjgl.glfw.GLFWCharModsCallback;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
@@ -17,6 +16,7 @@ import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
 
 import vine.input.Input;
+import vine.input.InputAction;
 
 /**
  * @author Steffen
@@ -55,19 +55,20 @@ public final class GLFWInput implements Input {
         if (keyCallback != null) {
             keyCallback.release();
         }
-        keyCallback = GLFWKeyCallback
-                .create((win, key, scancode, action, mods) -> callback.keyPressed(win, key, scancode, action, mods));
+        keyCallback = GLFWKeyCallback.create((win, key, scancode, action, mods) -> callback.keyPressed(win, key,
+                scancode, InputAction.getTypeByAction(action), mods));
         glfwSetKeyCallback(context, keyCallback);
     }
 
     @Override
     public void listenToWindow(final long context) {
         this.context = context;
-    }
-
-    @Override
-    public boolean isReleaseAction(final int action) {
-        return action != GLFW.GLFW_RELEASE;
+        if (scrollCallback != null) {
+            glfwSetScrollCallback(context, scrollCallback);
+        }
+        if (keyCallback != null) {
+            glfwSetKeyCallback(context, keyCallback);
+        }
     }
 
     @Override
@@ -116,8 +117,8 @@ public final class GLFWInput implements Input {
         if (mouseButtonCallback != null) {
             mouseButtonCallback.release();
         }
-        mouseButtonCallback = GLFWMouseButtonCallback
-                .create((window, button, action, mods) -> callback.pressedMouseButton(window, button, action, mods));
+        mouseButtonCallback = GLFWMouseButtonCallback.create((window, button, action, mods) -> callback
+                .pressedMouseButton(window, button, InputAction.getTypeByAction(action), mods));
         glfwSetMouseButtonCallback(context, mouseButtonCallback);
     }
 

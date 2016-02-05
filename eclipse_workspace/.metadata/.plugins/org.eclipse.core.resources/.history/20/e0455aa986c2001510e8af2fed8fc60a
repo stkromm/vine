@@ -1,5 +1,0 @@
-package vine.gameplay.scene;
-
-class SceneCreationException extends Exception {
-
-}

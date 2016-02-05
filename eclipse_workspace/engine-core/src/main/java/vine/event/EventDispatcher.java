@@ -3,7 +3,8 @@ package vine.event;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import vine.gameplay.scene.Layer;
+import vine.event.Event.EventType;
+import vine.game.GameObject;
 
 /**
  * @author Steffen
@@ -13,7 +14,7 @@ public final class EventDispatcher {
     /**
      * Stores all event layers of the game.
      */
-    private final Deque<Layer> layers;
+    private final Deque<EventListener> layers;
 
     /**
      * 
@@ -23,28 +24,23 @@ public final class EventDispatcher {
     }
 
     /**
-     * Used to provide functionality that will be executed on events.
-     * 
-     * @author Steffen
-     *
-     */
-    @FunctionalInterface
-    public interface EventHandler {
-        /**
-         * @param event
-         *            The event, the handler should process
-         * @return True, if the event is consumed by the handler and will not be
-         *         further propagated to other handlers.
-         */
-        boolean onEvent(final Event event);
-    }
-
-    /**
      * @param layer
      *            The event layer, that will be used to receive events.
      */
-    public void registerListener(final Layer layer) {
+    public void registerListener(final EventListener layer) {
         layers.addLast(layer);
+    }
+
+    public void registerHandler(final GameObject object, EventType type) {
+        for (EventListener listener : layers) {
+            if (listener.type == type) {
+                listener.addEventHandler(object);
+            }
+        }
+    }
+
+    public void unregisterHandler(final GameObject object) {
+
     }
 
     /**

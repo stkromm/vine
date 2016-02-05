@@ -1,0 +1,137 @@
+package vine.graphics;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import vine.assets.ShaderLoader;
+import vine.assets.TextureLoader;
+import vine.game.Game;
+import vine.gameplay.entity.GameEntity;
+import vine.math.Matrix4f;
+import vine.tilemap.TileMap;
+import vine.tilemap.TileMapRenderData;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Renderer {
+    /**
+     * Used logger for gameplay logs.
+     */
+    public static final Logger LOGGER = LoggerFactory.getLogger(Renderer.class);
+    /**
+     * 
+     */
+    public static final Texture2D DEFAULT_TEXTURE = new TextureLoader().loadSync(null, "res/test/hero.png", null, null);
+    /**
+     * 
+     */
+    public static final Texture2D DEFAULT_CHIPSET = new TextureLoader().loadSync(null, "res/test/chipset.png", null,
+            null);
+    /**
+     * 
+     */
+    public static final Shader DEFAULT_SHADER = new ShaderLoader().loadSync(null, "res/test/frag.shader", null, null);
+
+    /**
+     * 
+     */
+    private TileMap tileMap;
+    private TileMapRenderData tileMapRender;
+
+    private final Set<GameEntity> charSprites = new HashSet<>();
+
+    private VertexBufferObject vert;
+    private float[] tc;
+    private float[] verts;
+    private int[] indices;
+    private float[] tcs;
+    private float[] vertices;
+    VertexBufferObject render;
+
+    /**
+     * @param entities
+     *            A entity, that will be rendered throughout next render pass.
+     * @return this, so you can use this method statically in lambda
+     *         expressions.
+     */
+    public void submit(final List<GameEntity> entities) {
+        charSprites.addAll(entities);
+        int siz = 0;
+        for (GameEntity entity : charSprites) {
+            siz += entity.getSprites().size();
+        }
+
+        vertices = new float[12 * siz];
+        indices = new int[6 * siz];
+        tcs = new float[8 * siz];
+
+        int i = 0;
+        for (GameEntity entity : charSprites) {
+            for (Sprite sprite : entity.getSprites()) {
+                verts = sprite.getVertices();
+                tc = sprite.getUVCoordinates();
+                System.arraycopy(tc, 0, tcs, i * 8, 8);
+                i++;
+            }
+        }
+
+        vert = new VertexBufferObject(vertices, indices, tcs, Game.getGame().getGraphics());
+    }
+
+    public void submit(TileMap map) {
+        DEFAULT_SHADER.bind();
+        tileMap = map;
+        tileMapRender = new TileMapRenderData(map);
+    }
+
+    public final void flushTiles(final Matrix4f projectionMatrix, final Matrix4f viewMatrix) {
+        // DEFAULT_SHADER.setUniformMat4f("pr_matrix", projectionMatrix);
+        DEFAULT_SHADER.setUniformMat4f("vw_matrix", viewMatrix);
+        tileMap.getTexture().bind();
+        render = tileMapRender.getRenderData();
+        render.render();
+        render.unbind();
+        tileMap.getTexture().unbind();
+    }
+
+    /**
+     * @param scene
+     *            The scene thats used to render
+     * 
+     */
+    public void flushChars(final Matrix4f projectionMatrix, final Matrix4f viewMatrix) {
+        DEFAULT_SHADER.setUniformMat4f("pr_matrix", projectionMatrix);
+        DEFAULT_SHADER.setUniformMat4f("vw_matrix", viewMatrix);
+        int i = 0;
+        for (GameEntity entity : charSprites) {
+            for (Sprite sprite : entity.getSprites()) {
+                verts = sprite.getVertices();
+                for (int a = 0; a < 4; a++) {
+                    vertices[i * 12 + 3 * a + 0] = verts[3 * a] + entity.getX();
+                    vertices[i * 12 + 3 * a + 1] = verts[3 * a + 1] + entity.getY();
+                    vertices[i * 12 + 3 * a + 2] = verts[3 * a + 2] + entity.getZ();
+                }
+                tc = sprite.getUVCoordinates();
+                System.arraycopy(tc, 0, tcs, i * 8, 8);
+                i++;
+            }
+        }
+        vert.changeTexture(tcs);
+        vert.changeVertices(vertices);
+
+        DEFAULT_TEXTURE.bind();
+        vert.render();
+        vert.unbind();
+        DEFAULT_TEXTURE.unbind();
+    }
+
+    public void clear() {
+        charSprites.clear();
+    }
+}

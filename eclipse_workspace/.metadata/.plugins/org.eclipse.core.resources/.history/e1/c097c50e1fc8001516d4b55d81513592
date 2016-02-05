@@ -1,0 +1,9 @@
+package vine.sound;
+
+public class SoundClip {
+
+    
+    public SoundClip() {
+        
+    }
+}

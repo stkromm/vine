@@ -1,0 +1,19 @@
+package vine.animation;
+
+public class AnimationFrame {
+    float[] uvs;
+    float duration;
+    
+    public float[] getUvs() {
+        return uvs;
+    }
+    public float getDuration() {
+        return duration;
+    }
+    public void setUvs(float[] uvs) {
+        this.uvs = uvs;
+    }
+    public void setDuration(float duration) {
+        this.duration = duration;
+    }
+}

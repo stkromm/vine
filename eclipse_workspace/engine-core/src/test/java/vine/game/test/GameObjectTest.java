@@ -74,8 +74,6 @@ public class GameObjectTest {
         assertTrue(test.getName().equals("test"));
         Game.instantiate(GameEntity.class);
         test = (MyTestObject) Game.getObjectByName("test?");
-        test = Game.instantiate(MyTestObject.class, "test?", 5);
-        assertTrue(test == null);
         assertTrue(Game.getObjectsByType(MyTestObject.class).size() == 2);
         Game.instantiate(MyTestObject.class, 5);
         assertTrue(Game.getObjectsByType(MyTestObject.class).size() == 3);

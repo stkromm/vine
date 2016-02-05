@@ -1,5 +1,7 @@
 package vine.application;
 
+import java.lang.reflect.InvocationTargetException;
+
 import vine.display.Display;
 import vine.graphics.Graphics;
 import vine.input.Input;
@@ -21,13 +23,12 @@ public final class PlatformDependencyResolver {
      *            The display that is used to contain the window
      * @return The platform dependent implementation of window.
      */
-    public static Window getPlatformWindow(final Display display) {
+    public static Window getPlatformWindow(Display display) {
         try {
-            final Window window = (Window) ClassLoader.getSystemClassLoader()
-                    .loadClass("vine.platform.lwjgl3.GLFWWindow").newInstance();
-            window.init(display);
-            return window;
-        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | WindowCreationException e) {
+            return (Window) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWWindow")
+                    .getConstructor(Display.class).newInstance(display);
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException
+                | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             if (Application.LOGGER.isErrorEnabled()) {
                 Application.LOGGER.error("Could not load platform dependent window class", e);
             }

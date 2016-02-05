@@ -15,8 +15,7 @@ public class ScreenTest {
 
     @Test
     public void testScreenCreation() throws WindowCreationException {
-        Window window = new GLFWWindow();
-        window.init(new GLFWDisplay());
+        Window window = new GLFWWindow(new GLFWDisplay());
         window.setWindowSize(1200, 750);
         Screen screen = new GameScreen(window, 1000, 750);
         assertTrue(screen.getViewport().getLeftOffset() == screen.getViewport().getRightOffset());

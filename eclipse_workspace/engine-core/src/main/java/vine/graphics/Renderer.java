@@ -1,17 +1,19 @@
 package vine.graphics;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import vine.assets.ShaderLoader;
+import vine.assets.TextureLoader;
 import vine.game.Game;
-import vine.gameplay.component.Sprite;
 import vine.gameplay.entity.GameEntity;
-import vine.gameplay.scene.Scene;
 import vine.math.Matrix4f;
-import vine.math.Vector3f;
-import vine.platform.lwjgl3.GLShader;
-import vine.platform.lwjgl3.GLTexture;
-import vine.platform.lwjgl3.GLVertexArray;
+import vine.tilemap.TileMap;
+import vine.tilemap.TileMapRenderData;
 
 /**
  * @author Steffen
@@ -19,161 +21,114 @@ import vine.platform.lwjgl3.GLVertexArray;
  */
 public class Renderer {
     /**
-     * 
+     * Used logger for gameplay logs.
      */
-    public static final Texture DEFAULT_TEXTURE = new GLTexture(
-            "D:\\Workspaces\\VineEngine\\eclipse_workspace\\engine-core\\res\\test\\hero.png");
+    public static final Logger LOGGER = LoggerFactory.getLogger(Renderer.class);
     /**
      * 
      */
-    public static final Texture DEFAULT_CHIPSET = new GLTexture(
-            "D:\\Workspaces\\VineEngine\\eclipse_workspace\\engine-core\\res\\test\\chipset.png");
+    public static final Texture2D DEFAULT_TEXTURE = new TextureLoader().loadSync(null, "res/test/hero.png", null, null);
     /**
      * 
      */
-    public static final Shader DEFAULT_SHADER = new GLShader();
+    public static final Texture2D DEFAULT_CHIPSET = new TextureLoader().loadSync(null, "res/test/chipset.png", null,
+            null);
+    /**
+     * 
+     */
+    public static final Shader DEFAULT_SHADER = new ShaderLoader().loadSync(null, "res/test/frag.shader", null, null);
 
     /**
      * 
      */
-    private final List<Sprite> tileSprites = new ArrayList<>();
-    private final List<Sprite> charSprites = new ArrayList<>();
+    private TileMap tileMap;
+    private TileMapRenderData tileMapRender;
 
-    private GLVertexArray vert;
-    private GLVertexArray vertt;
-    private float[] tc;
-    private float[] verts;
-    private int[] indice;
-    private int[] indices;
-    private float[] tcs;
-    private float[] vertices;
+    private final Set<GameEntity> charSprites = new HashSet<>();
+
+    private float[] tc = new float[8];
+    private float[] verts = new float[12];
+    private int[] indices = new int[100000];
+    private float[] tcs = new float[8010];
+    private float[] vertices = new float[12100];
+    private VertexBufferObject vert;
+    VertexBufferObject render;
 
     /**
-     * @param entity
+     * @param entities
      *            A entity, that will be rendered throughout next render pass.
      * @return this, so you can use this method statically in lambda
      *         expressions.
      */
-    public Object submit(final GameEntity entity) {
-        for (final Sprite sprite : entity.getSprites()) {
-            if (sprite.getTexture().equals(DEFAULT_CHIPSET)) {
-                tileSprites.add(sprite);
-            } else {
-                charSprites.add(sprite);
-            }
-        }
-        return this;
-    }
-
-    /**
-     * @param scene
-     *            The scene thats used to render
-     * 
-     */
-    public void flushTiles(final Scene scene) {
-        DEFAULT_SHADER.setUniformMat4f("pr_matrix", Game.getGame().getScreen().getOrthographicProjection());
-        DEFAULT_SHADER.setUniformMat4f("vw_matrix", Matrix4f.translate(
-                new Vector3f(-scene.cameras.getActiveCamera().getX(), -scene.cameras.getActiveCamera().getY(), 0)));
-        if (vertt == null) {
-            final int siz = tileSprites.size();
-            vertices = new float[12 * siz];
-            indices = new int[6 * siz];
-            tcs = new float[8 * siz];
-            indice = new int[] { 0, 1, 2, 2, 3, 0 };
-            tc = new float[] { 0, 1, 0, 0, 1, 0, 1, 1 };
-
-            for (int i = 0; i < tileSprites.size(); i++) {
-                verts = tileSprites.get(i).getVertices();
-                for (int a = 0; a < verts.length / 3; a++) {
-                    vertices[i * verts.length + 3 * a + 0] = verts[3 * a] + tileSprites.get(i).getX();
-                    vertices[i * verts.length + 3 * a + 1] = verts[3 * a + 1] + tileSprites.get(i).getY();
-                    vertices[i * verts.length + 3 * a + 2] = verts[3 * a + 2] + tileSprites.get(i).getZ();
-                }
-                for (int b = 0; b < indice.length; b++) {
-                    indices[i * indice.length + b] = i * 4 + indice[b];
-                }
-                tc = tileSprites.get(i).getUVCoordinates();
-                for (int c = 0; c < tc.length; c++) {
-                    tcs[i * tc.length + c] = tc[c];
-                }
-            }
-            vertt = new GLVertexArray(vertices, indices, tcs);
-        } else {
-            final int siz = tileSprites.size();
-            tcs = new float[8 * siz];
-            tc = tileSprites.get(0).getUVCoordinates();
-            for (int i = 0; i < tileSprites.size(); i++) {
-                for (int c = 0; c < tc.length; c++) {
-                    tcs[i * tc.length + c] = tc[c];
-                }
-            }
-            vertt.changeTexture(tcs);
-        }
-        DEFAULT_CHIPSET.bind();
-        DEFAULT_SHADER.bind();
-        vertt.render();
-        vertt.unbind();
-        DEFAULT_SHADER.unbind();
-        DEFAULT_CHIPSET.unbind();
-        tileSprites.clear();
-    }
-
-    /**
-     * @param scene
-     *            The scene thats used to render
-     * 
-     */
-    public void flushChars(final Scene scene) {
-        DEFAULT_SHADER.setUniformMat4f("pr_matrix", Game.getGame().getScreen().getOrthographicProjection());
-        DEFAULT_SHADER.setUniformMat4f("vw_matrix", Matrix4f.translate(
-                new Vector3f(-scene.cameras.getActiveCamera().getX(), -scene.cameras.getActiveCamera().getY(), 0)));
+    public void submit(final Set<GameEntity> entities) {
+        int[] indice = new int[] { 0, 1, 2, 2, 3, 0 };
         if (vert == null) {
-            final int siz = charSprites.size();
-            vertices = new float[12 * siz];
-            indices = new int[6 * siz];
-            tcs = new float[8 * siz];
-            indice = new int[] { 0, 1, 2, 2, 3, 0 };
-            for (int i = 0; i < charSprites.size(); i++) {
-                verts = charSprites.get(i).getVertices();
-                for (int a = 0; a < verts.length / 3; a++) {
-                    vertices[i * verts.length + 3 * a + 0] = verts[3 * a] + charSprites.get(i).getX();
-                    vertices[i * verts.length + 3 * a + 1] = verts[3 * a + 1] + charSprites.get(i).getY();
-                    vertices[i * verts.length + 3 * a + 2] = verts[3 * a + 2] + charSprites.get(i).getZ();
-                }
+            for (int i = 0; i < 2000; i++) {
                 for (int b = 0; b < indice.length; b++) {
                     indices[i * indice.length + b] = i * 4 + indice[b];
                 }
-                tc = charSprites.get(i).getUVCoordinates();
-                for (int c = 0; c < tc.length; c++) {
-                    tcs[i * tc.length + c] = tc[c];
-                }
             }
-            vert = new GLVertexArray(vertices, indices, tcs);
-        } else {
-            final int siz = charSprites.size();
-            vertices = new float[12 * siz];
-            tcs = new float[8 * siz];
-            tc = charSprites.get(0).getUVCoordinates();
-            for (int i = 0; i < charSprites.size(); i++) {
-                verts = charSprites.get(i).getVertices();
-                for (int a = 0; a < verts.length / 3; a++) {
-                    vertices[i * verts.length + 3 * a + 0] = verts[3 * a] + charSprites.get(i).getX();
-                    vertices[i * verts.length + 3 * a + 1] = verts[3 * a + 1] + charSprites.get(i).getY();
-                    vertices[i * verts.length + 3 * a + 2] = verts[3 * a + 2] + charSprites.get(i).getZ();
-                }
-                for (int c = 0; c < tc.length; c++) {
-                    tcs[i * tc.length + c] = tc[c];
-                }
-            }
-            vert.changeTexture(tcs);
-            vert.changeVertices(vertices);
+            vert = new VertexBufferObject(vertices, indices, tcs, Game.getGame().getGraphics());
         }
-        DEFAULT_TEXTURE.bind();
+        charSprites.addAll(entities);
+        int siz = 0;
+        for (GameEntity entity : charSprites) {
+            siz += entity.getSprites().size();
+        }
+
+        int i = 0;
+        for (GameEntity entity : charSprites) {
+            for (Sprite sprite : entity.getSprites()) {
+                verts = sprite.getVertices();
+                for (int a = 0; a < 4; a++) {
+                    vertices[i * 12 + 3 * a + 0] = verts[3 * a] + entity.getX();
+                    vertices[i * 12 + 3 * a + 1] = verts[3 * a + 1] + entity.getY();
+                    vertices[i * 12 + 3 * a + 2] = verts[3 * a + 2] + entity.getZ();
+                }
+                System.arraycopy(sprite.getUVCoordinates(), 0, tcs, i * 8, 8);
+                for (int b = 0; b < indice.length; b++) {
+                    indices[i * indice.length + b] = i * 4 + indice[b];
+                }
+                i++;
+            }
+
+        }
+        vert.changeTexture(tcs);
+        vert.changeVertices(vertices);
+    }
+
+    public void submit(TileMap map) {
         DEFAULT_SHADER.bind();
+        tileMap = map;
+        tileMapRender = new TileMapRenderData(map);
+    }
+
+    public final void drawMap(final Matrix4f projectionMatrix, final Matrix4f viewMatrix) {
+        DEFAULT_SHADER.setUniformMat4f("pr_matrix", projectionMatrix);
+        DEFAULT_SHADER.setUniformMat4f("vw_matrix", viewMatrix);
+        tileMap.getTexture().bind();
+        render = tileMapRender.getRenderData();
+        render.render();
+        render.unbind();
+        tileMap.getTexture().unbind();
+    }
+
+    /**
+     * @param scene
+     *            The scene thats used to render
+     * 
+     */
+    public void drawEntities(final Matrix4f projectionMatrix, final Matrix4f viewMatrix) {
+        DEFAULT_SHADER.setUniformMat4f("pr_matrix", projectionMatrix);
+        DEFAULT_SHADER.setUniformMat4f("vw_matrix", viewMatrix);
+
+        DEFAULT_TEXTURE.bind();
         vert.render();
         vert.unbind();
-        DEFAULT_SHADER.unbind();
         DEFAULT_TEXTURE.unbind();
+    }
+
+    public void clear() {
         charSprites.clear();
     }
 }

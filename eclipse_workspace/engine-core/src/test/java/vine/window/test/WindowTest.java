@@ -17,18 +17,11 @@ public class WindowTest {
 
     @Before
     public void setup() throws WindowCreationException {
-        window = new GLFWWindow();
-        window.init(new GLFWDisplay());
+        window = new GLFWWindow(new GLFWDisplay());
     }
 
     @Rule
     public final ExpectedException exception = ExpectedException.none();
-
-    @Test
-    public void testInitWindowDisplayFalse() throws WindowCreationException {
-        exception.expect(WindowCreationException.class);
-        window.init(null);
-    }
 
     @Test
     public void testWindowTitle() {

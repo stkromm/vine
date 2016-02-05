@@ -1,0 +1,110 @@
+package vine.platform.lwjgl3;
+
+import vine.game.Game;
+import vine.graphics.Graphics;
+import vine.graphics.VertexArray;
+
+/**
+ * @author Steffen
+ *
+ */
+public class GLVertexArray implements VertexArray {
+
+    /**
+     * Vertex array object.
+     */
+    private final int vao;
+    /**
+     * Vertex buffer object.
+     */
+    private final int vbo;
+    /**
+     * Index buffer object.
+     */
+    private final int ibo;
+    /**
+     * Texture buffer object.
+     */
+    private final int tbo;
+    private final int count;
+
+    private final Graphics graphics;
+
+    /**
+     * Creates a new vertex array buffer.
+     * 
+     * @param vertices
+     *            The vertices
+     * @param indices
+     *            The indices for the vertex order
+     * @param uvs
+     *            The texture coordinates for the vertices
+     */
+    public GLVertexArray(final float[] vertices, final int[] indices, final float[] uvs) {
+        if (indices == null) {
+            throw new NullPointerException("indice field of vertex array can't be null.");
+        }
+        graphics = Game.getGame().getGraphics();
+
+        count = indices.length;
+
+        vao = graphics.generateVertexArray();
+        graphics.bindVertexArray(vao);
+
+        vbo = graphics.generateBuffer();
+        graphics.bindVertexData(vbo, vertices);
+
+        tbo = graphics.generateBuffer();
+        graphics.bindTextureData(tbo, uvs);
+
+        ibo = graphics.generateBuffer();
+        graphics.bindIndexData(ibo, indices);
+        
+        graphics.bindElementArrayBuffer(0);
+        graphics.bindArrayBuffer(0);
+        graphics.bindVertexArrayBuffer(0);
+    }
+
+    @Override
+    public void changeVertices(final float[] vertices) {
+        graphics.bindVertexData(vbo, vertices);
+    }
+
+    @Override
+    public void changeTexture(final float[] uvs) {
+        graphics.bindTextureData(tbo, uvs);
+    }
+
+    /**
+     * Binds the current vertex array buffer.
+     */
+    @Override
+    public void bind() {
+        graphics.bindVertexArray(vao);
+        if (ibo > 0) {
+            graphics.bindArrayBuffer(ibo);
+        }
+    }
+
+    /**
+     * Unbinds the current vertex array buffer.
+     */
+    public void unbind() {
+        if (ibo > 0) {
+            graphics.bindArrayBuffer(0);
+        }
+        graphics.bindVertexArray(0);
+    }
+
+    /**
+     * Draws the current triangles in the buffer.
+     */
+    @Override
+    public void draw() {
+        if (ibo > 0) {
+            graphics.drawElements(count);
+        } else {
+            graphics.drawArrays(count);
+        }
+    }
+}

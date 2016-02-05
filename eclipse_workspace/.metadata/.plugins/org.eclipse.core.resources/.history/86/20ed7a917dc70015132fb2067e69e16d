@@ -1,0 +1,117 @@
+package vine.graphics;
+
+import static org.lwjgl.opengl.GL11.GL_FLOAT;
+import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
+import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
+import static org.lwjgl.opengl.GL15.glBindBuffer;
+import static org.lwjgl.opengl.GL15.glBufferData;
+import static org.lwjgl.opengl.GL20.glEnableVertexAttribArray;
+import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
+
+import vine.game.Game;
+import vine.util.BufferConverter;
+
+/**
+ * @author Steffen
+ * 
+ */
+public class VertexArray {
+    /**
+     * Vertex array object.
+     */
+    private final int vao;
+    /**
+     * Vertex buffer object.
+     */
+    private final int vbo;
+    /**
+     * Index buffer object.
+     */
+    private final int ibo;
+    /**
+     * Texture buffer object.
+     */
+    private final int tbo;
+    private final int count;
+
+    private final Graphics graphics;
+
+    /**
+     * Creates a new vertex array buffer.
+     * 
+     * @param vertices
+     *            The vertices
+     * @param indices
+     *            The indices for the vertex order
+     * @param uvs
+     *            The texture coordinates for the vertices
+     */
+    public VertexArray(final float[] vertices, final int[] indices, final float[] uvs) {
+        if (indices == null) {
+            throw new NullPointerException("indice field of vertex array can't be null.");
+        }
+        graphics = Game.getGame().getGraphics();
+
+        count = indices.length;
+
+        vao = graphics.generateVertexArray();
+        graphics.bindVertexArray(vao);
+
+        vbo = graphics.generateBuffer();
+        graphics.bindVertexData(vbo, vertices);
+
+        tbo = graphics.generateBuffer();
+        graphics.bindTextureData(tbo, uvs);
+
+        ibo = graphics.generateBuffer();
+        graphics.bindIndexData(ibo, indices);
+
+        graphics.bindElementArrayBuffer(0);
+        graphics.bindArrayBuffer(0);
+        graphics.bindVertexArray(0);
+    }
+
+    public void changeVertices(final float[] vertices) {
+        graphics.bindVertexData(vbo, vertices);
+    }
+
+    public void changeTexture(final float[] uvs) {
+        graphics.bindTextureData(tbo, uvs);
+    }
+
+    /**
+     * Binds the current vertex array buffer.
+     */
+    public void bind() {
+        graphics.bindVertexArray(vao);
+        if (ibo > 0) {
+            graphics.bindElementArrayBuffer(ibo);
+        }
+    }
+
+    /**
+     * Unbinds the current vertex array buffer.
+     */
+    public void unbind() {
+        if (ibo > 0) {
+            graphics.bindElementArrayBuffer(0);
+        }
+        graphics.bindVertexArray(0);
+    }
+
+    /**
+     * Draws the current triangles in the buffer.
+     */
+    public void draw() {
+        if (ibo > 0) {
+            graphics.drawElements(count);
+        } else {
+            graphics.drawArrays(count);
+        }
+    }
+
+    void render() {
+        bind();
+        draw();
+    }
+}

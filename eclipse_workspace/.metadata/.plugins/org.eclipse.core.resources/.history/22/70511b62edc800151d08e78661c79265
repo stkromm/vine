@@ -1,0 +1,10 @@
+package vine.animation;
+
+public class AnimationStateManager {
+
+    public AnimationClip getCurrentAnimation() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+}

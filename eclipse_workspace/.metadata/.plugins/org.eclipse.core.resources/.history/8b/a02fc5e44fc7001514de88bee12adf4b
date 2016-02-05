@@ -1,0 +1,8 @@
+package vine.assets;
+
+import vine.graphics.Texture;
+
+public class abstract TextureLoader extends AssetLoader<Texture, AssetLoaderParameters<Texture>> {
+
+
+}

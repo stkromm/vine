@@ -96,4 +96,13 @@ public class Rectangle implements Shape {
 
         return new Intersection(true, 0, ray, this);
     }
+
+    public boolean intersect(Rectangle rect) {
+        if (rect.origin.getX() < this.origin.getX() + this.diagonal.getX()
+                && this.origin.getX() < rect.origin.getX() + rect.diagonal.getX()
+                && rect.origin.getY() < this.origin.getY() + this.diagonal.getY())
+            return this.origin.getY() < rect.origin.getY() + rect.diagonal.getY();
+        else
+            return false;
+    }
 }

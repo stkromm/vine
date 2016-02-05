@@ -1,0 +1,177 @@
+package vine.platform.lwjgl3;
+
+import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
+import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
+import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL13.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL30.*;
+
+import org.lwjgl.opengl.GL;
+
+import vine.graphics.Graphics;
+import vine.graphics.Shader;
+import vine.math.Matrix4f;
+import vine.math.Vector3f;
+import vine.util.BufferConverter;
+
+/**
+ * @author Steffen
+ *
+ */
+public final class GLGraphics implements Graphics {
+    private long context;
+
+    @Override
+    public void makeContext(final long context) {
+        glfwMakeContextCurrent(context);
+        this.context = context;
+    }
+
+    @Override
+    public void swapBuffer() {
+        glfwSwapBuffers(context);
+    }
+
+    @Override
+    public void init() {
+        // init open gl
+        GL.createCapabilities();
+        // configure open gl
+        glEnable(GL_DEPTH_TEST);
+        glActiveTexture(GL_TEXTURE1);
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);
+        glfwSwapInterval(0);
+    }
+
+    @Override
+    public void setViewport(final int x, final int y, final int width, final int height) {
+        glViewport(0, 0, width, height);
+    }
+
+    @Override
+    public void clearBuffer() {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
+    @Override
+    public void bindTexture2D(int id) {
+        glBindTexture(GL_TEXTURE_2D, id);
+    }
+
+    @Override
+    public void setTextureParameter(int parameter, int value) {
+        glTexParameteri(GL_TEXTURE_2D, parameter, value);
+    }
+
+    @Override
+    public void createRgbaTexture2D(int width, int height, int[] data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE,
+                BufferConverter.createIntBuffer(data));
+    }
+
+    @Override
+    public int generateTexture() {
+        return glGenTextures();
+    }
+
+    @Override
+    public int getUniformLocation(int id, String name) {
+        return glGetUniformLocation(id, name);
+    }
+
+    @Override
+    public void storeUniformInt(int location, int value) {
+        glUniform1i(location, value);
+    }
+
+    @Override
+    public void storeUniformVector3f(int location, Vector3f vector) {
+        glUniform3f(location, vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    @Override
+    public void storeUniformMatrix4f(int location, Matrix4f matrix) {
+        glUniformMatrix4fv(location, false, BufferConverter.createFloatBuffer(matrix.elements));
+    }
+
+    @Override
+    public void bindShader(int id) {
+        glUseProgram(id);
+
+    }
+
+    @Override
+    public int generateBuffer() {
+        return glGenBuffers();
+    }
+
+    @Override
+    public void bindArrayBuffer(int id) {
+        glBindBuffer(GL_ARRAY_BUFFER, id);
+    }
+
+    @Override
+    public void bindVertexData(int bufferId, float[] vertices) {
+        glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+        glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(vertices), GL_STATIC_DRAW);
+        glVertexAttribPointer(Shader.VERTEX_ATTRIB, 3, GL_FLOAT, false, 0, 0);
+        glEnableVertexAttribArray(Shader.VERTEX_ATTRIB);
+    }
+
+    @Override
+    public void bindTextureData(int bufferId, float[] uvs) {
+        glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+        glBufferData(GL_ARRAY_BUFFER, BufferConverter.createFloatBuffer(uvs), GL_STATIC_DRAW);
+        glVertexAttribPointer(Shader.TCOORD_ATTRIB, 2, GL_FLOAT, false, 0, 0);
+        glEnableVertexAttribArray(Shader.TCOORD_ATTRIB);
+    }
+
+    @Override
+    public void bindIndexData(int bufferId, int[] indices) {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferId);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, BufferConverter.createIntBuffer(indices), GL_STATIC_DRAW);
+    }
+
+    @Override
+    public int generateVertexArray() {
+        return glGenVertexArrays();
+    }
+
+    @Override
+    public void bindVertexArray(int id) {
+        glBindVertexArray(id);
+    }
+
+    @Override
+    public void drawElements(int count) {
+        glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
+    }
+
+    @Override
+    public void drawArrays(int count) {
+        glDrawArrays(GL_TRIANGLES, 0, count);
+    }
+
+    @Override
+    public void bindElementArrayBuffer(int id) {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
+    }
+
+    @Override
+    public void reallocateTextureData(int bufferId, float[] uvs) {
+        glBindBuffer(GL_ARRAY_BUFFER, bufferId);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, BufferConverter.createFloatBuffer(uvs));
+    }
+
+    @Override
+    public void reallocateVerticeData(int vbo, float[] vertices) {
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, BufferConverter.createFloatBuffer(vertices));
+    }
+}

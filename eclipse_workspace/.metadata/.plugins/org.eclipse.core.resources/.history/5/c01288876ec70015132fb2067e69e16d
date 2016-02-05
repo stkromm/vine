@@ -1,0 +1,102 @@
+package vine.game;
+
+import vine.application.Application;
+import vine.application.StatMonitor;
+import vine.game.screen.Viewport;
+import vine.graphics.Graphics;
+import vine.input.Input;
+import vine.input.InputMapper;
+import vine.window.Window;
+
+/**
+ * @author Steffen
+ *
+ */
+public class GameRunner {
+    /**
+     * 
+     */
+    private boolean running = true;
+
+    /**
+     * @param application
+     *            The application, that contains the game
+     * @param window
+     *            System window
+     * @param input
+     *            Input Manager
+     * @param graphics
+     *            Graphics Provider
+     */
+    public GameRunner(final Application application) {
+        if (application != null) {
+            throw new IllegalStateException("GameRunner can only be run from the Application class");
+        }
+    }
+
+    /**
+     * Executes the game loop.
+     */
+    public void run(final Window window, final Input input, final Graphics graphics) {
+        // init render thread
+        Thread.currentThread().setName("render");
+
+        // init game
+        Game.init(window, graphics);
+        InputMapper.initInput(input, Game.getGame().getEventDispatcher());
+
+        // final int cores = Application.getProcessorCount();
+        final long maxFrameDuration = 2L * (long) 1e6;
+        long currentTime = 0;
+        while (running) {
+            StatMonitor.newUp();
+            input.pollEvents();
+            Game.update((System.nanoTime() - currentTime) / (float) 1e6);
+            currentTime = System.nanoTime();
+            StatMonitor.newFrame();
+            graphics.clearBuffer();
+            Game.render();
+            graphics.swapBuffer();
+            if (window.requestedClose()) {
+                running = false;
+            }
+            waitForNextTick((int) (maxFrameDuration - System.nanoTime() + currentTime));
+        } /*
+           * } else if (cores >= 2) { final Thread logic = logicThread();
+           * logic.start(); long currentTime; while (running) {
+           * StatMonitor.newFrame(); currentTime = System.nanoTime();
+           * input.pollEvents(); graphics.clearBuffer(); Game.render();
+           * graphics.swapBuffers(); sleep((int)
+           * (GameSettings.getMaxFrameDuration() * 1000000000 -
+           * System.nanoTime() + currentTime)); if (window.requestedClose()) {
+           * running = false; } } logic.interrupt(); }
+           */
+    }
+
+    /**
+     * @return A thread, used to calculate the game logic.
+     * 
+     *         private Thread logicThread() { final Thread logic = new Thread(()
+     *         -> { long currentTime = System.nanoTime(); while (running) {
+     *         StatMonitor.newUp(); Game.update((System.nanoTime() -
+     *         currentTime) / 100000000.f); currentTime = System.nanoTime();
+     *         sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 -
+     *         System.nanoTime() + currentTime)); } }); logic.setName("logic");
+     *         return logic; }
+     */
+
+    /**
+     * @param sleepTime
+     *            The time, the thread should sleep. It is not guaranteed the
+     *            thread will sleep the given time.
+     */
+    private static final void waitForNextTick(final long sleepTime) {
+        if (sleepTime > 0) {
+            try {
+                Thread.sleep((long) (sleepTime / 1e6), (int) (sleepTime % 1e6));
+            } catch (InterruptedException e) {
+                // do nothing
+            }
+        }
+    }
+}

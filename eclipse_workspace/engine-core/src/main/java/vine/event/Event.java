@@ -27,7 +27,7 @@ public interface Event {
         /**
         * 
         */
-        MOUSE_POSITION,
+        MOUSE_MOVE,
         /**
         * 
         */

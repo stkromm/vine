@@ -1,0 +1,7 @@
+package vine.animation;
+
+public class AnimationState {
+    private String name;
+    private AnimationClip clip;
+    private float playbackSpeed;
+}

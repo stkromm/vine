@@ -1,0 +1,16 @@
+package vine.settings.test;
+import static org.junit.Assert.assertEquals;
+
+import java.util.Map;
+
+import org.junit.Test;
+
+import vine.settings.ConfigSerializer;
+import vine.settings.ConfigurationParser;
+
+public class IniParsingTest {
+
+    @Test
+    public void testParsing() {
+    }
+}

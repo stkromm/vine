@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import vine.game.GameObject;
 import vine.gameplay.component.Component;
-import vine.gameplay.component.Sprite;
 import vine.gameplay.scene.Scene;
+import vine.graphics.Sprite;
 import vine.math.Vector2f;
 import vine.math.Vector3f;
 
@@ -24,7 +24,7 @@ public class GameEntity extends GameObject { // NOSONAR
     /**
      * 
      */
-    protected final Vector3f position = new Vector3f((int) (Math.random() * 1000), (int) (Math.random() * 500), 0.2f);
+    protected final Vector3f position = new Vector3f(0, 0, 0.2f);
     private Scene scene;
     private Group group;
     private final List<String> tags = new ArrayList<>();
@@ -174,13 +174,4 @@ public class GameEntity extends GameObject { // NOSONAR
         return (Optional<T>) components.stream().filter(c -> c.getClass() == type).findFirst();
     }
 
-    /**
-     * @param x
-     * @param y
-     */
-    public void construct(final int x, final int y) {
-        this.position.setX(x);
-        this.position.setY(y);
-        this.position.setZ(0);
-    }
 }

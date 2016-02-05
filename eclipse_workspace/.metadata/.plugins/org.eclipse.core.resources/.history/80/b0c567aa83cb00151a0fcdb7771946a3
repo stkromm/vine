@@ -1,0 +1,49 @@
+package vine.event;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import vine.event.EventDispatcher.EventHandler;
+
+/**
+ * Provides a unique rendering method with post processing, global screnn
+ * maniuplation for a set of gameobjects. Offers no semantic ordering of
+ * gameobjects and is not relevant for physics or audio.
+ * 
+ * @author Steffen
+ * 
+ */
+public class EventLayer {
+
+    /**
+     * 
+     */
+    public final List<EventHandler> handler;
+
+    /**
+     * 
+     */
+    public EventLayer() {
+        handler = new ArrayList<>();
+    }
+
+    /**
+     * @param handler
+     *            Adds the handler to the eventlayer.
+     */
+    public void addEventHandler(final EventHandler handler) {
+        this.handler.add(handler);
+    }
+
+    /**
+     * @param event
+     *            The event that will be processed by this layer
+     * @return True, if the event was consumed
+     */
+    public boolean onEvent(final Event event) {
+        final Optional<EventHandler> opt = handler.stream().filter(h -> h.onEvent(event)).findFirst();
+        return opt.isPresent();
+    }
+
+}

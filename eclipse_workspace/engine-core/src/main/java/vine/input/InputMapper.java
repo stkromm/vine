@@ -47,10 +47,10 @@ public final class InputMapper {
      *         pressed.
      */
     public static boolean isKeyPressed(final int keycode) {
-        if (KEYS.length <= keycode || keycode < 0) {
-            return false;
-        } else {
+        if (keycode >= 0 && KEYS.length > keycode) {
             return KEYS[keycode];
+        } else {
+            return false;
         }
     }
 
@@ -61,15 +61,20 @@ public final class InputMapper {
     public static void initInput(final Input input, final EventDispatcher dispatcher) {
         input.setKeyCallback((win, key, scancode, action, mods) -> {
             if (getNumberOfKeys() > key && key >= 0) {
-                setKeyPressed(key, input.isReleaseAction(action));
+                setKeyPressed(key, InputAction.isReleaseAction(action));
             }
-            dispatcher.dispatch(new KeyEvent(key, scancode, InputAction.getTypeByAction(action), mods));
+            dispatcher.dispatch(new KeyEvent(key, scancode, action, mods));
         });
         input.setMouseButtonCallback((win, key, action, mods) -> {
-            if (getNumberOfKeys() > key && key >= 0) {
-                setKeyPressed(key, input.isReleaseAction(action));
-            }
             dispatcher.dispatch(new MouseButtonEvent(key, action, mods, input.getCursorX(), input.getCursorY()));
+        });
+        input.setCharModCallback((context, id, mod) -> {
+        });
+        input.setCharCallback((context, id) -> {
+        });
+        input.setCursorPositionCallback((context, x, y) -> {
+        });
+        input.setScrollCallback((context, x, y) -> {
         });
     }
 }

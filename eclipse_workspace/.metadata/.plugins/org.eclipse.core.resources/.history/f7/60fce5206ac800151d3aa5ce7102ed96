@@ -1,0 +1,55 @@
+package vine.settings;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class Configuration {
+
+    private final Map<String, String> settings = new HashMap<>();
+    private final List<Configurable> configurables = new ArrayList<>();
+    private final String iniPath;
+    private boolean dirty = true;
+    
+    public Configuration(String iniPath) {
+        this.iniPath = iniPath;
+    }
+
+    private void cleanSettings() {
+
+    }
+
+    public boolean areSettingsApplied() {
+        return dirty;
+    }
+
+    public void addConfigurable(Configurable configurable) {
+        configurables.add(configurable);
+    }
+
+    public void apply() {
+        if(!dirty) {
+            return;
+        }
+        for (Configurable setting : configurables) {
+            setting.applyConfigs(settings);
+        }
+        dirty = false;
+    }
+
+    public void save() {
+        cleanSettings();
+        ConfigSerializer.saveIniToFile(settings, iniPath);
+    }
+
+    public void putSetting(String key, String value) {
+        dirty = true;
+        settings.put(key, value);
+    }
+
+    public void load() {
+        ConfigurationParser.parseIniFile(iniPath).forEach((key, value) -> putSetting(key, value));
+        cleanSettings();
+    }
+}

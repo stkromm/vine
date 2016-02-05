@@ -1,12 +1,14 @@
 package vine.event;
 
+import vine.input.InputAction;
+
 /**
  * @author Steffen
  *
  */
 public class MouseButtonEvent implements Event {
     private final int button;
-    private final int action;
+    private final InputAction action;
     private final int mods;
     private final double x;
     private final double y;
@@ -23,7 +25,8 @@ public class MouseButtonEvent implements Event {
      * @param y
      *            The y coordinate of the cursor, when the event was generated
      */
-    public MouseButtonEvent(final int button, final int action, final int mods, final double x, final double y) {
+    public MouseButtonEvent(final int button, final InputAction action, final int mods, final double x,
+            final double y) {
         super();
         this.button = button;
         this.action = action;
@@ -42,7 +45,7 @@ public class MouseButtonEvent implements Event {
     /**
      * @return The action type of the event
      */
-    public final int getAction() {
+    public final InputAction getAction() {
         return action;
     }
 

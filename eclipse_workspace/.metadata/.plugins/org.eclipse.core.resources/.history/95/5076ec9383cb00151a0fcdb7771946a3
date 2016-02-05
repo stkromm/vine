@@ -1,0 +1,15 @@
+package vine.event;
+
+import vine.event.EventDispatcher.EventHandler;
+
+/**
+ * @author Steffen
+ *
+ */
+public interface EventLayer {
+   
+    void addEventHandler(final EventHandler handler);
+
+  
+    boolean onEvent(final Event event);
+}

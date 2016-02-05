@@ -52,7 +52,6 @@ public final class GLFWDisplay implements Display {
         } else {
             currentMonitor = glfwGetPrimaryMonitor();
             vidmode = prefVidMode;
-
         }
     }
 

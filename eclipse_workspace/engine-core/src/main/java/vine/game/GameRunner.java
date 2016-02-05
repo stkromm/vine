@@ -2,11 +2,9 @@ package vine.game;
 
 import vine.application.Application;
 import vine.application.StatMonitor;
-import vine.game.screen.Viewport;
 import vine.graphics.Graphics;
 import vine.input.Input;
 import vine.input.InputMapper;
-import vine.settings.GameSettings;
 import vine.window.Window;
 
 /**
@@ -18,18 +16,8 @@ public class GameRunner {
      * 
      */
     private boolean running = true;
-    /**
-     * 
-     */
-    private final Window window;
-    /**
-     * 
-     */
-    private final Input input;
-    /**
-     * 
-     */
-    private final Graphics graphics;
+
+    private boolean idle = false;
 
     /**
      * @param application
@@ -41,82 +29,55 @@ public class GameRunner {
      * @param graphics
      *            Graphics Provider
      */
-    public GameRunner(final Application application, final Window window, final Input input, final Graphics graphics) {
-        if (application != null) {
-            // LOG
+    public GameRunner(final Application application) {
+        if (application == null) {
+            throw new IllegalStateException("GameRunner can only be run from the Application class");
         }
-        this.window = window;
-        this.input = input;
-        this.graphics = graphics;
     }
 
     /**
      * Executes the game loop.
      */
-    public void run() {
+    public void run(final Window window, final Input input, final Graphics graphics) {
+
         // init render thread
         Thread.currentThread().setName("render");
-        graphics.makeContext(window.getContext());
-        graphics.init();
-        window.setSizeCallback((w, h) -> {
-            window.setWindowSize(w, h);
-            final Viewport viewport = Game.getGame().getScreen().getViewport();
-            graphics.setViewport(viewport.getLeftOffset(), viewport.getTopOffset(), w - viewport.getRightOffset(),
-                    h - viewport.getBottomOffset());
-        });
+
         // init game
-        Game.init(window);
+        Game.init(window, graphics);
         InputMapper.initInput(input, Game.getGame().getEventDispatcher());
 
-        // final int cores = Application.getProcessorCount();
-
+        final long maxFrameDuration = 13L * (long) 1e6;
         long currentTime = 0;
+
         while (running) {
-            StatMonitor.newUp();
-            input.pollEvents();
-            Game.update((System.nanoTime() - currentTime) / 100000000.f);
+            if (!idle) {
+                input.pollEvents();
+                Game.update((System.nanoTime() - currentTime) / (float) 1e6);
+            }
             currentTime = System.nanoTime();
             StatMonitor.newFrame();
             graphics.clearBuffer();
-            Game.render();
-            graphics.swapBuffers();
-            sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 - System.nanoTime() + currentTime));
+
+            Game.getGame().getScene().render();
+            graphics.swapBuffer();
             if (window.requestedClose()) {
                 running = false;
             }
-        } /*
-           * } else if (cores >= 2) { final Thread logic = logicThread();
-           * logic.start(); long currentTime; while (running) {
-           * StatMonitor.newFrame(); currentTime = System.nanoTime();
-           * input.pollEvents(); graphics.clearBuffer(); Game.render();
-           * graphics.swapBuffers(); sleep((int)
-           * (GameSettings.getMaxFrameDuration() * 1000000000 -
-           * System.nanoTime() + currentTime)); if (window.requestedClose()) {
-           * running = false; } } logic.interrupt(); }
-           */
-    }
 
-    /**
-     * @return A thread, used to calculate the game logic.
-     * 
-     *         private Thread logicThread() { final Thread logic = new Thread(()
-     *         -> { long currentTime = System.nanoTime(); while (running) {
-     *         StatMonitor.newUp(); Game.update((System.nanoTime() -
-     *         currentTime) / 100000000.f); currentTime = System.nanoTime();
-     *         sleep((int) (GameSettings.getMaxFrameDuration() * 1000000000 -
-     *         System.nanoTime() + currentTime)); } }); logic.setName("logic");
-     *         return logic; }
-     */
+            //waitForNextTick((int) (maxFrameDuration - System.nanoTime() + currentTime));
+        }
+    }
 
     /**
      * @param sleepTime
      *            The time, the thread should sleep. It is not guaranteed the
      *            thread will sleep the given time.
      */
-    private static final void sleep(final long sleepTime) {
+    private final static void waitForNextTick(final long sleepTime) {
         if (sleepTime > 0) {
             try {
-                Thread.sleep(sleepTime / 100000000L, (int) (sleepTime % 1000000L));
+                Thread.sleep((long) (sleepTime / 1e6), (int) (sleepTime % 1e6));
             } catch (InterruptedException e) {
                 // do nothing
             }

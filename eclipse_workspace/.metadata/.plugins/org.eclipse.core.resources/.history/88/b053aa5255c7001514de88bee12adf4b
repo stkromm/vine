@@ -1,0 +1,46 @@
+package vine.graphics;
+
+/**
+ * @author Steffen
+ *
+ */
+public interface Graphics {
+
+    // RENDER FUNCTIONS
+    /**
+     * @param context
+     */
+    void makeContext(long context);
+
+    /**
+     * 
+     */
+    void clearBuffer();
+
+    /**
+     * 
+     */
+    void swapBuffers();
+
+    /**
+     * 
+     */
+    void init();
+
+    /**
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    void setViewport(int x, int y, int width, int height);
+
+    // TEXTURE FUNCTIONS
+    int generateTexture();
+
+    void bindTexture2D(int id);
+
+    void setTextureParameter(int parameter, int value);
+
+    void createRgbaTexture2D(int width, int height, final int[] data);
+}

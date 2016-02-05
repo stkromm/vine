@@ -1,7 +1,0 @@
-package vine.settings;
-
-import java.util.Collection;
-
-public interface Configurable {
-    public Settings getSettings();
-}

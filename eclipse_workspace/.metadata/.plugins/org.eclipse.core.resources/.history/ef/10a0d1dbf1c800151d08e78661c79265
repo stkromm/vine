@@ -1,0 +1,39 @@
+package vine.animation;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import vine.graphics.Sprite;
+
+public class AnimationStateManager {
+    private Map<String, AnimationState> states = new HashMap<>();
+    private AnimationState currentState;
+    private float time;
+
+    public AnimationStateManager(AnimationState[] animation) {
+        for (AnimationState state : animation) {
+            if (currentState == null) {
+                currentState = state;
+            }
+            states.put(state.getName(), state);
+        }
+        System.out.println(currentState.getName());
+    }
+
+    public void changeState(String name) {
+        currentState = states.get(name);
+    }
+
+    public void update(float delta) {
+        this.time += delta;
+        this.time = time % currentState.getClip().getDuration();
+    }
+
+    public float[] getCurrentFrame() {
+        return currentState.getClip().getFrame(time).getUvs();
+    }
+
+    public AnimationState getCurrentState() {
+        return currentState;
+    }
+}

@@ -1,0 +1,7 @@
+package vine.tilemap;
+
+import vine.graphics.VertexArray;
+
+public class TileMapVertexArray extends VertexArray {
+
+}

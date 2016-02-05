@@ -1,0 +1,84 @@
+package vine.graphics;
+
+import java.nio.FloatBuffer;
+
+import vine.util.BufferConverter;
+
+public class VertexArrayBuffer {
+    /**
+     * Vertex array object.
+     */
+    private final int vao;
+    /**
+     * Vertex buffer object.
+     */
+    private final int vbo;
+    /**
+     * Texture buffer object.
+     */
+    private final int tbo;
+
+    private final Graphics graphics;
+
+    private final FloatBuffer textureBuffer;
+    private final FloatBuffer verticeBuffer;
+
+    public VertexArrayBuffer(float[] vertices, float[] tcs, Graphics graphics) {
+        this.graphics = graphics;
+
+        vao = graphics.generateVertexArray();
+        graphics.bindVertexArray(vao);
+
+        vbo = graphics.generateBuffer();
+        verticeBuffer = BufferConverter.createFloatBuffer(vertices);
+        graphics.bindVertexData(vbo, verticeBuffer);
+
+        tbo = graphics.generateBuffer();
+        textureBuffer = BufferConverter.createFloatBuffer(tcs);
+        graphics.bindTextureData(tbo, textureBuffer);
+
+        graphics.bindElementArrayBuffer(0);
+        graphics.bindArrayBuffer(0);
+        graphics.bindVertexArray(0);
+
+    }
+
+    public void changeTexture(final float[] uvs) {
+        textureBuffer.put(uvs, 0, uvs.length);
+        textureBuffer.flip();
+        graphics.reallocateTextureData(tbo, textureBuffer);
+    }
+
+    public void changeVertices(final float[] vertices) {
+        verticeBuffer.put(vertices, 0, vertices.length);
+        verticeBuffer.flip();
+        graphics.reallocateVerticeData(vbo, verticeBuffer);
+    }
+
+    /**
+     * Binds the current vertex array buffer.
+     */
+    public void bind() {
+        graphics.bindVertexArray(vao);
+    }
+
+    /**
+     * Unbinds the current vertex array buffer.
+     */
+    public void unbind() {
+        graphics.bindElementArrayBuffer(0);
+        graphics.bindVertexArray(0);
+    }
+
+    /**
+     * Draws the current triangles in the buffer.
+     */
+    public void draw() {
+        graphics.drawElements(verticeBuffer.capacity() / 3 / 3);
+    }
+
+    void render() {
+        bind();
+        draw();
+    }
+}

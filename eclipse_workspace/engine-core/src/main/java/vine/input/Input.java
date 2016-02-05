@@ -38,7 +38,7 @@ public interface Input {
          * @param action
          * @param mods
          */
-        void keyPressed(long context, int key, int scancode, int action, int mods);
+        void keyPressed(long context, int key, int scancode, InputAction action, int mods);
     }
 
     /**
@@ -114,7 +114,7 @@ public interface Input {
          * @param action
          * @param mods
          */
-        void pressedMouseButton(long context, int button, int action, int mods);
+        void pressedMouseButton(long context, int button, InputAction action, int mods);
     }
 
     /**
@@ -141,10 +141,4 @@ public interface Input {
      * 
      */
     void pollEvents();
-
-    /**
-     * @param action
-     * @return
-     */
-    boolean isReleaseAction(int action);
 }

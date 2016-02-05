@@ -1,0 +1,161 @@
+package vine.tilemap;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
+import vine.animation.AnimationClip;
+import vine.animation.AnimationFrame;
+import vine.animation.AnimationState;
+import vine.game.Game;
+import vine.gameplay.component.AnimatedSprite;
+import vine.gameplay.component.StaticSprite;
+import vine.gameplay.entity.GameEntity;
+import vine.graphics.Renderer;
+import vine.graphics.Sprite;
+import vine.graphics.Texture2D;
+import vine.graphics.VertexArray;
+
+public class TileMap extends GameEntity {
+
+    private int xTiles;
+    private int yTiles;
+
+    private Sprite[] sprites;
+
+    private Set<AnimatedSprite> animatedSprites = new HashSet<>();
+    private VertexArray vertexArray;
+
+    int screenxTiles = 42;
+    int screenyTiles = 27;
+
+    float[] vertices;
+    float[] uvs;
+
+    /**
+     * @param width
+     * @param height
+     */
+    public void construct(final int width, final int height) {
+        this.xTiles = width;
+        this.yTiles = height;
+        screenxTiles = Game.getGame().getScreen().getWidth() / 32 + 2;
+        screenyTiles = Game.getGame().getScreen().getHeight() / 32 + 2;
+        float[] uv1 = Renderer.DEFAULT_CHIPSET.getUVSquad(16, 16, 16, 16);
+        float[] uv2 = Renderer.DEFAULT_CHIPSET.getUVSquad(96, 32, 16, 16);
+        Sprite sprite2 = Game.instantiate(AnimatedSprite.class, Integer.valueOf(16), Integer.valueOf(16),
+                new AnimationState(new AnimationClip(Renderer.DEFAULT_CHIPSET, new AnimationFrame(uv1, 500),
+                        new AnimationFrame(uv2, 1000)), "idle", 2));
+        Sprite sprite3 = Game.instantiate(StaticSprite.class, Integer.valueOf(16), Integer.valueOf(16),
+                Renderer.DEFAULT_CHIPSET, 16, 0, 16, 16);
+        Game.getGame().getScene().setMap(this);
+        sprites = new Sprite[xTiles * yTiles];
+        for (int i = 0; i < xTiles * yTiles; i++) {
+            if (i % xTiles > 20 && i % xTiles < 50) {
+                sprites[i] = sprite3;
+            } else {
+                sprites[i] = sprite2;
+            }
+        }
+
+        if (sprite2 instanceof AnimatedSprite) {
+            animatedSprites.add((AnimatedSprite) sprite2);
+        }
+
+        int[] indices = new int[6 * screenxTiles * screenyTiles];
+        this.vertices = new float[3 * (screenxTiles+1) * (screenyTiles+1)];
+        this.uvs = new float[8 * screenxTiles * screenyTiles];
+        int startX = 0;
+        int startY = 0;
+        for (int i = startX; i <= startX + screenxTiles; i++) {
+            for (int j = startY; j <= startY + screenyTiles; j++) {
+                int index = (i - startX) + (j - startY) * (screenxTiles+1);
+                vertices[3*index] = i*32;
+                vertices[3*index +1] = j*32;
+                vertices[3*index +2] = 0;
+            }
+        }
+        for (int i = startX; i < startX + screenxTiles; i++) {
+            for (int j = startY; j < startY + screenyTiles; j++) {
+                int spritesIndex = i + j * xTiles < 0 ? 0 : i + j * xTiles;
+                int index2 = (i - startX) + (j - startY) * (screenxTiles);
+               /* System.arraycopy(new float[] { //
+                        i * 32, j * 32, 0, //
+                        i * 32, j * 32 + 32, 0, //
+                        i * 32 + 32, j * 32 + 32, 0, //
+                        i * 32 + 32, j * 32, 0, }, 0, vertices, index * 12, 12);
+*/
+                System.arraycopy(sprites[i + j * xTiles < 0 ? 0 : i + j * xTiles].getUVCoordinates(), 0, uvs, index2 * 8,
+                        8);
+                int x = i-startX;
+                int y = j-startY;
+                System.arraycopy(
+                        new int[] { //
+                                x+y*(screenxTiles+1),x+(y+1)*(screenxTiles+1), x +1+y*(screenxTiles+1),  // 
+                                x +1+y*(screenxTiles+1),x+y*(screenxTiles+1),  x +1+(y+1)*(screenxTiles+1)},//
+                        0, indices, index2 * 6, 6);
+            }
+        }
+        System.out.println(Arrays.toString(vertices));
+        System.out.println(Arrays.toString(indices));
+        vertexArray = new VertexArray(vertices, indices, uvs, Game.getGame().getGraphics());
+        Game.getGame().getScene().add(this);
+    }
+
+    @Override
+    public final void update(final float delta) {
+        for (AnimatedSprite sprite : animatedSprites) {
+            sprite.update(delta);
+        }
+    }
+
+    private int lastFrameX = 0;
+    private int lastFrameY = 0;
+    
+    /**
+     * @return
+     */
+    public final VertexArray getRenderData() {
+        int startX = (int) Math.floor(Game.getGame().getScene().cameras.getActiveCamera().getX() / 32)
+                - screenxTiles / 2 + 1;
+        int startY = (int) Math.floor(Game.getGame().getScene().cameras.getActiveCamera().getY() / 32)
+                - screenyTiles / 2 + 1;
+        if(lastFrameX != startX || lastFrameY != startY) {
+            for (int i = startX; i <= startX + screenxTiles; i++) {
+                for (int j = startY; j <= startY + screenyTiles; j++) {
+                    int index = (i - startX) + (j - startY) * (screenxTiles+1);
+                    vertices[3*index] = i*32;
+                    vertices[3*index +1] = j*32;
+                    vertices[3*index +2] = 0;
+                }
+            }
+        vertexArray.changeVertices(vertices);
+        }
+        lastFrameX = startX;
+        lastFrameY = startY;
+        for (int i = startX; i < startX + screenxTiles; i++) {
+            for (int j = startY; j < startY + screenyTiles; j++) {
+
+                int index = (i - startX) + (j - startY) * (screenxTiles);
+               /* System.arraycopy(new float[] { //
+                        i * 32, j * 32, 0, //
+                        i * 32, j * 32 + 32, 0, //
+                        i * 32 + 32, j * 32 + 32, 0, //
+                        i * 32 + 32, j * 32, 0, }, 0, vertices, index * 12, 12);
+*/
+                System.arraycopy(sprites[i + j * xTiles < 0 ? 0 : i + j * xTiles].getUVCoordinates(), 0, uvs, index * 8,
+                        8);
+            }
+        }
+
+        vertexArray.changeTexture(uvs);
+
+        return vertexArray;
+    }
+
+    public final Texture2D getTexture() {
+        return Renderer.DEFAULT_CHIPSET;
+    }
+
+}

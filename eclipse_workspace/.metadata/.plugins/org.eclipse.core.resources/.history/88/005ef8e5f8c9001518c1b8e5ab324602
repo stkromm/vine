@@ -1,0 +1,79 @@
+src/main/java/vine/game/Game.java:47:	Avoid short class names like Game
+src/main/java/vine/game/Game.java:63:	Avoid protected methods in a final class that doesnt extend anything other than Object.  Change to private or package access.
+src/main/java/vine/game/Game.java:184:	Assigning an Object to null is a code smell.  Consider refactoring.
+src/main/java/vine/game/GameObject.java:3:	Avoid unused imports such as 'java.util.HashMap'
+src/main/java/vine/game/GameObject.java:20:	This abstract class does not have any abstract methods
+src/main/java/vine/game/GameObject.java:106:	An empty method in an abstract class should be abstract instead
+src/main/java/vine/game/GameObject.java:129:	Use opposite operator instead of the logic complement operator.
+src/main/java/vine/game/GameObject.java:139:	Parameter 'event' is not assigned and could be declared final
+src/main/java/vine/game/GameObject.java:148:	Parameter 'keyEvent' is not assigned and could be declared final
+src/main/java/vine/game/GameObject.java:155:	An empty method in an abstract class should be abstract instead
+src/main/java/vine/game/GameObject.java:202:	Use block level rather than method level synchronization
+src/main/java/vine/util/BufferConverter.java:28:	Avoid throwing null pointer exceptions.
+src/main/java/vine/util/BufferConverter.java:45:	Avoid throwing null pointer exceptions.
+src/test/java/vine/game/test/GameObjectTest.java:5:	Avoid unused imports such as 'org.junit.Rule'
+src/test/java/vine/game/test/GameObjectTest.java:7:	Avoid unused imports such as 'org.junit.rules.ExpectedException'
+src/test/java/vine/game/test/GameObjectTest.java:23:	JUnit tests should not contain more than 1 assert(s).
+src/test/java/vine/game/test/GameObjectTest.java:24:	Local variable 'object' could be declared final
+src/test/java/vine/game/test/GameObjectTest.java:25:	Avoid using equals() to compare against null
+src/test/java/vine/game/test/GameObjectTest.java:25:	assertTrue(!expr) can be replaced by assertFalse(expr)
+src/test/java/vine/game/test/GameObjectTest.java:26:	Use assertEquals(x, y) instead of assertTrue(x.equals(y))
+src/test/java/vine/game/test/GameObjectTest.java:27:	assertTrue(!expr) can be replaced by assertFalse(expr)
+src/test/java/vine/game/test/GameObjectTest.java:28:	Position literals first in String comparisons
+src/test/java/vine/game/test/GameObjectTest.java:28:	assertTrue(!expr) can be replaced by assertFalse(expr)
+src/test/java/vine/game/test/GameObjectTest.java:36:	JUnit tests should not contain more than 1 assert(s).
+src/test/java/vine/game/test/GameObjectTest.java:37:	Local variable 'object' could be declared final
+src/test/java/vine/game/test/GameObjectTest.java:38:	assertTrue(!expr) can be replaced by assertFalse(expr)
+src/test/java/vine/game/test/GameObjectTest.java:49:	Local variable 'object' could be declared final
+src/test/java/vine/game/test/GameObjectTest.java:50:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/game/test/GameObjectTest.java:59:	Local variable 'object' could be declared final
+src/test/java/vine/game/test/GameObjectTest.java:70:	JUnit tests should not contain more than 1 assert(s).
+src/test/java/vine/game/test/GameObjectTest.java:71:	The String literal "test" appears 4 times in this file; the first occurrence is on line 71
+src/test/java/vine/game/test/GameObjectTest.java:77:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/game/test/GameObjectTest.java:79:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/game/test/GameObjectTest.java:81:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/game/test/GameObjectTest.java:83:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/game/test/GameObjectTest.java:85:	Use assertNull(x) instead of assertTrue(x==null), or assertNotNull(x) vs assertFalse(x==null)
+src/test/java/vine/game/test/GameObjectTest.java:87:	Use assertNull(x) instead of assertTrue(x==null), or assertNotNull(x) vs assertFalse(x==null)
+src/test/java/vine/game/test/GameObjectTest.java:89:	Use assertNull(x) instead of assertTrue(x==null), or assertNotNull(x) vs assertFalse(x==null)
+src/test/java/vine/game/test/MyTestObject.java:14:	Avoid unnecessary constructors - the compiler will generate these for you
+src/test/java/vine/game/test/MyTestObject.java:14:	Document empty constructor
+src/test/java/vine/game/test/MyTestObject.java:14:	It is a good practice to call super() in a constructor
+src/test/java/vine/game/test/MyTestObject.java:19:	Parameter 'delta' is not assigned and could be declared final
+src/test/java/vine/game/test/MyTestObject.java:31:	Overriding method merely calls super
+src/test/java/vine/game/test/MyTestObject.java:31:	Overriding method merely calls super
+src/test/java/vine/game/test/MyTestObject.java:35:	Parameter 'x' is not assigned and could be declared final
+src/test/java/vine/game/test/MyTestObject.java:36:	System.out.println is used
+src/test/java/vine/game/test/MyWrongTestObject.java:9:	A class which only has private constructors should be final
+src/test/java/vine/game/test/MyWrongTestObject.java:9:	Class cannot be instantiated and does not provide any static methods or fields
+src/test/java/vine/game/test/MyWrongTestObject.java:10:	It is a good practice to call super() in a constructor
+src/test/java/vine/game/test/MyWrongTestObject.java:15:	Overriding method merely calls super
+src/test/java/vine/game/test/MyWrongTestObject.java:15:	Overriding method merely calls super
+src/test/java/vine/game/test/MyWrongTestObject.java:21:	Overriding method merely calls super
+src/test/java/vine/game/test/MyWrongTestObject.java:21:	Overriding method merely calls super
+src/test/java/vine/screen/test/ScreenTest.java:17:	JUnit tests should not contain more than 1 assert(s).
+src/test/java/vine/screen/test/ScreenTest.java:18:	Local variable 'window' could be declared final
+src/test/java/vine/screen/test/ScreenTest.java:20:	Local variable 'screen' could be declared final
+src/test/java/vine/screen/test/ScreenTest.java:21:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:22:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:23:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:24:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:25:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:26:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:27:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:28:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:29:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/screen/test/ScreenTest.java:30:	Use assertNull(x) instead of assertTrue(x==null), or assertNotNull(x) vs assertFalse(x==null)
+src/test/java/vine/window/test/DisplayTest.java:15:	Avoid using redundant field initializer for 'display'
+src/test/java/vine/window/test/DisplayTest.java:18:	You may have misspelled a JUnit framework method (setUp or tearDown)
+src/test/java/vine/window/test/DisplayTest.java:24:	Local variable 'env' could be declared final
+src/test/java/vine/window/test/DisplayTest.java:25:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/window/test/DisplayTest.java:30:	Local variable 'env' could be declared final
+src/test/java/vine/window/test/DisplayTest.java:31:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/window/test/WindowTest.java:16:	Avoid using redundant field initializer for 'window'
+src/test/java/vine/window/test/WindowTest.java:19:	You may have misspelled a JUnit framework method (setUp or tearDown)
+src/test/java/vine/window/test/WindowTest.java:33:	JUnit tests should not contain more than 1 assert(s).
+src/test/java/vine/window/test/WindowTest.java:35:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/window/test/WindowTest.java:36:	Use assertSame(x, y) instead of assertTrue(x==y), or assertNotSame(x,y) vs assertFalse(x==y)
+src/test/java/vine/window/test/WindowTest.java:40:	JUnit tests should not contain more than 1 assert(s).
+src/test/java/vine/window/test/WindowTest.java:44:	assertTrue(!expr) can be replaced by assertFalse(expr)

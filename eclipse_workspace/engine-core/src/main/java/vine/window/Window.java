@@ -1,7 +1,5 @@
 package vine.window;
 
-import vine.display.Display;
-
 /**
  * A window, represents a system window, that exists within a display and is
  * used, to display a application.
@@ -74,6 +72,21 @@ public interface Window {
          *            The new height the window changed to.
          */
         void onSizeChange(int width, int height);
+    }
+
+    /**
+     * Callback, used to react to a window context change.
+     * 
+     * @author Steffen
+     *
+     */
+    @FunctionalInterface
+    interface WindowContextCallback {
+        /**
+         * @param context
+         *            The new window context
+         */
+        void onContextChange(long context);
     }
 
     /**
@@ -155,18 +168,15 @@ public interface Window {
     void setCloseCallback(CloseCallback callback);
 
     /**
+     * @param callback
+     */
+    void setWindowContextCallback(WindowContextCallback callback);
+
+    /**
      * @param title
      *            The title of the window.
      */
     void setTitle(String title);
-
-    /**
-     * @param display
-     *            The physical display that the window is showed on.
-     * @throws WindowCreationException
-     *             Signals, that the window could not be created.
-     */
-    void init(Display display) throws WindowCreationException;
 
     /**
      * @return True, if the window is resizeable by the user.
@@ -223,5 +233,7 @@ public interface Window {
      * @return The window title.
      */
     String getTitle();
+
+    void setWindowMode(WindowMode mode);
 
 }

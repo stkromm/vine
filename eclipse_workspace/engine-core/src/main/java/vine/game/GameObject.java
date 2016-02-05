@@ -1,6 +1,5 @@
 package vine.game;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,6 +38,8 @@ public abstract class GameObject {
      */
     public static final byte ACTIVE_FLAG = 2;
     private static final byte DESTROYED_FLAG = 4;
+    private static final byte PERSISTENCE_FLAG = 8;
+
     private String name;
     private byte flags = ACTIVE_FLAG;
 
@@ -95,7 +96,7 @@ public abstract class GameObject {
      *            Time that passed since the last update call.
      */
     public void update(final float delta) { // NOSONAR
-        if ((flags & ACTIVE_FLAG) != ACTIVE_FLAG) {
+        if ((flags & ACTIVE_FLAG) != ACTIVE_FLAG || (flags & DESTROYED_FLAG) != DESTROYED_FLAG) {
             return;
         }
     }
@@ -116,7 +117,15 @@ public abstract class GameObject {
         enableFlags(DESTROYED_FLAG);
         onDestroy();
         synchronized (this) {
+            // Remove the hardreference of the gameobject
             ReferenceManager.OBJECTS.remove(name);
+            // Remove from event listener
+            Game.getGame().getEventDispatcher().unregisterHandler(this);
+            // Remove from the scene if it's an entity
+            // Game.getGame().getScene().removeEntity(this);
+
+            // Remove from updates
+            Game.getGame().updateList.remove(this);
         }
     }
 
@@ -147,6 +156,10 @@ public abstract class GameObject {
      */
     public boolean onMouseButtonEvent(MouseButtonEvent keyEvent) { // NOSONAR
         return false;
+    }
+
+    public boolean isLevelPeristent() {
+        return (flags & PERSISTENCE_FLAG) == PERSISTENCE_FLAG;
     }
 
     /**
@@ -225,15 +238,17 @@ public abstract class GameObject {
                 objectClass.getMethodByName(CONSTRUCT_METHOD)
                         .ifPresent(method -> VineMethodUtils.invokeMethodOn(method, object, params));
                 if (objectClass.hasMethodImplemented(GameObject.KEY_EVENT_METHOD, KeyEvent.class)) {
-                    Game.getGame().getScene().addEventHandler(
-                            event -> event.getType() == EventType.KEY ? object.onKeyEvent((KeyEvent) event) : false);
+                    Game.getGame().getEventDispatcher().registerHandler(object, EventType.KEY);
+                }
+                if (objectClass.hasMethodImplemented("update", float.class)) {
+                    Game.getGame().updateList.add(object);
                 }
                 if (objectClass.hasMethodImplemented(GameObject.MOUSE_BUTTON_EVENT_METHOD, MouseButtonEvent.class)) {
-                    Game.getGame().getScene().addEventHandler(event -> event.getType() == EventType.MOUSE_BUTTON
-                            ? object.onMouseButtonEvent((MouseButtonEvent) event) : false);
+                    Game.getGame().getEventDispatcher().registerHandler(object, EventType.MOUSE_BUTTON);
                 }
             }
             return object;
         }
     }
+
 }

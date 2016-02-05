@@ -1,0 +1,29 @@
+package vine.animation;
+
+public class AnimationState {
+    private final String name;
+    private final AnimationClip clip;
+    private float playbackSpeed;
+
+    public AnimationState(AnimationClip clip, String name) {
+        this.name = name;
+        this.clip = clip;
+        playbackSpeed = 1;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public AnimationClip getClip() {
+        return clip;
+    }
+
+    public float getPlaybackSpeed() {
+        return playbackSpeed;
+    }
+
+    public void setPlaybackSpeed(float playbackSpeed) {
+        this.playbackSpeed = playbackSpeed;
+    }
+}

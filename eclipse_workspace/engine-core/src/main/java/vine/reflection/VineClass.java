@@ -1,5 +1,6 @@
 package vine.reflection;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Optional;
@@ -39,6 +40,36 @@ public class VineClass<T> {
      */
     public final Optional<Method> getMethodByName(final String methodName) {
         return Arrays.stream(type.getMethods()).filter(method -> method.getName().equals(methodName)).findFirst();
+    }
+
+    /**
+     * @param params
+     *            The parameters that the class constructor needs.
+     * @return The constructor, if a constructor is defined, that takes the
+     *         parameters.
+     */
+    public final Constructor<T> getConstructorWithParams(final Object... params) {
+        final int size = params == null ? 0 : params.length;
+        final Class<?>[] types = new Class<?>[size];
+        if (params != null) {
+            for (int i = size - 1; i >= 0; i--) {
+                types[i] = params[i].getClass();
+            }
+        }
+        try {
+            return type.getConstructor(types);
+        } catch (NoSuchMethodException e) {
+            if (LOGGER.isErrorEnabled()) {
+                LOGGER.error("", e);
+            }
+        } catch (SecurityException e) {
+            if (LOGGER.isErrorEnabled()) {
+                LOGGER.error(
+                        "You made the constructor private. You have to use a public constructor to instantiate a gameobject.",
+                        e);
+            }
+        }
+        return null;
     }
 
     /**

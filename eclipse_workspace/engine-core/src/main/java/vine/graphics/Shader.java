@@ -3,20 +3,21 @@ package vine.graphics;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-import vine.math.Matrix3f;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import vine.math.Matrix4f;
 import vine.math.Vector3f;
-import vine.util.ShaderLoader;
 
 /**
  * @author Steffen
  *
  */
-public abstract class Shader {
+public class Shader {
     /**
-     * 
+     * Used logger for gameplay logs.
      */
-    private static final float ZOOM = 1;
+    public static final Logger LOGGER = LoggerFactory.getLogger(Shader.class);
     /**
      * 
      */
@@ -38,10 +39,13 @@ public abstract class Shader {
      */
     protected final int id;
 
+    private boolean enabled;
     /**
      * 
      */
     protected final Map<String, Integer> locationCache = new WeakHashMap<>();
+
+    private final Graphics graphics;
 
     /**
      * @param vertPath
@@ -49,23 +53,15 @@ public abstract class Shader {
      * @param fragPath
      *            The file path to the fragment shader code
      */
-    public Shader(final String vertPath, final String fragPath) {
-        id = ShaderLoader.load(vertPath, fragPath);
-        setProperties();
-    }
-
-    /**
-     * 
-     */
-    public Shader() {
-        id = ShaderLoader.load();
+    public Shader(int id, Graphics graphics) {
+        this.id = id;
+        this.graphics = graphics;
         setProperties();
     }
 
     private void setProperties() {
         setUniform1i("tex", 1);
-
-        final Matrix4f mat = Matrix4f.orthographic(0, ZOOM * VIEWPORT_WIDTH, 0, ZOOM * VIEWPORT_HEIGHT, -1, 1);
+        final Matrix4f mat = Matrix4f.orthographic(0, VIEWPORT_WIDTH, 0, VIEWPORT_HEIGHT, -1, 1);
         setUniformMat4f("pr_matrix", mat);
         setUniformMat4f("vw_matrix", Matrix4f.translate(new Vector3f(0.f, 0.0f, 0.0f)));
     }
@@ -77,7 +73,18 @@ public abstract class Shader {
      *            uniform name
      * @return the stored uniform
      */
-    public abstract int getUniform(String name);
+    public int getUniform(String name) {
+        if (locationCache.containsKey(name)) {
+            return locationCache.get(name);
+        }
+        final int result = graphics.getUniformLocation(id, name);
+        if (result == -1) {
+            LOGGER.error("Failed to create shader");
+        } else {
+            locationCache.put(name, result);
+        }
+        return result;
+    }
 
     /**
      * Tries to set the uniform variable with the given name and value.
@@ -87,17 +94,12 @@ public abstract class Shader {
      * @param value
      *            the to store uniform
      */
-    public abstract void setUniform1i(String name, int value);
-
-    /**
-     * Tries to set the uniform variable with the given name and value.
-     * 
-     * @param name
-     *            uniform name
-     * @param value
-     *            the to store uniform
-     */
-    public abstract void setUniform1f(String name, float value);
+    public void setUniform1i(final String name, final int value) {
+        if (!enabled) {
+            graphics.bindShader(id);
+        }
+        graphics.storeUniformInt(getUniform(name), value);
+    }
 
     /**
      * Tries to set the uniform vector 3 with the given name and value.
@@ -107,18 +109,12 @@ public abstract class Shader {
      * @param vector
      *            the vector that should be stored in the uniform
      */
-    public abstract void setUniform3f(String name, Vector3f vector);
-
-    /**
-     * Tries to set the uniform transformation matrix 3x3 with the given name
-     * and value.
-     * 
-     * @param name
-     *            uniform name
-     * @param matrix
-     *            the matrix that should be stored in the uniform
-     */
-    public abstract void setUniformMat3f(String name, Matrix3f matrix);
+    public void setUniform3f(final String name, final Vector3f vector) {
+        if (!enabled) {
+            graphics.bindShader(id);
+        }
+        graphics.storeUniformVector3f(getUniform(name), vector);
+    }
 
     /**
      * @param name
@@ -126,15 +122,20 @@ public abstract class Shader {
      * @param matrix
      *            the matrix that should be stored in the uniform
      */
-    public abstract void setUniformMat4f(String name, Matrix4f matrix);
+    public void setUniformMat4f(final String name, final Matrix4f matrix) {
+        if (!enabled) {
+            graphics.bindShader(id);
+        }
+        graphics.storeUniformMatrix4f(getUniform(name), matrix);
+    }
 
-    /**
-     * 
-     */
-    public abstract void bind();
+    public void bind() {
+        graphics.bindShader(id);
+        enabled = true;
+    }
 
-    /**
-     * 
-     */
-    public abstract void unbind();
+    public void unbind() {
+        graphics.bindShader(0);
+        enabled = false;
+    }
 }

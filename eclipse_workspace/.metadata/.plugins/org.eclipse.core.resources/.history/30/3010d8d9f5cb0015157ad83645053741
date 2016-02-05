@@ -1,0 +1,5 @@
+package vine.gameplay.entity;
+
+public class NPC extends GameEntity {
+
+}

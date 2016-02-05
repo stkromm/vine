@@ -1,0 +1,21 @@
+package vine.assets;
+
+import vine.graphics.Shader;
+
+public class ShaderLoader extends AssetLoader<Shader, AssetLoaderParameters<Shader>> {
+
+    @Override
+    public void loadAsync(AssetManager manager, String fileName, FileHandle file,
+            AssetLoaderParameters<Shader> parameter) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public Shader loadSync(AssetManager manager, String fileName, FileHandle file,
+            AssetLoaderParameters<Shader> parameter) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+}

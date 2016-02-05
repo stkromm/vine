@@ -6,6 +6,8 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 /**
+ * Utility class for converting number array objects into buffer objects.
+ * 
  * @author Steffen
  *
  */
@@ -22,9 +24,12 @@ public final class BufferConverter {
      * @return The buffer of the array
      */
     public static FloatBuffer createFloatBuffer(final float[] array) {
-        final FloatBuffer result = ByteBuffer.allocateDirect((array == null ? 0 : array.length) << 2)
-                .order(ByteOrder.nativeOrder()).asFloatBuffer();
-        result.put(array == null ? new float[] {} : array).flip();
+        if (array == null) {
+            throw new NullPointerException("Can't convert null to an float buffer object");
+        }
+        final FloatBuffer result = ByteBuffer.allocateDirect(array.length << 2).order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+        result.put(array).flip();
         return result;
     }
 
@@ -36,9 +41,12 @@ public final class BufferConverter {
      * @return The buffer of the array
      */
     public static IntBuffer createIntBuffer(final int[] array) {
-        final IntBuffer result = ByteBuffer.allocateDirect((array == null ? 0 : array.length) << 2)
-                .order(ByteOrder.nativeOrder()).asIntBuffer();
-        result.put(array == null ? new int[] {} : array).flip();
+        if (array == null) {
+            throw new NullPointerException("Can't convert null to an int buffer object");
+        }
+        final IntBuffer result = ByteBuffer.allocateDirect(array.length << 2).order(ByteOrder.nativeOrder())
+                .asIntBuffer();
+        result.put(array).flip();
         return result;
     }
 

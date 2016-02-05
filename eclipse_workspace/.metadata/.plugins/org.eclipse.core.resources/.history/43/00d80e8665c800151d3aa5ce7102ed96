@@ -1,0 +1,19 @@
+import static org.junit.Assert.assertEquals;
+
+import java.util.Map;
+
+import org.junit.Test;
+
+import vine.util.ConfigurationParser;
+import vine.util.ConfigSerializer;
+
+public class IniParsingTest {
+
+    @Test
+    public void testParsing() {
+        Map<String, String> settings = ConfigurationParser.parseIniFile("res/test/init_test.ini");
+        assertEquals(settings.get("x"), "test");
+        settings.put("test", "ajdajdjoi");
+        ConfigSerializer.saveIniToFile(settings, "res/test/init_test.ini");
+    }
+}

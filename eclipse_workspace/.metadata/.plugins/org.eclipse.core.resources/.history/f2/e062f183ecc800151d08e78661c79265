@@ -1,0 +1,42 @@
+package vine.gameplay.component;
+
+import vine.animation.AnimationFrame;
+import vine.animation.AnimationStateManager;
+import vine.graphics.Sprite;
+import vine.graphics.Texture2D;
+
+public class AnimatedSprite extends Component implements Sprite {
+
+    AnimationStateManager animation;
+    
+    public AnimatedSprite() {
+    }
+
+    public void construct(Texture2D spriteSheet, AnimationStateManager animation) {
+        this.animation = animation;
+    }
+    @Override
+    public float[] getVertices() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public float[] getUVCoordinates() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Texture2D getTexture() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public int[] getIndices() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+}

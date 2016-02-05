@@ -1,0 +1,73 @@
+package vine.gameplay.component;
+
+import vine.graphics.Texture2D;
+
+/**
+ * @author Steffen
+ *
+ */
+public class Sprite extends Component { // NOSONAR
+
+    private Texture2D texture;
+    private float[] vertices;
+    private float[] textureUVs;
+    private float[] textureUVs2;
+
+    private float time = 0;
+
+    /**
+     * @return The vertices array of the sprite.
+     */
+    public final float[] getVertices() {
+        return vertices.clone();
+    }
+
+    /**
+     * @return
+     */
+    public final float[] getUVCoordinates() {
+        return time < 1000 ? textureUVs.clone() : textureUVs2.clone();
+    }
+
+    public void addTime(float time) {
+        this.time += time;
+        this.time = time % 2000;
+        System.out.println("Current sprite time " + this.time);
+    }
+
+    @Override
+    public void update(float delta) {
+        addTime(delta);
+    }
+
+    /**
+     * @param worldWidth
+     * @param worldHeight
+     * @param texture
+     * @param texX
+     * @param texY
+     * @param texWidth
+     * @param texHeight
+     */
+    public void construct(final int worldWidth, final int worldHeight, final Texture2D texture, final int texX,
+            final int texY, final int texWidth, final int texHeight) {
+        vertices = new float[] { 0, 0, 0, 0, worldHeight, 0, worldWidth, worldHeight, 0, worldWidth, 0, 0, };
+        this.texture = texture;
+        final int textureWidth = texture.getWidth();
+        final int textureHeight = texture.getHeight();
+        final float uvX = texX / (float) textureWidth;
+        final float uvY = texY / (float) textureHeight;
+        final float uvWidth = texWidth / (float) textureWidth;
+        final float uvHeight = texHeight / (float) textureHeight;
+        textureUVs = new float[] { uvX, uvY + uvHeight, uvX, uvY, uvX + uvWidth, uvY, uvX + uvWidth, uvY + uvHeight };
+        textureUVs2 = new float[] { uvX + uvWidth, uvY + uvHeight + uvHeight, uvX + uvWidth, uvY + uvHeight,
+                uvX + uvWidth + uvWidth, uvY + +uvHeight, uvX + uvWidth + uvWidth, uvY + uvHeight + uvHeight };
+    }
+
+    /**
+     * @return
+     */
+    public Texture2D getTexture() {
+        return texture;
+    }
+}

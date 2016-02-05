@@ -34,6 +34,7 @@ public class GameScreen implements Screen {
 
     private final void calculateProjection() {
         this.projection = Matrix4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
+        
     }
 
     private final void calculateViewport() {

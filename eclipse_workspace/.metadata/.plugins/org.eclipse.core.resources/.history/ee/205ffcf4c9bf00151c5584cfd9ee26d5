@@ -1,7 +1,0 @@
-package vine.event;
-
-public class MouseButtonEvent {
-    int button;
-    int action;
-    int mods;
-}

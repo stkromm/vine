@@ -1,0 +1,22 @@
+package vine.animation;
+
+import vine.graphics.Texture2D;
+
+public class AnimationFrame {
+    private final float[] uvs;
+    private final float duration;
+
+    public AnimationFrame(final Texture2D texture, final int texX, final int texY, final int texWidth,
+            final int texHeight, float duration) {
+        uvs = texture.getUVSquad(texX, texY, texWidth, texHeight);
+        this.duration = duration;
+    }
+
+    public final float[] getUvs() {
+        return uvs;
+    }
+
+    public final float getDuration() {
+        return duration;
+    }
+}
