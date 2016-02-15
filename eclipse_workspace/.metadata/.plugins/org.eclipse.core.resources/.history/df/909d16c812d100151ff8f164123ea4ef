@@ -1,8 +1,0 @@
-package vine.gameplay.scene;
-
-public class SceneChunk {
-    private SceneChunk bottmLeft;
-    private SceneChunk topLeft;
-    private SceneChunk bottomRight;
-    private SceneChunk topRight;
-}

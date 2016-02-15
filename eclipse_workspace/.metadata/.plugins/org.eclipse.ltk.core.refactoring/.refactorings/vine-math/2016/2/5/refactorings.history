@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename field &apos;diagonal&apos; in &apos;vine.math.geometry.Rectangle&apos; to &apos;borders&apos;&#x0D;&#x0A;- Original project: &apos;vine-math&apos;&#x0D;&#x0A;- Original element: &apos;vine.math.geometry.Rectangle.diagonal&apos;&#x0D;&#x0A;- Renamed element: &apos;vine.math.geometry.Rectangle.borders&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename field &apos;diagonal&apos;" flags="589826" getter="false" id="org.eclipse.jdt.ui.rename.field" input="/src\/main\/java&lt;vine.math.geometry{Rectangle.java[Rectangle^diagonal" name="borders" references="true" setter="false" stamp="1454346852134" textual="false" version="1.0"/>
-</session>
