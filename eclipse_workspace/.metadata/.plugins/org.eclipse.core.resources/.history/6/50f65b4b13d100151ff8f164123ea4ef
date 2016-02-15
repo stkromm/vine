@@ -1,0 +1,10 @@
+package vine.gameplay.scene;
+
+public class SceneChunk extends SceneNode {
+
+    public SceneChunk(SceneNode parent) {
+        super(parent);
+        // TODO Auto-generated constructor stub
+    }
+
+}

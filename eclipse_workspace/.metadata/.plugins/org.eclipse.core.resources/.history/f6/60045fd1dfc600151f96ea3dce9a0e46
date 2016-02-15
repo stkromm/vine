@@ -1,7 +1,0 @@
-package vine.util;
-
-public class Sound {
-
-    public void create(byte[] data) {
-    }
-}

@@ -1,0 +1,17 @@
+package vine.gameplay.scene;
+
+import java.util.Set;
+
+import vine.gameplay.entity.GameEntity;
+
+public class Chunk {
+    private Set<GameEntity> entities;
+
+    public void addEntity(GameEntity entity) {
+
+    }
+
+    public Set<GameEntitiy> getEntities() {
+        return entities;
+    }
+}

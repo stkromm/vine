@@ -4,7 +4,7 @@ public class AnimationFrame {
     private final float[] uvs;
     private final float duration;
 
-    public AnimationFrame(float[] uvs, float duration) {
+    public AnimationFrame(final float[] uvs, final float duration) {
         this.uvs = uvs;
         this.duration = duration;
     }

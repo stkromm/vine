@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.MenuItem"/>
-<fullyQualifiedTypeName name="scalafx.scene.input.MouseEvent"/>
-<fullyQualifiedTypeName name="scalafx.geometry.Point2D"/>
-<fullyQualifiedTypeName name="scalafx.scene.control.Button"/>
-<fullyQualifiedTypeName name="scalafx.geometry.Insets"/>
-<fullyQualifiedTypeName name="scalafx.event.ActionEvent"/>
-</qualifiedTypeNameHistroy>

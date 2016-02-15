@@ -32,7 +32,7 @@ public final class FileUtils {
     public static byte[] readBytes(final String path, final int offset) {
         try (InputStream reader = Files.newInputStream(Paths.get(path))) {
             reader.skip(offset);
-            byte[] data = new byte[reader.available()];
+            final byte[] data = new byte[reader.available()];
             reader.read(data);
             return data;
         } catch (IOException e) {

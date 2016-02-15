@@ -12,9 +12,8 @@ public class Configuration {
     private final String iniPath;
     private boolean dirty = true;
 
-    public Configuration(String iniPath) {
+    public Configuration(final String iniPath) {
         this.iniPath = iniPath;
-        load();
     }
 
     private void cleanSettings() {
@@ -29,7 +28,7 @@ public class Configuration {
         return !dirty;
     }
 
-    public void addConfigurable(Configurable configurable) {
+    public void addConfigurable(final Configurable configurable) {
         if (configurable == null) {
             return;
         }
@@ -41,7 +40,7 @@ public class Configuration {
         if (!dirty) {
             return;
         }
-        for (Configurable setting : configurables) {
+        for (final Configurable setting : configurables) {
             setting.applyConfigs(settings);
         }
         dirty = false;
@@ -52,7 +51,7 @@ public class Configuration {
         ConfigSerializer.saveIniToFile(settings, iniPath);
     }
 
-    public void putSetting(String key, String value) {
+    public void putSetting(final String key, final String value) {
         dirty = true;
         settings.put(key, value);
     }

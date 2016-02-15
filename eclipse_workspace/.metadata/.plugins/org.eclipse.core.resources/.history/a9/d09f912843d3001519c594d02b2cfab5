@@ -1,0 +1,24 @@
+package vine.gameplay.scene;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Chunk {
+    protected Set<GameEntity> entities = new HashSet<>(500);
+
+    public void addEntity(GameEntity entity) {
+        entities.add(entity);
+    }
+
+    public void updateEntityLocation(GameEntity entity) {
+
+    }
+
+    public Set<GameEntity> getEntities() {
+        return entities;
+    }
+
+    public void removeEntity(GameEntity entity) {
+        entities.remove(entity);
+    }
+}

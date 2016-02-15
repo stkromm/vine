@@ -5,28 +5,22 @@ import vine.animation.AnimationStateManager;
 import vine.graphics.Sprite;
 import vine.graphics.Texture2D;
 
+/**
+ * @author Steffen
+ *
+ */
 public class AnimatedSprite extends Component implements Sprite {
 
-    float[] vertices;
     Texture2D texture;
     AnimationStateManager animation;
 
-    public AnimatedSprite() {
-    }
-
     @Override
-    public void update(float delta) {
+    public final void update(final float delta) {
         animation.tick(delta);
     }
 
-    public void construct(final int worldWidth, final int worldHeight, AnimationState animation) {
-        vertices = new float[] { 0, 0, 0, 0, worldHeight, 0, worldWidth, worldHeight, 0, worldWidth, 0, 0, };
+    public void construct(final AnimationState animation) {
         this.animation = new AnimationStateManager(new AnimationState[] { animation });
-    }
-
-    @Override
-    public float[] getVertices() {
-        return vertices.clone();
     }
 
     @Override
@@ -37,11 +31,6 @@ public class AnimatedSprite extends Component implements Sprite {
     @Override
     public Texture2D getTexture() {
         return animation.getCurrentState().getClip().getTexture();
-    }
-
-    @Override
-    public int[] getIndices() {
-        return new int[] { 0, 1, 2, 2, 3, 0 };
     }
 
 }

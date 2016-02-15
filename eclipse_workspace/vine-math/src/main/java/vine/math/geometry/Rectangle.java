@@ -26,6 +26,14 @@ public class Rectangle implements Shape {
         diagonal = new Vector2f(width, height);
     }
 
+    public float getWidth() {
+        return diagonal.getX();
+    }
+
+    public float getHeight() {
+        return diagonal.getY();
+    }
+
     public final boolean contains(float x, float y) {
         float a = (x - origin.getX()) / diagonal.getX();
         float b = (y - origin.getY()) / diagonal.getY();

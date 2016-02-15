@@ -1,5 +1,7 @@
 package vine.gameplay.entity;
 
+import vine.gameplay.scene.GameEntity;
+
 /**
  * @author Steffen
  *

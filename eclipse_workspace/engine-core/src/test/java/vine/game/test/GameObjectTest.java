@@ -8,7 +8,7 @@ import org.junit.rules.ExpectedException;
 
 import vine.game.Game;
 import vine.game.GameObject;
-import vine.gameplay.entity.GameEntity;
+import vine.gameplay.scene.GameEntity;
 
 /**
  * @author Steffen

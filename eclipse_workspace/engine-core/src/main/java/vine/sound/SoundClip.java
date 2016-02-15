@@ -18,9 +18,9 @@ public class SoundClip {
     private final Clip clip;
     private AudioInputStream audioIn;
 
-    public SoundClip(String path) {
+    public SoundClip(final String path) {
         try {
-            InputStream file = new FileInputStream(new File("E:\\Sound\\music.wav"));
+            final InputStream file = new FileInputStream(new File("E:\\Sounds\\music.wav"));
             audioIn = AudioSystem.getAudioInputStream(new BufferedInputStream(file));
         } catch (UnsupportedAudioFileException | IOException e) {
             audioIn = null;
@@ -33,7 +33,7 @@ public class SoundClip {
             e.printStackTrace();
         }
         clip = localClip;
-        FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        final FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         gainControl.setValue(3.0f); // Reduce volume by 10 decibels.
     }
 

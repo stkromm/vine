@@ -1,7 +1,0 @@
-package main
-
-object Main {
-  def main(args: Array[String]) {
-    new Thread(new Screen()).start()
-  }
-}

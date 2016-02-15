@@ -1,7 +1,7 @@
 package vine.game;
 
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.WeakHashMap;
 
 import vine.event.Event.EventType;
 import vine.event.KeyEvent;
@@ -17,6 +17,7 @@ import vine.reflection.VineMethodUtils;
  *
  */
 public abstract class GameObject {
+    protected static final String UPDATE_METHOD = "update";
     /**
      * 
      */
@@ -199,7 +200,7 @@ public abstract class GameObject {
         /**
          * All independent gameobjects that are currently in the game.
          */
-        protected static final Map<String, GameObject> OBJECTS = new ConcurrentHashMap<>();
+        protected static final Map<String, GameObject> OBJECTS = new WeakHashMap<>(1000);
 
         private ReferenceManager() {
             /**

@@ -27,13 +27,13 @@ public class VertexBufferObject {
      */
     private final int tbo;
 
-    private final int count;
+    private int count;
 
     private final Graphics graphics;
 
     private final FloatBuffer textureBuffer;
     private final FloatBuffer verticeBuffer;
-    private final IntBuffer indiceBuffer;
+    private IntBuffer indiceBuffer;
 
     /**
      * Creates a new vertex array buffer.
@@ -75,15 +75,36 @@ public class VertexBufferObject {
     }
 
     public void changeVertices(final float[] vertices) {
+        verticeBuffer.position(0);
         verticeBuffer.put(vertices, 0, vertices.length);
         verticeBuffer.flip();
         graphics.reallocateVerticeData(vbo, verticeBuffer);
     }
 
     public void changeTexture(final float[] uvs) {
+        textureBuffer.position(0);
         textureBuffer.put(uvs, 0, uvs.length);
         textureBuffer.flip();
         graphics.reallocateTextureData(tbo, textureBuffer);
+    }
+
+    public void changeIndices(final int count) {
+        if (count > indiceBuffer.capacity() / 6) {
+            int[] indices = new int[count * 6];
+            int[] indice = new int[] { 0, 1, 2, 2, 3, 0 };
+            for (int i = count * 6 - 1; i >= 0; i--) {
+                for (int b = 0; b < indice.length; b++) {
+                    indices[i * indice.length + b] = i * 4 + indice[b];
+                }
+            }
+            indiceBuffer = BufferConverter.createIntBuffer(indices);
+            graphics.bindIndexData(ibo, indiceBuffer);
+        }
+        indiceBuffer.limit(count* 6);
+        indiceBuffer.position(count * 6);
+        indiceBuffer.flip();
+        this.count = count * 6;
+        graphics.reallocateIndicesData(ibo, indiceBuffer);
     }
 
     /**

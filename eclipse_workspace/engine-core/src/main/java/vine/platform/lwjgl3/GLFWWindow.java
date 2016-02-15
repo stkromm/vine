@@ -58,7 +58,8 @@ import vine.window.WindowMode;
  *
  */
 public final class GLFWWindow implements Window {
-    private static final int TRUE = 1;
+    private static final int GL_TRUE = 1;
+
     private int xPos;
     private int yPos;
 
@@ -68,14 +69,14 @@ public final class GLFWWindow implements Window {
     private int bufferWidth;
     private int bufferHeight;
 
-    private long window = 0;
+    private long window;
 
     private WindowMode mode;
 
     private String title = "My Game";
 
     // Need hard references, otherwise the callbacks get garbage collected
-    private GLFWErrorCallback errorCallback;
+    private final GLFWErrorCallback errorCallback;
     private GLFWFramebufferSizeCallback framebufferCallback;
     private GLFWWindowCloseCallback closeCallback;
     private GLFWWindowPosCallback positionCallback;
@@ -88,7 +89,7 @@ public final class GLFWWindow implements Window {
     /**
      * Initializes GLFW.
      */
-    public GLFWWindow(Display display) {
+    public GLFWWindow(final Display display) {
         // Initialize GLFW. Most GLFW functions will not work before doing this.
         if (glfwInit() != GLFW_TRUE) {
             throw new IllegalStateException("Failed to init glfw");
@@ -107,32 +108,32 @@ public final class GLFWWindow implements Window {
 
     @Override
     public final boolean isResizeable() {
-        return TRUE == glfwGetWindowAttrib(window, GLFW_RESIZABLE);
+        return GL_TRUE == glfwGetWindowAttrib(window, GLFW_RESIZABLE);
     }
 
     @Override
     public final boolean isVisible() {
-        return TRUE == glfwGetWindowAttrib(window, GLFW_VISIBLE);
+        return GL_TRUE == glfwGetWindowAttrib(window, GLFW_VISIBLE);
     }
 
     @Override
     public final boolean isFocused() {
-        return TRUE == glfwGetWindowAttrib(window, GLFW_FOCUSED);
+        return GL_TRUE == glfwGetWindowAttrib(window, GLFW_FOCUSED);
     }
 
     @Override
     public final boolean isDecorated() {
-        return TRUE == glfwGetWindowAttrib(window, GLFW_DECORATED);
+        return GL_TRUE == glfwGetWindowAttrib(window, GLFW_DECORATED);
     }
 
     @Override
     public boolean isIconified() {
-        return TRUE == glfwGetWindowAttrib(window, GLFW_ICONIFIED);
+        return GL_TRUE == glfwGetWindowAttrib(window, GLFW_ICONIFIED);
     }
 
     @Override
     public boolean requestedClose() {
-        return glfwWindowShouldClose(window) == TRUE;
+        return glfwWindowShouldClose(window) == GL_TRUE;
     }
 
     @Override
@@ -249,7 +250,7 @@ public final class GLFWWindow implements Window {
     }
 
     @Override
-    public void setWindowContextCallback(WindowContextCallback callback) {
+    public void setWindowContextCallback(final WindowContextCallback callback) {
         this.contextChangeCallback = callback;
     }
 
@@ -266,7 +267,7 @@ public final class GLFWWindow implements Window {
     }
 
     @Override
-    public void setWindowMode(WindowMode mode) {
+    public void setWindowMode(final WindowMode mode) {
         if (this.mode == mode) {
             return;
         }
@@ -285,7 +286,7 @@ public final class GLFWWindow implements Window {
         }
     }
 
-    private final void goWindowed() {
+    private void goWindowed() {
         glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
         glfwWindowHint(GLFW_ACCUM_RED_BITS, 0);
@@ -304,12 +305,12 @@ public final class GLFWWindow implements Window {
         this.width = display.getWidth() / 3 * 2;
         this.height = display.getHeight() / 3 * 2;
         this.mode = WindowMode.WINDOWED;
-        performWindowChange(width, height);
+        switchToNewWindow(width, height);
 
         glfwSetWindowPos(window, display.getWidth() / 3, display.getHeight() / 3);
     }
 
-    private final void goFullscreen() {
+    private void goFullscreen() {
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
         glfwWindowHint(GLFW_ACCUM_RED_BITS, 0);
@@ -328,25 +329,38 @@ public final class GLFWWindow implements Window {
         this.width = display.getWidth();
         this.height = display.getHeight();
         this.mode = WindowMode.FULLSCREEN;
-        performWindowChange(display.getWidth(), display.getHeight());
+        switchToNewWindow(display.getWidth(), display.getHeight());
 
         glfwSetWindowPos(window, 0, 0);
     }
 
-    private final void performWindowChange(int width, int height) {
-        long newWindow = glfwCreateWindow(width, height, title, 0, window);
+    private void switchToNewWindow(final int width, final int height) {
+        // Release callbacks of the old window
+        if (framebufferCallback != null) {
+            framebufferCallback.release();
+        }
+        if (closeCallback != null) {
+            closeCallback.release();
+        }
+
+        // Create and switch to new window
+        final long newWindow = glfwCreateWindow(width, height, title, 0, window);
         glfwDestroyWindow(window);
         window = newWindow;
+        glfwMakeContextCurrent(window);
+
+        // Configure new window
         glfwSetWindowAspectRatio(window, 16, 9);
+        glfwShowWindow(window);
+        glfwSwapInterval(0);
+
+        // Set callbacks to new window
         glfwSetWindowCloseCallback(window, closeCallback);
         glfwSetFramebufferSizeCallback(window, framebufferCallback);
         glfwSetWindowPosCallback(window, positionCallback);
         glfwSetWindowSizeCallback(window, resizeCallback);
         glfwSetWindowCloseCallback(window, closeCallback);
-        // Make the window visible
-        glfwShowWindow(window);
-        glfwMakeContextCurrent(window);
-        glfwSwapInterval(0);
+
         if (contextChangeCallback != null) {
             contextChangeCallback.onContextChange(window);
         }

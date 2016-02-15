@@ -1,0 +1,15 @@
+package vine.gameplay.scene;
+
+public class SceneNode {
+    private SceneNode bottomLeft;
+    private SceneNode topLeft;
+    private SceneNode bottomRight;
+    private SceneNode topRight;
+
+    private SceneNode parent;
+
+    public SceneNode(SceneNode parent) {
+
+    }
+
+}

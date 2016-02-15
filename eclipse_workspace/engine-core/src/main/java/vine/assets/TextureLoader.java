@@ -15,15 +15,15 @@ import vine.util.FileUtils;
 public class TextureLoader extends AssetLoader<Texture2D, AssetLoaderParameters<Texture2D>> {
 
     @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<Texture2D> parameter) {
+    public void loadAsync(final AssetManager manager, final String fileName, final FileHandle file,
+            final AssetLoaderParameters<Texture2D> parameter) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public Texture2D loadSync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<Texture2D> parameter) {
+    public Texture2D loadSync(final AssetManager manager, final String fileName, final FileHandle file,
+            final AssetLoaderParameters<Texture2D> parameter) {
         BufferedImage image = null;
         try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readBytes(fileName))) {
             image = ImageIO.read(stream);

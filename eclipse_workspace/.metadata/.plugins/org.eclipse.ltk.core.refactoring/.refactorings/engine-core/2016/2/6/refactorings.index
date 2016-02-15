@@ -1,0 +1,22 @@
+1455146427123	Rename method 'performWindowChange'
+1455146569681	Rename field 'TRUE'
+1455231500890	Rename type 'SceneChunk'
+1455231508677	Rename type 'SceneChunkNode'
+1455231650365	Delete elements
+1455275751728	Rename type 'AssetDescriptor'
+1455281052819	Rename type 'Renderer'
+1455362110872	Rename local variable 'currentChunkx'
+1455362115332	Rename local variable 'currentChunky'
+1455381024650	Rename field 'halfHeight'
+1455381033956	Rename field 'halfWidth'
+1455381068319	Move compilation unit
+1455381526099	Rename method 'onPositionChange'
+1455472417202	Infer generic type arguments
+1455490747871	Delete element
+1455492171436	Delete element
+1455492412632	Rename field 'tempVertices'
+1455493064636	Rename method 'updateVerticeGridArray'
+1455493191403	Rename field 'lastX'
+1455493197442	Rename field 'lastY'
+1455493207784	Rename local variable 'startY'
+1455493213763	Rename local variable 'startX'

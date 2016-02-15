@@ -14,17 +14,17 @@ public class AssetManager {
      *            the asset type
      * @return the asset
      */
-    public synchronized <T> T get(String fileName, Class<T> type) {
+    public synchronized <T> T get(final String fileName, final Class<T> type) {
         final ObservedAsset<?> asset = assetsByType.get(type).get(fileName);
         if (asset != null && asset.getClass().equals(type)) {
             return (T) asset.getAsset();
         } else {
-            AssetLoader<T, AssetLoaderParameters<T>> loader = getLoader(type);
+            final AssetLoader<T, AssetLoaderParameters<T>> loader = getLoader(type);
             return loader.loadSync(this, fileName, null, null);
         }
     }
 
-    private <T> AssetLoader<T, AssetLoaderParameters<T>> getLoader(Class<T> type) {
+    private <T> AssetLoader<T, AssetLoaderParameters<T>> getLoader(final Class<T> type) {
         return null;
     }
 
@@ -35,7 +35,7 @@ public class AssetManager {
      * @param fileName
      *            the file name
      */
-    public synchronized void unload(String fileName) {
+    public synchronized void unload(final String fileName) {
 
     }
 }

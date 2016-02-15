@@ -5,7 +5,7 @@ public class AnimationState {
     private final AnimationClip clip;
     private float playbackSpeed;
 
-    public AnimationState(AnimationClip clip, String name, float playbackSpeed) {
+    public AnimationState(final AnimationClip clip, final String name, final float playbackSpeed) {
         this.name = name;
         this.clip = clip;
         this.playbackSpeed = playbackSpeed;

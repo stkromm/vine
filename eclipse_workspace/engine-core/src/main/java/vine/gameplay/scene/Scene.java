@@ -8,11 +8,8 @@ import java.util.Set;
 import vine.game.Game;
 import vine.gameplay.component.Camera;
 import vine.gameplay.component.StaticSprite;
-import vine.gameplay.entity.GameEntity;
 import vine.gameplay.entity.PlayerPawn;
-import vine.graphics.Graphics;
-import vine.graphics.Renderer;
-import vine.math.Matrix4f;
+import vine.graphics.SceneRenderer;
 import vine.tilemap.TileMap;
 
 /**
@@ -20,28 +17,68 @@ import vine.tilemap.TileMap;
  *
  */
 public class Scene {
-
-    /**
-     * 
-     */
-    protected final Renderer renderer = new Renderer();
+    protected Chunk[][] chunks;
     /**
      * 
      */
     public final CameraManager cameras = new CameraManager();
-    private final Graphics graphics = Game.getGame().getGraphics();
-    private Matrix4f cameraTranslation = Matrix4f.identity();
 
     /**
      * 
      */
     protected final Set<GameEntity> entities = new HashSet<>();
 
+    private Set<GameEntity> visibleSet = new HashSet<>();
+
+    private static final int HALF_CHUNK_WIDTH = 700;
+    private static final int HALF_CHUNK_HEIGHT = 400;
+
     /**
      * @return All entities that are rendered by this layer
      */
     public Set<GameEntity> getEntities() {
         return entities;
+    }
+
+    private long time;
+
+    /**
+     * @return
+     */
+    public Set<GameEntity> getVisibleEntities() {
+        if (System.currentTimeMillis() - time > 43) {
+            int x = (int) cameras.getActiveCamera().getEntity().getX() / 1400;
+            int y = (int) cameras.getActiveCamera().getEntity().getY() / 800;
+            x = 10 <= x ? 10 - 1 : x;
+            y = 10 <= y ? 10 - 1 : y;
+            x = x < 0 ? 0 : x;
+            y = y < 0 ? 0 : y;
+            int xMod = (int) cameras.getActiveCamera().getEntity().getX() % 1400;
+            int yMod = (int) cameras.getActiveCamera().getEntity().getY() % 800;
+            visibleSet.clear();
+            visibleSet.addAll(chunks[x][y].entities);
+            if (HALF_CHUNK_WIDTH > xMod && x > 0) {
+                visibleSet.addAll(chunks[x - 1][y].entities);
+            } else if (x < 9) {
+                visibleSet.addAll(chunks[x + 1][y].entities);
+            }
+            if (HALF_CHUNK_HEIGHT > yMod && y > 0) {
+                visibleSet.addAll(chunks[x][y - 1].entities);
+            } else if (y < 9) {
+                visibleSet.addAll(chunks[x][y + 1].entities);
+            }
+            if (xMod <= HALF_CHUNK_WIDTH && yMod <= HALF_CHUNK_HEIGHT && x > 0 && y > 0) {
+                visibleSet.addAll(chunks[x - 1][y - 1].entities);
+            } else if (xMod <= HALF_CHUNK_WIDTH && yMod > HALF_CHUNK_HEIGHT && x > 0 && y < 9) {
+                visibleSet.addAll(chunks[x - 1][y + 1].entities);
+            } else if (xMod > HALF_CHUNK_WIDTH && yMod > HALF_CHUNK_HEIGHT && x < 9 && y < 9) {
+                visibleSet.addAll(chunks[x + 1][y + 1].entities);
+            } else if (x < 9 && y > 0) {
+                visibleSet.addAll(chunks[x + 1][y - 1].entities);
+            }
+            time = System.currentTimeMillis();
+        }
+        return visibleSet;
     }
 
     /**
@@ -56,39 +93,38 @@ public class Scene {
         }
     }
 
-    public void setMap(TileMap map) {
-        renderer.submit(map);
-        this.add(map);
-    }
-
-    public final void render() {
-        renderer.clear();
-        renderer.submit(entities);
-        cameraTranslation.elements[0 + 3 * 4] = -cameras.getActiveCamera().getEntity().getX();
-        cameraTranslation.elements[1 + 3 * 4] = -cameras.getActiveCamera().getEntity().getY();
-        renderer.drawMap(Game.getGame().getScreen().getOrthographicProjection(), cameraTranslation);
-        renderer.drawEntities(Game.getGame().getScreen().getOrthographicProjection(), cameraTranslation);
-    }
-
     /**
      * @param level
      *            The asset name of the level
      * @return A newly created Scene.
      * @throws SceneCreationException
      */
-    public void loadScene(final String level) throws SceneCreationException {
-
-        Game.instantiate(TileMap.class, Integer.valueOf(2000), Integer.valueOf(1500));
+    public void loadScene(final String level) {
+        chunks = new Chunk[10][10];
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                chunks[i][j] = new Chunk();
+            }
+        }
+        TileMap map = Game.instantiate(TileMap.class, Integer.valueOf(2000), Integer.valueOf(1500));
+        add(map);
+        Game.getGame().getRenderer().submit(map);
+        for (int i = 0; i < 1000; i++) {
+            final GameEntity entity = Game.instantiate(GameEntity.class, Integer.valueOf((int) (Math.random() * 10000)),
+                    Integer.valueOf((int) (Math.random() * 10000)));
+            final StaticSprite sprite = Game.instantiate(StaticSprite.class, SceneRenderer.DEFAULT_TEXTURE,
+                    Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(16), Integer.valueOf(32));
+            entity.addComponent(sprite);
+            add(entity);
+        }
         final PlayerPawn entity = Game.instantiate(PlayerPawn.class, Integer.valueOf(1), Integer.valueOf(2));
-        final StaticSprite sprite = Game.instantiate(StaticSprite.class, Integer.valueOf(32), Integer.valueOf(64),
-                Renderer.DEFAULT_TEXTURE, Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(16),
-                Integer.valueOf(32));
+        final StaticSprite sprite = Game.instantiate(StaticSprite.class, SceneRenderer.DEFAULT_TEXTURE,
+                Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(16), Integer.valueOf(32));
         entity.addComponent(sprite);
         final Camera camera = cameras.instantiateCamera();
         entity.addComponent(camera);
         cameras.activate(camera);
         add(entity);
-        entity.setScene(this);
     }
 
     /**

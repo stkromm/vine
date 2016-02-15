@@ -31,16 +31,21 @@ public final class EventDispatcher {
         layers.addLast(layer);
     }
 
-    public void registerHandler(final GameObject object, EventType type) {
-        for (EventListener listener : layers) {
+    public void registerHandler(final GameObject object, final EventType type) {
+        for (final EventListener listener : layers) {
             if (listener.type == type) {
                 listener.addEventHandler(object);
             }
         }
     }
 
+    /**
+     * @param object
+     */
     public void unregisterHandler(final GameObject object) {
-
+        for (final EventListener listener : layers) {
+            listener.handler.remove(object);
+        }
     }
 
     /**

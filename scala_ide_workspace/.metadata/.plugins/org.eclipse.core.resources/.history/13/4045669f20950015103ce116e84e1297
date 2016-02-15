@@ -1,7 +1,0 @@
-package main
-
-object Appp extends App {
-  def main(args: Array[String]) {
-    println("ddd")
-  }
-}

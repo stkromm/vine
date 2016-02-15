@@ -4,14 +4,14 @@ class ObservedAsset<A> {
 
     @FunctionalInterface
     interface AssetRemover {
-        public void remove();
+        void remove();
     }
 
     private int refCount;
     private final A asset;
     private final AssetRemover remover;
 
-    ObservedAsset(A asset, AssetRemover remover) {
+    ObservedAsset(final A asset, final AssetRemover remover) {
         this.asset = asset;
         this.remover = remover;
     }

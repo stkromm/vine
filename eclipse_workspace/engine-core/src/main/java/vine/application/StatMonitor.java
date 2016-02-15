@@ -37,10 +37,10 @@ public final class StatMonitor {
         for (int i = 0; i < FRAME_DURATIONS.size(); i++) {
             frames += FRAME_DURATIONS.get(i).longValue();
         }
-        if(FRAME_DURATIONS.size()==0) {
+        if (FRAME_DURATIONS.isEmpty()) {
             return 0;
         }
-        return (float)1e9 / ( frames / FRAME_DURATIONS.size());
+        return (float) 1e9 / (frames / FRAME_DURATIONS.size());
     }
 
     /**

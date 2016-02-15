@@ -18,9 +18,10 @@ import vine.event.EventListener;
 import vine.game.GameObject.ReferenceManager;
 import vine.game.screen.GameScreen;
 import vine.game.screen.Screen;
+import vine.gameplay.scene.GameEntity;
 import vine.gameplay.scene.Scene;
-import vine.gameplay.scene.SceneCreationException;
 import vine.graphics.Graphics;
+import vine.graphics.SceneRenderer;
 import vine.settings.Configuration;
 import vine.window.Window;
 
@@ -44,10 +45,12 @@ public final class Game {
     /**
      * Used logger for gameplay logs.
      */
-    public static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
     private static Game runningGame = new Game();
 
-    private static float timer = 0;
+    private float timer = 0;
+
+    private float time;
 
     private Scene scene;
     private Screen screen;
@@ -55,7 +58,9 @@ public final class Game {
     private Graphics graphics;
     private Configuration configuration;
 
-    protected Set<GameObject> updateList = new HashSet<>();
+    protected SceneRenderer renderer;
+    protected final Set<GameObject> updateList = new HashSet<>(1000);
+    private static boolean paused;
 
     private Game() {
 
@@ -75,8 +80,8 @@ public final class Game {
     /**
      * @return
      */
-    public static Configuration getSettings() {
-        return runningGame.configuration;
+    public Configuration getSettings() {
+        return configuration;
     }
 
     /**
@@ -100,11 +105,27 @@ public final class Game {
         return graphics;
     }
 
+    public SceneRenderer getRenderer() {
+        return renderer;
+    }
+
     /**
      * @param delta
      *            The time that passed since the last update
      */
-    static void update(final float delta) {
+    void update(final float delta) {
+        if (paused) {
+            return;
+        }
+        time += delta > 1000 ? 16 : delta;
+        if (time > 16) {
+            time *= 0.001f;
+            for (final GameEntity entity : scene.getEntities()) {
+                entity.updatePhysics(time);
+            }
+            time = 0;
+        }
+
         timer += delta;
         if (timer > 1000) {
             timer = 0;
@@ -115,7 +136,7 @@ public final class Game {
                         + "\n");
             }
         }
-        for (GameObject object : runningGame.updateList) {
+        for (final GameObject object : updateList) {
             object.update(delta);
         }
     }
@@ -123,8 +144,8 @@ public final class Game {
     /**
      * 
      */
-    static void render() {
-        runningGame.scene.render();
+    void render() {
+        renderer.renderScene(scene);
     }
 
     /**
@@ -136,9 +157,11 @@ public final class Game {
      *            The graphics provider used to render the game
      */
     static void init(final Window window, final Graphics graphics) {
+        paused = true;
         runningGame.screen = new GameScreen(window, 1280, 720);
         runningGame.graphics = graphics;
         runningGame.eventDispatcher = new EventDispatcher();
+        runningGame.renderer = new SceneRenderer();
 
         Game.getGame().getEventDispatcher().registerListener(new EventListener(EventType.KEY));
         Game.getGame().getEventDispatcher().registerListener(new EventListener(EventType.MOUSE_BUTTON));
@@ -147,27 +170,23 @@ public final class Game {
         runningGame.configuration = new Configuration("res/settings.ini");
         runningGame.scene = new Scene();
 
-        changeLevel("default-level");
+        runningGame.changeLevel("default-level");
+
+        paused = false;
     }
 
     /**
      * @param level
      *            The asset name of the level that should be loaded.
      */
-    public static void changeLevel(final String level) {
+    public void changeLevel(final String level) {
         getObjectsByType(GameObject.class).stream().forEach(object -> {
             if (!object.isLevelPeristent()) {
                 object.destroy();
             }
         });
-        try {
-            runningGame.scene.loadScene(level);
-        } catch (SceneCreationException e) {
-            if (LOGGER.isErrorEnabled()) {
-                LOGGER.error("Failed to create scene " + level, e);
-            }
-        }
-
+        scene.loadScene(level);
+        System.out.println(GameObject.ReferenceManager.OBJECTS.keySet().size());
     }
 
     /**
@@ -223,5 +242,4 @@ public final class Game {
     public static GameObject getObjectByName(final String name) {
         return ReferenceManager.OBJECTS.get(name);
     }
-
 }

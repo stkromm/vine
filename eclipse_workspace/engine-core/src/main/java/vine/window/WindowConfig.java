@@ -8,15 +8,15 @@ import vine.settings.SettingHandler;
 
 public class WindowConfig extends Configurable {
 
-    public WindowConfig(Window window) {
-        if(window == null) {
+    public WindowConfig(final Window window) {
+        if (window == null) {
             throw new IllegalArgumentException("The window of WindowConfig must be valid.");
         }
         final SettingHandler mode = windowModeHandler(window);
         this.properties.put(mode.getKey(), mode);
     }
 
-    private final SettingHandler windowModeHandler(Window window) {
+    private final SettingHandler windowModeHandler(final Window window) {
         return new SettingHandler() {
             private WindowMode value = WindowMode.WINDOWED;
 

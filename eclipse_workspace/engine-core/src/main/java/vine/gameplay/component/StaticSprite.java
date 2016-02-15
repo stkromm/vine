@@ -10,16 +10,7 @@ import vine.graphics.Texture2D;
 public class StaticSprite extends Component implements Sprite { // NOSONAR
 
     private Texture2D texture;
-    private float[] vertices;
     private float[] textureUVs;
-
-    /**
-     * @return The vertices array of the sprite.
-     */
-    @Override
-    public final float[] getVertices() {
-        return vertices.clone();
-    }
 
     /**
      * @return
@@ -27,11 +18,6 @@ public class StaticSprite extends Component implements Sprite { // NOSONAR
     @Override
     public final float[] getUVCoordinates() {
         return textureUVs.clone();
-    }
-
-    @Override
-    public int[] getIndices() {
-        return new int[] { 0, 1, 2, 2, 3, 0 };
     }
 
     /**
@@ -43,9 +29,8 @@ public class StaticSprite extends Component implements Sprite { // NOSONAR
      * @param texWidth
      * @param texHeight
      */
-    public void construct(final int worldWidth, final int worldHeight, final Texture2D texture, final int texX,
-            final int texY, final int texWidth, final int texHeight) {
-        vertices = new float[] { 0, 0, 0, 0, worldHeight, 0, worldWidth, worldHeight, 0, worldWidth, 0, 0, };
+    public void construct(final Texture2D texture, final int texX, final int texY, final int texWidth,
+            final int texHeight) {
         this.texture = texture;
         textureUVs = texture.getUVSquad(texX, texY, texWidth, texHeight);
     }

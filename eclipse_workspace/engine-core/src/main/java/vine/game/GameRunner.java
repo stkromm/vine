@@ -50,22 +50,24 @@ public class GameRunner {
         final long maxFrameDuration = 13L * (long) 1e6;
         long currentTime = 0;
 
+        final Game game = Game.getGame();
         while (running) {
             if (!idle) {
                 input.pollEvents();
-                Game.update((System.nanoTime() - currentTime) / (float) 1e6);
+                game.update((System.nanoTime() - currentTime) / (float) 1e6);
             }
             currentTime = System.nanoTime();
             StatMonitor.newFrame();
             graphics.clearBuffer();
 
-            Game.getGame().getScene().render();
+            game.render();
             graphics.swapBuffer();
             if (window.requestedClose()) {
                 running = false;
             }
 
-            //waitForNextTick((int) (maxFrameDuration - System.nanoTime() + currentTime));
+            // waitForNextTick((int) (maxFrameDuration - System.nanoTime() +
+            // currentTime));
         }
     }
 

@@ -1,0 +1,27 @@
+package vine.tilemap;
+
+public class GridCalculator {
+
+    float[] squadVertices = new float[12];
+
+    verticeGridCalc.updateVerticeGridArray(i,j,startX,startY,screenxTiles,vertices);
+
+    }}
+
+    public void updateVerticeGridArray(int startX, int startY, int width, int height, float[] vertices) {
+        for (int i = startX; i < startX + width; i++) {
+            for (int j = startY; j < startY + height; j++) {
+                final int index = (i - startX) + (j - startY) * width;
+                squadVertices[0] = i * 32.f;
+                squadVertices[1] = j * 32.f;
+                squadVertices[3] = i * 32.f;
+                squadVertices[4] = j * 32.f + 32;
+                squadVertices[6] = i * 32.f + 32;
+                squadVertices[7] = j * 32.f + 32;
+                squadVertices[9] = i * 32.f + 32;
+                squadVertices[10] = j * 32.f;
+                System.arraycopy(squadVertices, 0, vertices, index * 12, 12);
+            }
+        }
+    }
+}

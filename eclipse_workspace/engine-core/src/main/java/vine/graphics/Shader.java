@@ -53,7 +53,7 @@ public class Shader {
      * @param fragPath
      *            The file path to the fragment shader code
      */
-    public Shader(int id, Graphics graphics) {
+    public Shader(final int id, final Graphics graphics) {
         this.id = id;
         this.graphics = graphics;
         setProperties();
@@ -73,7 +73,7 @@ public class Shader {
      *            uniform name
      * @return the stored uniform
      */
-    public int getUniform(String name) {
+    public int getUniform(final String name) {
         if (locationCache.containsKey(name)) {
             return locationCache.get(name);
         }

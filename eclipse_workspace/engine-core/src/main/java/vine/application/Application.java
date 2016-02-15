@@ -19,7 +19,7 @@ import vine.window.WindowConfig;
  *
  */
 public final class Application {
-    private static final Application application = new Application();
+    private static final Application INSTANCE = new Application();
     /**
      * vine.application package logger.
      */
@@ -40,7 +40,7 @@ public final class Application {
     public static void main(final String... args) {
         // BasicConfigurator replaced with PropertyConfigurator.
         PropertyConfigurator.configure("src/main/java/log4j.properties");
-        Application.application.run();
+        Application.INSTANCE.run();
     }
 
     /**
@@ -50,7 +50,7 @@ public final class Application {
         LOGGER.info("Started application");
         LOGGER.info("Resolving application platform dependencies.");
         LOGGER.info("Checking display device.");
-        Display display = PlatformDependencyResolver.getDisplay();
+        final Display display = PlatformDependencyResolver.getDisplay();
         LOGGER.info("Creating system application window.");
         final Window window = PlatformDependencyResolver.getPlatformWindow(display);
         LOGGER.info("Checking input devices.");
@@ -86,7 +86,7 @@ public final class Application {
         } , "shutdown"));
 
         LOGGER.info("Start the game");
-        final GameRunner runner = new GameRunner(application);
+        final GameRunner runner = new GameRunner(INSTANCE);
         runner.run(window, input, graphics);
     }
 

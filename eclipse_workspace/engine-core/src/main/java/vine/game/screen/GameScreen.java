@@ -1,6 +1,7 @@
 package vine.game.screen;
 
 import vine.math.Matrix4f;
+import vine.math.geometry.Rectangle;
 import vine.window.Window;
 
 /**
@@ -30,11 +31,12 @@ public class GameScreen implements Screen {
         this.width = width;
         calculateViewport();
         calculateProjection();
+
     }
 
     private final void calculateProjection() {
         this.projection = Matrix4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
-        
+
     }
 
     private final void calculateViewport() {
@@ -97,4 +99,5 @@ public class GameScreen implements Screen {
         calculateViewport();
         calculateProjection();
     }
+
 }

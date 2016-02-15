@@ -1,7 +1,0 @@
-package vine.settings.test;
-
-import vine.settings.Configurable;
-
-public class TestConfig extends Configurable {
-    
-}

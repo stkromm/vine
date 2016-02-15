@@ -4,6 +4,7 @@ import org.lwjgl.glfw.GLFW;
 
 import vine.event.KeyEvent;
 import vine.game.Game;
+import vine.gameplay.scene.GameEntity;
 import vine.input.InputAction;
 import vine.sound.SoundClip;
 
@@ -17,8 +18,7 @@ public class PlayerPawn extends GameEntity {
 
     @Override
     public strictfp void update(final float delta) {
-        this.position.add(velocity.getX() / 50 * delta, velocity.getY() / 50 * delta, 0);
-
+        super.update(delta);
     }
 
     private void onMoveButtonReleased(final int button) {
@@ -36,11 +36,16 @@ public class PlayerPawn extends GameEntity {
             velocity.setY(velocity.getY() < 64 ? velocity.getY() + 64 : 64);
             break;
         case GLFW.GLFW_KEY_F:
-            Game.changeLevel("");
+            Game.getGame().changeLevel("");
             break;
         default:
             break;
         }
+    }
+
+    @Override
+    public void updatePhysics(final float delta) {
+        super.updatePhysics(delta * 10);
     }
 
     private void onMoveButtonPressed(final int button) {
@@ -72,9 +77,17 @@ public class PlayerPawn extends GameEntity {
         return true;
     }
 
+    /**
+     * @param x
+     * @param y
+     */
     public void construct(final int x, final int y) {
-        this.position.add(0, 0, 0.5f);
-        sound = new SoundClip("E:\\Sound\\click4.wav");
+        super.construct(x, y);
+        this.velocity.setX(0);
+        this.velocity.setY(0);
+        this.position.add(0, 0);
+        sound = new SoundClip("E:\\Sounds\\music.wav");
         sound.playLooped();
     }
+
 }

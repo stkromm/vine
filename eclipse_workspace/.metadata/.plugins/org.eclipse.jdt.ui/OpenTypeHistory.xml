@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-<typeInfo handle="=engine-core/C:\/Program Files\/Java\/jre1.8.0_66\/lib\/rt.jar&lt;java.lang(Iterable.class[Iterable" modifiers="1537" timestamp="1451406721112"/>
-<typeInfo handle="=engine-core/C:\/Program Files\/Java\/jre1.8.0_66\/lib\/rt.jar&lt;javax.swing.text.html.parser(Entity.class[Entity" modifiers="49" timestamp="1451406721112"/>
-<typeInfo handle="=engine-core/C:\/Program Files\/Java\/jre1.8.0_66\/lib\/rt.jar&lt;java.nio(FloatBuffer.class[FloatBuffer" modifiers="1057" timestamp="1451406721112"/>
-<typeInfo handle="=engine-core/C:\/Program Files\/Java\/jre1.8.0_66\/lib\/rt.jar&lt;java.util.concurrent(ScheduledExecutorService.class[ScheduledExecutorService" modifiers="1537" timestamp="1451406721112"/>
-<typeInfo handle="=engine-core/C:\/Program Files\/Java\/jre1.8.0_66\/lib\/rt.jar&lt;java.lang(Exception.class[Exception" modifiers="1" timestamp="1451406721112"/>
-<typeInfo handle="=engine-core/src\/main\/java&lt;vine.assets{TextureLoader.java[TextureLoader" modifiers="1" timestamp="1454512535565"/>
+<typeInfo handle="=engine-core/src\/main\/java&lt;vine.assets{TextureLoader.java[TextureLoader" modifiers="1" timestamp="1455273624663"/>
 <typeInfo handle="=engine-core/src\/main\/java&lt;vine.assets{AssetLoader.java[AssetLoader" modifiers="1025" timestamp="1454109630587"/>
-<typeInfo handle="=engine-core/src\/main\/java&lt;vine.settings{Configurable.java[Configurable" modifiers="1025" timestamp="1454023025156"/>
-<typeInfo handle="=engine-core/src\/main\/java&lt;vine.gameplay.entity{GameEntity.java[GameEntity" modifiers="1" timestamp="1454671298953"/>
+<typeInfo handle="=engine-core/src\/main\/java&lt;vine.settings{Configurable.java[Configurable" modifiers="1" timestamp="1454948635697"/>
+<typeInfo handle="=engine-core/src\/main\/java&lt;vine.gameplay.scene{Scene.java[Scene" modifiers="1" timestamp="1455475604210"/>
 </typeInfoHistroy>

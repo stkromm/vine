@@ -14,7 +14,7 @@ public class AnimationStateManager {
         }
 
         states = new HashMap<>();
-        for (AnimationState state : animation) {
+        for (final AnimationState state : animation) {
             states.put(state.getName(), state);
         }
     }

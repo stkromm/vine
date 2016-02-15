@@ -8,7 +8,7 @@ import vine.animation.AnimationClip;
 import vine.animation.AnimationFrame;
 import vine.animation.AnimationState;
 import vine.animation.AnimationStateManager;
-import vine.graphics.Renderer;
+import vine.graphics.SceneRenderer;
 
 public class AnimationClipTest {
 

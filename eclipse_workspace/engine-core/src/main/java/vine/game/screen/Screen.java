@@ -1,6 +1,7 @@
 package vine.game.screen;
 
 import vine.math.Matrix4f;
+import vine.math.geometry.Rectangle;
 
 /**
  * @author Steffen
@@ -50,4 +51,5 @@ public interface Screen {
     float getUnitsPerPixel();
 
     void setHeight(int height);
+
 }

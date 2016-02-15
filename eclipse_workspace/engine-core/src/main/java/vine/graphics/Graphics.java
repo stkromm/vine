@@ -89,4 +89,6 @@ public interface Graphics {
     void reallocateVerticeData(int vbo, FloatBuffer vertices);
 
     void reallocateTextureData(int tbo, FloatBuffer uvBuffer);
+
+    void reallocateIndicesData(int ibo, IntBuffer indicesBuffer);
 }

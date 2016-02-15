@@ -1,8 +1,8 @@
 package vine.event;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 import vine.event.Event.EventType;
 import vine.game.GameObject;
@@ -20,14 +20,14 @@ public class EventListener {
     /**
      * 
      */
-    public final List<GameObject> handler;
+    public final Set<GameObject> handler;
 
     /**
      * @param key
      * 
      */
-    public EventListener(EventType key) {
-        handler = new ArrayList<>();
+    public EventListener(final EventType key) {
+        handler = new HashSet<>();
         type = key;
     }
 

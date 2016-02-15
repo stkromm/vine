@@ -1,0 +1,15 @@
+package vine.gameplay.scene;
+
+public class SceneChunkNode {
+    private SceneChunkNode bottomLeft;
+    private SceneChunkNode topLeft;
+    private SceneChunkNode bottomRight;
+    private SceneChunkNode topRight;
+
+    private SceneChunkNode parent;
+
+    public SceneChunkNode(SceneChunkNode parent) {
+
+    }
+
+}

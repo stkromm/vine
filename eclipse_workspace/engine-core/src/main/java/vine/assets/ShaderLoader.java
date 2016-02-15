@@ -24,15 +24,15 @@ import vine.graphics.Shader;
 public class ShaderLoader extends AssetLoader<Shader, AssetLoaderParameters<Shader>> {
 
     @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<Shader> parameter) {
+    public void loadAsync(final AssetManager manager, final String fileName, final FileHandle file,
+            final AssetLoaderParameters<Shader> parameter) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public Shader loadSync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<Shader> parameter) {
+    public Shader loadSync(final AssetManager manager, final String fileName, final FileHandle file,
+            final AssetLoaderParameters<Shader> parameter) {
         final String frag = "#version 330 core\n" + "layout (location = 0) out vec4 color;" + "in DATA{"
                 + "  vec2 tc;       vec3 position;" + "} fs_in;" + "uniform sampler2D tex;\n" + "void main() {\n"
                 + " color = texture(tex, fs_in.tc);\n" + "}";

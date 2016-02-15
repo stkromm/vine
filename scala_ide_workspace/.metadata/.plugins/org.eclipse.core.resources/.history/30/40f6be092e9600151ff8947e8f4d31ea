@@ -1,7 +1,0 @@
-package main
-
-abstract class Renderer {
-  def init
-  def render
-  def exit: Boolean
-}

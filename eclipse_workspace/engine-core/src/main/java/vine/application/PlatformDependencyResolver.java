@@ -6,7 +6,6 @@ import vine.display.Display;
 import vine.graphics.Graphics;
 import vine.input.Input;
 import vine.window.Window;
-import vine.window.WindowCreationException;
 
 /**
  * @author Steffen
@@ -23,7 +22,7 @@ public final class PlatformDependencyResolver {
      *            The display that is used to contain the window
      * @return The platform dependent implementation of window.
      */
-    public static Window getPlatformWindow(Display display) {
+    public static Window getPlatformWindow(final Display display) {
         try {
             return (Window) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWWindow")
                     .getConstructor(Display.class).newInstance(display);

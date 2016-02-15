@@ -103,17 +103,17 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public void bindTexture2D(int id) {
+    public void bindTexture2D(final int id) {
         glBindTexture(GL_TEXTURE_2D, id);
     }
 
     @Override
-    public void setTextureParameter(int parameter, int value) {
+    public void setTextureParameter(final int parameter, final int value) {
         glTexParameteri(GL_TEXTURE_2D, parameter, value);
     }
 
     @Override
-    public void createRgbaTexture2D(int width, int height, int[] data) {
+    public void createRgbaTexture2D(final int width, final int height, final int[] data) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE,
                 BufferConverter.createIntBuffer(data));
     }
@@ -124,27 +124,27 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public int getUniformLocation(int id, String name) {
+    public int getUniformLocation(final int id, final String name) {
         return glGetUniformLocation(id, name);
     }
 
     @Override
-    public void storeUniformInt(int location, int value) {
+    public void storeUniformInt(final int location, final int value) {
         glUniform1i(location, value);
     }
 
     @Override
-    public void storeUniformVector3f(int location, Vector3f vector) {
+    public void storeUniformVector3f(final int location, final Vector3f vector) {
         glUniform3f(location, vector.getX(), vector.getY(), vector.getZ());
     }
 
     @Override
-    public void storeUniformMatrix4f(int location, Matrix4f matrix) {
+    public void storeUniformMatrix4f(final int location, final Matrix4f matrix) {
         glUniformMatrix4fv(location, false, BufferConverter.createFloatBuffer(matrix.elements));
     }
 
     @Override
-    public void bindShader(int id) {
+    public void bindShader(final int id) {
         glUseProgram(id);
 
     }
@@ -155,12 +155,12 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public void bindArrayBuffer(int id) {
+    public void bindArrayBuffer(final int id) {
         glBindBuffer(GL_ARRAY_BUFFER, id);
     }
 
     @Override
-    public void bindVertexData(int bufferId, FloatBuffer vertices) {
+    public void bindVertexData(final int bufferId, final FloatBuffer vertices) {
         glBindBuffer(GL_ARRAY_BUFFER, bufferId);
         glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
         glVertexAttribPointer(Shader.VERTEX_ATTRIB, 3, GL_FLOAT, false, 0, 0);
@@ -168,7 +168,7 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public void bindTextureData(int bufferId, FloatBuffer uvs) {
+    public void bindTextureData(final int bufferId, final FloatBuffer uvs) {
         glBindBuffer(GL_ARRAY_BUFFER, bufferId);
         glBufferData(GL_ARRAY_BUFFER, uvs, GL_DYNAMIC_DRAW);
         glVertexAttribPointer(Shader.TCOORD_ATTRIB, 2, GL_FLOAT, false, 0, 0);
@@ -176,7 +176,7 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public void bindIndexData(int bufferId, IntBuffer indices) {
+    public void bindIndexData(final int bufferId, final IntBuffer indices) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bufferId);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices, GL_STATIC_DRAW);
     }
@@ -187,34 +187,40 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public void bindVertexArray(int id) {
+    public void bindVertexArray(final int id) {
         glBindVertexArray(id);
     }
 
     @Override
-    public void drawElements(int count) {
+    public void drawElements(final int count) {
         glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_INT, 0);
     }
 
     @Override
-    public void drawArrays(int count) {
+    public void drawArrays(final int count) {
         glDrawArrays(GL_TRIANGLES, 0, count);
     }
 
     @Override
-    public void bindElementArrayBuffer(int id) {
+    public void bindElementArrayBuffer(final int id) {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
     }
 
     @Override
-    public void reallocateVerticeData(int vbo, FloatBuffer vertices) {
+    public void reallocateVerticeData(final int vbo, final FloatBuffer vertices) {
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
     }
 
     @Override
-    public void reallocateTextureData(int tbo, FloatBuffer uvBuffer) {
+    public void reallocateTextureData(final int tbo, final FloatBuffer uvBuffer) {
         glBindBuffer(GL_ARRAY_BUFFER, tbo);
         glBufferSubData(GL_ARRAY_BUFFER, 0, uvBuffer);
+    }
+
+    @Override
+    public void reallocateIndicesData(int ibo, IntBuffer indicesBuffer) {
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, indicesBuffer);
     }
 }

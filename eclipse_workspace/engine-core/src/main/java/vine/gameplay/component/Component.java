@@ -1,7 +1,7 @@
 package vine.gameplay.component;
 
 import vine.game.GameObject;
-import vine.gameplay.entity.GameEntity;
+import vine.gameplay.scene.GameEntity;
 
 /**
  * @author Steffen

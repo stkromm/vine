@@ -1,7 +1,0 @@
-package core
-
-import util.UnitSpec
-import core.Game
-
-class GameSpec extends UnitSpec {
-}
