@@ -20,7 +20,7 @@ public class AnimationClip {
      */
     public final AnimationFrame getFrame(final float time) {
         int frameId = 0;
-        while (frames[frameId].getDuration() < time) {
+        while (frames[frameId].getDuration() < time && frameId < frames.length) {
             ++frameId;
         }
         return frames[frameId];

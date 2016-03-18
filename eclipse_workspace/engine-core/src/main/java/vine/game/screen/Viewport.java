@@ -65,5 +65,4 @@ public class Viewport {
     protected void setTopOffset(final int topOffset) {
         this.topOffset = topOffset;
     }
-
 }

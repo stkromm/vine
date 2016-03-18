@@ -1,13 +1,8 @@
 package vine.game.screen;
 
 import vine.math.Matrix4f;
-import vine.math.geometry.Rectangle;
 import vine.window.Window;
 
-/**
- * @author Steffen
- *
- */
 public class GameScreen implements Screen {
 
     private final Window window;
@@ -15,7 +10,7 @@ public class GameScreen implements Screen {
     private int height;
     private int width;
     private float aspect;
-    private Matrix4f projection;
+    private volatile Matrix4f projection;
 
     /**
      * @param window

@@ -2,6 +2,7 @@ package vine.gameplay.component;
 
 import vine.animation.AnimationState;
 import vine.animation.AnimationStateManager;
+import vine.game.Component;
 import vine.graphics.Sprite;
 import vine.graphics.Texture2D;
 

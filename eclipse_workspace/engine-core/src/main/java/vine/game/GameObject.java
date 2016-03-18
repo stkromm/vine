@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import vine.event.Event.EventType;
+import vine.application.GameLifecycle;
 import vine.event.KeyEvent;
 import vine.event.MouseButtonEvent;
 import vine.reflection.VineClass;
@@ -121,12 +122,15 @@ public abstract class GameObject {
             // Remove the hardreference of the gameobject
             ReferenceManager.OBJECTS.remove(name);
             // Remove from event listener
-            Game.getGame().getEventDispatcher().unregisterHandler(this);
+            final Game game = GameLifecycle.getRunningGame();
+            if (game.getEventDispatcher() != null)
+                game.getEventDispatcher().unregisterHandler(name);
             // Remove from the scene if it's an entity
             // Game.getGame().getScene().removeEntity(this);
 
             // Remove from updates
-            Game.getGame().updateList.remove(this);
+            if (game.updateList != null)
+                game.updateList.remove(this);
         }
     }
 
@@ -239,13 +243,15 @@ public abstract class GameObject {
                 objectClass.getMethodByName(CONSTRUCT_METHOD)
                         .ifPresent(method -> VineMethodUtils.invokeMethodOn(method, object, params));
                 if (objectClass.hasMethodImplemented(GameObject.KEY_EVENT_METHOD, KeyEvent.class)) {
-                    Game.getGame().getEventDispatcher().registerHandler(object, EventType.KEY);
+                    GameLifecycle.getRunningGame().getEventDispatcher().registerHandler(object.getName(),
+                            event -> object.onKeyEvent((KeyEvent) event), EventType.KEY);
                 }
                 if (objectClass.hasMethodImplemented("update", float.class)) {
-                    Game.getGame().updateList.add(object);
+                    GameLifecycle.getRunningGame().updateList.add(object);
                 }
                 if (objectClass.hasMethodImplemented(GameObject.MOUSE_BUTTON_EVENT_METHOD, MouseButtonEvent.class)) {
-                    Game.getGame().getEventDispatcher().registerHandler(object, EventType.MOUSE_BUTTON);
+                    GameLifecycle.getRunningGame().getEventDispatcher().registerHandler(object.getName(),
+                            event -> object.onMouseButtonEvent((MouseButtonEvent) event), EventType.MOUSE_BUTTON);
                 }
             }
             return object;

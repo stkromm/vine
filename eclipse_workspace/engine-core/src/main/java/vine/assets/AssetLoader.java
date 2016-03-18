@@ -1,6 +1,16 @@
 package vine.assets;
 
 public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>> {
+    @FunctionalInterface
+    public interface FinishCallback<A> {
+        void finished(A asset);
+    }
+
+    @FunctionalInterface
+    public interface ProgressCallback {
+        void onProgressUpdate(float percent);
+    }
+
     /**
      * Loads the non-OpenGL part of the asset and injects any dependencies of
      * the asset into the AssetManager.
@@ -13,7 +23,8 @@ public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>> {
      * @param parameter
      *            the parameters to use for loading the asset
      */
-    public abstract void loadAsync(AssetManager manager, String fileName, FileHandle file, P parameter);
+    public abstract void loadAsync(AssetManager manager, String fileName, FileHandle file, P parameter,
+            FinishCallback callback, ProgressCallback progessCallback);
 
     /**
      * Loads the OpenGL part of the asset.
@@ -24,5 +35,6 @@ public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>> {
      *            the resolved file to load
      * @param parameter
      */
-    public abstract A loadSync(AssetManager manager, String fileName, FileHandle file, P parameter);
+    public abstract A loadSync(AssetManager manager, String fileName, FileHandle file, P parameter,
+            ProgressCallback callback);
 }

@@ -1,9 +1,5 @@
 package vine.input;
 
-import vine.event.EventDispatcher;
-import vine.event.KeyEvent;
-import vine.event.MouseButtonEvent;
-
 /**
  * @author Steffen
  *
@@ -24,17 +20,17 @@ public final class InputMapper {
      * 
      * @param keycode
      *            Maps to the current key state.
-     * @param value
+     * @param action
      *            Signals, that the key with the given keycode is pressed.
      */
-    private static void setKeyPressed(final int keycode, final boolean value) {
-        KEYS[keycode] = value;
+    public static void setKeyPressed(final int keycode, final InputAction action) {
+        KEYS[keycode] = InputAction.isReleaseAction(action);
     }
 
     /**
      * @return Returns the absolute number of possible different keys.
      */
-    private static int getNumberOfKeys() {
+    public static int getNumberOfKeys() {
         return KEYS.length;
     }
 
@@ -54,27 +50,4 @@ public final class InputMapper {
         }
     }
 
-    /**
-     * @param input
-     * @param dispatcher
-     */
-    public static void initInput(final Input input, final EventDispatcher dispatcher) {
-        input.setKeyCallback((win, key, scancode, action, mods) -> {
-            if (getNumberOfKeys() > key && key >= 0) {
-                setKeyPressed(key, InputAction.isReleaseAction(action));
-            }
-            dispatcher.dispatch(new KeyEvent(key, scancode, action, mods));
-        });
-        input.setMouseButtonCallback((win, key, action, mods) -> {
-            dispatcher.dispatch(new MouseButtonEvent(key, action, mods, input.getCursorX(), input.getCursorY()));
-        });
-        input.setCharModCallback((context, id, mod) -> {
-        });
-        input.setCharCallback((context, id) -> {
-        });
-        input.setCursorPositionCallback((context, x, y) -> {
-        });
-        input.setScrollCallback((context, x, y) -> {
-        });
-    }
 }

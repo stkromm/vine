@@ -97,6 +97,8 @@ public final class GLFWWindow implements Window {
         this.display = display;
         errorCallback = GLFWErrorCallback.createPrint();
         glfwSetErrorCallback(errorCallback);
+        // Create GLFW window
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
         if (window == 0) {
             window = glfwCreateWindow(display.getWidth() / 2, display.getHeight() / 2, title, 0, 0);
@@ -185,7 +187,7 @@ public final class GLFWWindow implements Window {
     @Override
     public void setSizeCallback(final SizeCallback callback) {
         if (resizeCallback != null) {
-            resizeCallback.release();
+            resizeCallback.free();
         }
         resizeCallback = GLFWWindowSizeCallback.create((win, w, h) -> {
             callback.onSizeChange(w, h);
@@ -198,7 +200,7 @@ public final class GLFWWindow implements Window {
     @Override
     public void setPositionCallback(final PositionCallback callback) {
         if (positionCallback != null) {
-            positionCallback.release();
+            positionCallback.free();
         }
         positionCallback = GLFWWindowPosCallback.create((win, w, h) -> {
             callback.onPositionChange(w, h);
@@ -211,7 +213,7 @@ public final class GLFWWindow implements Window {
     @Override
     public void setFramebufferSizeCallback(final FramebufferSizeCallback callback) {
         if (framebufferCallback != null) {
-            framebufferCallback.release();
+            framebufferCallback.free();
         }
         framebufferCallback = GLFWFramebufferSizeCallback.create((win, w, h) -> {
             callback.onFramebufferSizeChange(w, h);
@@ -224,7 +226,7 @@ public final class GLFWWindow implements Window {
     @Override
     public void setCloseCallback(final CloseCallback callback) {
         if (closeCallback != null) {
-            closeCallback.release();
+            closeCallback.free();
         }
         closeCallback = GLFWWindowCloseCallback.create(context -> callback.onCloseRequest());
         glfwSetWindowCloseCallback(window, closeCallback);
@@ -289,19 +291,6 @@ public final class GLFWWindow implements Window {
     private void goWindowed() {
         glfwWindowHint(GLFW_DECORATED, GLFW_TRUE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_ACCUM_RED_BITS, 0);
-        glfwWindowHint(GLFW_ACCUM_GREEN_BITS, 0);
-        glfwWindowHint(GLFW_ACCUM_BLUE_BITS, 0);
-        glfwWindowHint(GLFW_ACCUM_ALPHA_BITS, 0);
-        glfwWindowHint(GLFW_AUX_BUFFERS, 0);
-        glfwWindowHint(GLFW_SAMPLES, 0);
-        glfwWindowHint(GLFW_RED_BITS, display.getRedBits());
-        glfwWindowHint(GLFW_GREEN_BITS, display.getGreenBits());
-        glfwWindowHint(GLFW_BLUE_BITS, display.getBlueBits());
-        glfwWindowHint(GLFW_ALPHA_BITS, 8);
-        glfwWindowHint(GLFW_DEPTH_BITS, 24);
-        glfwWindowHint(GLFW_STENCIL_BITS, 8);
-        glfwWindowHint(GLFW_REFRESH_RATE, display.getRefreshRate());
         this.width = display.getWidth() / 3 * 2;
         this.height = display.getHeight() / 3 * 2;
         this.mode = WindowMode.WINDOWED;
@@ -313,6 +302,22 @@ public final class GLFWWindow implements Window {
     private void goFullscreen() {
         glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
         glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+        this.width = display.getWidth();
+        this.height = display.getHeight();
+        this.mode = WindowMode.FULLSCREEN;
+        switchToNewWindow(display.getWidth(), display.getHeight());
+
+        glfwSetWindowPos(window, 0, 0);
+    }
+
+    private void switchToNewWindow(final int width, final int height) {
+        // Release callbacks of the old window
+        if (framebufferCallback != null) {
+            framebufferCallback.free();
+        }
+        if (closeCallback != null) {
+            closeCallback.free();
+        }
         glfwWindowHint(GLFW_ACCUM_RED_BITS, 0);
         glfwWindowHint(GLFW_ACCUM_GREEN_BITS, 0);
         glfwWindowHint(GLFW_ACCUM_BLUE_BITS, 0);
@@ -326,22 +331,6 @@ public final class GLFWWindow implements Window {
         glfwWindowHint(GLFW_DEPTH_BITS, 24);
         glfwWindowHint(GLFW_STENCIL_BITS, 8);
         glfwWindowHint(GLFW_REFRESH_RATE, display.getRefreshRate());
-        this.width = display.getWidth();
-        this.height = display.getHeight();
-        this.mode = WindowMode.FULLSCREEN;
-        switchToNewWindow(display.getWidth(), display.getHeight());
-
-        glfwSetWindowPos(window, 0, 0);
-    }
-
-    private void switchToNewWindow(final int width, final int height) {
-        // Release callbacks of the old window
-        if (framebufferCallback != null) {
-            framebufferCallback.release();
-        }
-        if (closeCallback != null) {
-            closeCallback.release();
-        }
 
         // Create and switch to new window
         final long newWindow = glfwCreateWindow(width, height, title, 0, window);

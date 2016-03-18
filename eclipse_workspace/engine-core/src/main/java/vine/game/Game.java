@@ -2,6 +2,7 @@ package vine.game;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -12,18 +13,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import vine.application.StatMonitor;
-import vine.event.Event.EventType;
 import vine.event.EventDispatcher;
-import vine.event.EventListener;
 import vine.game.GameObject.ReferenceManager;
-import vine.game.screen.GameScreen;
+import vine.game.scene.Scene;
 import vine.game.screen.Screen;
-import vine.gameplay.scene.GameEntity;
-import vine.gameplay.scene.Scene;
 import vine.graphics.Graphics;
 import vine.graphics.SceneRenderer;
 import vine.settings.Configuration;
-import vine.window.Window;
 
 /**
  * Manages the gameplay on a global level. That is managing level changer
@@ -46,86 +42,39 @@ public final class Game {
      * Used logger for gameplay logs.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
-    private static Game runningGame = new Game();
-
+    private final Screen screen;
+    private final EventDispatcher eventDispatcher;
+    private final Graphics graphics;
+    private final Configuration configuration;
     private float timer = 0;
-
-    private float time;
-
     private Scene scene;
-    private Screen screen;
-    private EventDispatcher eventDispatcher;
-    private Graphics graphics;
-    private Configuration configuration;
-
     protected SceneRenderer renderer;
     protected final Set<GameObject> updateList = new HashSet<>(1000);
-    private static boolean paused;
 
-    private Game() {
-
+    public Game(Screen screen, final Graphics graphics, final EventDispatcher dispatcher) {
+        this.screen = screen;
+        this.graphics = graphics;
+        this.eventDispatcher = dispatcher;
+        this.configuration = new Configuration("res/settings.ini");
     }
 
-    protected EventDispatcher getEventDispatcher() {
+    protected final EventDispatcher getEventDispatcher() {
         return eventDispatcher;
     }
 
     /**
-     * @return The current running game.
-     */
-    public static Game getGame() {
-        return runningGame;
-    }
-
-    /**
      * @return
      */
-    public Configuration getSettings() {
+    public final Configuration getSettings() {
         return configuration;
-    }
-
-    /**
-     * @return Returns the games screen.
-     */
-    public Screen getScreen() {
-        return screen;
-    }
-
-    /**
-     * @return The current scene of the game.
-     */
-    public Scene getScene() {
-        return scene;
-    }
-
-    /**
-     * @return
-     */
-    public Graphics getGraphics() {
-        return graphics;
-    }
-
-    public SceneRenderer getRenderer() {
-        return renderer;
     }
 
     /**
      * @param delta
      *            The time that passed since the last update
      */
-    void update(final float delta) {
-        if (paused) {
-            return;
-        }
-        time += delta > 1000 ? 16 : delta;
-        if (time > 16) {
-            time *= 0.001f;
-            for (final GameEntity entity : scene.getEntities()) {
-                entity.updatePhysics(time);
-            }
-            time = 0;
-        }
-
+    public void update(final float delta) {
+        scene.update(delta);
         timer += delta;
         if (timer > 1000) {
             timer = 0;
@@ -134,6 +83,7 @@ public final class Game {
                         + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date())
                         + "\nTime delta is:" + delta + " milliseconds\nCurrent FPS about:" + StatMonitor.getFPS()
                         + "\n");
+                LOGGER.debug("" + Arrays.toString(screen.getOrthographicProjection().elements));
             }
         }
         for (final GameObject object : updateList) {
@@ -144,35 +94,10 @@ public final class Game {
     /**
      * 
      */
-    void render() {
-        renderer.renderScene(scene);
-    }
-
-    /**
-     * Creates a new World and destroys all objects of the old world.
-     * 
-     * @param window
-     *            the window the game runs in
-     * @param graphics
-     *            The graphics provider used to render the game
-     */
-    static void init(final Window window, final Graphics graphics) {
-        paused = true;
-        runningGame.screen = new GameScreen(window, 1280, 720);
-        runningGame.graphics = graphics;
-        runningGame.eventDispatcher = new EventDispatcher();
-        runningGame.renderer = new SceneRenderer();
-
-        Game.getGame().getEventDispatcher().registerListener(new EventListener(EventType.KEY));
-        Game.getGame().getEventDispatcher().registerListener(new EventListener(EventType.MOUSE_BUTTON));
-        Game.getGame().getEventDispatcher().registerListener(new EventListener(EventType.MOUSE_MOVE));
-
-        runningGame.configuration = new Configuration("res/settings.ini");
-        runningGame.scene = new Scene();
-
-        runningGame.changeLevel("default-level");
-
-        paused = false;
+    public void render() {
+        graphics.clearBuffer();
+        renderer.renderScene(scene, screen, graphics);
+        graphics.swapBuffer();
     }
 
     /**
@@ -180,20 +105,23 @@ public final class Game {
      *            The asset name of the level that should be loaded.
      */
     public void changeLevel(final String level) {
+        if (scene == null)
+            this.scene = new Scene();
+        if (renderer == null)
+            this.renderer = new SceneRenderer();
         getObjectsByType(GameObject.class).stream().forEach(object -> {
             if (!object.isLevelPeristent()) {
                 object.destroy();
             }
         });
-        scene.loadScene(level);
-        System.out.println(GameObject.ReferenceManager.OBJECTS.keySet().size());
+        scene.loadScene(level, renderer, screen);
     }
 
     /**
      * @param type
      *            Class, that is instantiated
      * @param params
-     *            The optinal arguments of the construct method of the
+     *            The optional arguments of the construct method of the
      *            instantiated type.
      * @return Returns all GameObjects in the Game of the given type.
      */

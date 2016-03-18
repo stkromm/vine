@@ -3,7 +3,6 @@ package vine.settings.test;
 import java.util.List;
 
 import vine.settings.Configurable;
-import vine.settings.SettingHandler;
 
 public class TestConfig extends Configurable {
     public TestConfig() {

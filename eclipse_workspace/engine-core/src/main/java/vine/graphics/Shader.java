@@ -53,9 +53,9 @@ public class Shader {
      * @param fragPath
      *            The file path to the fragment shader code
      */
-    public Shader(final int id, final Graphics graphics) {
+    public Shader(final int id) {
         this.id = id;
-        this.graphics = graphics;
+        this.graphics = GraphicsProvider.getGraphics();
         setProperties();
     }
 

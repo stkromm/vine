@@ -6,18 +6,13 @@ import org.junit.Test;
 
 import vine.game.screen.GameScreen;
 import vine.game.screen.Screen;
-import vine.platform.lwjgl3.GLFWDisplay;
-import vine.platform.lwjgl3.GLFWWindow;
-import vine.window.Window;
 import vine.window.WindowCreationException;
 
 public class ScreenTest {
 
     @Test
     public void testScreenCreation() throws WindowCreationException {
-        Window window = new GLFWWindow(new GLFWDisplay());
-        window.setWindowSize(1200, 750);
-        Screen screen = new GameScreen(window, 1000, 750);
+        Screen screen = new GameScreen(1200, 750, 1000, 750);
         assertTrue(screen.getViewport().getLeftOffset() == screen.getViewport().getRightOffset());
         assertTrue(screen.getViewport().getLeftOffset() == 100);
         assertTrue(screen.getViewport().getTopOffset() == screen.getViewport().getBottomOffset());

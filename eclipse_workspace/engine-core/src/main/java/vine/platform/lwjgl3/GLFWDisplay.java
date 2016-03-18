@@ -1,5 +1,4 @@
 package vine.platform.lwjgl3;
-
 import static org.lwjgl.glfw.GLFW.GLFW_DISCONNECTED;
 import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
 import static org.lwjgl.glfw.GLFW.glfwGetMonitorName;

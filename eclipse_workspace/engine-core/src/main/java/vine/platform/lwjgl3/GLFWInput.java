@@ -53,7 +53,7 @@ public final class GLFWInput implements Input {
     @Override
     public void setKeyCallback(final KeyCallback callback) {
         if (keyCallback != null) {
-            keyCallback.release();
+            keyCallback.free();
         }
         keyCallback = GLFWKeyCallback.create((win, key, scancode, action, mods) -> callback.keyPressed(win, key,
                 scancode, InputAction.getTypeByAction(action), mods));
@@ -74,7 +74,7 @@ public final class GLFWInput implements Input {
     @Override
     public void setScrollCallback(final ScrollCallback callback) {
         if (scrollCallback != null) {
-            scrollCallback.release();
+            scrollCallback.free();
         }
         scrollCallback = GLFWScrollCallback.create((w, offsetx, offsety) -> callback.scrolled(w, offsetx, offsety));
         glfwSetScrollCallback(context, scrollCallback);
@@ -83,7 +83,7 @@ public final class GLFWInput implements Input {
     @Override
     public void setCharCallback(final CharCallback callback) {
         if (charCallback != null) {
-            charCallback.release();
+            charCallback.free();
         }
         charCallback = GLFWCharCallback.create((w, codepoint) -> callback.charInput(w, codepoint));
         glfwSetCharCallback(context, charCallback);
@@ -92,7 +92,7 @@ public final class GLFWInput implements Input {
     @Override
     public void setCharModCallback(final CharModCallback callback) {
         if (charModsCallback != null) {
-            charModsCallback.release();
+            charModsCallback.free();
         }
         charModsCallback = GLFWCharModsCallback
                 .create((w, codepoint, mods) -> callback.charModInput(w, codepoint, mods));
@@ -102,7 +102,7 @@ public final class GLFWInput implements Input {
     @Override
     public void setCursorPositionCallback(final CursorPositionCallback callback) {
         if (cursorPosCallback != null) {
-            cursorPosCallback.release();
+            cursorPosCallback.free();
         }
         cursorPosCallback = GLFWCursorPosCallback.create((window, posx, posy) -> {
             this.mouseX = posx;
@@ -115,7 +115,7 @@ public final class GLFWInput implements Input {
     @Override
     public void setMouseButtonCallback(final MouseButtonCallback callback) {
         if (mouseButtonCallback != null) {
-            mouseButtonCallback.release();
+            mouseButtonCallback.free();
         }
         mouseButtonCallback = GLFWMouseButtonCallback.create((window, button, action, mods) -> callback
                 .pressedMouseButton(window, button, InputAction.getTypeByAction(action), mods));

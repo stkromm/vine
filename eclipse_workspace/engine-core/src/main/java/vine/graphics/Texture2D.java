@@ -24,8 +24,8 @@ public class Texture2D {
 
     private final Graphics graphics;
 
-    public Texture2D(final int[] data, final int width, final int height, final Graphics graphics) {
-        this.graphics = graphics;
+    public Texture2D(final int[] data, final int width, final int height) {
+        this.graphics = GraphicsProvider.getGraphics();
         this.height = height;
         this.width = width;
         textureId = graphics.generateTexture();

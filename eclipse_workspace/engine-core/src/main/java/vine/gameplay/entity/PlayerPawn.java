@@ -2,11 +2,11 @@ package vine.gameplay.entity;
 
 import org.lwjgl.glfw.GLFW;
 
+import vine.assets.SoundLoader;
 import vine.event.KeyEvent;
-import vine.game.Game;
-import vine.gameplay.scene.GameEntity;
+import vine.game.scene.GameEntity;
 import vine.input.InputAction;
-import vine.sound.SoundClip;
+import vine.sound.AudioPlayer;
 
 /**
  * @author Steffen
@@ -14,7 +14,7 @@ import vine.sound.SoundClip;
  */
 public class PlayerPawn extends GameEntity {
 
-    private SoundClip sound;
+    AudioPlayer player = new AudioPlayer();
 
     @Override
     public strictfp void update(final float delta) {
@@ -35,9 +35,6 @@ public class PlayerPawn extends GameEntity {
         case GLFW.GLFW_KEY_S:
             velocity.setY(velocity.getY() < 64 ? velocity.getY() + 64 : 64);
             break;
-        case GLFW.GLFW_KEY_F:
-            Game.getGame().changeLevel("");
-            break;
         default:
             break;
         }
@@ -45,7 +42,7 @@ public class PlayerPawn extends GameEntity {
 
     @Override
     public void updatePhysics(final float delta) {
-        super.updatePhysics(delta * 10);
+        super.updatePhysics(delta * 2);
     }
 
     private void onMoveButtonPressed(final int button) {
@@ -55,12 +52,14 @@ public class PlayerPawn extends GameEntity {
             break;
         case GLFW.GLFW_KEY_D:
             velocity.setX(velocity.getX() < -64 ? -64 : velocity.getX() + 64);
+            player.resume();
             break;
         case GLFW.GLFW_KEY_S:
             velocity.setY(velocity.getY() < -64 ? -64 : velocity.getY() - 64);
             break;
         case GLFW.GLFW_KEY_W:
             velocity.setY(velocity.getX() > 64 ? 64 : velocity.getY() + 64);
+            player.pause();
             break;
         default:
             break;
@@ -86,8 +85,8 @@ public class PlayerPawn extends GameEntity {
         this.velocity.setX(0);
         this.velocity.setY(0);
         this.position.add(0, 0);
-        sound = new SoundClip("E:\\Sounds\\music.wav");
-        sound.playLooped();
+        player.setClip(new SoundLoader().loadSync(null, "E:\\Sounds\\music.wav", null, null, null));
+        player.playLooped();
     }
 
 }

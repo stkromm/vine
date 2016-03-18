@@ -2,7 +2,8 @@ package vine.tilemap;
 
 import java.util.Arrays;
 
-import vine.game.Game;
+import vine.game.screen.Screen;
+import vine.graphics.Graphics;
 import vine.graphics.VertexBufferObject;
 
 public class TileMapRenderData {
@@ -22,10 +23,10 @@ public class TileMapRenderData {
     private final GridCalculator verticeGridCalc = new GridCalculator();
     private final float[] squadVertices = new float[12];
 
-    public TileMapRenderData(final TileMap map) {
+    public TileMapRenderData(final TileMap map, final Graphics graphics, final Screen screen) {
         tileMap = map;
-        screenxTiles = Game.getGame().getScreen().getWidth() / 32 + 2;
-        screenyTiles = Game.getGame().getScreen().getHeight() / 32 + 2;
+        screenxTiles = screen.getWidth() / 32 + 2;
+        screenyTiles = screen.getHeight() / 32 + 2;
         //
         final int[] indices = new int[6 * screenxTiles * screenyTiles];
         this.vertices = new float[12 * screenxTiles * screenyTiles];
@@ -38,7 +39,7 @@ public class TileMapRenderData {
                         0, indices, index * 6, 6);
             }
         }
-        vertexBuffer = new VertexBufferObject(vertices, indices, uvs, Game.getGame().getGraphics());
+        vertexBuffer = new VertexBufferObject(vertices, indices, uvs, graphics);
     }
 
     /**

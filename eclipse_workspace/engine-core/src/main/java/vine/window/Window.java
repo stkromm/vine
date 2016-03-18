@@ -234,6 +234,8 @@ public interface Window {
      */
     String getTitle();
 
+    /**
+     * @param mode
+     */
     void setWindowMode(WindowMode mode);
-
 }

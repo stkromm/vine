@@ -14,9 +14,10 @@ public interface Graphics {
 
     // RENDER FUNCTIONS
     /**
+     * @param l
      * @param context
      */
-    void makeContext(long context);
+    void makeContext(long l);
 
     /**
      * 

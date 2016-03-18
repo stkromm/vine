@@ -1,42 +1,53 @@
 package vine.event;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 
 import vine.event.Event.EventType;
-import vine.game.GameObject;
 
 /**
- * Provides a unique rendering method with post processing, global screnn
- * maniuplation for a set of gameobjects. Offers no semantic ordering of
- * gameobjects and is not relevant for physics or audio.
- * 
  * @author Steffen
  * 
  */
 public class EventListener {
+    /**
+     * 
+     */
     EventType type;
     /**
      * 
      */
-    public final Set<GameObject> handler;
+    public final Map<String, EventHandler> handler;
+
+    /**
+     * @author Steffen
+     *
+     */
+    public interface EventHandler {
+        /**
+         * @param event
+         * @return
+         */
+        boolean handle(Event event);
+    }
 
     /**
      * @param key
      * 
      */
     public EventListener(final EventType key) {
-        handler = new HashSet<>();
+        handler = new HashMap<>();
         type = key;
     }
 
     /**
+     * @param name
      * @param handler
      *            Adds the handler to the eventlayer.
      */
-    public void addEventHandler(final GameObject handler) {
-        this.handler.add(handler);
+    public void addEventHandler(final String name, final EventHandler handler) {
+        this.handler.put(name, handler);
     }
 
     /**
@@ -46,7 +57,7 @@ public class EventListener {
      */
     public boolean onEvent(final Event event) {
         if (event.getType() == type) {
-            final Optional<GameObject> opt = handler.stream().filter(h -> h.onKeyEvent((KeyEvent) event)).findFirst();
+            final Optional<EventHandler> opt = handler.values().stream().filter(h -> h.handle(event)).findFirst();
             return opt.isPresent();
         }
         return false;

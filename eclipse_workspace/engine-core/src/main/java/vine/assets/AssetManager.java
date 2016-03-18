@@ -20,7 +20,7 @@ public class AssetManager {
             return (T) asset.getAsset();
         } else {
             final AssetLoader<T, AssetLoaderParameters<T>> loader = getLoader(type);
-            return loader.loadSync(this, fileName, null, null);
+            return loader.loadSync(this, fileName, null, null, null);
         }
     }
 

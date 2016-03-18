@@ -8,22 +8,14 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import vine.game.Game;
 import vine.graphics.Texture2D;
 import vine.util.FileUtils;
 
 public class TextureLoader extends AssetLoader<Texture2D, AssetLoaderParameters<Texture2D>> {
 
     @Override
-    public void loadAsync(final AssetManager manager, final String fileName, final FileHandle file,
-            final AssetLoaderParameters<Texture2D> parameter) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public Texture2D loadSync(final AssetManager manager, final String fileName, final FileHandle file,
-            final AssetLoaderParameters<Texture2D> parameter) {
+            final AssetLoaderParameters<Texture2D> parameter, vine.assets.AssetLoader.ProgressCallback progess) {
         BufferedImage image = null;
         try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readBytes(fileName))) {
             image = ImageIO.read(stream);
@@ -43,7 +35,15 @@ public class TextureLoader extends AssetLoader<Texture2D, AssetLoaderParameters<
             final int blue = pixels[i] & 0xff;
             data[i] = alpha << 24 | blue << 16 | green << 8 | red;
         }
-        return new Texture2D(data, width, height, Game.getGame().getGraphics());
+        return new Texture2D(data, width, height);
+    }
+
+    @Override
+    public void loadAsync(AssetManager manager, String fileName, FileHandle file,
+            AssetLoaderParameters<Texture2D> parameter, vine.assets.AssetLoader.FinishCallback callback,
+            vine.assets.AssetLoader.ProgressCallback progessCallback) {
+        // TODO Auto-generated method stub
+
     }
 
 }

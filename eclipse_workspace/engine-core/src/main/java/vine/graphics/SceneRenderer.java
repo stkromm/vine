@@ -6,11 +6,13 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import vine.application.GameLifecycle;
 import vine.assets.ShaderLoader;
 import vine.assets.TextureLoader;
 import vine.game.Game;
-import vine.gameplay.scene.GameEntity;
-import vine.gameplay.scene.Scene;
+import vine.game.scene.GameEntity;
+import vine.game.scene.Scene;
+import vine.game.screen.Screen;
 import vine.math.Matrix4f;
 import vine.tilemap.TileMap;
 import vine.tilemap.TileMapRenderData;
@@ -27,16 +29,18 @@ public class SceneRenderer {
     /**
      * 
      */
-    public static final Texture2D DEFAULT_TEXTURE = new TextureLoader().loadSync(null, "res/test/hero.png", null, null);
-    /**
-     * 
-     */
-    public static final Texture2D DEFAULT_CHIPSET = new TextureLoader().loadSync(null, "res/test/chipset.png", null,
+    public static final Texture2D DEFAULT_TEXTURE = new TextureLoader().loadSync(null, "res/test/hero.png", null, null,
             null);
     /**
      * 
      */
-    public static final Shader DEFAULT_SHADER = new ShaderLoader().loadSync(null, "res/test/frag.shader", null, null);
+    public static final Texture2D DEFAULT_CHIPSET = new TextureLoader().loadSync(null, "res/test/chipset.png", null,
+            null, null);
+    /**
+     * 
+     */
+    public static final Shader DEFAULT_SHADER = new ShaderLoader().loadSync(null, "res/test/frag.shader", null, null,
+            null);
 
     /**
      * 
@@ -60,7 +64,7 @@ public class SceneRenderer {
      * @return this, so you can use this method statically in lambda
      *         expressions.
      */
-    public void submit(final Set<GameEntity> entities) {
+    public void submit(final Set<GameEntity> entities, Graphics graphics) {
         charSprites.retainAll(entities);
         if (charSprites.size() != entities.size()) {
             charSprites.addAll(entities);
@@ -75,7 +79,7 @@ public class SceneRenderer {
                     indices[i * indice.length + b] = i * 4 + indice[b];
                 }
             }
-            vert = new VertexBufferObject(vertices, indices, tcs, Game.getGame().getGraphics());
+            vert = new VertexBufferObject(vertices, indices, tcs, graphics);
         }
 
         int i = 0;
@@ -104,27 +108,27 @@ public class SceneRenderer {
         vert.changeIndices(i);
     }
 
-    public void submit(final TileMap map) {
+    public void submit(final TileMap map, Graphics graphics, Screen screen) {
         DEFAULT_SHADER.bind();
         tileMap = map;
-        tileMapRender = new TileMapRenderData(map);
+        tileMapRender = new TileMapRenderData(map, graphics, screen);
     }
 
-    public final void renderScene(final Scene scene) {
-        submit(scene.getVisibleEntities());
+    public final void renderScene(final Scene scene, final Screen screen, final Graphics graphics) {
+        submit(scene.getVisibleEntities(), graphics);
         cameraTransformation.elements[0 + 3 * 4] = -scene.cameras.getActiveCamera().getEntity().getX();
         cameraTransformation.elements[1 + 3 * 4] = -scene.cameras.getActiveCamera().getEntity().getY();
-        drawMap(Game.getGame().getScreen().getOrthographicProjection(), cameraTransformation);
-        drawEntities(Game.getGame().getScreen().getOrthographicProjection(), cameraTransformation);
+        drawMap(screen.getOrthographicProjection(), cameraTransformation, scene);
+        drawEntities(screen.getOrthographicProjection(), cameraTransformation);
+
     }
 
-    private final void drawMap(final Matrix4f projectionMatrix, final Matrix4f viewMatrix) {
+    private final void drawMap(final Matrix4f projectionMatrix, final Matrix4f viewMatrix, final Scene scene) {
         DEFAULT_SHADER.setUniformMat4f("pr_matrix", projectionMatrix);
         DEFAULT_SHADER.setUniformMat4f("vw_matrix", viewMatrix);
         tileMap.getTexture().bind();
-        render = tileMapRender.getRenderData(
-                (int) Game.getGame().getScene().cameras.getActiveCamera().getEntity().getX(),
-                (int) Game.getGame().getScene().cameras.getActiveCamera().getEntity().getY());
+        render = tileMapRender.getRenderData((int) scene.cameras.getActiveCamera().getEntity().getX(),
+                (int) scene.cameras.getActiveCamera().getEntity().getY());
         render.render();
         render.unbind();
         tileMap.getTexture().unbind();

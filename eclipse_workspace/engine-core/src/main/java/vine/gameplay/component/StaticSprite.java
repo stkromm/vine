@@ -1,5 +1,6 @@
 package vine.gameplay.component;
 
+import vine.game.Component;
 import vine.graphics.Sprite;
 import vine.graphics.Texture2D;
 

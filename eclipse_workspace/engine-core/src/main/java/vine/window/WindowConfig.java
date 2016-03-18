@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import vine.settings.Configurable;
-import vine.settings.SettingHandler;
 
 public class WindowConfig extends Configurable {
 

@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 import vine.event.Event.EventType;
-import vine.game.GameObject;
+import vine.event.EventListener.EventHandler;
 
 /**
  * @author Steffen
@@ -31,20 +31,25 @@ public final class EventDispatcher {
         layers.addLast(layer);
     }
 
-    public void registerHandler(final GameObject object, final EventType type) {
+    /**
+     * @param name
+     * @param handler
+     * @param type
+     */
+    public void registerHandler(final String name, final EventHandler handler, final EventType type) {
         for (final EventListener listener : layers) {
             if (listener.type == type) {
-                listener.addEventHandler(object);
+                listener.addEventHandler(name, handler);
             }
         }
     }
 
     /**
-     * @param object
+     * @param name
      */
-    public void unregisterHandler(final GameObject object) {
+    public void unregisterHandler(final String name) {
         for (final EventListener listener : layers) {
-            listener.handler.remove(object);
+            listener.handler.remove(name);
         }
     }
 

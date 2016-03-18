@@ -45,7 +45,9 @@ public final class VineMethodUtils {
                         e);
             }
         } catch (InvocationTargetException e) {
+            if(LOGGER.isErrorEnabled()) {
             LOGGER.error("Class has not construct method. Have you passed a GameObject inherited class?", e);
+            }
         }
     }
 }
