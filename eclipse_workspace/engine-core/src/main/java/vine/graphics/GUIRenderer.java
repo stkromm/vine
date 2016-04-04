@@ -32,6 +32,15 @@ public class GUIRenderer {
     private float[] colors;
     private VertexBufferObject vert;
     private VertexBufferObject render;
+    private final float[] tempVertices = new float[12];
+    private final float[] tempColors = new float[4];
+    private int[] tempIndices = new int[6];
+    private final VertexAttributeBuffer vertexPositions = new VertexAttributeBuffer(this.tempVertices,
+            VertexAttribute.POSITION);
+    private final VertexAttributeBuffer vertexTextureCoords = new VertexAttributeBuffer(new float[8],
+            VertexAttribute.TEXTURE);
+    private final VertexAttributeBuffer vertexColors = new VertexAttributeBuffer(this.tempColors,
+            VertexAttribute.COLOR);
     int q = 0;
 
     /**
@@ -45,26 +54,20 @@ public class GUIRenderer {
         if (submittedWidgets.size() != widgets.size()) {
             submittedWidgets.addAll(widgets);
             if (q < submittedWidgets.size()) {
-                vertices = new float[12 * submittedWidgets.size()];
-                tcs = new float[8 * submittedWidgets.size()];
                 indices = new int[6 * submittedWidgets.size()];
-                colors = new float[16 * submittedWidgets.size()];
                 int[] indice = new int[] { 0, 1, 2, 2, 3, 0 };
                 int i = 0;
                 for (Widget widget : submittedWidgets) {
                     for (int b = 0; b < indice.length; b++) {
                         indices[i * indice.length + b] = i * 4 + indice[b];
                     }
-                    for (int c = 0; c < 4; c++) {
-                        colors[i * 16 + c * 4] = widget.getColor().getX();
-                        colors[i * 16 + c * 4 + 1] = widget.getColor().getY();
-                        colors[i * 16 + c * 4 + 2] = widget.getColor().getZ();
-                        colors[i * 16 + c * 4 + 3] = -widget.getTransparency();
-                    }
                     i++;
                 }
-                System.out.println("Needed to create new buffer for GUI");
-                vert = new VertexBufferObject(vertices, indices, tcs, colors);
+                vertices = new float[12 * i];
+                this.vertexPositions.resize(12 * i);
+                this.vertexTextureCoords.resize(8 * i);
+                this.vertexColors.resize(16 * i);
+                vert = new VertexBufferObject(indices, vertexPositions, vertexColors);
             }
         }
 
@@ -84,11 +87,18 @@ public class GUIRenderer {
             vertices[i * 12 + 9] = widget.getPosition().getX() + worldWidth;
             vertices[i * 12 + 10] = widget.getPosition().getY();
             vertices[i * 12 + 11] = 0.9f;
-            i++;
+            this.tempColors[0] = widget.getColor().getX();
+            this.tempColors[1] = widget.getColor().getY();
+            this.tempColors[2] = widget.getColor().getZ();
+            this.tempColors[3] = -widget.getTransparency();
+            this.vertexColors.append(this.tempColors);
+            this.vertexColors.append(this.tempColors);
+            this.vertexColors.append(this.tempColors);
         }
-        vert.changeTexture(tcs, 0, tcs.length);
-        vert.changeVertices(vertices, 0, vertices.length);
         vert.changeIndices(i);
+        vertexPositions.append(vertices);
+        vertexPositions.reallocate();
+        vertexColors.reallocate();
     }
 
     Matrix4f cameraTransformation = Matrix4f.identity();

@@ -17,6 +17,8 @@ import vine.game.screen.GameScreen;
 import vine.game.screen.Screen;
 import vine.graphics.Graphics;
 import vine.graphics.GraphicsProvider;
+import vine.gui.GameUserInterface;
+import vine.gui.Widget;
 import vine.input.Input;
 import vine.input.InputMapper;
 import vine.settings.Configuration;
@@ -91,9 +93,9 @@ public final class Application {
         final Screen screen = new GameScreen(window, 1280, 720);
 
         Layer scene = new Scene();
-        // GameUserInterface gui = new GameUserInterface();
-        final Game game = new Game(screen, new Layer[] { scene });
-        // gui.addWidget(Game.instantiate(Widget.class));
+        GameUserInterface gui = new GameUserInterface();
+        final Game game = new Game(screen, new Layer[] { scene, gui });
+        gui.addWidget(Game.instantiate(Widget.class));
         window.setWindowContextCallback(context -> {
             input.listenToWindow(context);
         });
