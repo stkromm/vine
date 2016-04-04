@@ -1,8 +1,6 @@
 package vine.graphics;
 
-import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-
 import vine.util.BufferConverter;
 
 /**
@@ -10,29 +8,11 @@ import vine.util.BufferConverter;
  * 
  */
 public class VertexBufferObject {
-    /**
-     * Vertex array object.
-     */
+    private static final int[] SQUAD_INDICE = new int[] { 0, 1, 2, 2, 3, 0 };
     private final int vao;
-    /**
-     * Vertex buffer object.
-     */
-    private final int vbo;
-    /**
-     * Index buffer object.
-     */
     private final int ibo;
-    /**
-     * Texture buffer object.
-     */
-    private final int tbo;
-
     private int count;
-
     private final Graphics graphics;
-
-    private final FloatBuffer textureBuffer;
-    private final FloatBuffer verticeBuffer;
     private IntBuffer indiceBuffer;
 
     /**
@@ -45,25 +25,20 @@ public class VertexBufferObject {
      * @param uvs
      *            The texture coordinates for the vertices
      */
-    public VertexBufferObject(final float[] vertices, final int[] indices, final float[] uvs, Graphics graphics) {
+    public VertexBufferObject(final int[] indices, final VertexAttributeBuffer... attributes) {
         if (indices == null) {
             throw new NullPointerException("indice field of vertex array can't be null.");
         }
-
-        this.graphics = graphics;
+        this.graphics = GraphicsProvider.getGraphics();
 
         count = indices.length;
 
         vao = graphics.generateVertexArray();
         graphics.bindVertexArray(vao);
 
-        vbo = graphics.generateBuffer();
-        verticeBuffer = BufferConverter.createFloatBuffer(vertices);
-        graphics.bindVertexData(vbo, verticeBuffer);
-
-        tbo = graphics.generateBuffer();
-        textureBuffer = BufferConverter.createFloatBuffer(uvs);
-        graphics.bindTextureData(tbo, textureBuffer);
+        for (VertexAttributeBuffer attribute : attributes) {
+            attribute.bind();
+        }
 
         ibo = graphics.generateBuffer();
         indiceBuffer = BufferConverter.createIntBuffer(indices);
@@ -74,33 +49,18 @@ public class VertexBufferObject {
         graphics.bindVertexArray(0);
     }
 
-    public void changeVertices(final float[] vertices) {
-        verticeBuffer.position(0);
-        verticeBuffer.put(vertices, 0, vertices.length);
-        verticeBuffer.flip();
-        graphics.reallocateVerticeData(vbo, verticeBuffer);
-    }
-
-    public void changeTexture(final float[] uvs) {
-        textureBuffer.position(0);
-        textureBuffer.put(uvs, 0, uvs.length);
-        textureBuffer.flip();
-        graphics.reallocateTextureData(tbo, textureBuffer);
-    }
-
-    public void changeIndices(final int count) {
+    void changeIndices(final int count) {
         if (count > indiceBuffer.capacity() / 6) {
-            int[] indices = new int[count * 6];
-            int[] indice = new int[] { 0, 1, 2, 2, 3, 0 };
+            final int[] indices = new int[count * 6];
             for (int i = count * 6 - 1; i >= 0; i--) {
-                for (int b = 0; b < indice.length; b++) {
-                    indices[i * indice.length + b] = i * 4 + indice[b];
+                for (int b = 0; b < SQUAD_INDICE.length; b++) {
+                    indices[i * SQUAD_INDICE.length + b] = i * 4 + SQUAD_INDICE[b];
                 }
             }
             indiceBuffer = BufferConverter.createIntBuffer(indices);
             graphics.bindIndexData(ibo, indiceBuffer);
         }
-        indiceBuffer.limit(count* 6);
+        indiceBuffer.limit(count * 6);
         indiceBuffer.position(count * 6);
         indiceBuffer.flip();
         this.count = count * 6;
@@ -110,7 +70,7 @@ public class VertexBufferObject {
     /**
      * Binds the current vertex array buffer.
      */
-    public void bind() {
+    void bind() {
         graphics.bindVertexArray(vao);
         graphics.bindElementArrayBuffer(ibo);
     }
@@ -118,7 +78,7 @@ public class VertexBufferObject {
     /**
      * Unbinds the current vertex array buffer.
      */
-    public void unbind() {
+    void unbind() {
         graphics.bindElementArrayBuffer(0);
         graphics.bindVertexArray(0);
     }
@@ -126,12 +86,13 @@ public class VertexBufferObject {
     /**
      * Draws the current triangles in the buffer.
      */
-    public void draw() {
+    void draw() {
         graphics.drawElements(count);
     }
 
     void render() {
         bind();
         draw();
+        unbind();
     }
 }

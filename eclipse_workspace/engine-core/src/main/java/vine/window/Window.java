@@ -168,7 +168,7 @@ public interface Window {
     void setCloseCallback(CloseCallback callback);
 
     /**
-     * @param callback
+     * @param callback The new context change callback
      */
     void setWindowContextCallback(WindowContextCallback callback);
 
@@ -235,7 +235,7 @@ public interface Window {
     String getTitle();
 
     /**
-     * @param mode
+     * @param mode The new window mode
      */
     void setWindowMode(WindowMode mode);
 }

@@ -46,8 +46,7 @@ public class Vector2fTest {
         assertTrue(nullVector.length() == 0);
         Random rn = new Random();
         for (int i = 0; i <= 100000; i++) {
-            Vector2f vec = new Vector2f(rn.nextFloat() * (float) System.currentTimeMillis() - 12345,
-                    (float) System.nanoTime());
+            Vector2f vec = new Vector2f(rn.nextFloat() * System.currentTimeMillis() - 12345, System.nanoTime());
             vec.normalize();
             assertTrue(Math.abs(vec.length() - 1) <= Vector2f.EPSILON);
         }

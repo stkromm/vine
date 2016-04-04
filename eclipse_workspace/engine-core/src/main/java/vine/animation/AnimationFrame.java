@@ -10,7 +10,7 @@ public class AnimationFrame {
     }
 
     public final float[] getUvs() {
-        return uvs;
+        return this.uvs;
     }
 
     public final float getDuration() {

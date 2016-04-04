@@ -10,13 +10,12 @@ import org.junit.rules.ExpectedException;
 import vine.platform.lwjgl3.GLFWDisplay;
 import vine.platform.lwjgl3.GLFWWindow;
 import vine.window.Window;
-import vine.window.WindowCreationException;
 
 public class WindowTest {
     Window window = null;
 
     @Before
-    public void setup() throws WindowCreationException {
+    public void setup() {
         window = new GLFWWindow(new GLFWDisplay());
     }
 

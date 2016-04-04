@@ -18,14 +18,18 @@ public final class PlatformDependencyResolver {
     }
 
     /**
+     * @param classPath
      * @param display
      *            The display that is used to contain the window
      * @return The platform dependent implementation of window.
      */
-    public static Window getPlatformWindow(final Display display) {
+    public static Window getPlatformWindow(String classPath, final Display display) {
         try {
-            return (Window) ClassLoader.getSystemClassLoader().loadClass("vine.platform.lwjgl3.GLFWWindow")
-                    .getConstructor(Display.class).newInstance(display);
+            Class<?> windowClass = ClassLoader.getSystemClassLoader().loadClass(classPath);
+            for (Class<?> c : windowClass.getInterfaces()) {
+                if (c.equals(Window.class))
+                    return (Window) windowClass.getConstructor(Display.class).newInstance(display);
+            }
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | IllegalArgumentException
                 | InvocationTargetException | NoSuchMethodException | SecurityException e) {
             if (Application.LOGGER.isErrorEnabled()) {

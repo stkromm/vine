@@ -1,10 +1,11 @@
 package vine.game;
 
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.WeakHashMap;
 
-import vine.event.Event.EventType;
-import vine.application.GameLifecycle;
+import vine.application.GamePlayer;
 import vine.event.KeyEvent;
 import vine.event.MouseButtonEvent;
 import vine.reflection.VineClass;
@@ -18,19 +19,22 @@ import vine.reflection.VineMethodUtils;
  *
  */
 public abstract class GameObject {
-    protected static final String UPDATE_METHOD = "update";
     /**
-     * 
+     * @author Steffen
+     *
      */
-    protected static final String CONSTRUCT_METHOD = "construct";
-    /**
-     * 
-     */
-    protected static final String KEY_EVENT_METHOD = "onKeyEvent";
-    /**
-     * 
-     */
-    protected static final String MOUSE_BUTTON_EVENT_METHOD = "onMouseButtonEvent";
+    @FunctionalInterface
+    public interface GameObjectDestroyCallback {
+        /**
+         * @param gameObject
+         *            The gameobject, that states callback changed.
+         */
+        void changedState(GameObject gameObject);
+    }
+
+    private Set<GameObjectDestroyCallback> onDestroyCallbacks = new HashSet<>();
+    static final String UPDATE_METHOD = "update";
+    static final String CONSTRUCT_METHOD = "construct";
     /**
      * If this flag is set, the gameobject gets not rendered.
      */
@@ -47,6 +51,7 @@ public abstract class GameObject {
 
     /**
      * @param name
+     *            The name of the gameobject. Id in the game.
      */
     protected void setName(final String name) {
         this.name = name;
@@ -59,8 +64,10 @@ public abstract class GameObject {
      * @param flags
      *            The flags that should be enabled for this gameobject.
      */
-    public final void enableFlags(final byte flags) {
-        this.flags |= flags;
+    private final void enableFlags(final byte newFlags) {
+        if (!isDestroyed()) {
+            this.flags |= newFlags;
+        }
     }
 
     /**
@@ -70,16 +77,37 @@ public abstract class GameObject {
      * @param flags
      *            The flags, that should be disabled for this gameobject.
      */
-    public final void disableFlags(final byte flags) {
-        final int effectiveFlags = ~flags;
+    private final void disableFlags(final byte newFlags) {
+        final int effectiveFlags = ~newFlags;
         this.flags &= effectiveFlags;
+    }
+
+    /**
+     * Activates rendering of this gameobject.
+     */
+    public final void show() {
+        disableFlags(HIDE_FLAG);
     }
 
     /**
      * @return True, if the corresponding flag is set.
      */
-    public final boolean hideFlag() {
-        return (flags & HIDE_FLAG) == HIDE_FLAG;
+    public final boolean isHidden() {
+        return (this.flags & HIDE_FLAG) == HIDE_FLAG;
+    }
+
+    /**
+     * @return True, if the corresponding flag is set.
+     */
+    public final boolean isDestroyed() {
+        return (this.flags & DESTROYED_FLAG) == DESTROYED_FLAG;
+    }
+
+    /**
+     * @return True, if the corresponding flag is set.
+     */
+    public boolean isLevelPersistent() {
+        return (this.flags & PERSISTENCE_FLAG) == PERSISTENCE_FLAG;
     }
 
     /**
@@ -90,15 +118,35 @@ public abstract class GameObject {
      *         fails.
      */
     public final String getName() {
-        return name;
+        return this.name;
+    }
+
+    /**
+     * @param callback
+     *            Callback for destruction
+     */
+    public final void addDestroyCallback(GameObjectDestroyCallback callback) {
+        if (!isDestroyed() && callback != null) {
+            this.onDestroyCallbacks.add(callback);
+        }
+    }
+
+    /**
+     * @param callback
+     *            Callback for destruction
+     */
+    public final void removeDestroyCallback(GameObjectDestroyCallback callback) {
+        if (!isDestroyed() && callback != null) {
+            this.onDestroyCallbacks.remove(callback);
+        }
     }
 
     /**
      * @param delta
      *            Time that passed since the last update call.
      */
-    public void update(final float delta) { // NOSONAR
-        if ((flags & ACTIVE_FLAG) != ACTIVE_FLAG || (flags & DESTROYED_FLAG) != DESTROYED_FLAG) {
+    public void update(final float delta) {
+        if ((this.flags & ACTIVE_FLAG) != ACTIVE_FLAG || (this.flags & DESTROYED_FLAG) != DESTROYED_FLAG) {
             return;
         }
     }
@@ -107,7 +155,7 @@ public abstract class GameObject {
      * 
      */
     public void begin() {
-        // Not necessarily needs to be overridden
+        // Doesn't need to be overridden
     }
 
     /**
@@ -119,18 +167,15 @@ public abstract class GameObject {
         enableFlags(DESTROYED_FLAG);
         onDestroy();
         synchronized (this) {
-            // Remove the hardreference of the gameobject
-            ReferenceManager.OBJECTS.remove(name);
+            for (final GameObjectDestroyCallback callback : this.onDestroyCallbacks) {
+                callback.changedState(this);
+            }
             // Remove from event listener
-            final Game game = GameLifecycle.getRunningGame();
-            if (game.getEventDispatcher() != null)
-                game.getEventDispatcher().unregisterHandler(name);
-            // Remove from the scene if it's an entity
-            // Game.getGame().getScene().removeEntity(this);
+            final Game game = GamePlayer.getRunningGame();
+            game.removeList.add(this);
 
-            // Remove from updates
-            if (game.updateList != null)
-                game.updateList.remove(this);
+            // Remove the hardreference of the gameobject
+            ReferenceManager.OBJECTS.remove(this.name);
         }
     }
 
@@ -140,7 +185,7 @@ public abstract class GameObject {
      * to destroy an object, use the destroy method, not this method!
      */
     protected void onDestroy() {
-        if (!((flags & DESTROYED_FLAG) == DESTROYED_FLAG)) {
+        if (!((this.flags & DESTROYED_FLAG) == DESTROYED_FLAG)) {
             return;
         }
     }
@@ -150,7 +195,8 @@ public abstract class GameObject {
      *            the event to react to
      * @return true if the event is consumned
      */
-    public boolean onKeyEvent(KeyEvent event) { // NOSONAR
+    @SuppressWarnings("static-method")
+    public boolean onKeyEvent(final KeyEvent event) {
         return false;
     }
 
@@ -159,12 +205,9 @@ public abstract class GameObject {
      *            The key event reacted to
      * @return true, if the event is consumed by this handler
      */
-    public boolean onMouseButtonEvent(MouseButtonEvent keyEvent) { // NOSONAR
+    @SuppressWarnings("static-method")
+    public boolean onMouseButtonEvent(final MouseButtonEvent keyEvent) {
         return false;
-    }
-
-    public boolean isLevelPeristent() {
-        return (flags & PERSISTENCE_FLAG) == PERSISTENCE_FLAG;
     }
 
     /**
@@ -180,14 +223,14 @@ public abstract class GameObject {
             return false;
         }
         if (object instanceof GameObject) {
-            return name.equals(((GameObject) object).getName());
+            return this.name.equals(((GameObject) object).getName());
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return this.name.hashCode();
     }
 
     /**
@@ -200,27 +243,24 @@ public abstract class GameObject {
          */
         protected static final String ID_QUALIFIER = "?id";
 
-        private static int nameGenCount;
+        private static long nameGenCount;
         /**
          * All independent gameobjects that are currently in the game.
          */
         protected static final Map<String, GameObject> OBJECTS = new WeakHashMap<>(1000);
 
         private ReferenceManager() {
-            /**
-             * Hide public.
-             */
         }
 
         /**
          * @param type
          *            The type of the instantiate gameobject.
-         * @return The instantated gameobject or null on failure
+         * @return A valid gameobject name id.
          */
         protected static final synchronized <T extends GameObject> String generateObjectName(final Class<T> type) {
-            final String className = type.getName() + ID_QUALIFIER + nameGenCount;
+            final String name = type.getName() + ID_QUALIFIER + nameGenCount;
             nameGenCount++;
-            return className;
+            return name;
         }
 
         /**
@@ -242,16 +282,8 @@ public abstract class GameObject {
                 OBJECTS.put(name, object);
                 objectClass.getMethodByName(CONSTRUCT_METHOD)
                         .ifPresent(method -> VineMethodUtils.invokeMethodOn(method, object, params));
-                if (objectClass.hasMethodImplemented(GameObject.KEY_EVENT_METHOD, KeyEvent.class)) {
-                    GameLifecycle.getRunningGame().getEventDispatcher().registerHandler(object.getName(),
-                            event -> object.onKeyEvent((KeyEvent) event), EventType.KEY);
-                }
                 if (objectClass.hasMethodImplemented("update", float.class)) {
-                    GameLifecycle.getRunningGame().updateList.add(object);
-                }
-                if (objectClass.hasMethodImplemented(GameObject.MOUSE_BUTTON_EVENT_METHOD, MouseButtonEvent.class)) {
-                    GameLifecycle.getRunningGame().getEventDispatcher().registerHandler(object.getName(),
-                            event -> object.onMouseButtonEvent((MouseButtonEvent) event), EventType.MOUSE_BUTTON);
+                    GamePlayer.getRunningGame().addList.add(object);
                 }
             }
             return object;

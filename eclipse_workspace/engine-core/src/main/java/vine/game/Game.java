@@ -1,10 +1,11 @@
 package vine.game;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.Deque;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -17,8 +18,7 @@ import vine.event.EventDispatcher;
 import vine.game.GameObject.ReferenceManager;
 import vine.game.scene.Scene;
 import vine.game.screen.Screen;
-import vine.graphics.Graphics;
-import vine.graphics.SceneRenderer;
+import vine.graphics.GraphicsProvider;
 import vine.settings.Configuration;
 
 /**
@@ -43,30 +43,52 @@ public final class Game {
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
     private final Screen screen;
-    private final EventDispatcher eventDispatcher;
-    private final Graphics graphics;
     private final Configuration configuration;
     private float timer = 0;
-    private Scene scene;
-    protected SceneRenderer renderer;
-    protected final Set<GameObject> updateList = new HashSet<>(1000);
+    private final Set<GameObject> updateList = new LinkedHashSet<>(1000);
+    private final Layer[] layers;
+    final Deque<GameObject> addList = new ArrayDeque<>(100);
+    final Deque<GameObject> removeList = new ArrayDeque<>(100);
 
-    public Game(Screen screen, final Graphics graphics, final EventDispatcher dispatcher) {
+    /**
+     * 
+     */
+    protected EventDispatcher dispatcher;
+
+    /**
+     * @param screen
+     *            Screen to render the game on
+     * @param layers
+     *            The layers to render
+     */
+    public Game(final Screen screen, final Layer[] layers) {
+        this.layers = layers;
         this.screen = screen;
-        this.graphics = graphics;
-        this.eventDispatcher = dispatcher;
         this.configuration = new Configuration("res/settings.ini");
     }
 
-    protected final EventDispatcher getEventDispatcher() {
-        return eventDispatcher;
+    /**
+     * @return Getter
+     */
+    public Screen getScreen() {
+        return this.screen;
     }
 
     /**
-     * @return
+     * @return Getter
      */
     public final Configuration getSettings() {
-        return configuration;
+        return this.configuration;
+    }
+
+    private void preUpdate() {
+        if (!this.addList.isEmpty()) {
+            this.updateList.addAll(this.addList);
+            for (final GameObject o : this.addList) {
+                o.begin();
+            }
+            this.addList.clear();
+        }
     }
 
     /**
@@ -74,30 +96,39 @@ public final class Game {
      *            The time that passed since the last update
      */
     public void update(final float delta) {
-        scene.update(delta);
-        timer += delta;
-        if (timer > 1000) {
-            timer = 0;
+        preUpdate();
+        this.timer += delta;
+        if (this.timer > 1000) {
+            this.timer = 0;
             if (LOGGER.isDebugEnabled()) {
                 LOGGER.debug("Start new update at "
                         + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date())
                         + "\nTime delta is:" + delta + " milliseconds\nCurrent FPS about:" + StatMonitor.getFPS()
                         + "\n");
-                LOGGER.debug("" + Arrays.toString(screen.getOrthographicProjection().elements));
             }
         }
-        for (final GameObject object : updateList) {
+        for (final GameObject object : this.updateList) {
             object.update(delta);
+        }
+        postUpdate();
+    }
+
+    private void postUpdate() {
+        if (!this.removeList.isEmpty()) {
+            this.updateList.removeAll(this.removeList);
+            this.removeList.clear();
         }
     }
 
     /**
      * 
      */
-    public void render() {
-        graphics.clearBuffer();
-        renderer.renderScene(scene, screen, graphics);
-        graphics.swapBuffer();
+    public synchronized void render() {
+        GraphicsProvider.getGraphics().clearBuffer();
+        for (final Layer layer : this.layers) {
+            layer.render(this.screen);
+        }
+        GraphicsProvider.getGraphics().swapBuffer();
     }
 
     /**
@@ -105,16 +136,16 @@ public final class Game {
      *            The asset name of the level that should be loaded.
      */
     public void changeLevel(final String level) {
-        if (scene == null)
-            this.scene = new Scene();
-        if (renderer == null)
-            this.renderer = new SceneRenderer();
         getObjectsByType(GameObject.class).stream().forEach(object -> {
-            if (!object.isLevelPeristent()) {
+            if (!object.isLevelPersistent()) {
                 object.destroy();
             }
         });
-        scene.loadScene(level, renderer, screen);
+        for (final Layer layer : this.layers) {
+            if (layer.getName().equals("Scene")) {
+                ((Scene) layer).loadScene(level, this.screen);
+            }
+        }
     }
 
     /**

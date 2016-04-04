@@ -2,9 +2,7 @@ package vine.event;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-
-import vine.event.Event.EventType;
-import vine.event.EventListener.EventHandler;
+import java.util.Iterator;
 
 /**
  * @author Steffen
@@ -20,7 +18,7 @@ public final class EventDispatcher {
      * 
      */
     public EventDispatcher() {
-        layers = new ArrayDeque<>();
+        this.layers = new ArrayDeque<>();
     }
 
     /**
@@ -28,29 +26,7 @@ public final class EventDispatcher {
      *            The event layer, that will be used to receive events.
      */
     public void registerListener(final EventListener layer) {
-        layers.addLast(layer);
-    }
-
-    /**
-     * @param name
-     * @param handler
-     * @param type
-     */
-    public void registerHandler(final String name, final EventHandler handler, final EventType type) {
-        for (final EventListener listener : layers) {
-            if (listener.type == type) {
-                listener.addEventHandler(name, handler);
-            }
-        }
-    }
-
-    /**
-     * @param name
-     */
-    public void unregisterHandler(final String name) {
-        for (final EventListener listener : layers) {
-            listener.handler.remove(name);
-        }
+        this.layers.addLast(layer);
     }
 
     /**
@@ -59,6 +35,11 @@ public final class EventDispatcher {
      *            layer, until a handler in a layer consumes the event.
      */
     public void dispatch(final Event event) {
-        layers.stream().filter(e -> e.onEvent(event)).findFirst();
+        final Iterator<EventListener> it = this.layers.descendingIterator();
+        while (it.hasNext()) {
+            if (it.next().onEvent(event)) {
+                return;
+            }
+        }
     }
 }

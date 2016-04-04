@@ -11,58 +11,46 @@ public class Viewport {
     private int topOffset;
 
     /**
-     * @return
+     * @return The offset the the right (black border)
      */
     public int getRightOffset() {
-        return rightOffset;
+        return this.rightOffset;
     }
 
     /**
-     * @return
+     * @return The offset the the bottom (black border)
      */
     public int getBottomOffset() {
-        return bottomOffset;
+        return this.bottomOffset;
     }
 
     /**
-     * @return
+     * @return The offset the the left (black border)
      */
     public int getLeftOffset() {
-        return leftOffset;
+        return this.leftOffset;
     }
 
     /**
-     * @return
+     * @return The offset the the top (black border)
      */
     public int getTopOffset() {
-        return topOffset;
+        return this.topOffset;
     }
 
-    /**
-     * @param rightOffset
-     */
-    protected void setRightOffset(final int rightOffset) {
+    void setRightOffset(final int rightOffset) {
         this.rightOffset = rightOffset;
     }
 
-    /**
-     * @param bottomOffset
-     */
-    protected void setBottomOffset(final int bottomOffset) {
+    void setBottomOffset(final int bottomOffset) {
         this.bottomOffset = bottomOffset;
     }
 
-    /**
-     * @param leftOffset
-     */
-    protected void setLeftOffset(final int leftOffset) {
+    void setLeftOffset(final int leftOffset) {
         this.leftOffset = leftOffset;
     }
 
-    /**
-     * @param topOffset
-     */
-    protected void setTopOffset(final int topOffset) {
+    void setTopOffset(final int topOffset) {
         this.topOffset = topOffset;
     }
 }

@@ -37,6 +37,10 @@ public class Shader {
     /**
      * 
      */
+    public static final int COLOR_ATTRIB = 2;
+    /**
+     * 
+     */
     protected final int id;
 
     private boolean enabled;

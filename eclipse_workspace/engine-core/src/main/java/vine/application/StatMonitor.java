@@ -43,6 +43,9 @@ public final class StatMonitor {
         return Runtime.getRuntime().totalMemory();
     }
 
+    /**
+     * 
+     */
     public static void logGC() {
         List<GarbageCollectorMXBean> gcbeans = java.lang.management.ManagementFactory.getGarbageCollectorMXBeans();
         for (GarbageCollectorMXBean gcbean : gcbeans) {
@@ -89,8 +92,8 @@ public final class StatMonitor {
                                     + (percent / 10) + "." + (percent % 10) + "%(" + ((memUsed / 1048576) + 1)
                                     + "MB) / ");
                         }
-                        totalGcDuration += info.getGcInfo().getDuration();
-                        long percent = totalGcDuration * 1000L / info.getGcInfo().getEndTime();
+                        this.totalGcDuration += info.getGcInfo().getDuration();
+                        long percent = this.totalGcDuration * 1000L / info.getGcInfo().getEndTime();
                         LOGGER.debug("GC cumulated overhead " + (percent / 10) + "." + (percent % 10) + "%");
                     }
                 }

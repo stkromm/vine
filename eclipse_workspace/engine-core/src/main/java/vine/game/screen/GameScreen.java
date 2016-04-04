@@ -3,6 +3,10 @@ package vine.game.screen;
 import vine.math.Matrix4f;
 import vine.window.Window;
 
+/**
+ * @author Steffen
+ *
+ */
 public class GameScreen implements Screen {
 
     private final Window window;
@@ -14,8 +18,11 @@ public class GameScreen implements Screen {
 
     /**
      * @param window
-     * @param aspectRatio
+     *            The window, that contains this screen.
      * @param width
+     *            The width of the displayed screen on the window
+     * @param height
+     *            The height of the displayed screen on the window
      */
     public GameScreen(final Window window, final int width, final int height) {
         super();
@@ -24,19 +31,20 @@ public class GameScreen implements Screen {
         this.viewport = new Viewport();
         this.height = height;
         this.width = width;
-        calculateViewport();
-        calculateProjection();
+        calculateViewport(this.viewport, window.getHeight(), window.getWidth(), (float) height / width);
+        this.projection = calculateProjection(width, height);
 
     }
 
-    private final void calculateProjection() {
-        this.projection = Matrix4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
+    private final static Matrix4f calculateProjection(final float width, final float height) {
+        return Matrix4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
 
     }
 
-    private final void calculateViewport() {
-        final float widthInAspectRatio = window.getHeight() / (aspect);
-        final float totalOffset = window.getWidth() - widthInAspectRatio;
+    private final static void calculateViewport(final Viewport viewport, final float windowHeight,
+            final float windowWidth, final float aspectRatio) {
+        final float widthInAspectRatio = windowHeight / aspectRatio;
+        final float totalOffset = windowWidth - widthInAspectRatio;
         viewport.setLeftOffset((int) (totalOffset / 2));
         viewport.setRightOffset((int) (totalOffset / 2));
         viewport.setBottomOffset(0);
@@ -45,18 +53,18 @@ public class GameScreen implements Screen {
 
     @Override
     public final Viewport getViewport() {
-        calculateViewport();
-        return viewport;
+        calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
+        return this.viewport;
     }
 
     @Override
     public final int getWidth() {
-        return width;
+        return this.width;
     }
 
     @Override
     public final int getHeight() {
-        return height;
+        return this.height;
     }
 
     @Override
@@ -66,33 +74,33 @@ public class GameScreen implements Screen {
 
     @Override
     public final float getUnitsPerPixel() {
-        return ((float) window.getWidth() - viewport.getLeftOffset() * 2) / width;
+        return ((float) this.window.getWidth() - this.viewport.getLeftOffset() * 2) / this.width;
     }
 
     @Override
     public final float getAspect() {
-        return aspect;
+        return this.aspect;
     }
 
     @Override
     public final Matrix4f getOrthographicProjection() {
-        return projection;
+        return this.projection;
     }
 
     @Override
     public final void setWidth(final int width) {
         this.width = width;
-        this.aspect = (float) height / width;
-        calculateViewport();
-        calculateProjection();
+        this.aspect = (float) this.height / width;
+        calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
+        this.projection = calculateProjection(this.width, this.height);
     }
 
     @Override
     public final void setHeight(final int height) {
         this.height = height;
-        this.aspect = (float) height / width;
-        calculateViewport();
-        calculateProjection();
+        this.aspect = (float) height / this.width;
+        calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
+        this.projection = calculateProjection(this.width, this.height);
     }
 
 }

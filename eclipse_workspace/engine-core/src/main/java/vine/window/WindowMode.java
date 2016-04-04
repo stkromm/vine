@@ -1,5 +1,20 @@
 package vine.window;
 
+/**
+ * @author Steffen
+ *
+ */
 public enum WindowMode {
-    FULLSCREEN, WINDOWED, WINDOWED_FULLSCREEN
+    /**
+     * 
+     */
+    FULLSCREEN,
+    /**
+    * 
+    */
+    WINDOWED,
+    /**
+    * 
+    */
+    WINDOWED_FULLSCREEN
 }

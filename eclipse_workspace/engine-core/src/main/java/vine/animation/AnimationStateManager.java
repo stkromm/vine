@@ -10,31 +10,31 @@ public class AnimationStateManager {
 
     public AnimationStateManager(final AnimationState[] animation) {
         if (animation.length > 0) {
-            currentState = animation[animation.length - 1];
+            this.currentState = animation[animation.length - 1];
         }
 
-        states = new HashMap<>();
+        this.states = new HashMap<>();
         for (final AnimationState state : animation) {
-            states.put(state.getName(), state);
+            this.states.put(state.getName(), state);
         }
     }
 
     public final void changeState(final String name) {
-        if (states.containsKey(name)) {
-            currentState = states.get(name);
+        if (this.states.containsKey(name)) {
+            this.currentState = this.states.get(name);
         }
     }
 
     public final void tick(final float delta) {
-        this.time += delta * currentState.getPlaybackSpeed();
-        this.time = time % currentState.getClip().getDuration();
+        this.time += delta * this.currentState.getPlaybackSpeed();
+        this.time = this.time % this.currentState.getClip().getDuration();
     }
 
     public final float[] getCurrentFrame() {
-        return currentState.getClip().getFrame(time).getUvs();
+        return this.currentState.getClip().getFrame(this.time).getUvs();
     }
 
     public final AnimationState getCurrentState() {
-        return currentState;
+        return this.currentState;
     }
 }

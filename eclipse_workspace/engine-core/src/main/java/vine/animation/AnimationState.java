@@ -12,15 +12,15 @@ public class AnimationState {
     }
 
     public final String getName() {
-        return name;
+        return this.name;
     }
 
     public final AnimationClip getClip() {
-        return clip;
+        return this.clip;
     }
 
     public final float getPlaybackSpeed() {
-        return playbackSpeed;
+        return this.playbackSpeed;
     }
 
     public final void setPlaybackSpeed(final float playbackSpeed) {

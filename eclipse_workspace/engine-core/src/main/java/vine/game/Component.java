@@ -17,15 +17,15 @@ public class Component extends GameObject { // NOSONAR
      * @return The entity this component is attached to
      */
     public final GameEntity getEntity() {
-        return entity;
+        return this.entity;
     }
 
     /**
-     * @param entity
+     * @param holder
      *            the entity this component should be attached to
      */
-    public void attachTo(final GameEntity entity) {
-        this.entity = entity;
+    public void attachTo(final GameEntity holder) {
+        this.entity = holder;
     }
 
 }

@@ -1,16 +1,17 @@
 package vine.platform.lwjgl3;
 
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.glfw.GLFW.glfwMakeContextCurrent;
 import static org.lwjgl.glfw.GLFW.glfwSwapBuffers;
 import static org.lwjgl.glfw.GLFW.glfwSwapInterval;
 import static org.lwjgl.opengl.GL11.GL_BLEND;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
 import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_CULL_FACE;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL11.GL_FRONT;
 import static org.lwjgl.opengl.GL11.GL_ONE_MINUS_SRC_ALPHA;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
 import static org.lwjgl.opengl.GL11.GL_RGBA;
 import static org.lwjgl.opengl.GL11.GL_SRC_ALPHA;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
@@ -25,11 +26,8 @@ import static org.lwjgl.opengl.GL11.glDrawArrays;
 import static org.lwjgl.opengl.GL11.glDrawElements;
 import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glGenTextures;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
 import static org.lwjgl.opengl.GL11.glTexImage2D;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
-import static org.lwjgl.opengl.GL11.glTranslatef;
 import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE1;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
@@ -50,17 +48,15 @@ import static org.lwjgl.opengl.GL20.glUseProgram;
 import static org.lwjgl.opengl.GL20.glVertexAttribPointer;
 import static org.lwjgl.opengl.GL30.glBindVertexArray;
 import static org.lwjgl.opengl.GL30.glGenVertexArrays;
-import static org.lwjgl.stb.STBEasyFont.stb_easy_font_print;
 
-import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL;
 
 import vine.graphics.Graphics;
 import vine.graphics.Shader;
+import vine.graphics.VertexAttribute;
 import vine.math.Matrix4f;
 import vine.math.Vector3f;
 import vine.util.BufferConverter;
@@ -88,7 +84,7 @@ public final class GLGraphics implements Graphics {
         // init open gl
         GL.createCapabilities();
         // configure open gl
-        // glEnable(GL_DEPTH_TEST);
+        glEnable(GL_DEPTH_TEST);
         glActiveTexture(GL_TEXTURE1);
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -100,7 +96,7 @@ public final class GLGraphics implements Graphics {
 
     @Override
     public void setViewport(final int x, final int y, final int width, final int height) {
-        glViewport(0, 0, width, height);
+        glViewport(x, y, width, height);
     }
 
     @Override
@@ -167,19 +163,11 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public void bindVertexData(final int bufferId, final FloatBuffer vertices) {
+    public void bindVertexData(int bufferId, FloatBuffer data, VertexAttribute attribute) {
         glBindBuffer(GL_ARRAY_BUFFER, bufferId);
-        glBufferData(GL_ARRAY_BUFFER, vertices, GL_STATIC_DRAW);
-        glVertexAttribPointer(Shader.VERTEX_ATTRIB, 3, GL_FLOAT, false, 0, 0);
-        glEnableVertexAttribArray(Shader.VERTEX_ATTRIB);
-    }
-
-    @Override
-    public void bindTextureData(final int bufferId, final FloatBuffer uvs) {
-        glBindBuffer(GL_ARRAY_BUFFER, bufferId);
-        glBufferData(GL_ARRAY_BUFFER, uvs, GL_DYNAMIC_DRAW);
-        glVertexAttribPointer(Shader.TCOORD_ATTRIB, 2, GL_FLOAT, false, 0, 0);
-        glEnableVertexAttribArray(Shader.TCOORD_ATTRIB);
+        glBufferData(GL_ARRAY_BUFFER, data, GL_DYNAMIC_DRAW);
+        glVertexAttribPointer(attribute.getId(), attribute.getDimension(), GL_FLOAT, false, 0, 0);
+        glEnableVertexAttribArray(attribute.getId());
     }
 
     @Override
@@ -214,15 +202,9 @@ public final class GLGraphics implements Graphics {
     }
 
     @Override
-    public void reallocateVerticeData(final int vbo, final FloatBuffer vertices) {
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, vertices);
-    }
-
-    @Override
-    public void reallocateTextureData(final int tbo, final FloatBuffer uvBuffer) {
-        glBindBuffer(GL_ARRAY_BUFFER, tbo);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, uvBuffer);
+    public void reallocateVerticeData(final int attributeBuffer, final FloatBuffer data) {
+        glBindBuffer(GL_ARRAY_BUFFER, attributeBuffer);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, data);
     }
 
     @Override

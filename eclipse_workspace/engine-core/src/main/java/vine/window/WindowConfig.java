@@ -5,8 +5,16 @@ import java.util.List;
 
 import vine.settings.Configurable;
 
+/**
+ * @author Steffen
+ *
+ */
 public class WindowConfig extends Configurable {
 
+    /**
+     * @param window
+     *            The window, that is configured
+     */
     public WindowConfig(final Window window) {
         if (window == null) {
             throw new IllegalArgumentException("The window of WindowConfig must be valid.");
@@ -15,7 +23,7 @@ public class WindowConfig extends Configurable {
         this.properties.put(mode.getKey(), mode);
     }
 
-    private final SettingHandler windowModeHandler(final Window window) {
+    private final static SettingHandler windowModeHandler(final Window window) {
         return new SettingHandler() {
             private WindowMode value = WindowMode.WINDOWED;
 
@@ -38,12 +46,12 @@ public class WindowConfig extends Configurable {
 
             @Override
             public final String getCurrentValue() {
-                return value.toString();
+                return this.value.toString();
             }
 
             @Override
             public final List<String> getOptions() {
-                return Arrays.asList(options);
+                return Arrays.asList(this.options);
             }
         };
     }

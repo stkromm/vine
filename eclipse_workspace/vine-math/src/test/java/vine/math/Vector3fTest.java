@@ -67,8 +67,8 @@ public class Vector3fTest {
         assertTrue(nullVector.length() == 0);
         Random rn = new Random();
         for (int i = 0; i <= 100000; i++) {
-            Vector3f vec = new Vector3f(rn.nextFloat() * 10000,
-                    rn.nextFloat() * (float) System.currentTimeMillis() - 12345, (float) System.nanoTime());
+            Vector3f vec = new Vector3f(rn.nextFloat() * 10000, rn.nextFloat() * System.currentTimeMillis() - 12345,
+                    System.nanoTime());
             vec.normalize();
             assertTrue(Math.abs(Math.abs(vec.length()) - 1) <= Vector3f.EPSILON);
         }

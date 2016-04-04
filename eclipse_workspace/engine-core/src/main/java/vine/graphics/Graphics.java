@@ -71,9 +71,7 @@ public interface Graphics {
 
     void bindElementArrayBuffer(int id);
 
-    void bindVertexData(int bufferId, FloatBuffer vertices);
-
-    void bindTextureData(int bufferId, FloatBuffer uvs);
+    void bindVertexData(int bufferId, FloatBuffer vertices, VertexAttribute usage);
 
     void bindIndexData(int bufferId, IntBuffer indices);
 
@@ -88,8 +86,6 @@ public interface Graphics {
     void drawArrays(int count);
 
     void reallocateVerticeData(int vbo, FloatBuffer vertices);
-
-    void reallocateTextureData(int tbo, FloatBuffer uvBuffer);
 
     void reallocateIndicesData(int ibo, IntBuffer indicesBuffer);
 }

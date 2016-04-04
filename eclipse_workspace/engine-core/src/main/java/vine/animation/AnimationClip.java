@@ -11,7 +11,7 @@ public class AnimationClip {
         super();
         this.frames = frames;
         this.texture = texture;
-        duration = frames[frames.length - 1].getDuration();
+        this.duration = frames[frames.length - 1].getDuration();
     }
 
     /**
@@ -20,23 +20,23 @@ public class AnimationClip {
      */
     public final AnimationFrame getFrame(final float time) {
         int frameId = 0;
-        while (frames[frameId].getDuration() < time && frameId < frames.length) {
+        while (frameId < this.frames.length-1 && this.frames[frameId].getDuration() < time) {
             ++frameId;
         }
-        return frames[frameId];
+        return this.frames[frameId];
     }
 
     /**
      * @return
      */
     public final float getDuration() {
-        return duration;
+        return this.duration;
     }
 
     /**
      * @return
      */
     public final Texture2D getTexture() {
-        return texture;
+        return this.texture;
     }
 }

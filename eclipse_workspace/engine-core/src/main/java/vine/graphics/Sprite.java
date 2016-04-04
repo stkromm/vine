@@ -1,5 +1,7 @@
 package vine.graphics;
 
+import vine.math.Vector3f;
+
 /**
  * @author Steffen
  *
@@ -13,4 +15,5 @@ public interface Sprite {
 
     Texture2D getTexture();
 
+    Vector3f getSize();
 }

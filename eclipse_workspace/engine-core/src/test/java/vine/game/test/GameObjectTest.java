@@ -33,33 +33,9 @@ public class GameObjectTest {
      * 
      */
     @Test
-    public void testHideFlag() {
-        GameObject object = Game.instantiate(MyTestObject.class, 5);
-        assertTrue(!object.hideFlag());
-        object.enableFlags(GameObject.HIDE_FLAG);
-        assertTrue(object.hideFlag());
-        object.destroy();
-    }
-
-    /**
-     * 
-     */
-    @Test
     public void testHashCode() {
         GameObject object = Game.instantiate(MyTestObject.class, 5);
         assertTrue(object.hashCode() == object.getName().hashCode());
-        object.destroy();
-    }
-
-    /**
-     * 
-     */
-    @Test
-    public void testActiveFlag() {
-        GameObject object = Game.instantiate(MyTestObject.class, 5);
-        object.update(0);
-        object.disableFlags(GameObject.ACTIVE_FLAG);
-        object.update(0);
         object.destroy();
     }
 

@@ -11,9 +11,10 @@ import vine.event.EventListener;
 import vine.event.KeyEvent;
 import vine.event.MouseButtonEvent;
 import vine.game.Game;
+import vine.game.Layer;
+import vine.game.scene.Scene;
 import vine.game.screen.GameScreen;
 import vine.game.screen.Screen;
-import vine.game.screen.Viewport;
 import vine.graphics.Graphics;
 import vine.graphics.GraphicsProvider;
 import vine.input.Input;
@@ -27,7 +28,6 @@ import vine.window.WindowConfig;
  *
  */
 public final class Application {
-    private static final Application INSTANCE = new Application();
     /**
      * vine.application package logger.
      */
@@ -44,13 +44,13 @@ public final class Application {
      *            window and graphic settings.
      */
     public static void main(final String... args) {
-        Application.INSTANCE.run(EngineMode.DEBUG, args);
+        Application.run(EngineMode.DEBUG, args);
     }
 
     /**
      * Begin the game loop.
      */
-    private void run(EngineMode mode, String... args) {
+    private static void run(EngineMode mode, String... args) {
         switch (mode) {
         case DEBUG:
             PropertyConfigurator.configure("src/main/java/log4j-debug.properties");
@@ -58,6 +58,8 @@ public final class Application {
             break;
         case PRODUCTION:
             PropertyConfigurator.configure("src/main/java/log4j-production.properties");
+            break;
+        case EDITOR:
             break;
         default:
             PropertyConfigurator.configure("src/main/java/log4j-debug.properties");
@@ -67,7 +69,7 @@ public final class Application {
         LOGGER.info("Checking display device.");
         final Display display = PlatformDependencyResolver.getDisplay();
         LOGGER.info("Creating system application window.");
-        final Window window = PlatformDependencyResolver.getPlatformWindow(display);
+        final Window window = PlatformDependencyResolver.getPlatformWindow("vine.platform.lwjgl3.GLFWWindow", display);
         LOGGER.info("Checking input devices.");
         final Input input = PlatformDependencyResolver.getInput(window);
         LOGGER.info("Assign graphics provider.");
@@ -77,9 +79,6 @@ public final class Application {
         GraphicsProvider.setGraphics(graphics);
 
         final EventDispatcher dispatcher = new EventDispatcher();
-        dispatcher.registerListener(new EventListener(EventType.KEY));
-        dispatcher.registerListener(new EventListener(EventType.MOUSE_BUTTON));
-        dispatcher.registerListener(new EventListener(EventType.MOUSE_MOVE));
         input.setKeyCallback((win, key, scancode, action, mods) -> {
             if (InputMapper.getNumberOfKeys() > key && key >= 0) {
                 InputMapper.setKeyPressed(key, action);
@@ -90,25 +89,28 @@ public final class Application {
             dispatcher.dispatch(new MouseButtonEvent(key, action, mods, input.getCursorX(), input.getCursorY()));
         });
         final Screen screen = new GameScreen(window, 1280, 720);
-        final Game game = new Game(screen, graphics, dispatcher);
-        window.setSizeCallback((w, h) -> {
-            window.setWindowSize(w, h);
-            final Viewport viewport = screen.getViewport();
-            graphics.setViewport(viewport.getLeftOffset(), viewport.getTopOffset(), w - viewport.getRightOffset(),
-                    h - viewport.getBottomOffset());
-        });
+
+        Layer scene = new Scene();
+        // GameUserInterface gui = new GameUserInterface();
+        final Game game = new Game(screen, new Layer[] { scene });
+        // gui.addWidget(Game.instantiate(Widget.class));
         window.setWindowContextCallback(context -> {
-            graphics.makeContext(context);
-            graphics.init();
             input.listenToWindow(context);
         });
+        dispatcher.registerListener(scene.getListener());
+        EventListener debugKeyEventListener = new EventListener();
+        debugKeyEventListener.addEventHandler(EventType.KEY, e -> {
+            LOGGER.debug("Dispatched key event \n" + e.toString());
+            return false;
+        });
+        // dispatcher.registerListener(debugKeyEventListener);
         LOGGER.info("Load configuration settings");
         Configuration configuration = new Configuration("res/settings.ini");
         configuration.addConfigurable(new WindowConfig(window));
         configuration.load();
         configuration.apply();
 
-        final GameLifecycle runner = new GameLifecycle(window, input, game);
+        final GamePlayer runner = new GamePlayer(window, input, game);
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             LOGGER.info("Dispose resources");
             runner.destroy();
