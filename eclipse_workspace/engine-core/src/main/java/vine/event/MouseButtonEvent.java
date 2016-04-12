@@ -39,35 +39,35 @@ public class MouseButtonEvent implements Event {
      * @return The mouse-button id of the event
      */
     public final int getButton() {
-        return button;
+        return this.button;
     }
 
     /**
      * @return The action type of the event
      */
     public final InputAction getAction() {
-        return action;
+        return this.action;
     }
 
     /**
      * @return The mods of the event
      */
     public final int getMods() {
-        return mods;
+        return this.mods;
     }
 
     /**
      * @return The x cursor coordinate of the event
      */
     public final double getX() {
-        return x;
+        return this.x;
     }
 
     /**
      * @return The y cursor coordinate of the event
      */
     public final double getY() {
-        return y;
+        return this.y;
     }
 
     @Override

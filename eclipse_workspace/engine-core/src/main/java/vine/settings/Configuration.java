@@ -25,39 +25,39 @@ public class Configuration {
      *         configurable components.
      */
     public boolean isApplied() {
-        return !dirty;
+        return !this.dirty;
     }
 
     public void addConfigurable(final Configurable configurable) {
         if (configurable == null) {
             return;
         }
-        configurables.add(configurable);
-        dirty = true;
+        this.configurables.add(configurable);
+        this.dirty = true;
     }
 
     public void apply() {
-        if (!dirty) {
+        if (!this.dirty) {
             return;
         }
-        for (final Configurable setting : configurables) {
-            setting.applyConfigs(settings);
+        for (final Configurable setting : this.configurables) {
+            setting.applyConfigs(this.settings);
         }
-        dirty = false;
+        this.dirty = false;
     }
 
     public void save() {
-        cleanSettings();
-        ConfigSerializer.saveIniToFile(settings, iniPath);
+        this.cleanSettings();
+        ConfigSerializer.saveIniToFile(this.settings, this.iniPath);
     }
 
     public void putSetting(final String key, final String value) {
-        dirty = true;
-        settings.put(key, value);
+        this.dirty = true;
+        this.settings.put(key, value);
     }
 
     public void load() {
-        ConfigurationParser.parseIniFile(iniPath).forEach((key, value) -> putSetting(key, value));
-        cleanSettings();
+        ConfigurationParser.parseIniFile(this.iniPath).forEach((key, value) -> this.putSetting(key, value));
+        this.cleanSettings();
     }
 }

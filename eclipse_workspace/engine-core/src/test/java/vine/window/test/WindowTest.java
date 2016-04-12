@@ -1,7 +1,6 @@
 package vine.window.test;
 
-import static org.junit.Assert.assertTrue;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,7 +15,7 @@ public class WindowTest {
 
     @Before
     public void setup() {
-        window = new GLFWWindow(new GLFWDisplay());
+        this.window = new GLFWWindow(new GLFWDisplay());
     }
 
     @Rule
@@ -24,24 +23,24 @@ public class WindowTest {
 
     @Test
     public void testWindowTitle() {
-        window.setTitle("test");
-        assertTrue(window.getTitle().equals("test"));
+        this.window.setTitle("test");
+        Assert.assertTrue(this.window.getTitle().equals("test"));
     }
 
     @Test
     public void testWindowSize() {
-        window.setWindowSize(500, 500);
-        assertTrue(window.getHeight() == 500);
-        assertTrue(window.getWidth() == 500);
+        this.window.setWindowSize(500, 500);
+        Assert.assertTrue(this.window.getHeight() == 500);
+        Assert.assertTrue(this.window.getWidth() == 500);
     }
 
     @Test
     public void testVisibility() {
-        window.show();
-        assertTrue(window.isVisible());
-        window.hide();
-        assertTrue(!window.isVisible());
-        window.show();
-        assertTrue(window.isVisible());
+        this.window.show();
+        Assert.assertTrue(this.window.isVisible());
+        this.window.hide();
+        Assert.assertTrue(!this.window.isVisible());
+        this.window.show();
+        Assert.assertTrue(this.window.isVisible());
     }
 }

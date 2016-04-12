@@ -23,8 +23,8 @@ public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>> {
      * @param parameter
      *            the parameters to use for loading the asset
      */
-    public abstract void loadAsync(AssetManager manager, String fileName, FileHandle file, P parameter,
-            FinishCallback callback, ProgressCallback progessCallback);
+    public abstract void loadAsync(AssetPointer pointer, P parameter, FinishCallback<A> callback,
+            ProgressCallback progessCallback);
 
     /**
      * Loads the OpenGL part of the asset.
@@ -35,6 +35,5 @@ public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>> {
      *            the resolved file to load
      * @param parameter
      */
-    public abstract A loadSync(AssetManager manager, String fileName, FileHandle file, P parameter,
-            ProgressCallback callback);
+    public abstract A loadSync(AssetPointer pointer, P parameter);
 }

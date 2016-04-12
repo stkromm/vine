@@ -17,7 +17,7 @@ public class TestConfig extends Configurable {
 
             @Override
             public void apply(String value) {
-                val = value;
+                this.val = value;
             }
 
             @Override
@@ -27,7 +27,7 @@ public class TestConfig extends Configurable {
 
             @Override
             public String getCurrentValue() {
-                return val;
+                return this.val;
             }
         });
     }

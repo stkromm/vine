@@ -2,13 +2,15 @@ package vine.gameplay.entity;
 
 import org.lwjgl.glfw.GLFW;
 
-import vine.application.GamePlayer;
+import vine.animation.AnimationClip;
+import vine.animation.AnimationFrame;
+import vine.animation.AnimationState;
+import vine.animation.AnimationStateManager;
+import vine.assets.AssetManager;
 import vine.event.KeyEvent;
-import vine.game.Game;
 import vine.game.scene.GameEntity;
 import vine.gameplay.component.AnimatedSprite;
-import vine.gameplay.component.StaticSprite;
-import vine.graphics.SpriteRenderer;
+import vine.graphics.Texture2D;
 import vine.input.InputAction;
 import vine.sound.AudioPlayer;
 
@@ -17,68 +19,97 @@ import vine.sound.AudioPlayer;
  *
  */
 public class PlayerPawn extends GameEntity {
-
+    AnimationStateManager animation;
     AudioPlayer player = new AudioPlayer();
 
     @Override
-    public strictfp void update(final float delta) {
-        super.update(delta * 10);
+    public void onUpdate(final float delta) {
+        super.onUpdate(delta);
     }
 
     private void onMoveButtonReleased(final int button) {
         switch (button) {
         case GLFW.GLFW_KEY_W:
-            velocity.setY(velocity.getY() > -64 ? velocity.getY() - 64 : -64);
+            this.velocity.setY(this.velocity.getY() > -64 ? this.velocity.getY() - 64 : -64);
             break;
         case GLFW.GLFW_KEY_A:
-            velocity.setX(velocity.getX() < 64 ? velocity.getX() + 64 : 64);
+            this.velocity.setX(this.velocity.getX() < 64 ? this.velocity.getX() + 64 : 64);
             break;
         case GLFW.GLFW_KEY_D:
-            velocity.setX(velocity.getX() > -64 ? velocity.getX() - 64 : -64);
+            this.velocity.setX(this.velocity.getX() > -64 ? this.velocity.getX() - 64 : -64);
             break;
         case GLFW.GLFW_KEY_S:
-            velocity.setY(velocity.getY() < 64 ? velocity.getY() + 64 : 64);
+            this.velocity.setY(this.velocity.getY() < 64 ? this.velocity.getY() + 64 : 64);
             break;
         default:
             break;
+        }
+        this.setAnimationState();
+    }
+
+    private void setAnimationState() {
+        if (this.velocity.getX() == 0 && this.velocity.getY() == 0) {
+            switch (this.animation.getCurrentState().getName()) {
+            case "down":
+                this.animation.changeState("idle-down");
+                break;
+            case "up":
+                this.animation.changeState("idle-up");
+                break;
+            case "left":
+                this.animation.changeState("idle-left");
+                break;
+            case "right":
+                this.animation.changeState("idle-right");
+                break;
+            default:
+            }
+
+        } else if (this.velocity.getX() > 0) {
+            this.animation.changeState("right");
+        } else if (this.velocity.getX() < 0) {
+            this.animation.changeState("left");
+        } else if (this.velocity.getY() < 0) {
+            this.animation.changeState("down");
+        } else if (this.velocity.getY() > 0) {
+            this.animation.changeState("up");
         }
     }
 
     private void onMoveButtonPressed(final int button) {
         switch (button) {
         case GLFW.GLFW_KEY_A:
-            velocity.setX(velocity.getX() > 64 ? 64 : velocity.getX() - 64);
+            this.velocity.setX(this.velocity.getX() > 64 ? 64 : this.velocity.getX() - 64);
             break;
         case GLFW.GLFW_KEY_D:
-            velocity.setX(velocity.getX() < -64 ? -64 : velocity.getX() + 64);
+            this.velocity.setX(this.velocity.getX() < -64 ? -64 : this.velocity.getX() + 64);
             break;
         case GLFW.GLFW_KEY_S:
-            velocity.setY(velocity.getY() < -64 ? -64 : velocity.getY() - 64);
+            this.velocity.setY(this.velocity.getY() < -64 ? -64 : this.velocity.getY() - 64);
             break;
         case GLFW.GLFW_KEY_W:
-            velocity.setY(velocity.getX() > 64 ? 64 : velocity.getY() + 64);
+            this.velocity.setY(this.velocity.getX() > 64 ? 64 : this.velocity.getY() + 64);
             break;
         case GLFW.GLFW_KEY_F:
-            this.getScene().cameras.getActiveCamera().shake(4.2f, 1f, Game.getObjectsByType(GameEntity.class).size(),
-                    true);
-            final GameEntity entity = Game.instantiate(GameEntity.class, Integer.valueOf((int) (Math.random() * 1000)),
-                    Integer.valueOf((int) (Math.random() * 1000)));
-            final StaticSprite sprite = Game.instantiate(StaticSprite.class, SpriteRenderer.DEFAULT_TEXTURE,
-                    Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(16), Integer.valueOf(32));
-            entity.addComponent(sprite);
-            scene.add(entity);
+            this.wait(5.f);
+            break;
+        case GLFW.GLFW_KEY_SPACE:
+            if (this.currentCollidedEntity != null) {
+                this.currentCollidedEntity.destroy();
+            }
             break;
         default:
             break;
         }
+        this.setAnimationState();
     }
 
     @Override
     public boolean onKeyEvent(final KeyEvent keyEvent) {
         if (keyEvent.getAction() == InputAction.RELEASED) {
-            onMoveButtonReleased(keyEvent.getKey());
+            this.onMoveButtonReleased(keyEvent.getKey());
         } else if (keyEvent.getAction() == InputAction.PRESS) {
-            onMoveButtonPressed(keyEvent.getKey());
+            this.onMoveButtonPressed(keyEvent.getKey());
         }
         return true;
     }
@@ -87,6 +118,7 @@ public class PlayerPawn extends GameEntity {
      * @param x
      * @param y
      */
+    @Override
     public void construct(final int x, final int y) {
         super.construct(x, y);
         this.velocity.setX(0);
@@ -94,9 +126,40 @@ public class PlayerPawn extends GameEntity {
         this.collisionEnabled = false;
         this.move(32, 32);
         this.collisionEnabled = true;
-        // player.setClip(new SoundLoader().loadSync(null,
-        // "E:\\Sounds\\music.wav", null, null, null));
-        // player.playLooped();
+        final Texture2D tex = AssetManager.loadSync("herosheet", Texture2D.class);
+        float[] uv1 = tex.getUVSquad(0, 0, 24, 32);
+        float[] uv2 = tex.getUVSquad(24, 0, 24, 32);
+        float[] uv3 = tex.getUVSquad(48, 0, 24, 32);
+        final AnimationClip moveUpwards = new AnimationClip(new AnimationFrame(uv2, 200), new AnimationFrame(uv1, 400),
+                new AnimationFrame(uv2, 600), new AnimationFrame(uv3, 800));
+        uv1 = tex.getUVSquad(0, 64, 24, 32);
+        uv2 = tex.getUVSquad(24, 64, 24, 32);
+        uv3 = tex.getUVSquad(48, 64, 24, 32);
+        final AnimationClip moveDownwards = new AnimationClip(new AnimationFrame(uv2, 200),
+                new AnimationFrame(uv1, 400), new AnimationFrame(uv2, 600), new AnimationFrame(uv3, 800));
+        uv1 = tex.getUVSquad(0, 32, 24, 32);
+        uv2 = tex.getUVSquad(24, 32, 24, 32);
+        uv3 = tex.getUVSquad(48, 32, 24, 32);
+        final AnimationClip moveRight = new AnimationClip(new AnimationFrame(uv2, 200), new AnimationFrame(uv1, 400),
+                new AnimationFrame(uv2, 600), new AnimationFrame(uv3, 800));
+        uv1 = tex.getUVSquad(0, 96, 24, 32);
+        uv2 = tex.getUVSquad(24, 96, 24, 32);
+        uv3 = tex.getUVSquad(48, 96, 24, 32);
+        final AnimationClip moveLeft = new AnimationClip(new AnimationFrame(uv2, 200), new AnimationFrame(uv1, 400),
+                new AnimationFrame(uv2, 600), new AnimationFrame(uv3, 800));
+        final AnimationClip idleDown = new AnimationClip(new AnimationFrame(tex.getUVSquad(24, 64, 24, 32), 100f));
+        final AnimationClip idleUp = new AnimationClip(new AnimationFrame(tex.getUVSquad(24, 0, 24, 32), 100f));
+        final AnimationClip idleLeft = new AnimationClip(new AnimationFrame(tex.getUVSquad(24, 96, 24, 32), 100f));
+        final AnimationClip idleRight = new AnimationClip(new AnimationFrame(tex.getUVSquad(24, 32, 24, 32), 100f));
+        final AnimationStateManager animation = new AnimationStateManager(new AnimationState[] {
+                new AnimationState(idleUp, "idle-up", 1), new AnimationState(idleRight, "idle-right", 1),
+                new AnimationState(idleDown, "idle-down", 1), new AnimationState(idleLeft, "idle-left", 1),
+                new AnimationState(moveUpwards, "up", 1), new AnimationState(moveDownwards, "down", 1),
+                new AnimationState(moveRight, "right", 1), new AnimationState(moveLeft, "left", 1) });
+        animation.changeState("idle-down");
+        this.animation = animation;
+        this.addComponent(this.getWorld().instantiate(AnimatedSprite.class, animation, tex, Integer.valueOf(48),
+                Integer.valueOf(64)));
     }
 
 }

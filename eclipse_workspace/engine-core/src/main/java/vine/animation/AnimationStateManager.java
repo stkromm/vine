@@ -12,7 +12,6 @@ public class AnimationStateManager {
         if (animation.length > 0) {
             this.currentState = animation[animation.length - 1];
         }
-
         this.states = new HashMap<>();
         for (final AnimationState state : animation) {
             this.states.put(state.getName(), state);
@@ -20,8 +19,9 @@ public class AnimationStateManager {
     }
 
     public final void changeState(final String name) {
-        if (this.states.containsKey(name)) {
+        if (!this.currentState.getName().equals(name) && this.states.containsKey(name)) {
             this.currentState = this.states.get(name);
+            this.time = 0;
         }
     }
 

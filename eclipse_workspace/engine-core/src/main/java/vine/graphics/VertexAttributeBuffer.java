@@ -15,42 +15,40 @@ public class VertexAttributeBuffer {
     private FloatBuffer data;
 
     public VertexAttributeBuffer(float[] data, VertexAttribute attribute) {
-        graphics = GraphicsProvider.getGraphics();
-        bufferId = graphics.generateBuffer();
+        this.graphics = GraphicsProvider.getGraphics();
+        this.bufferId = this.graphics.generateBuffer();
         this.data = BufferConverter.createFloatBuffer(data);
         this.attribute = attribute;
     }
 
     public int getPosition() {
-        return data.position();
+        return this.data.position();
     }
 
     public void append(final float[] values) {
-        if (LOGGER.isDebugEnabled() && data.capacity() < values.length) {
-            LOGGER.debug("OVERFLOW:\n" + data.capacity() + "\n" + data.position() + "" + values.length + "\n\n");
-        } else {
-            data.put(values, 0, values.length);
-        }
+        this.data.put(values, 0, values.length);
     }
 
     public void resize(final int size) {
-        if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug("Resized attribute buffer with size " + size);
+        if (VertexAttributeBuffer.LOGGER.isDebugEnabled()) {
+            VertexAttributeBuffer.LOGGER
+                    .debug("Resized attribute buffer with size " + this.attribute.name() + size);
         }
-        data = BufferConverter.createFloatBuffer(new float[size]);
+        this.data = BufferConverter.createFloatBuffer(new float[size]);
     }
 
     public void reallocate() {
-        data.flip();
-        graphics.reallocateVerticeData(bufferId, data);
-        data.clear();
+        this.data.flip();
+        this.graphics.reallocateVerticeData(this.bufferId, this.data);
+        this.data.clear();
     }
 
     public void bind() {
-        graphics.bindVertexData(bufferId, data, attribute);
+        this.graphics.bindVertexData(this.bufferId, this.data, this.attribute);
     }
 
     public VertexAttribute getAttribute() {
-        return attribute;
+        return this.attribute;
     }
+
 }

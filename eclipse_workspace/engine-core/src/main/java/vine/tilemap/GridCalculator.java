@@ -2,9 +2,9 @@ package vine.tilemap;
 
 class GridCalculator {
 
-    float[] squadVertices = new float[12];
+    private final float[] squadVertices = new float[12];
 
-    void calculateVertexGrid(int startX, int startY, int width, int height, float[] vertices) {
+    strictfp void calculateVertexGrid(int startX, int startY, int width, int height, float[] vertices) {
         for (int i = width - 1; i >= 0; i--) {
             for (int j = height - 1; j >= 0; j--) {
                 final int index = i + j * width;

@@ -14,13 +14,15 @@ import vine.util.FileUtils;
 public class TextureLoader extends AssetLoader<Texture2D, AssetLoaderParameters<Texture2D>> {
 
     @Override
-    public Texture2D loadSync(final AssetManager manager, final String fileName, final FileHandle file,
-            final AssetLoaderParameters<Texture2D> parameter, vine.assets.AssetLoader.ProgressCallback progess) {
+    public Texture2D loadSync(AssetPointer pointer, final AssetLoaderParameters<Texture2D> parameter) {
         BufferedImage image = null;
-        try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readBytes(fileName))) {
+        try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readBytes(pointer.path))) {
             image = ImageIO.read(stream);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             Logger.getGlobal().log(Level.SEVERE, "Failed to read texture source file", e);
+        }
+        if (image == null) {
+            return null;
         }
         final int width = image.getWidth();
         final int height = image.getHeight();
@@ -39,8 +41,8 @@ public class TextureLoader extends AssetLoader<Texture2D, AssetLoaderParameters<
     }
 
     @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<Texture2D> parameter, vine.assets.AssetLoader.FinishCallback callback,
+    public void loadAsync(AssetPointer pointer, AssetLoaderParameters<Texture2D> parameter,
+            vine.assets.AssetLoader.FinishCallback<Texture2D> callback,
             vine.assets.AssetLoader.ProgressCallback progessCallback) {
         // TODO Auto-generated method stub
 

@@ -16,12 +16,14 @@ import vine.sound.SoundClip;
 
 public class SoundLoader extends AssetLoader<SoundClip, AssetLoaderParameters<SoundClip>> {
 
+    @SuppressWarnings("resource")
     @Override
-    public SoundClip loadSync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<SoundClip> parameter, vine.assets.AssetLoader.ProgressCallback progess) {
+    public SoundClip loadSync(AssetPointer pointer, AssetLoaderParameters<SoundClip> parameter) {
         AudioInputStream audioIn;
         try {
-            final InputStream f = new FileInputStream(fileName);
+            final InputStream f = new FileInputStream(pointer.path);
+            f.skip(pointer.offset);
+            f.mark(f.available() - pointer.length);
             audioIn = AudioSystem.getAudioInputStream(new BufferedInputStream(f));
         } catch (UnsupportedAudioFileException | IOException e) {
             audioIn = null;
@@ -33,16 +35,20 @@ public class SoundLoader extends AssetLoader<SoundClip, AssetLoaderParameters<So
         } catch (LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
-        final FloatControl gainControl = (FloatControl) localClip.getControl(FloatControl.Type.MASTER_GAIN);
-        gainControl.setValue(3.0f); // Reduce volume by 10 decibels.
-        return new SoundClip(localClip, audioIn);
+        if (localClip != null) {
+            final FloatControl gainControl = (FloatControl) localClip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(3.0f); // Reduce volume by 10 decibels.
+            return new SoundClip(localClip, audioIn);
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<SoundClip> parameter, vine.assets.AssetLoader.FinishCallback callback,
+    public void loadAsync(AssetPointer pointer, AssetLoaderParameters<SoundClip> parameter,
+            vine.assets.AssetLoader.FinishCallback<SoundClip> callback,
             vine.assets.AssetLoader.ProgressCallback progessCallback) {
-
+        //
     }
 
 }

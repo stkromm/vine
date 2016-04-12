@@ -1,7 +1,6 @@
 package vine.settings.test;
 
-import static org.junit.Assert.assertTrue;
-
+import org.junit.Assert;
 import org.junit.Test;
 
 import vine.settings.Configuration;
@@ -9,20 +8,20 @@ import vine.settings.Configuration;
 public class ConfigurationTest {
 
     @Test
-    public void testConfigApply() {
-        Configuration configuration = new Configuration("res/settings.ini");
+    public static void testConfigApply() {
+        final Configuration configuration = new Configuration("res/settings.ini");
         configuration.apply();
-        assertTrue(configuration.isApplied());
+        Assert.assertTrue(configuration.isApplied());
         configuration.addConfigurable(null);
-        assertTrue(configuration.isApplied());
+        Assert.assertTrue(configuration.isApplied());
         configuration.addConfigurable(new TestConfig());
-        assertTrue(!configuration.isApplied());
+        Assert.assertTrue(!configuration.isApplied());
         configuration.apply();
-        assertTrue(configuration.isApplied());
+        Assert.assertTrue(configuration.isApplied());
         configuration.putSetting("test", "");
         configuration.putSetting("", "");
         configuration.apply();
         configuration.apply();
-        assertTrue(configuration.isApplied());
+        Assert.assertTrue(configuration.isApplied());
     }
 }

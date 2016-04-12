@@ -3,14 +3,14 @@ package vine.gameplay.component;
 import vine.game.Component;
 import vine.graphics.Sprite;
 import vine.graphics.Texture2D;
-import vine.math.Vector3f;
+import vine.math.Vector2f;
 
 /**
  * @author Steffen
  *
  */
-public class StaticSprite extends Component implements Sprite { // NOSONAR
-    private final Vector3f size = new Vector3f(0, 0, 0);
+public class StaticSprite extends Component implements Sprite {
+    private final Vector2f size = new Vector2f(0, 0);
     private Texture2D texture;
     private float[] textureUVs;
 
@@ -42,12 +42,13 @@ public class StaticSprite extends Component implements Sprite { // NOSONAR
     /**
      * @return
      */
+    @Override
     public Texture2D getTexture() {
         return this.texture;
     }
 
     @Override
-    public Vector3f getSize() {
+    public Vector2f getSize() {
         return this.size;
     }
 }

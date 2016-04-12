@@ -6,6 +6,7 @@ import java.util.WeakHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import vine.assets.Asset;
 import vine.math.Matrix4f;
 import vine.math.Vector3f;
 
@@ -13,7 +14,7 @@ import vine.math.Vector3f;
  * @author Steffen
  *
  */
-public class Shader {
+public class Shader implements Asset {
     /**
      * Used logger for gameplay logs.
      */
@@ -60,14 +61,14 @@ public class Shader {
     public Shader(final int id) {
         this.id = id;
         this.graphics = GraphicsProvider.getGraphics();
-        setProperties();
+        this.setProperties();
     }
 
     private void setProperties() {
-        setUniform1i("tex", 1);
-        final Matrix4f mat = Matrix4f.orthographic(0, VIEWPORT_WIDTH, 0, VIEWPORT_HEIGHT, -1, 1);
-        setUniformMat4f("pr_matrix", mat);
-        setUniformMat4f("vw_matrix", Matrix4f.translate(new Vector3f(0.f, 0.0f, 0.0f)));
+        this.setUniform1i("tex", 1);
+        final Matrix4f mat = Matrix4f.orthographic(0, Shader.VIEWPORT_WIDTH, 0, Shader.VIEWPORT_HEIGHT, -1, 1);
+        this.setUniformMat4f("pr_matrix", mat);
+        this.setUniformMat4f("vw_matrix", Matrix4f.translate(new Vector3f(0.f, 0.0f, 0.0f)));
     }
 
     /**
@@ -78,14 +79,14 @@ public class Shader {
      * @return the stored uniform
      */
     public int getUniform(final String name) {
-        if (locationCache.containsKey(name)) {
-            return locationCache.get(name);
+        if (this.locationCache.containsKey(name)) {
+            return this.locationCache.get(name).intValue();
         }
-        final int result = graphics.getUniformLocation(id, name);
+        final int result = this.graphics.getUniformLocation(this.id, name);
         if (result == -1) {
-            LOGGER.error("Failed to create shader");
+            Shader.LOGGER.error("Failed to create shader");
         } else {
-            locationCache.put(name, result);
+            this.locationCache.put(name, Integer.valueOf(result));
         }
         return result;
     }
@@ -99,10 +100,10 @@ public class Shader {
      *            the to store uniform
      */
     public void setUniform1i(final String name, final int value) {
-        if (!enabled) {
-            graphics.bindShader(id);
+        if (!this.enabled) {
+            this.graphics.bindShader(this.id);
         }
-        graphics.storeUniformInt(getUniform(name), value);
+        this.graphics.storeUniformInt(this.getUniform(name), value);
     }
 
     /**
@@ -114,10 +115,10 @@ public class Shader {
      *            the vector that should be stored in the uniform
      */
     public void setUniform3f(final String name, final Vector3f vector) {
-        if (!enabled) {
-            graphics.bindShader(id);
+        if (!this.enabled) {
+            this.graphics.bindShader(this.id);
         }
-        graphics.storeUniformVector3f(getUniform(name), vector);
+        this.graphics.storeUniformVector3f(this.getUniform(name), vector);
     }
 
     /**
@@ -127,19 +128,26 @@ public class Shader {
      *            the matrix that should be stored in the uniform
      */
     public void setUniformMat4f(final String name, final Matrix4f matrix) {
-        if (!enabled) {
-            graphics.bindShader(id);
+        if (!this.enabled) {
+            this.graphics.bindShader(this.id);
         }
-        graphics.storeUniformMatrix4f(getUniform(name), matrix);
+        this.graphics.storeUniformMatrix4f(this.getUniform(name), matrix);
+    }
+
+    public void setUniformMat4f(final ShaderUniforms name, final Matrix4f matrix) {
+        if (!this.enabled) {
+            this.graphics.bindShader(this.id);
+        }
+        this.graphics.storeUniformMatrix4f(this.getUniform(name.toString()), matrix);
     }
 
     public void bind() {
-        graphics.bindShader(id);
-        enabled = true;
+        this.graphics.bindShader(this.id);
+        this.enabled = true;
     }
 
     public void unbind() {
-        graphics.bindShader(0);
-        enabled = false;
+        this.graphics.bindShader(0);
+        this.enabled = false;
     }
 }

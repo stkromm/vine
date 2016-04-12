@@ -1,4 +1,4 @@
-package vine.gui;
+package vine.game.gui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +16,24 @@ import vine.graphics.GUIRenderer;
  *
  */
 public class GameUserInterface implements Layer {
-    private EventListener listener = new EventListener();
-    private List<Widget> widgets = new ArrayList<>();
-    private GUIRenderer renderer = new GUIRenderer();
+    private final EventListener listener = new EventListener();
+    private final List<Widget> widgets = new ArrayList<>();
+    private final GUIRenderer renderer = new GUIRenderer();
 
-    /**
-     * 
-     */
     public GameUserInterface() {
-        final EventHandler handler = event -> {
+        final EventHandler keyHandler = event -> {
             for (final Widget widget : this.widgets) {
-                if (widget.selected) {
+                if (widget.isSelected()) {
                     widget.onKeyEvent((KeyEvent) event);
                 }
             }
             return false;
         };
-        this.listener.addEventHandler(EventType.KEY, handler);
+        this.listener.addEventHandler(EventType.KEY, keyHandler);
+        final EventHandler mouseMoveHandler = event -> {
+            return false;
+        };
+        this.listener.addEventHandler(EventType.MOUSE_MOVE, mouseMoveHandler);
     }
 
     @Override
@@ -42,7 +43,7 @@ public class GameUserInterface implements Layer {
 
     @Override
     public void render(Screen screen) {
-        renderer.renderGUI(widgets, screen);
+        this.renderer.renderGUI(this.widgets, screen);
     }
 
     @Override

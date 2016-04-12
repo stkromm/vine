@@ -1,9 +1,8 @@
 package vine.window.test;
 
-import static org.junit.Assert.assertTrue;
-
 import java.awt.GraphicsEnvironment;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,19 +15,20 @@ public class DisplayTest {
 
     @Before
     public void setup() {
-        display = new GLFWDisplay();
+        this.display = new GLFWDisplay();
     }
 
     @Test
     public void testRefreshRate() {
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        assertTrue(env.getDefaultScreenDevice().getDisplayMode().getRefreshRate() == display.getRefreshRate());
+        final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Assert.assertTrue(
+                env.getDefaultScreenDevice().getDisplayMode().getRefreshRate() == this.display.getRefreshRate());
     }
 
     @Test
     public void testBitValues() {
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        assertTrue(env.getDefaultScreenDevice().getDisplayMode().getBitDepth() == display.getBlueBits()
-                + display.getGreenBits() + display.getRedBits() + display.getRedBits());
+        final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Assert.assertTrue(env.getDefaultScreenDevice().getDisplayMode().getBitDepth() == this.display.getBlueBits()
+                + this.display.getGreenBits() + this.display.getRedBits() + this.display.getRedBits());
     }
 }

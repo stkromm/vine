@@ -1,22 +1,10 @@
 package vine.assets;
 
-import static org.lwjgl.opengl.GL11.GL_FALSE;
-import static org.lwjgl.opengl.GL20.GL_COMPILE_STATUS;
-import static org.lwjgl.opengl.GL20.GL_FRAGMENT_SHADER;
-import static org.lwjgl.opengl.GL20.GL_VERTEX_SHADER;
-import static org.lwjgl.opengl.GL20.glAttachShader;
-import static org.lwjgl.opengl.GL20.glCompileShader;
-import static org.lwjgl.opengl.GL20.glCreateProgram;
-import static org.lwjgl.opengl.GL20.glCreateShader;
-import static org.lwjgl.opengl.GL20.glDeleteShader;
-import static org.lwjgl.opengl.GL20.glGetShaderInfoLog;
-import static org.lwjgl.opengl.GL20.glGetShaderi;
-import static org.lwjgl.opengl.GL20.glLinkProgram;
-import static org.lwjgl.opengl.GL20.glShaderSource;
-import static org.lwjgl.opengl.GL20.glValidateProgram;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
 
 import vine.graphics.Shader;
 
@@ -27,44 +15,44 @@ import vine.graphics.Shader;
 public class ShaderLoader extends AssetLoader<Shader, AssetLoaderParameters<Shader>> {
 
     @Override
-    public Shader loadSync(final AssetManager manager, final String fileName, final FileHandle file,
-            final AssetLoaderParameters<Shader> parameter, vine.assets.AssetLoader.ProgressCallback progess) {
+    public Shader loadSync(AssetPointer pointer, final AssetLoaderParameters<Shader> parameter) {
         final String frag = "#version 330 core\nlayout (location = 0) out vec4 color;in DATA{"
                 + "vec4 color;vec2 tc;vec3 position;" + "} fs_in;" + "uniform sampler2D tex;\n" + "void main() {\n"
-                + " color = texture(tex, fs_in.tc) + fs_in.color;if(color.a <= 0.1) discard;\n}";
+                + " color = texture(tex, fs_in.tc); if(color.a == 0) discard; color += fs_in.color;\n}";
         final String vert = "#version 330 core\nlayout(location = 0)\n "
                 + "in vec4 position;layout (location = 1) in vec2 tc;layout (location = 2) in vec4 color;\n"
                 + "uniform mat4 pr_matrix;uniform mat4 vw_matrix;out DATA{vec4 color;vec2 tc;vec3 position;}\n "
                 + "vs_out;void main(){gl_Position = pr_matrix * vw_matrix * position;vs_out.tc = tc;vs_out.color = color;\n"
                 + "vs_out.position = vec3(vw_matrix * position);}";
-        final int vertId = glCreateShader(GL_VERTEX_SHADER);
-        final int fragId = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(vertId, vert);
-        glShaderSource(fragId, frag);
-        glCompileShader(vertId);
-        if (glGetShaderi(vertId, GL_COMPILE_STATUS) == GL_FALSE) {
+        final int vertId = GL20.glCreateShader(GL20.GL_VERTEX_SHADER);
+        final int fragId = GL20.glCreateShader(GL20.GL_FRAGMENT_SHADER);
+        GL20.glShaderSource(vertId, vert);
+        GL20.glShaderSource(fragId, frag);
+        GL20.glCompileShader(vertId);
+        if (GL20.glGetShaderi(vertId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
             // Could not load vertex shader
-            Logger.getGlobal().log(Level.SEVERE, "Failed to compile vertex shader!" + glGetShaderInfoLog(vertId));
+            Logger.getGlobal().log(Level.SEVERE, "Failed to compile vertex shader!" + GL20.glGetShaderInfoLog(vertId));
         }
 
-        glCompileShader(fragId);
-        if (glGetShaderi(fragId, GL_COMPILE_STATUS) == GL_FALSE) {
+        GL20.glCompileShader(fragId);
+        if (GL20.glGetShaderi(fragId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
             // Could not load fragment shader
-            Logger.getGlobal().log(Level.SEVERE, "Failed to compile fragment shader!" + glGetShaderInfoLog(fragId));
+            Logger.getGlobal().log(Level.SEVERE,
+                    "Failed to compile fragment shader!" + GL20.glGetShaderInfoLog(fragId));
         }
-        final int program = glCreateProgram();
-        glAttachShader(program, vertId);
-        glAttachShader(program, fragId);
-        glLinkProgram(program);
-        glValidateProgram(program);
-        glDeleteShader(vertId);
-        glDeleteShader(fragId);
+        final int program = GL20.glCreateProgram();
+        GL20.glAttachShader(program, vertId);
+        GL20.glAttachShader(program, fragId);
+        GL20.glLinkProgram(program);
+        GL20.glValidateProgram(program);
+        GL20.glDeleteShader(vertId);
+        GL20.glDeleteShader(fragId);
         return new Shader(program);
     }
 
     @Override
-    public void loadAsync(AssetManager manager, String fileName, FileHandle file,
-            AssetLoaderParameters<Shader> parameter, vine.assets.AssetLoader.FinishCallback callback,
+    public void loadAsync(AssetPointer pointer, AssetLoaderParameters<Shader> parameter,
+            vine.assets.AssetLoader.FinishCallback<Shader> callback,
             vine.assets.AssetLoader.ProgressCallback progessCallback) {
         // TODO Auto-generated method stub
 

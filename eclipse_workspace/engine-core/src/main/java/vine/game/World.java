@@ -9,17 +9,19 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.Semaphore;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import vine.application.StatMonitor;
+import vine.application.PerformanceMonitor;
 import vine.event.EventDispatcher;
 import vine.game.GameObject.ReferenceManager;
 import vine.game.scene.Scene;
 import vine.game.screen.Screen;
 import vine.graphics.GraphicsProvider;
 import vine.settings.Configuration;
+import vine.time.TimerManager;
 
 /**
  * Manages the gameplay on a global level. That is managing level changer
@@ -37,19 +39,18 @@ import vine.settings.Configuration;
  * @author Steffen
  *
  */
-public final class Game {
+public final class World {
     /**
      * Used logger for gameplay logs.
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(Game.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(World.class);
     private final Screen screen;
     private final Configuration configuration;
-    private float timer = 0;
     private final Set<GameObject> updateList = new LinkedHashSet<>(1000);
-    private final Layer[] layers;
+    private final Deque<Layer> layers = new ArrayDeque<>();
     final Deque<GameObject> addList = new ArrayDeque<>(100);
     final Deque<GameObject> removeList = new ArrayDeque<>(100);
-
+    private final Semaphore available = new Semaphore(1, true);
     /**
      * 
      */
@@ -61,8 +62,7 @@ public final class Game {
      * @param layers
      *            The layers to render
      */
-    public Game(final Screen screen, final Layer[] layers) {
-        this.layers = layers;
+    public World(final Screen screen) {
         this.screen = screen;
         this.configuration = new Configuration("res/settings.ini");
     }
@@ -83,12 +83,28 @@ public final class Game {
 
     private void preUpdate() {
         if (!this.addList.isEmpty()) {
+
             this.updateList.addAll(this.addList);
+            try {
+                this.available.acquire();
+            } catch (final InterruptedException exception) {
+            }
             for (final GameObject o : this.addList) {
                 o.begin();
             }
+            this.available.release();
             this.addList.clear();
         }
+    }
+
+    public void addObject(GameObject object) {
+        try {
+            this.available.acquire();
+        } catch (final InterruptedException exception) {
+        }
+        this.addList.add(object);
+        this.available.release();
+        object.registerDestructionCallback(o -> this.removeList.add(object));
     }
 
     /**
@@ -96,21 +112,11 @@ public final class Game {
      *            The time that passed since the last update
      */
     public void update(final float delta) {
-        preUpdate();
-        this.timer += delta;
-        if (this.timer > 1000) {
-            this.timer = 0;
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("Start new update at "
-                        + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date())
-                        + "\nTime delta is:" + delta + " milliseconds\nCurrent FPS about:" + StatMonitor.getFPS()
-                        + "\n");
-            }
-        }
+        this.preUpdate();
         for (final GameObject object : this.updateList) {
             object.update(delta);
         }
-        postUpdate();
+        this.postUpdate();
     }
 
     private void postUpdate() {
@@ -136,9 +142,17 @@ public final class Game {
      *            The asset name of the level that should be loaded.
      */
     public void changeLevel(final String level) {
-        getObjectsByType(GameObject.class).stream().forEach(object -> {
+        World.getObjectsByType(GameObject.class).stream().forEach(object -> {
             if (!object.isLevelPersistent()) {
                 object.destroy();
+            }
+        });
+        TimerManager.get().createTimer(1, -1, () -> {
+            if (World.LOGGER.isDebugEnabled()) {
+                World.LOGGER.debug("Start new update at "
+                        + new SimpleDateFormat("yyyy.MM.dd HH:mm:ss", Locale.GERMAN).format(new Date())
+                        + "\nTime delta is:" + 1 / PerformanceMonitor.getFPS() + " milliseconds\nCurrent FPS about:"
+                        + PerformanceMonitor.getFPS() + "\n");
             }
         });
         for (final Layer layer : this.layers) {
@@ -156,9 +170,9 @@ public final class Game {
      *            instantiated type.
      * @return Returns all GameObjects in the Game of the given type.
      */
-    public static <T extends GameObject> T instantiate(final Class<T> type, final Object... params) {
+    public <T extends GameObject> T instantiate(final Class<T> type, final Object... params) {
         return type == null ? null
-                : ReferenceManager.instantiate(type, ReferenceManager.generateObjectName(type), params);
+                : ReferenceManager.instantiate(this, type, ReferenceManager.generateObjectName(type), params);
     }
 
     /**
@@ -173,9 +187,9 @@ public final class Game {
      *            instantiated type.
      * @return the newly created gameobject
      */
-    public static <T extends GameObject> T instantiate(final Class<T> type, final String name, final Object... params) {
+    public <T extends GameObject> T instantiate(final Class<T> type, final String name, final Object... params) {
         return !GameUtils.isValidGameObjectName(name) || type == null ? null
-                : ReferenceManager.instantiate(type, name, params);
+                : ReferenceManager.instantiate(this, type, name, params);
     }
 
     /**
@@ -200,5 +214,9 @@ public final class Game {
      */
     public static GameObject getObjectByName(final String name) {
         return ReferenceManager.OBJECTS.get(name);
+    }
+
+    public void addLayer(Layer scene) {
+        this.layers.push(scene);
     }
 }

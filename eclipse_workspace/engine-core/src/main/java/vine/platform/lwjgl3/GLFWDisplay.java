@@ -1,14 +1,7 @@
 package vine.platform.lwjgl3;
-import static org.lwjgl.glfw.GLFW.GLFW_DISCONNECTED;
-import static org.lwjgl.glfw.GLFW.GLFW_TRUE;
-import static org.lwjgl.glfw.GLFW.glfwGetMonitorName;
-import static org.lwjgl.glfw.GLFW.glfwGetMonitors;
-import static org.lwjgl.glfw.GLFW.glfwGetPrimaryMonitor;
-import static org.lwjgl.glfw.GLFW.glfwGetVideoMode;
-import static org.lwjgl.glfw.GLFW.glfwInit;
-import static org.lwjgl.glfw.GLFW.glfwSetMonitorCallback;
 
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWMonitorCallback;
 import org.lwjgl.glfw.GLFWVidMode;
 
@@ -24,14 +17,14 @@ import vine.display.Display;
 public final class GLFWDisplay implements Display {
     // Get the resolution of the primary monitor
     private GLFWVidMode vidmode;
-    private long currentMonitor = glfwGetPrimaryMonitor();
-    private GLFWMonitorCallback monitorCallback = GLFWMonitorCallback.create((l, e) -> changeMonitor(l, e));
+    private long currentMonitor = GLFW.glfwGetPrimaryMonitor();
+    private final GLFWMonitorCallback monitorCallback = GLFWMonitorCallback.create((l, e) -> this.changeMonitor(l, e));
 
     /**
      * Default display constructor, uses the system primary monitor.
      */
     public GLFWDisplay() {
-        this(glfwGetPrimaryMonitor());
+        this(GLFW.glfwGetPrimaryMonitor());
     }
 
     /**
@@ -40,73 +33,73 @@ public final class GLFWDisplay implements Display {
      */
     public GLFWDisplay(long preferredMonitor) {
         // Initialize GLFW. Most GLFW functions will not work before doing this.
-        if (glfwInit() != GLFW_TRUE) {
+        if (GLFW.glfwInit() != GLFW.GLFW_TRUE) {
             throw new IllegalStateException("Failed to init glfw");
         }
-        glfwSetMonitorCallback(monitorCallback);
-        GLFWVidMode prefVidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        GLFW.glfwSetMonitorCallback(this.monitorCallback);
+        final GLFWVidMode prefVidMode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
         if (prefVidMode != null) {
-            currentMonitor = preferredMonitor;
-            vidmode = prefVidMode;
+            this.currentMonitor = preferredMonitor;
+            this.vidmode = prefVidMode;
         } else {
-            currentMonitor = glfwGetPrimaryMonitor();
-            vidmode = prefVidMode;
+            this.currentMonitor = GLFW.glfwGetPrimaryMonitor();
+            this.vidmode = prefVidMode;
         }
     }
 
     private void changeMonitor(long monitor, int event) {
-        if (monitor == currentMonitor && event == GLFW_DISCONNECTED) {
-            vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+        if (monitor == this.currentMonitor && event == GLFW.GLFW_DISCONNECTED) {
+            this.vidmode = GLFW.glfwGetVideoMode(GLFW.glfwGetPrimaryMonitor());
         }
     }
 
     @Override
     public String[] getMonitorNames() {
-        PointerBuffer monitors = glfwGetMonitors();
-        String[] monitorNames = new String[monitors.capacity()];
+        final PointerBuffer monitors = GLFW.glfwGetMonitors();
+        final String[] monitorNames = new String[monitors.capacity()];
         for (int i = 0; i < monitors.capacity(); i++) {
-            monitorNames[i] = glfwGetMonitorName(monitors.get(i));
+            monitorNames[i] = GLFW.glfwGetMonitorName(monitors.get(i));
         }
         return monitorNames;
     }
 
     @Override
     public int getWidth() {
-        return vidmode.width();
+        return this.vidmode.width();
     }
 
     @Override
     public int getRedBits() {
-        return vidmode.redBits();
+        return this.vidmode.redBits();
     }
 
     @Override
     public int getHeight() {
-        return vidmode.height();
+        return this.vidmode.height();
     }
 
     @Override
     public int getRefreshRate() {
-        return vidmode.refreshRate();
+        return this.vidmode.refreshRate();
     }
 
     @Override
     public int getBlueBits() {
-        return vidmode.blueBits();
+        return this.vidmode.blueBits();
     }
 
     @Override
     public int getGreenBits() {
-        return vidmode.greenBits();
+        return this.vidmode.greenBits();
     }
 
     @Override
     public String getMonitorName() {
-        return glfwGetMonitorName(glfwGetPrimaryMonitor());
+        return GLFW.glfwGetMonitorName(GLFW.glfwGetPrimaryMonitor());
     }
 
     @Override
     public long getPrimaryMonitor() {
-        return glfwGetPrimaryMonitor();
+        return GLFW.glfwGetPrimaryMonitor();
     }
 }

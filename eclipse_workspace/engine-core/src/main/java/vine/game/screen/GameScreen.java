@@ -31,29 +31,26 @@ public class GameScreen implements Screen {
         this.viewport = new Viewport();
         this.height = height;
         this.width = width;
-        calculateViewport(this.viewport, window.getHeight(), window.getWidth(), (float) height / width);
-        this.projection = calculateProjection(width, height);
+        GameScreen.calculateViewport(this.viewport, window.getHeight(), window.getWidth(), (float) height / width);
+        this.projection = GameScreen.calculateProjection(width, height);
 
     }
 
     private final static Matrix4f calculateProjection(final float width, final float height) {
         return Matrix4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
-
     }
 
     private final static void calculateViewport(final Viewport viewport, final float windowHeight,
             final float windowWidth, final float aspectRatio) {
-        final float widthInAspectRatio = windowHeight / aspectRatio;
-        final float totalOffset = windowWidth - widthInAspectRatio;
-        viewport.setLeftOffset((int) (totalOffset / 2));
-        viewport.setRightOffset((int) (totalOffset / 2));
+        final int totalOffset = Math.round(windowWidth - windowHeight / aspectRatio);
+        viewport.setLeftOffset(totalOffset / 2);
+        viewport.setRightOffset(totalOffset / 2);
         viewport.setBottomOffset(0);
         viewport.setTopOffset(0);
     }
 
     @Override
     public final Viewport getViewport() {
-        calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
         return this.viewport;
     }
 
@@ -68,13 +65,8 @@ public class GameScreen implements Screen {
     }
 
     @Override
-    public final float worldToScreenCoord(final float x) {
-        return x * getUnitsPerPixel();
-    }
-
-    @Override
     public final float getUnitsPerPixel() {
-        return ((float) this.window.getWidth() - this.viewport.getLeftOffset() * 2) / this.width;
+        return (this.window.getWidth() - this.viewport.getLeftOffset() * 2.f) / this.width;
     }
 
     @Override
@@ -91,16 +83,20 @@ public class GameScreen implements Screen {
     public final void setWidth(final int width) {
         this.width = width;
         this.aspect = (float) this.height / width;
-        calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
-        this.projection = calculateProjection(this.width, this.height);
+        GameScreen.calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
+        this.projection = GameScreen.calculateProjection(this.width, this.height);
     }
 
     @Override
     public final void setHeight(final int height) {
         this.height = height;
         this.aspect = (float) height / this.width;
-        calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
-        this.projection = calculateProjection(this.width, this.height);
+        GameScreen.calculateViewport(this.viewport, this.window.getHeight(), this.window.getWidth(), this.aspect);
+        this.projection = GameScreen.calculateProjection(this.width, this.height);
     }
 
+    @Override
+    public final float worldToScreenCoord(final float x) {
+        return x * this.getUnitsPerPixel();
+    }
 }

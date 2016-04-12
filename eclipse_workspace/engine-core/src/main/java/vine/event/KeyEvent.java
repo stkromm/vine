@@ -42,33 +42,39 @@ public class KeyEvent implements Event {
      * @return
      */
     public final int getKey() {
-        return key;
+        return this.key;
     }
 
     /**
      * @return
      */
     public final int getScancode() {
-        return scancode;
+        return this.scancode;
     }
 
     /**
      * @return
      */
     public final InputAction getAction() {
-        return action;
+        return this.action;
     }
 
     /**
      * @return
      */
     public final int getMods() {
-        return mods;
+        return this.mods;
     }
 
     @Override
     public final EventType getType() {
         return EventType.KEY;
+    }
+
+    @Override
+    public final String toString() {
+        return "KeyEvent:" + this.getAction().toString() + " Key:" + this.getKey() + " with Mods:" + this.getMods()
+                + " and Scancode:" + this.scancode;
     }
 
 }

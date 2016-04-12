@@ -6,32 +6,32 @@ import java.util.Optional;
 
 import vine.game.Component;
 import vine.game.GameObject;
+import vine.game.collision.BoxCollision;
 import vine.gameplay.component.AnimatedSprite;
+import vine.graphics.Color;
 import vine.graphics.Sprite;
 import vine.math.Vector2f;
-import vine.math.Vector3f;
-import vine.tilemap.TileMap;
+import vine.tilemap.UniformTileMap;
 
 /**
  * @author Steffen
  *
  */
-public class GameEntity extends GameObject { // NOSONAR
+public class GameEntity extends GameObject {
     private final List<String> tags = new ArrayList<>();
     private final Vector2f position = new Vector2f(32, 32);
-    private float zOrder = 0.2f;
+    private final float zOrder = 0.2f;
     /**
      * The scene, that contains this entity.
      */
     protected Scene scene;
-    private final Vector3f color = new Vector3f(0, 0, 0);
-    private float translucency = 0;
+    private final Color color = new Color(0, 0, 0, 0);
     private Sprite sprite;
 
     private Chunk currentChunk;
     private int chunkX = -1;
     private int chunkY = -1;
-    private int numberOfChunks = 10;
+    private final int numberOfChunks = 10;
 
     private final Vector2f move = new Vector2f(0, 0);
     /**
@@ -46,7 +46,7 @@ public class GameEntity extends GameObject { // NOSONAR
     /**
      * Does this entity get blocked by dynamic entities.
      */
-    protected boolean blockDynamic = true;
+    protected boolean blockDynamic = false;
     /**
      * Does this entity get blocked by static objects.
      */
@@ -55,11 +55,12 @@ public class GameEntity extends GameObject { // NOSONAR
      * The extends of the collision box. Origin is the world space position of
      * this entity.
      */
-    protected final Vector2f boundingBoxExtends = new Vector2f(24, 32);
+    protected final Vector2f boundingBoxExtends = new Vector2f(24, 31.9f);
     /*
      * Cache for Collision.
      */
     private GameEntity lastCollidedEntity = this;
+    public GameEntity currentCollidedEntity = null;
     /**
      * 
      */
@@ -94,39 +95,32 @@ public class GameEntity extends GameObject { // NOSONAR
     }
 
     @Override
-    public void update(final float delta) {
-        super.update(delta / 1000);
-        move(this.velocity.getX() * delta / 1000, this.velocity.getY() * delta / 1000);
-        setCurrentChunk((int) this.position.getX() / 1400, (int) this.position.getY() / 800);
+    public void onUpdate(final float delta) {
+        this.move(this.velocity.getX() * delta / 1000, this.velocity.getY() * delta / 1000);
+        this.setCurrentChunk((int) this.position.getX() / 1400, (int) this.position.getY() / 800);
     }
 
     private final boolean intersect(GameEntity e) {
         return e.collisionEnabled //
-                && e.getXCoord() <= getXCoord() + this.boundingBoxExtends.getX()//
-                && getXCoord() <= e.getXCoord() + e.getBoundingBoxExtends().getX()//
-                && e.getYCoord() <= getYCoord() + this.boundingBoxExtends.getY()//
-                && getYCoord() <= e.getYCoord() + e.getBoundingBoxExtends().getY()//
+                && BoxCollision.collide(this.position, this.boundingBoxExtends, e.position, e.boundingBoxExtends)//
                 && e != this;
     }
 
-    private final boolean intersect(TileMap map) {
-        return (this.position.getY() + this.boundingBoxExtends.getY()) / 32f >= map.getHeight()//
-                || (this.position.getX() + this.boundingBoxExtends.getX()) / 32f >= map.getWidth()//
+    private final boolean intersect(UniformTileMap map) {
+        return (this.position.getY() + this.boundingBoxExtends.getY()) / map.getTileHeight() >= map.getHeight()//
+                || (this.position.getX() + this.boundingBoxExtends.getX()) / map.getTileWidth() >= map.getWidth()//
                 || this.position.getY() < 0//
                 || this.position.getX() < 0//
-                || (map.getTile((int) (this.position.getX() + this.boundingBoxExtends.getX()) / 32,
-                        (int) (this.position.getY() + this.boundingBoxExtends.getY()) / 32).getClass().equals(
-                                AnimatedSprite.class)
-                        || map.getTile(
-                                (int) (this.position.getX()
-                                        / 32f),
-                                (int) (this.position.getY() / 32f)).getClass().equals(AnimatedSprite.class)
-                        || map.getTile((int) (this.position.getX() / 32f),
-                                (int) (this.position.getY() + this.boundingBoxExtends.getY())
-                                        / 32)
-                                .getClass().equals(AnimatedSprite.class)
-                        || map.getTile((int) (this.position.getX() + this.boundingBoxExtends.getX()) / 32,
-                                (int) (this.position.getY() / 32f)).getClass().equals(AnimatedSprite.class));
+                || map.getTile((int) (this.position.getX() + this.boundingBoxExtends.getX()) / map.getTileWidth(),
+                        (int) (this.position.getY() + this.boundingBoxExtends.getY()) / map.getTileHeight()).getClass()
+                        .equals(AnimatedSprite.class)
+                || map.getTile((int) (this.position.getX() / map.getTileWidth()),
+                        (int) (this.position.getY() / map.getTileHeight())).getClass().equals(AnimatedSprite.class)
+                || map.getTile((int) (this.position.getX() / map.getTileWidth()),
+                        (int) (this.position.getY() + this.boundingBoxExtends.getY()) / map.getTileHeight()).getClass()
+                        .equals(AnimatedSprite.class)
+                || map.getTile((int) (this.position.getX() + this.boundingBoxExtends.getX()) / map.getTileWidth(),
+                        (int) (this.position.getY() / map.getTileHeight())).getClass().equals(AnimatedSprite.class);
 
     }
 
@@ -142,33 +136,41 @@ public class GameEntity extends GameObject { // NOSONAR
             this.move.setX(x);
             this.move.setY(y);
             if (this.move.length() >= this.boundingBoxExtends.length()) {
-                return move(x / 2, y / 2) && move(x / 2, y / 2);
+                return this.move(x / 2, y / 2) && this.move(x / 2, y / 2);
             }
             this.position.add(x, y);
             if (this.collisionEnabled) {
                 if (this.blockStatic) {
-                    if (intersect(this.scene.getMap())) {
+                    if (this.intersect(this.scene.getMap())) {
                         this.position.add(-x, -y);
                         boolean result = false;
-                        if (y != 0)
-                            result = move(x / 2, 0);
-                        if (x != 0)
-                            return result || move(0, y / 2);
+                        if (y != 0) {
+                            result = this.move(x / 2, 0);
+                        }
+                        if (x != 0) {
+                            return result || this.move(0, y / 2);
+                        }
+                        this.currentCollidedEntity = null;
                         return false;
                     }
                 }
                 if (this.blockDynamic) {
-                    if (intersect(this.lastCollidedEntity)) {
+                    if (this.lastCollidedEntity.isDestroyed()) {
+                        this.lastCollidedEntity = this;
+                    } else if (this.intersect(this.lastCollidedEntity)) {
                         this.position.add(-x, -y);
                         boolean result = false;
-                        if (y != 0)
-                            result = move(x / 2, 0);
-                        if (x != 0)
-                            return result || move(0, y / 2);
+                        if (y != 0) {
+                            result = this.move(x / 2, 0);
+                        }
+                        if (x != 0) {
+                            return result || this.move(0, y / 2);
+                        }
                     }
                     for (final GameEntity e : this.currentChunk.entities.values()) {
-                        if (intersect(e)) {
+                        if (this.intersect(e)) {
                             this.lastCollidedEntity = e;
+                            this.currentCollidedEntity = e;
                             this.position.add(-x, -y);
                             return false;
                         }
@@ -181,19 +183,8 @@ public class GameEntity extends GameObject { // NOSONAR
 
     }
 
-    /**
-     * @param translucency
-     *            The translucency of this entity
-     */
-    public final void setTranslucency(final float translucency) {
-        this.translucency = translucency;
-    }
-
-    /**
-     * @return The translucency of this entity
-     */
-    public final float getTranslucency() {
-        return this.translucency;
+    public Color getColor() {
+        return this.color;
     }
 
     /**
@@ -242,7 +233,7 @@ public class GameEntity extends GameObject { // NOSONAR
      */
     @SuppressWarnings("unchecked")
     public <T extends Component> List<T> getComponents(final Class<T> type) {
-        List<T> comps = new ArrayList<>();
+        final List<T> comps = new ArrayList<>();
         for (final Component component : this.components) {
             if (component.getClass().equals(type)) {
                 comps.add((T) component);
@@ -256,7 +247,7 @@ public class GameEntity extends GameObject { // NOSONAR
      *            The component, that should be attached to this entity
      */
     public final void addComponent(final Component component) {
-        removeComponent(component);
+        this.removeComponent(component);
         if (component instanceof Sprite) {
             this.sprite = (Sprite) component;
         }
@@ -285,7 +276,7 @@ public class GameEntity extends GameObject { // NOSONAR
 
     void addToScene(final Scene scene) {
         this.scene = scene;
-        setCurrentChunk((int) this.position.getX() / 1400, (int) this.position.getY() / 800);
+        this.setCurrentChunk((int) this.position.getX() / 1400, (int) this.position.getY() / 800);
     }
 
     private final void setCurrentChunk(final int x, final int y) {
@@ -300,6 +291,10 @@ public class GameEntity extends GameObject { // NOSONAR
         }
     }
 
+    public <T extends GameEntity> T spawn(Class<T> type, float x, float y, boolean spawnIfBlocked) {
+        return null;
+    }
+
     /**
      * @param x
      *            The x spawn position
@@ -311,8 +306,8 @@ public class GameEntity extends GameObject { // NOSONAR
         this.velocity.add(32 * (float) Math.random(), 32 * (float) Math.random());
     }
 
-    public Vector3f getColor() {
-        return color;
+    @Override
+    protected void onDestroy() {
+        this.currentChunk.entities.remove(this.getName());
     }
-
 }

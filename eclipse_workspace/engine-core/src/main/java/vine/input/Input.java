@@ -140,5 +140,5 @@ public interface Input {
     /**
      * 
      */
-    void pollEvents();
+    void poll();
 }

@@ -1,16 +1,12 @@
 package vine.animation;
 
-import vine.graphics.Texture2D;
-
 public class AnimationClip {
     private final AnimationFrame[] frames;
-    private final Texture2D texture;
     private final float duration;
 
-    public AnimationClip(final Texture2D texture, final AnimationFrame... frames) {
+    public AnimationClip(final AnimationFrame... frames) {
         super();
         this.frames = frames;
-        this.texture = texture;
         this.duration = frames[frames.length - 1].getDuration();
     }
 
@@ -20,7 +16,7 @@ public class AnimationClip {
      */
     public final AnimationFrame getFrame(final float time) {
         int frameId = 0;
-        while (frameId < this.frames.length-1 && this.frames[frameId].getDuration() < time) {
+        while (frameId < this.frames.length - 1 && this.frames[frameId].getDuration() < time) {
             ++frameId;
         }
         return this.frames[frameId];
@@ -33,10 +29,4 @@ public class AnimationClip {
         return this.duration;
     }
 
-    /**
-     * @return
-     */
-    public final Texture2D getTexture() {
-        return this.texture;
-    }
 }

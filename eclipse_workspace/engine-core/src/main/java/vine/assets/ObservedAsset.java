@@ -14,25 +14,26 @@ class ObservedAsset<A> {
     ObservedAsset(final A asset, final AssetRemover remover) {
         this.asset = asset;
         this.remover = remover;
+        this.addReference();
     }
 
     private final void addReference() {
-        refCount++;
+        this.refCount++;
     }
 
     private final void removeReference() {
-        refCount--;
-        if (refCount == 0) {
-            remover.remove();
+        this.refCount--;
+        if (this.refCount == 0) {
+            this.remover.remove();
         }
     }
 
     public void returnAsset() {
-        removeReference();
+        this.removeReference();
     }
 
     public A getAsset() {
-        addReference();
-        return asset;
+        this.addReference();
+        return this.asset;
     }
 }

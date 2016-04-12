@@ -8,7 +8,8 @@ public enum ShaderUniforms {
         this.key = key;
     }
 
-    public String getKey() {
-        return key;
+    @Override
+    public String toString() {
+        return this.key;
     }
 }

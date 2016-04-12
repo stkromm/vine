@@ -39,7 +39,7 @@ public class VineClass<T> {
      *         the a method with the given name.
      */
     public final Optional<Method> getMethodByName(final String methodName) {
-        return Arrays.stream(type.getMethods()).filter(method -> method.getName().equals(methodName)).findFirst();
+        return Arrays.stream(this.type.getMethods()).filter(method -> method.getName().equals(methodName)).findFirst();
     }
 
     /**
@@ -57,14 +57,14 @@ public class VineClass<T> {
             }
         }
         try {
-            return type.getConstructor(types);
-        } catch (NoSuchMethodException e) {
-            if (LOGGER.isErrorEnabled()) {
-                LOGGER.error("", e);
+            return this.type.getConstructor(types);
+        } catch (final NoSuchMethodException e) {
+            if (VineClass.LOGGER.isErrorEnabled()) {
+                VineClass.LOGGER.error("", e);
             }
-        } catch (SecurityException e) {
-            if (LOGGER.isErrorEnabled()) {
-                LOGGER.error(
+        } catch (final SecurityException e) {
+            if (VineClass.LOGGER.isErrorEnabled()) {
+                VineClass.LOGGER.error(
                         "You made the constructor private. You have to use a public constructor to instantiate a gameobject.",
                         e);
             }
@@ -75,17 +75,17 @@ public class VineClass<T> {
     /**
      * @return A object of the class T
      */
-    public final T instantiateType() {
+    public final T instantiate() {
         try {
-            return type.newInstance();
-        } catch (InstantiationException e) {
-            if (LOGGER.isErrorEnabled()) {
-                LOGGER.error("Could not instantiate gameobject of class:" + type.getName()
+            return this.type.newInstance();
+        } catch (final InstantiationException e) {
+            if (VineClass.LOGGER.isErrorEnabled()) {
+                VineClass.LOGGER.error("Could not instantiate gameobject of class:" + this.type.getName()
                         + "\nMaybe you passed a class, that is abstract and or does not inherit Gameobject", e);
             }
-        } catch (IllegalAccessException e) {
-            if (LOGGER.isErrorEnabled()) {
-                LOGGER.error("Could not instantiate gameobject of class:" + type.getName()
+        } catch (final IllegalAccessException e) {
+            if (VineClass.LOGGER.isErrorEnabled()) {
+                VineClass.LOGGER.error("Could not instantiate gameobject of class:" + this.type.getName()
                         + "\n Perhaps you made the constructor private?\n", e);
             }
         }
@@ -102,10 +102,10 @@ public class VineClass<T> {
      */
     public final boolean hasMethodImplemented(final String methodName, final Class<?>... params) {
         try {
-            final Method method = type.getMethod(methodName, params);
-            return method.getDeclaringClass().equals(type) && Arrays.equals(method.getParameterTypes(), params);
+            final Method method = this.type.getMethod(methodName, params);
+            return method.getDeclaringClass().equals(this.type) && Arrays.equals(method.getParameterTypes(), params);
         } catch (NoSuchMethodException | SecurityException e) {
-            LOGGER.error("Auto-generated catch block", e);
+            VineClass.LOGGER.error("Auto-generated catch block", e);
         }
         return false;
     }

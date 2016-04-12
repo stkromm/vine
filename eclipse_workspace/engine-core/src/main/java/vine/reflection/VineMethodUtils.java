@@ -32,21 +32,22 @@ public final class VineMethodUtils {
     public static void invokeMethodOn(final Method method, final Object object, final Object... params) {
         try {
             method.invoke(object, params);
-        } catch (IllegalAccessException e) {
-            if (LOGGER.isErrorEnabled()) {
-                LOGGER.error("The construct method you've implemented in the class " + object.getClass().toString()
-                        + " is not public.", e);
+        } catch (final IllegalAccessException e) {
+            if (VineMethodUtils.LOGGER.isErrorEnabled()) {
+                VineMethodUtils.LOGGER.error("The construct method you've implemented in the class "
+                        + object.getClass().toString() + " is not public.", e);
             }
-        } catch (IllegalArgumentException e) {
-            if (LOGGER.isErrorEnabled()) {
-                LOGGER.error("The supplied arguments " + Arrays.toString(params)
+        } catch (final IllegalArgumentException e) {
+            if (VineMethodUtils.LOGGER.isErrorEnabled()) {
+                VineMethodUtils.LOGGER.error("The supplied arguments " + Arrays.toString(params)
                         + " don't match the defined argument list of the given class " + object.getClass().toString()
                         + " construct method.\n Be sure to supply the right number of arguments in the order they are declared in the construct method.",
                         e);
             }
-        } catch (InvocationTargetException e) {
-            if(LOGGER.isErrorEnabled()) {
-            LOGGER.error("Class has not construct method. Have you passed a GameObject inherited class?", e);
+        } catch (final InvocationTargetException e) {
+            if (VineMethodUtils.LOGGER.isErrorEnabled()) {
+                VineMethodUtils.LOGGER
+                        .error("Class has not construct method. Have you passed a GameObject inherited class?", e);
             }
         }
     }

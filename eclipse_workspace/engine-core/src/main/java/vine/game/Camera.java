@@ -1,6 +1,5 @@
 package vine.game;
 
-import vine.application.GamePlayer;
 import vine.math.Vector3f;
 
 /**
@@ -17,8 +16,8 @@ public class Camera extends Component {
     private boolean smooth;
 
     @Override
-    public void update(final float delta) {
-        super.update(delta);
+    public void onUpdate(final float delta) {
+        super.onUpdate(delta);
         if (this.remainingShakeDuration > 0) {
             this.remainingShakeDuration = Math.max(this.remainingShakeDuration - delta / 1000, 0);
         }
@@ -49,9 +48,10 @@ public class Camera extends Component {
      */
     public final Vector3f getTranslation() {
         if (this.remainingShakeDuration != 0) {
-            float shakeOffset = GamePlayer.getRunningGame().getScreen().getWidth() * 0.01f * this.shakeIntensity;
+            float shakeOffset = this.getEntity().getScene().getWorld().getScreen().getWidth() * 0.01f
+                    * this.shakeIntensity;
             if (this.smooth) {
-                double easeInEaseOut = Math.pow((this.remainingShakeDuration / this.shakeDuration - 0.5f) * 2, 2) * (-1)
+                final double easeInEaseOut = -Math.pow((this.remainingShakeDuration / this.shakeDuration - 0.5f) * 2, 2)
                         + 1;
                 shakeOffset *= easeInEaseOut;
             }

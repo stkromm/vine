@@ -1,5 +1,9 @@
 package vine.graphics;
 
+import org.lwjgl.opengl.GL11;
+
+import vine.assets.Asset;
+
 /**
  * A texture represents an image object that can be bound to the render
  * pipeline.
@@ -7,7 +11,7 @@ package vine.graphics;
  * @author Steffen
  *
  */
-public class Texture2D {
+public class Texture2D implements BindableTexture, Asset {
 
     /**
      * The width in number of texels
@@ -28,48 +32,42 @@ public class Texture2D {
         this.graphics = GraphicsProvider.getGraphics();
         this.height = height;
         this.width = width;
-        textureId = graphics.generateTexture();
-        graphics.bindTexture2D(textureId);
-        graphics.setTextureParameter(10241, 9728);// GL_TEXTURE_2D,
-                                                  // GL_TEXTURE_MIN_FILTER,
-                                                  // GL_NEAREST
-        graphics.setTextureParameter(10240, 9728);// GL_TEXTURE_2D,
-                                                  // GL_TEXTURE_MAG_FILTER,
-                                                  // GL_NEAREST
-        graphics.createRgbaTexture2D(width, height, data);
+        this.textureId = this.graphics.generateTexture();
+        this.graphics.bindTexture2D(this.textureId);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
+        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
+        this.graphics.createRgbaTexture2D(width, height, data);
     }
 
-    /**
-     * 
-     */
-    void bind() {
-        graphics.bindTexture2D(textureId);
+    @Override
+    public void bind() {
+        this.graphics.bindTexture2D(this.textureId);
     }
 
-    /**
-     * 
-     */
-    void unbind() {
-        graphics.bindTexture2D(0);
+    @Override
+    public void unbind() {
+        this.graphics.bindTexture2D(0);
     }
 
     /**
      * @return
      */
+    @Override
     public int getWidth() {
-        return width;
+        return this.width;
     }
 
     /**
      * @return
      */
+    @Override
     public int getHeight() {
-        return height;
+        return this.height;
     }
 
     public float[] getUVSquad(final int texX, final int texY, final int texWidth, final int texHeight) {
-        final int textureWidth = getWidth();
-        final int textureHeight = getHeight();
+        final int textureWidth = this.getWidth();
+        final int textureHeight = this.getHeight();
         final float uvX = texX / (float) textureWidth;
         final float uvY = texY / (float) textureHeight;
         final float uvWidth = texWidth / (float) textureWidth;
