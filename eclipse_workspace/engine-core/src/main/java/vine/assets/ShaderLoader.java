@@ -1,24 +1,23 @@
 package vine.assets;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
-import vine.graphics.Shader;
+import vine.graphics.shader.Shader;
+import vine.util.Log;
 
 /**
  * @author Steffen
  *
  */
-public class ShaderLoader extends AssetLoader<Shader, AssetLoaderParameters<Shader>> {
-
+public class ShaderLoader extends AssetLoader<Shader, AssetLoaderParameters<Shader>>
+{
     @Override
-    public Shader loadSync(AssetPointer pointer, final AssetLoaderParameters<Shader> parameter) {
+    public Shader loadSync(final AssetPointer pointer, final AssetLoaderParameters<Shader> parameter)
+    {
         final String frag = "#version 330 core\nlayout (location = 0) out vec4 color;in DATA{"
                 + "vec4 color;vec2 tc;vec3 position;" + "} fs_in;" + "uniform sampler2D tex;\n" + "void main() {\n"
-                + " color = texture(tex, fs_in.tc); if(color.a == 0) discard; color += fs_in.color;\n}";
+                + " color = texture(tex, vec2(fs_in.tc.x * 0.001, fs_in.tc.y * 0.001)); if(color.a == 0) discard; color += fs_in.color;\n}";
         final String vert = "#version 330 core\nlayout(location = 0)\n "
                 + "in vec4 position;layout (location = 1) in vec2 tc;layout (location = 2) in vec4 color;\n"
                 + "uniform mat4 pr_matrix;uniform mat4 vw_matrix;out DATA{vec4 color;vec2 tc;vec3 position;}\n "
@@ -29,16 +28,17 @@ public class ShaderLoader extends AssetLoader<Shader, AssetLoaderParameters<Shad
         GL20.glShaderSource(vertId, vert);
         GL20.glShaderSource(fragId, frag);
         GL20.glCompileShader(vertId);
-        if (GL20.glGetShaderi(vertId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+        if (GL20.glGetShaderi(vertId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE)
+        {
             // Could not load vertex shader
-            Logger.getGlobal().log(Level.SEVERE, "Failed to compile vertex shader!" + GL20.glGetShaderInfoLog(vertId));
+            Log.debug("Failed to compile vertex shader!" + GL20.glGetShaderInfoLog(vertId));
         }
 
         GL20.glCompileShader(fragId);
-        if (GL20.glGetShaderi(fragId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE) {
+        if (GL20.glGetShaderi(fragId, GL20.GL_COMPILE_STATUS) == GL11.GL_FALSE)
+        {
             // Could not load fragment shader
-            Logger.getGlobal().log(Level.SEVERE,
-                    "Failed to compile fragment shader!" + GL20.glGetShaderInfoLog(fragId));
+            Log.debug("Failed to compile fragment shader!" + GL20.glGetShaderInfoLog(fragId));
         }
         final int program = GL20.glCreateProgram();
         GL20.glAttachShader(program, vertId);
@@ -51,11 +51,13 @@ public class ShaderLoader extends AssetLoader<Shader, AssetLoaderParameters<Shad
     }
 
     @Override
-    public void loadAsync(AssetPointer pointer, AssetLoaderParameters<Shader> parameter,
-            vine.assets.AssetLoader.FinishCallback<Shader> callback,
-            vine.assets.AssetLoader.ProgressCallback progessCallback) {
+    public void loadAsync(
+            final AssetPointer pointer,
+            final AssetLoaderParameters<Shader> parameter,
+            final vine.assets.AssetLoader.FinishCallback<Shader> callback,
+            final vine.assets.AssetLoader.ProgressCallback progessCallback)
+    {
         // TODO Auto-generated method stub
-
     }
 
 }

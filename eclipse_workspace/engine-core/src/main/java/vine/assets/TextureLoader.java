@@ -3,25 +3,29 @@ package vine.assets;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import vine.graphics.Texture2D;
+import vine.graphics.Image;
 import vine.util.FileUtils;
+import vine.util.Log;
 
-public class TextureLoader extends AssetLoader<Texture2D, AssetLoaderParameters<Texture2D>> {
+public class TextureLoader extends AssetLoader<Image, AssetLoaderParameters<Image>>
+{
 
     @Override
-    public Texture2D loadSync(AssetPointer pointer, final AssetLoaderParameters<Texture2D> parameter) {
+    public Image loadSync(final AssetPointer pointer, final AssetLoaderParameters<Image> parameter)
+    {
         BufferedImage image = null;
-        try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readBytes(pointer.path))) {
+        try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readBytes(pointer.getPath())))
+        {
             image = ImageIO.read(stream);
-        } catch (final IOException e) {
-            Logger.getGlobal().log(Level.SEVERE, "Failed to read texture source file", e);
+        } catch (final IOException e)
+        {
+            Log.exception("Failed to read texture source file", e);
         }
-        if (image == null) {
+        if (image == null)
+        {
             return null;
         }
         final int width = image.getWidth();
@@ -30,20 +34,24 @@ public class TextureLoader extends AssetLoader<Texture2D, AssetLoaderParameters<
         image.getRGB(0, 0, width, height, pixels, 0, width);
         // rgba array data
         final int[] data = new int[width * height];
-        for (int i = pixels.length - 1; i >= 0; i--) {
+        for (int i = pixels.length - 1; i >= 0; i--)
+        {
             final int alpha = (pixels[i] & 0xff000000) >> 24;
             final int red = (pixels[i] & 0xff0000) >> 16;
             final int green = (pixels[i] & 0xff00) >> 8;
             final int blue = pixels[i] & 0xff;
             data[i] = alpha << 24 | blue << 16 | green << 8 | red;
         }
-        return new Texture2D(data, width, height);
+        return new Image(data, width, height);
     }
 
     @Override
-    public void loadAsync(AssetPointer pointer, AssetLoaderParameters<Texture2D> parameter,
-            vine.assets.AssetLoader.FinishCallback<Texture2D> callback,
-            vine.assets.AssetLoader.ProgressCallback progessCallback) {
+    public void loadAsync(
+            final AssetPointer pointer,
+            final AssetLoaderParameters<Image> parameter,
+            final vine.assets.AssetLoader.FinishCallback<Image> callback,
+            final vine.assets.AssetLoader.ProgressCallback progessCallback)
+    {
         // TODO Auto-generated method stub
 
     }

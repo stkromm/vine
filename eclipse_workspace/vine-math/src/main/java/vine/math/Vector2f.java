@@ -7,14 +7,15 @@ package vine.math;
  * @author Steffen
  *
  */
-public class Vector2f {
+public class Vector2f
+{
     /**
      * Maximum difference two floating point values can differ and still count
      * as equal.
      */
     protected static final float EPSILON = 0.000001f;
-    private float x;
-    private float y;
+    private float                x;
+    private float                y;
 
     /**
      * Creates a new Vector2f object, that represents the mathematical vector 2d
@@ -25,7 +26,8 @@ public class Vector2f {
      * @param y
      *            The y value of the vector
      */
-    public Vector2f(final float x, final float y) {
+    public Vector2f(final float x, final float y)
+    {
         this.x = x;
         this.y = y;
     }
@@ -33,7 +35,8 @@ public class Vector2f {
     /**
      * @return the float value of the x element.
      */
-    public final float getX() {
+    public final float getX()
+    {
         return x;
     }
 
@@ -41,14 +44,16 @@ public class Vector2f {
      * @param x
      *            x value of the vector.
      */
-    public final void setX(float x) {
+    public final void setX(float x)
+    {
         this.x = x;
     }
 
     /**
      * @return the float value of the y element.
      */
-    public final float getY() {
+    public final float getY()
+    {
         return y;
     }
 
@@ -56,7 +61,8 @@ public class Vector2f {
      * @param y
      *            y value of the vector.
      */
-    public final void setY(float y) {
+    public final void setY(float y)
+    {
         this.y = y;
     }
 
@@ -67,7 +73,8 @@ public class Vector2f {
      * 
      * @return The new created perpendicular vector.
      */
-    public final Vector2f getPerpendicular() {
+    public final Vector2f getPerpendicular()
+    {
         return new Vector2f(-y, x);
     }
 
@@ -79,7 +86,8 @@ public class Vector2f {
      * @param y
      *            The y value added to this y value
      */
-    public final void add(final float x, final float y) {
+    public final void add(final float x, final float y)
+    {
         this.x += x;
         this.y += y;
     }
@@ -91,8 +99,10 @@ public class Vector2f {
      *            The vector, which elements are added to the elements of this
      *            vector
      */
-    public final void add(final Vector2f vector) {
-        if (vector != null) {
+    public final void add(final Vector2f vector)
+    {
+        if (vector != null)
+        {
             add(vector.getX(), vector.getY());
         }
     }
@@ -107,7 +117,8 @@ public class Vector2f {
      * @return The dot product of this vector and the given.
      * 
      */
-    public final strictfp float dot(final Vector2f vector) {
+    public final strictfp float dot(final Vector2f vector)
+    {
 
         return vector == null ? 0 : x * vector.getX() + y * vector.getY();
     }
@@ -116,7 +127,8 @@ public class Vector2f {
      * @param factor
      *            factor, that is multiplied element wise with the vector.
      */
-    public final strictfp void scale(final double factor) {
+    public final strictfp void scale(final double factor)
+    {
         x *= factor;
         y *= factor;
     }
@@ -126,7 +138,8 @@ public class Vector2f {
      * 
      * @return the length of this Vector2f
      */
-    public final strictfp double length() {
+    public final strictfp double length()
+    {
         return Math.sqrt(dot(this));
     }
 
@@ -137,16 +150,20 @@ public class Vector2f {
      *            The vector that angle between this vector is calculated
      * @return The angle between this and the given vector
      */
-    public final strictfp double getAngle(final Vector2f vector) {
-        if (vector == null) {
+    public final strictfp double getAngle(final Vector2f vector)
+    {
+        if (vector == null)
+        {
             return 0;
         }
         final double thisLength = length();
-        if (thisLength <= EPSILON) {
+        if (thisLength <= EPSILON)
+        {
             return 0;
         }
         final double vectorLength = vector.length();
-        if (vectorLength <= EPSILON) {
+        if (vectorLength <= EPSILON)
+        {
             return 0;
         }
         return this.dot(vector) / (thisLength * vectorLength);
@@ -155,8 +172,10 @@ public class Vector2f {
     /**
      * Normalizes this vector.
      */
-    public final void normalize() {
-        if (Math.abs(x) + Math.abs(y) <= 2 * EPSILON) {
+    public final void normalize()
+    {
+        if (Math.abs(x) + Math.abs(y) <= 2 * EPSILON)
+        {
             return;
         }
         final double inversedLength = 1 / length();
@@ -164,11 +183,14 @@ public class Vector2f {
     }
 
     @Override
-    public final boolean equals(Object object) {
-        if (object == null) {
+    public final boolean equals(Object object)
+    {
+        if (object == null)
+        {
             return false;
         }
-        if (!(object instanceof Vector2f)) {
+        if (!(object instanceof Vector2f))
+        {
             return false;
         }
         final Vector2f vector = (Vector2f) object;

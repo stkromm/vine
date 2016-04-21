@@ -7,9 +7,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Steffen
  *
  */
-public class Chunk {
+public class Chunk
+{
     /**
      * Entities of the chunk.
      */
     protected Map<String, GameEntity> entities = new ConcurrentHashMap<>();
+
+    public Iterable<GameEntity> getEntities()
+    {
+        return this.entities.values();
+    }
 }

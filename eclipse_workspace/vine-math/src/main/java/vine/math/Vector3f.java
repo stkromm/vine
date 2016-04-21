@@ -4,15 +4,23 @@ package vine.math;
  * @author Steffen
  *
  */
-public class Vector3f {
+public class Vector3f
+{
     /**
      * Maximum difference two floating point values can differ and still count
      * as equal.
      */
     protected static final float EPSILON = 0.000001f;
-    private float x;
-    private float y;
-    private float z;
+    private float                x;
+    private float                y;
+    private float                z;
+
+    private double               length;
+
+    private void invalidate()
+    {
+        length = -1;
+    }
 
     /**
      * Creates a new Vector3f with the given x,y and z elements.
@@ -24,16 +32,19 @@ public class Vector3f {
      * @param z
      *            The z element of the new vector
      */
-    public Vector3f(float x, float y, float z) {
+    public Vector3f(float x, float y, float z)
+    {
         this.x = x;
         this.y = y;
         this.z = z;
+        invalidate();
     }
 
     /**
      * @return The x element value
      */
-    public float getX() {
+    public float getX()
+    {
         return x;
     }
 
@@ -41,14 +52,17 @@ public class Vector3f {
      * @param x
      *            The new x element value
      */
-    public void setX(float x) {
+    public void setX(float x)
+    {
         this.x = x;
+        invalidate();
     }
 
     /**
      * @return y element value
      */
-    public float getY() {
+    public float getY()
+    {
         return y;
     }
 
@@ -56,14 +70,17 @@ public class Vector3f {
      * @param y
      *            The new y element value
      */
-    public void setY(float y) {
+    public void setY(float y)
+    {
         this.y = y;
+        invalidate();
     }
 
     /**
      * @return The z element value
      */
-    public float getZ() {
+    public float getZ()
+    {
         return z;
     }
 
@@ -71,8 +88,10 @@ public class Vector3f {
      * @param z
      *            The new z element value
      */
-    public void setZ(float z) {
+    public void setZ(float z)
+    {
         this.z = z;
+        invalidate();
     }
 
     /**
@@ -85,10 +104,12 @@ public class Vector3f {
      * @param z
      *            The addition to the z element
      */
-    public void add(float x, float y, float z) {
+    public void add(float x, float y, float z)
+    {
         this.x += x;
         this.y += y;
         this.z += z;
+        invalidate();
     }
 
     /**
@@ -98,11 +119,14 @@ public class Vector3f {
      *            The vector, which elements are added to the corresponding
      *            elements of this vector.
      */
-    public void add(Vector3f vector) {
-        if (vector == null) {
+    public void add(Vector3f vector)
+    {
+        if (vector == null)
+        {
             return;
         }
         add(vector.getX(), vector.getY(), vector.getZ());
+        invalidate();
     }
 
     /**
@@ -113,7 +137,8 @@ public class Vector3f {
      *            The vector used to calculate a dot product with this vector
      * @return The dot product of this and the given vector
      */
-    public strictfp float dot(Vector3f vector) {
+    public strictfp float dot(Vector3f vector)
+    {
         return vector == null ? 0 : vector.getX() * x + vector.getY() * y + z * vector.getZ();
     }
 
@@ -124,10 +149,12 @@ public class Vector3f {
      *            The factor that is multiplied with the elements of this
      *            vector.
      */
-    public void scale(double factor) {
+    public void scale(double factor)
+    {
         x *= factor;
         y *= factor;
         z *= factor;
+        invalidate();
     }
 
     /**
@@ -135,8 +162,13 @@ public class Vector3f {
      * 
      * @return The length of this vector
      */
-    public double length() {
-        return Math.sqrt(dot(this));
+    public double length()
+    {
+        if (length == -1)
+        {
+            length = Math.sqrt(dot(this));
+        }
+        return length;
     }
 
     /**
@@ -146,16 +178,20 @@ public class Vector3f {
      *            The vector, which angle between this vector is calculated
      * @return The angle between this and the given vector.
      */
-    public double getAngle(Vector3f vector) {
-        if (vector == null) {
+    public double getAngle(Vector3f vector)
+    {
+        if (vector == null)
+        {
             return 0;
         }
         final double length = length();
-        if (length <= EPSILON) {
+        if (length <= EPSILON)
+        {
             return 0;
         }
         final double vectorLength = vector.length();
-        if (vectorLength <= EPSILON) {
+        if (vectorLength <= EPSILON)
+        {
             return 0;
         }
         return this.dot(vector) / (length * vectorLength);
@@ -169,8 +205,10 @@ public class Vector3f {
      * @return The cross product of this and the given vector, which is a
      *         Vector3f object.
      */
-    public Vector3f cross(Vector3f vector) {
-        if (vector == null) {
+    public Vector3f cross(Vector3f vector)
+    {
+        if (vector == null)
+        {
             return new Vector3f(0, 0, 0);
         }
         return new Vector3f(y * vector.getZ() - z * vector.getY(), z * vector.getX() - x * vector.getZ(),
@@ -180,21 +218,27 @@ public class Vector3f {
     /**
      * Normalizes this vector.
      */
-    public void normalize() {
+    public void normalize()
+    {
         final float length = dot(this);
-        if (length <= EPSILON) {
+        if (length <= EPSILON)
+        {
             return;
         }
         final float inversedLength = (float) (1 / Math.sqrt(dot(this)));
         scale(inversedLength);
+        this.length = 1;
     }
 
     @Override
-    public boolean equals(final Object object) {
-        if (object == null) {
+    public boolean equals(final Object object)
+    {
+        if (object == null)
+        {
             return false;
         }
-        if (!(object instanceof Vector3f)) {
+        if (!(object instanceof Vector3f))
+        {
             return false;
         }
         final Vector3f vector = (Vector3f) object;

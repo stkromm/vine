@@ -1,25 +1,27 @@
 package vine.gameplay.component;
 
-import vine.game.Component;
+import vine.game.scene.Component;
+import vine.graphics.Image;
 import vine.graphics.Sprite;
-import vine.graphics.Texture2D;
 import vine.math.Vector2f;
 
 /**
  * @author Steffen
  *
  */
-public class StaticSprite extends Component implements Sprite {
+public class StaticSprite extends Component implements Sprite
+{
     private final Vector2f size = new Vector2f(0, 0);
-    private Texture2D texture;
-    private float[] textureUVs;
+    private final Image    texture;
+    private final float[]  textureUVs;
 
     /**
      * @return
      */
     @Override
-    public final float[] getUVCoordinates() {
-        return this.textureUVs.clone();
+    public final float[] getUVCoordinates()
+    {
+        return this.textureUVs;
     }
 
     /**
@@ -31,10 +33,12 @@ public class StaticSprite extends Component implements Sprite {
      * @param texWidth
      * @param texHeight
      */
-    public void construct(final Texture2D texture, final int texX, final int texY, final int texWidth,
-            final int texHeight, final float width, final float height) {
+    public StaticSprite(final Image texture, final int texX, final int texY, final int texWidth, final int texHeight,
+            final float width, final float height)
+    {
+        super();
         this.texture = texture;
-        this.textureUVs = texture.getUVSquad(texX, texY, texWidth, texHeight);
+        this.textureUVs = texture.getPackedUVSquad(texX, texY, texWidth, texHeight);
         this.size.setX(width);
         this.size.setY(height);
     }
@@ -43,12 +47,15 @@ public class StaticSprite extends Component implements Sprite {
      * @return
      */
     @Override
-    public Texture2D getTexture() {
+    public Image getTexture()
+    {
         return this.texture;
     }
 
     @Override
-    public Vector2f getSize() {
+    public Vector2f getSize()
+    {
         return this.size;
     }
+
 }

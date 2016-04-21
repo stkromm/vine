@@ -6,7 +6,8 @@ import vine.math.Matrix4f;
  * @author Steffen
  *
  */
-public interface Screen {
+public interface Screen
+{
 
     /**
      * @return The width of the screen in game units.
@@ -31,7 +32,7 @@ public interface Screen {
     /**
      * @return
      */
-    Matrix4f getOrthographicProjection();
+    Matrix4f getProjection();
 
     /**
      * @param width
@@ -53,4 +54,6 @@ public interface Screen {
      * @param height
      */
     void setHeight(int height);
+
+    void calculateViewport(final float windowHeight, final float windowWidth, final float aspectRatio);
 }

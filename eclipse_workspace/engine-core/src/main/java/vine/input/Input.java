@@ -4,13 +4,15 @@ package vine.input;
  * @author Steffen
  *
  */
-public interface Input {
+public interface Input
+{
     /**
      * @author Steffen
      *
      */
     @FunctionalInterface
-    interface ScrollCallback {
+    interface ScrollCallback
+    {
         /**
          * @param context
          * @param offsetx
@@ -30,7 +32,8 @@ public interface Input {
      *
      */
     @FunctionalInterface
-    interface KeyCallback {
+    interface KeyCallback
+    {
         /**
          * @param context
          * @param key
@@ -51,7 +54,8 @@ public interface Input {
      *
      */
     @FunctionalInterface
-    interface CharCallback {
+    interface CharCallback
+    {
         /**
          * @param context
          * @param codepoint
@@ -69,7 +73,8 @@ public interface Input {
      *
      */
     @FunctionalInterface
-    interface CharModCallback {
+    interface CharModCallback
+    {
         /**
          * @param context
          * @param codepoint
@@ -88,7 +93,8 @@ public interface Input {
      *
      */
     @FunctionalInterface
-    interface CursorPositionCallback {
+    interface CursorPositionCallback
+    {
         /**
          * @param context
          * @param x
@@ -107,7 +113,8 @@ public interface Input {
      *
      */
     @FunctionalInterface
-    interface MouseButtonCallback {
+    interface MouseButtonCallback
+    {
         /**
          * @param context
          * @param button

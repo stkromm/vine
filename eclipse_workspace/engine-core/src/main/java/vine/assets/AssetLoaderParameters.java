@@ -1,5 +1,6 @@
 package vine.assets;
 
-public class AssetLoaderParameters<A> {
+public class AssetLoaderParameters<A>
+{
     //
 }

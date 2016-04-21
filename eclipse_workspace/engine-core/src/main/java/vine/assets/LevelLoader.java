@@ -1,5 +1,6 @@
 package vine.assets;
 
-public class LevelLoader {
+public class LevelLoader
+{
     //
 }

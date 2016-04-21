@@ -16,58 +16,67 @@ import org.lwjgl.opengl.GL11;
 
 import vine.assets.Asset;
 
-public class Font implements BindableTexture, Asset {
+public class Font implements Texture, Asset
+{
 
     // Constants
-    private final Map<Integer, String> CHARS = new HashMap<Integer, String>() {
-        private static final long serialVersionUID = 1L;
-        {
-            this.put(Integer.valueOf(0), "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            this.put(Integer.valueOf(1), "abcdefghijklmnopqrstuvwxyz");
-            this.put(Integer.valueOf(2), "0123456789");
-            this.put(Integer.valueOf(3), "ÄÖÜäöüß");
-            this.put(Integer.valueOf(4), " $+-*/=%\"'#@&_(),.;:?!\\|<>[]§`^~");
-        }
-    };
+    private final Map<Integer, String> CHARS = new HashMap<Integer, String>()
+                                             {
+                                                 private static final long serialVersionUID = 1L;
+                                                 {
+                                                     this.put(Integer.valueOf(0), "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                                                     this.put(Integer.valueOf(1), "abcdefghijklmnopqrstuvwxyz");
+                                                     this.put(Integer.valueOf(2), "0123456789");
+                                                     this.put(Integer.valueOf(3), "ÄÖÜäöüß");
+                                                     this.put(Integer.valueOf(4), " $+-*/=%\"'#@&_(),.;:?!\\|<>[]§`^~");
+                                                 }
+                                             };
 
     // Variables
-    private final java.awt.Font font;
-    private final FontMetrics fontMetrics;
-    private final BufferedImage bufferedImage;
-    private final int fontTextureId;
+    private final java.awt.Font        font;
+    private final FontMetrics          fontMetrics;
+    private final BufferedImage        bufferedImage;
+    private final int                  fontTextureId;
 
     // Getters
-    public float getFontImageWidth() {
+    public float getFontImageWidth()
+    {
         return (float) this.CHARS.values().stream()
                 .mapToDouble(e -> this.fontMetrics.getStringBounds(e, null).getWidth()).max().getAsDouble();
     }
 
-    public float getFontImageHeight() {
+    public float getFontImageHeight()
+    {
         return this.CHARS.keySet().size() * this.getCharHeight();
     }
 
-    public float getCharX(char c) {
+    public float getCharX(final char c)
+    {
         final String originStr = this.CHARS.values().stream().filter(e -> e.contains("" + c)).findFirst()
                 .orElse("" + c);
         return (float) this.fontMetrics.getStringBounds(originStr.substring(0, originStr.indexOf(c)), null).getWidth();
     }
 
-    public float getCharY(char c) {
+    public float getCharY(final char c)
+    {
         final float lineId = this.CHARS.keySet().stream().filter(i -> this.CHARS.get(i).contains("" + c)).findFirst()
                 .orElse(Integer.valueOf(0)).floatValue();
         return this.getCharHeight() * lineId;
     }
 
-    public float getCharWidth(char c) {
+    public float getCharWidth(final char c)
+    {
         return this.fontMetrics.charWidth(c);
     }
 
-    public float getCharHeight() {
+    public float getCharHeight()
+    {
         return this.fontMetrics.getMaxAscent() + this.fontMetrics.getMaxDescent();
     }
 
     // Constructors
-    public Font(String path, float size) throws Exception {
+    public Font(final String path, final float size) throws Exception
+    {
         this.font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File(path)).deriveFont(size);
 
         // Generate buffered image
@@ -92,27 +101,32 @@ public class Font implements BindableTexture, Asset {
     }
 
     @Override
-    public void bind() {
+    public void bind()
+    {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.fontTextureId);
     }
 
     @Override
-    public void unbind() {
+    public void unbind()
+    {
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
     }
 
     @Override
-    public int getWidth() {
+    public int getWidth()
+    {
         return (int) this.getFontImageWidth();
     }
 
     @Override
-    public int getHeight() {
+    public int getHeight()
+    {
         return (int) this.getFontImageHeight();
     }
 
     // Conversions
-    public ByteBuffer asByteBuffer() {
+    public ByteBuffer asByteBuffer()
+    {
 
         ByteBuffer byteBuffer;
 
@@ -133,8 +147,10 @@ public class Font implements BindableTexture, Asset {
                 this.bufferedImage.getWidth());
         byteBuffer = ByteBuffer.allocateDirect(this.bufferedImage.getWidth() * this.bufferedImage.getHeight() * 4);
 
-        for (int y = 0; y < this.bufferedImage.getHeight(); y++) {
-            for (int x = 0; x < this.bufferedImage.getWidth(); x++) {
+        for (int y = 0; y < this.bufferedImage.getHeight(); y++)
+        {
+            for (int x = 0; x < this.bufferedImage.getWidth(); x++)
+            {
                 final int pixel = pixels[y * this.bufferedImage.getWidth() + x];
                 byteBuffer.put((byte) (pixel >> 16 & 0xFF)); // Red component
                 byteBuffer.put((byte) (pixel >> 8 & 0xFF)); // Green component

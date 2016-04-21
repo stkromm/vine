@@ -1,5 +1,6 @@
 package vine.assets;
 
-public interface Asset {
+public interface Asset
+{
     //
 }

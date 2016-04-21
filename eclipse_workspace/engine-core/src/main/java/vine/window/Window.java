@@ -7,7 +7,8 @@ package vine.window;
  * @author Steffen
  *
  */
-public interface Window {
+public interface Window
+{
 
     /**
      * Callback, used to react to a close request on the window.
@@ -16,7 +17,8 @@ public interface Window {
      *
      */
     @FunctionalInterface
-    interface CloseCallback {
+    interface CloseCallback
+    {
         /**
          * Called on close request.
          */
@@ -30,7 +32,8 @@ public interface Window {
      *
      */
     @FunctionalInterface
-    interface FramebufferSizeCallback {
+    interface FramebufferSizeCallback
+    {
         /**
          * @param width
          *            The new framebuffer width.
@@ -47,7 +50,8 @@ public interface Window {
      *
      */
     @FunctionalInterface
-    interface PositionCallback {
+    interface PositionCallback
+    {
         /**
          * @param xPos
          *            The new x position of the window on the display
@@ -64,7 +68,8 @@ public interface Window {
      *
      */
     @FunctionalInterface
-    interface SizeCallback {
+    interface SizeCallback
+    {
         /**
          * @param width
          *            The new width the window changed to.
@@ -81,7 +86,8 @@ public interface Window {
      *
      */
     @FunctionalInterface
-    interface WindowContextCallback {
+    interface WindowContextCallback
+    {
         /**
          * @param context
          *            The new window context
@@ -168,7 +174,8 @@ public interface Window {
     void setCloseCallback(CloseCallback callback);
 
     /**
-     * @param callback The new context change callback
+     * @param callback
+     *            The new context change callback
      */
     void setWindowContextCallback(WindowContextCallback callback);
 
@@ -235,7 +242,8 @@ public interface Window {
     String getTitle();
 
     /**
-     * @param mode The new window mode
+     * @param mode
+     *            The new window mode
      */
     void setWindowMode(WindowMode mode);
 }

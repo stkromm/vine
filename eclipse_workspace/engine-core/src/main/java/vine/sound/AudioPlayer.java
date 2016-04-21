@@ -6,22 +6,26 @@ import javax.sound.sampled.Clip;
  * @author Steffen
  *
  */
-public class AudioPlayer {
+public class AudioPlayer
+{
     SoundClip clip;
 
     /**
      * @param clip
      *            The played clip
      */
-    public void setClip(final SoundClip clip) {
+    public void setClip(final SoundClip clip)
+    {
         this.clip = clip;
     }
 
     /**
      * 
      */
-    public void playOnce() {
-        if (this.clip.clip.isRunning()) {
+    public void playOnce()
+    {
+        if (this.clip.clip.isRunning())
+        {
             this.clip.clip.stop();
         }
         this.clip.clip.setFramePosition(0);
@@ -31,8 +35,10 @@ public class AudioPlayer {
     /**
      * 
      */
-    public void playLooped() {
-        if (this.clip.clip.isRunning()) {
+    public void playLooped()
+    {
+        if (this.clip.clip.isRunning())
+        {
             this.clip.clip.stop();
         }
         this.clip.clip.setFramePosition(0);
@@ -43,7 +49,8 @@ public class AudioPlayer {
     /**
      * 
      */
-    public void stop() {
+    public void stop()
+    {
         this.clip.clip.stop();
         this.clip.clip.setFramePosition(0);
     }
@@ -51,14 +58,16 @@ public class AudioPlayer {
     /**
      * 
      */
-    public void resume() {
+    public void resume()
+    {
         this.clip.clip.start();
     }
 
     /**
      * 
      */
-    public void pause() {
+    public void pause()
+    {
         this.clip.clip.stop();
     }
 }

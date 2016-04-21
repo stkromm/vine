@@ -13,13 +13,15 @@ import vine.math.geometry.ray.Ray;
  * @author Steffen
  *
  */
-public class RayIntersectionTest {
+public class RayIntersectionTest
+{
 
     /**
      * 
      */
     @Test
-    public void testCircleRayIntersection() {
+    public void testCircleRayIntersection()
+    {
         Ray ray = new Ray(new Vector2f(0.1f, 0.1f), new Vector2f(0, 1));
         Circle circle = new Circle(1, 1, 1);
         Intersection intersec = circle.intersect(ray);

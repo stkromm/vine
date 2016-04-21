@@ -1,24 +1,27 @@
 package vine.game;
 
+import vine.game.scene.Component;
 import vine.math.Vector3f;
 
 /**
  * @author Steffen
  *
  */
-public class Camera extends Component {
+public class Camera extends Component
+{
 
-    private final Vector3f translation = new Vector3f(0, 0, 0);
-    private float shakeIntensity;
-    private double shakeScaling = 1;
-    private float shakeDuration;
-    private float remainingShakeDuration = 0;
-    private boolean smooth;
+    private final Vector3f translation  = new Vector3f(0, 0, 0);
+    private float          shakeIntensity;
+    private double         shakeScaling = 1;
+    private float          shakeDuration;
+    private float          remainingShakeDuration;
+    private boolean        smooth;
 
     @Override
-    public void onUpdate(final float delta) {
-        super.onUpdate(delta);
-        if (this.remainingShakeDuration > 0) {
+    public void onUpdate(final float delta)
+    {
+        if (this.remainingShakeDuration > 0)
+        {
             this.remainingShakeDuration = Math.max(this.remainingShakeDuration - delta / 1000, 0);
         }
     }
@@ -35,7 +38,8 @@ public class Camera extends Component {
      * @param smooth
      *            Should the shake ease in and out?
      */
-    public void shake(final float duration, final float shakeIntensity, final int shakes, final boolean smooth) {
+    public void shake(final float duration, final float shakeIntensity, final int shakes, final boolean smooth)
+    {
         this.remainingShakeDuration = duration;
         this.shakeIntensity = Math.min(5, Math.max(0, shakeIntensity));
         this.shakeScaling = Math.PI * shakes / duration * 2;
@@ -46,21 +50,29 @@ public class Camera extends Component {
     /**
      * @return The world translation of the camera.
      */
-    public final Vector3f getTranslation() {
-        if (this.remainingShakeDuration != 0) {
-            float shakeOffset = this.getEntity().getScene().getWorld().getScreen().getWidth() * 0.01f
-                    * this.shakeIntensity;
-            if (this.smooth) {
+    public final Vector3f getTranslation()
+    {
+        if (this.entity == null)
+        {
+            return this.translation;
+        }
+        if (this.remainingShakeDuration == 0)
+        {
+            this.translation.setX(this.entity.getXPosition());
+
+        } else
+        {
+            float shakeOffset = this.getEntity().getWorld().getScreen().getWidth() * 0.01f * this.shakeIntensity;
+            if (this.smooth)
+            {
                 final double easeInEaseOut = -Math.pow((this.remainingShakeDuration / this.shakeDuration - 0.5f) * 2, 2)
                         + 1;
                 shakeOffset *= easeInEaseOut;
             }
             this.translation.setX((float) (shakeOffset * Math.sin(this.remainingShakeDuration * this.shakeScaling)
-                    + this.entity.getXCoord()));
-        } else {
-            this.translation.setX(this.entity.getXCoord());
+                    + this.entity.getXPosition()));
         }
-        this.translation.setY(this.entity.getYCoord());
+        this.translation.setY(this.entity.getYPosition());
         return this.translation;
     }
 }

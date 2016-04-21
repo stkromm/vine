@@ -7,7 +7,8 @@ import vine.game.screen.Screen;
  * @author Steffen
  *
  */
-public interface Layer {
+public interface Layer
+{
     /**
      * @return The name of the layer
      */

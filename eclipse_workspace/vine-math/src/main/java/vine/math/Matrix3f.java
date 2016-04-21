@@ -10,24 +10,25 @@ import java.util.logging.Logger;
  * @author stkromm
  *
  */
-public class Matrix3f implements Serializable {
-    private static final long serialVersionUID = -3459114123273506177L;
+public class Matrix3f implements Serializable
+{
+    private static final long    serialVersionUID = -3459114123273506177L;
 
     /**
      * Maximum difference two floating point values can differ and still count
      * as equal.
      */
-    protected static final float EPSILON = 0.0015f;
+    protected static final float EPSILON          = 0.0015f;
 
-    private float a11 = 0;
-    private float a12 = 0;
-    private float a13 = 0;
-    private float a21 = 0;
-    private float a22 = 0;
-    private float a23 = 0;
-    private float a31 = 0;
-    private float a32 = 0;
-    private float a33 = 0;
+    private float                a11              = 0;
+    private float                a12              = 0;
+    private float                a13              = 0;
+    private float                a21              = 0;
+    private float                a22              = 0;
+    private float                a23              = 0;
+    private float                a31              = 0;
+    private float                a32              = 0;
+    private float                a33              = 0;
 
     /**
      * Creates a new matrix identical to the given matrix.
@@ -35,7 +36,8 @@ public class Matrix3f implements Serializable {
      * @param matrix
      *            The matrix to copy.
      */
-    public Matrix3f(final Matrix3f matrix) {
+    public Matrix3f(final Matrix3f matrix)
+    {
         setA11(matrix.getA11());
         setA12(matrix.getA12());
         setA13(matrix.getA13());
@@ -52,7 +54,8 @@ public class Matrix3f implements Serializable {
     /**
      * Creates the null matrix.
      */
-    public Matrix3f() {
+    public Matrix3f()
+    {
         /**
          * Leaves the matrix.
          */
@@ -61,63 +64,72 @@ public class Matrix3f implements Serializable {
     /**
      * @return row 1 column 1
      */
-    public float getA11() {
+    public float getA11()
+    {
         return a11;
     }
 
     /**
      * @return row 1 column 2
      */
-    public float getA12() {
+    public float getA12()
+    {
         return a12;
     }
 
     /**
      * @return row 1 column 3
      */
-    public float getA13() {
+    public float getA13()
+    {
         return a13;
     }
 
     /**
      * @return row 2 column 1
      */
-    public float getA21() {
+    public float getA21()
+    {
         return a21;
     }
 
     /**
      * @return row 2 column 2
      */
-    public float getA22() {
+    public float getA22()
+    {
         return a22;
     }
 
     /**
      * @return row 2 column 3
      */
-    public float getA23() {
+    public float getA23()
+    {
         return a23;
     }
 
     /**
      * @return row 3 column 1
      */
-    public float getA31() {
+    public float getA31()
+    {
         return a31;
     }
 
     /**
      * @return row 3 column 2
      */
-    public float getA32() {
+    public float getA32()
+    {
         return a32;
     }
 
     /**
      * @return row 3 column 3
      */
-    public float getA33() {
+    public float getA33()
+    {
         return a33;
     }
 
@@ -125,7 +137,8 @@ public class Matrix3f implements Serializable {
      * @param a11
      *            row 1 column 1
      */
-    public void setA11(float a11) {
+    public void setA11(float a11)
+    {
         this.a11 = a11;
     }
 
@@ -133,7 +146,8 @@ public class Matrix3f implements Serializable {
      * @param a12
      *            row 1 column 2
      */
-    public void setA12(float a12) {
+    public void setA12(float a12)
+    {
         this.a12 = a12;
     }
 
@@ -141,7 +155,8 @@ public class Matrix3f implements Serializable {
      * @param a13
      *            row 1 column 3
      */
-    public void setA13(float a13) {
+    public void setA13(float a13)
+    {
         this.a13 = a13;
     }
 
@@ -149,7 +164,8 @@ public class Matrix3f implements Serializable {
      * @param a21
      *            row 2 column 1
      */
-    public void setA21(float a21) {
+    public void setA21(float a21)
+    {
         this.a21 = a21;
     }
 
@@ -157,7 +173,8 @@ public class Matrix3f implements Serializable {
      * @param a22
      *            row 2 column 2
      */
-    public void setA22(float a22) {
+    public void setA22(float a22)
+    {
         this.a22 = a22;
     }
 
@@ -165,7 +182,8 @@ public class Matrix3f implements Serializable {
      * @param a23
      *            row 2 column 3
      */
-    public void setA23(float a23) {
+    public void setA23(float a23)
+    {
         this.a23 = a23;
     }
 
@@ -173,7 +191,8 @@ public class Matrix3f implements Serializable {
      * @param a31
      *            row 3 column 1
      */
-    public void setA31(float a31) {
+    public void setA31(float a31)
+    {
         this.a31 = a31;
     }
 
@@ -181,7 +200,8 @@ public class Matrix3f implements Serializable {
      * @param a32
      *            row 3 column 2
      */
-    public void setA32(float a32) {
+    public void setA32(float a32)
+    {
         this.a32 = a32;
     }
 
@@ -189,7 +209,8 @@ public class Matrix3f implements Serializable {
      * @param a33
      *            row 3 column 3
      */
-    public void setA33(float a33) {
+    public void setA33(float a33)
+    {
         this.a33 = a33;
     }
 
@@ -198,7 +219,8 @@ public class Matrix3f implements Serializable {
      * 
      * @return A new identity matrix
      */
-    public static final Matrix3f getIdentity() {
+    public static final Matrix3f getIdentity()
+    {
         final Matrix3f identity = new Matrix3f();
         identity.setA11(1);
         identity.setA22(1);
@@ -219,21 +241,26 @@ public class Matrix3f implements Serializable {
      *            third column element
      * @return this
      */
-    public final Matrix3f setRow(final int rowIndex, final float e1, final float e2, final float e3) {
-        if (rowIndex == 0) {
+    public final Matrix3f setRow(final int rowIndex, final float e1, final float e2, final float e3)
+    {
+        if (rowIndex == 0)
+        {
             a11 = e1;
             a12 = e2;
             a13 = e3;
-        } else if (rowIndex == 1) {
+        } else if (rowIndex == 1)
+        {
             a21 = e1;
             a22 = e2;
             a23 = e3;
-        } else if (rowIndex == 2) {
+        } else if (rowIndex == 2)
+        {
             a31 = e1;
             a32 = e2;
             a33 = e3;
-        } else {
-            Logger.getGlobal().log(Level.WARNING, Messages.getString("Matrix3f.0") + rowIndex); //$NON-NLS-1$
+        } else
+        {
+            Logger.getGlobal().log(Level.WARNING, Messages.getString("Matrix3f.0") + rowIndex);
         }
         return this;
     }
@@ -243,7 +270,8 @@ public class Matrix3f implements Serializable {
      * 
      * @return The determinant value of this matrix.
      */
-    public final strictfp float determinant() {
+    public final strictfp float determinant()
+    {
         return a11 * a22 * a33 + a12 * a23 * a31 + a13 * a21 * a32 - a12 * a21 * a33 - a13 * a22 * a13
                 - a11 * a23 * a32;
     }
@@ -253,7 +281,8 @@ public class Matrix3f implements Serializable {
      * 
      * @return TODO
      */
-    public final Matrix3f transpose() {
+    public final Matrix3f transpose()
+    {
         float temp = a21;
         a21 = a12;
         a12 = temp;
@@ -272,10 +301,12 @@ public class Matrix3f implements Serializable {
      * 
      * @return this
      */
-    public final strictfp Matrix3f inverse() {
+    public final strictfp Matrix3f inverse()
+    {
         final float[][] tempMatrix = new float[3][3];
         final float inversedDet = determinant();
-        if (Math.abs(inversedDet) <= EPSILON) {
+        if (Math.abs(inversedDet) <= EPSILON)
+        {
             return this;
         }
         // Calculate elements of the inverse 3x3 matrix with the inversed
@@ -315,8 +346,10 @@ public class Matrix3f implements Serializable {
      * 
      * @return this
      */
-    public final strictfp Matrix3f rightMultiply(Matrix3f matrix) {
-        if (matrix == null) {
+    public final strictfp Matrix3f rightMultiply(Matrix3f matrix)
+    {
+        if (matrix == null)
+        {
             Logger.getGlobal().log(Level.WARNING, Messages.getString("Matrix3f.1")); //$NON-NLS-1$
             return this;
         }
@@ -350,7 +383,8 @@ public class Matrix3f implements Serializable {
      *            Uniform scale factor, that scales all element of this matrix
      * @return this
      */
-    public final Matrix3f scale(float scale) {
+    public final Matrix3f scale(float scale)
+    {
         a11 *= scale;
         a12 *= scale;
         a13 *= scale;
@@ -372,7 +406,8 @@ public class Matrix3f implements Serializable {
      *            Scales the a22 element
      * @return this
      */
-    public Matrix3f scale(float x, float y) {
+    public Matrix3f scale(float x, float y)
+    {
         a11 *= x;
         a22 *= y;
         return this;
@@ -386,8 +421,10 @@ public class Matrix3f implements Serializable {
      * 
      * @return this
      */
-    public final Matrix3f add(Matrix3f matrix) {
-        if (matrix == null) {
+    public final Matrix3f add(Matrix3f matrix)
+    {
+        if (matrix == null)
+        {
             return this;
         }
         a11 += matrix.getA11();
@@ -413,11 +450,14 @@ public class Matrix3f implements Serializable {
      * @return true, if the matrix is equivalent to the given.
      */
     @Override
-    public final boolean equals(Object object) {
-        if (object == null) {
+    public final boolean equals(Object object)
+    {
+        if (object == null)
+        {
             return false;
         }
-        if (!(object instanceof Matrix3f)) {
+        if (!(object instanceof Matrix3f))
+        {
             return false;
         }
         Matrix3f matrix = (Matrix3f) object;
@@ -438,7 +478,8 @@ public class Matrix3f implements Serializable {
      * @return this
      * 
      */
-    public Matrix3f rotate(float angle) {
+    public Matrix3f rotate(float angle)
+    {
         final Matrix3f rotator = Matrix3f.getIdentity();
         final double rotation = Math.toRadians(angle);
         final float cos = (float) Math.cos(rotation);
@@ -461,7 +502,8 @@ public class Matrix3f implements Serializable {
      *            y Value of the translation vector
      * @return this
      */
-    public Matrix3f translate(float x, float y) {
+    public Matrix3f translate(float x, float y)
+    {
         a13 += x;
         a23 += y;
         return this;

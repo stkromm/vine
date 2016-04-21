@@ -4,13 +4,15 @@ package vine.input;
  * @author Steffen
  *
  */
-public final class InputMapper {
+public final class InputMapper
+{
     /**
      * 
      */
     private static final boolean[] KEYS = new boolean[65536];
 
-    private InputMapper() {
+    private InputMapper()
+    {
 
     }
 
@@ -23,14 +25,16 @@ public final class InputMapper {
      * @param action
      *            Signals, that the key with the given keycode is pressed.
      */
-    public static void setKeyPressed(final int keycode, final InputAction action) {
+    public static void setKeyPressed(final int keycode, final InputAction action)
+    {
         KEYS[keycode] = InputAction.isReleaseAction(action);
     }
 
     /**
      * @return Returns the absolute number of possible different keys.
      */
-    public static int getNumberOfKeys() {
+    public static int getNumberOfKeys()
+    {
         return KEYS.length;
     }
 
@@ -42,10 +46,13 @@ public final class InputMapper {
      * @return Returns true, if the key, that corresponds to the keycode, is
      *         pressed.
      */
-    public static boolean isKeyPressed(final int keycode) {
-        if (keycode >= 0 && KEYS.length > keycode) {
+    public static boolean isKeyPressed(final int keycode)
+    {
+        if (keycode >= 0 && KEYS.length > keycode)
+        {
             return KEYS[keycode];
-        } else {
+        } else
+        {
             return false;
         }
     }

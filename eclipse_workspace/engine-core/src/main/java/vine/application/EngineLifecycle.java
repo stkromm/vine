@@ -1,6 +1,7 @@
 package vine.application;
 
-public interface EngineLifecycle {
+public interface EngineLifecycle
+{
     void create();
 
     void start();

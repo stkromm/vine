@@ -10,11 +10,13 @@ import vine.platform.lwjgl3.GLFWDisplay;
 import vine.platform.lwjgl3.GLFWWindow;
 import vine.window.Window;
 
-public class WindowTest {
+public class WindowTest
+{
     Window window = null;
 
     @Before
-    public void setup() {
+    public void setup()
+    {
         this.window = new GLFWWindow(new GLFWDisplay());
     }
 
@@ -22,20 +24,23 @@ public class WindowTest {
     public final ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void testWindowTitle() {
+    public void testWindowTitle()
+    {
         this.window.setTitle("test");
         Assert.assertTrue(this.window.getTitle().equals("test"));
     }
 
     @Test
-    public void testWindowSize() {
+    public void testWindowSize()
+    {
         this.window.setWindowSize(500, 500);
         Assert.assertTrue(this.window.getHeight() == 500);
         Assert.assertTrue(this.window.getWidth() == 500);
     }
 
     @Test
-    public void testVisibility() {
+    public void testVisibility()
+    {
         this.window.show();
         Assert.assertTrue(this.window.isVisible());
         this.window.hide();

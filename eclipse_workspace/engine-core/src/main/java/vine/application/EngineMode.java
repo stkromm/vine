@@ -4,7 +4,8 @@ package vine.application;
  * @author Steffen
  *
  */
-public enum EngineMode {
+public enum EngineMode
+{
     /**
      * 
      */
@@ -16,5 +17,9 @@ public enum EngineMode {
     /**
     * 
     */
-    PRODUCTION
+    PRODUCTION,
+    /**
+     * 
+     */
+    BENCHMARK
 }

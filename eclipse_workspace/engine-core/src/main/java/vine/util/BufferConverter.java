@@ -11,9 +11,11 @@ import java.nio.IntBuffer;
  * @author Steffen
  *
  */
-public final class BufferConverter {
+public final class BufferConverter
+{
 
-    private BufferConverter() {
+    private BufferConverter()
+    {
     }
 
     /**
@@ -23,9 +25,11 @@ public final class BufferConverter {
      *            The float array that should be converted into a buffer
      * @return The buffer of the array
      */
-    public static FloatBuffer createFloatBuffer(final float[] array) {
-        if (array == null) {
-            throw new NullPointerException("Can't convert null to an float buffer object");
+    public static FloatBuffer createFloatBuffer(final float[] array)
+    {
+        if (array == null)
+        {
+            throw new IllegalArgumentException("Can't convert null to an float buffer object");
         }
         final FloatBuffer result = ByteBuffer.allocateDirect(array.length << 2).order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
@@ -40,9 +44,11 @@ public final class BufferConverter {
      *            The int array that should be converted into a buffer
      * @return The buffer of the array
      */
-    public static IntBuffer createIntBuffer(final int[] array) {
-        if (array == null) {
-            throw new NullPointerException("Can't convert null to an int buffer object");
+    public static IntBuffer createIntBuffer(final int[] array)
+    {
+        if (array == null)
+        {
+            throw new IllegalArgumentException("Can't convert null to an int buffer object");
         }
         final IntBuffer result = ByteBuffer.allocateDirect(array.length << 2).order(ByteOrder.nativeOrder())
                 .asIntBuffer();
@@ -50,4 +56,21 @@ public final class BufferConverter {
         return result;
     }
 
+    /**
+     * Creates a byte buffer object.
+     * 
+     * @param array
+     *            The byte array that should be converted into a buffer
+     * @return The buffer of the array
+     */
+    public static ByteBuffer createByteBuffer(final byte[] array)
+    {
+        if (array == null)
+        {
+            throw new IllegalArgumentException("Can't convert null to an byte buffer object");
+        }
+        final ByteBuffer result = ByteBuffer.allocateDirect(array.length << 2).order(ByteOrder.nativeOrder());
+        result.put(array).flip();
+        return result;
+    }
 }

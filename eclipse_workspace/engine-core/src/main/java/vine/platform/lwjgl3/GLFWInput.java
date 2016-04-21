@@ -16,43 +16,50 @@ import vine.input.InputMapper;
  * @author Steffen
  *
  */
-public final class GLFWInput implements Input {
-    private double mouseX;
-    private double mouseY;
-    private long context;
+public final class GLFWInput implements Input
+{
+    private double                  mouseX;
+    private double                  mouseY;
+    private long                    context;
 
-    private GLFWKeyCallback keyCallback;
-    private GLFWCursorPosCallback cursorPosCallback;
+    private GLFWKeyCallback         keyCallback;
+    private GLFWCursorPosCallback   cursorPosCallback;
 
     private GLFWMouseButtonCallback mouseButtonCallback;
-    private GLFWScrollCallback scrollCallback;
-    private GLFWCharCallback charCallback;
-    private GLFWCharModsCallback charModsCallback;
+    private GLFWScrollCallback      scrollCallback;
+    private GLFWCharCallback        charCallback;
+    private GLFWCharModsCallback    charModsCallback;
 
     /**
      * 
      */
-    public GLFWInput() {
-        this.cursorPosCallback = GLFWCursorPosCallback.create((w, posx, posy) -> {
-            System.out.println(" " + posx);
+    public GLFWInput()
+    {
+        this.cursorPosCallback = GLFWCursorPosCallback.create((w, posx, posy) ->
+        {
             this.mouseX = posx;
             this.mouseY = posy;
         });
     }
 
     @Override
-    public void poll() {
+    public void poll()
+    {
         GLFW.glfwPollEvents();
     }
 
     @Override
-    public void setKeyCallback(final KeyCallback callback) {
-        if (this.keyCallback != null) {
+    public void setKeyCallback(final KeyCallback callback)
+    {
+        if (this.keyCallback != null)
+        {
             this.keyCallback.free();
         }
 
-        this.keyCallback = GLFWKeyCallback.create((win, key, scancode, action, mods) -> {
-            if (InputMapper.getNumberOfKeys() > key && key >= 0) {
+        this.keyCallback = GLFWKeyCallback.create((win, key, scancode, action, mods) ->
+        {
+            if (InputMapper.getNumberOfKeys() > key && key >= 0)
+            {
                 InputMapper.setKeyPressed(key, InputAction.getTypeByAction(action));
             }
             callback.keyPressed(win, key, scancode, InputAction.getTypeByAction(action), mods);
@@ -61,19 +68,24 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void listenToWindow(final long context) {
+    public void listenToWindow(final long context)
+    {
         this.context = context;
-        if (this.scrollCallback != null) {
+        if (this.scrollCallback != null)
+        {
             GLFW.glfwSetScrollCallback(context, this.scrollCallback);
         }
-        if (this.keyCallback != null) {
+        if (this.keyCallback != null)
+        {
             GLFW.glfwSetKeyCallback(context, this.keyCallback);
         }
     }
 
     @Override
-    public void setScrollCallback(final ScrollCallback callback) {
-        if (this.scrollCallback != null) {
+    public void setScrollCallback(final ScrollCallback callback)
+    {
+        if (this.scrollCallback != null)
+        {
             this.scrollCallback.free();
         }
         this.scrollCallback = GLFWScrollCallback
@@ -82,8 +94,10 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void setCharCallback(final CharCallback callback) {
-        if (this.charCallback != null) {
+    public void setCharCallback(final CharCallback callback)
+    {
+        if (this.charCallback != null)
+        {
             this.charCallback.free();
         }
         this.charCallback = GLFWCharCallback.create((w, codepoint) -> callback.charInput(w, codepoint));
@@ -91,8 +105,10 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void setCharModCallback(final CharModCallback callback) {
-        if (this.charModsCallback != null) {
+    public void setCharModCallback(final CharModCallback callback)
+    {
+        if (this.charModsCallback != null)
+        {
             this.charModsCallback.free();
         }
         this.charModsCallback = GLFWCharModsCallback
@@ -101,22 +117,26 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public void setCursorPositionCallback(final CursorPositionCallback callback) {
-        if (this.cursorPosCallback != null) {
+    public void setCursorPositionCallback(final CursorPositionCallback callback)
+    {
+        if (this.cursorPosCallback != null)
+        {
             this.cursorPosCallback.free();
         }
-        this.cursorPosCallback = GLFWCursorPosCallback.create((window, posx, posy) -> {
+        this.cursorPosCallback = GLFWCursorPosCallback.create((window, posx, posy) ->
+        {
             this.mouseX = posx;
             this.mouseY = posy;
-            System.out.println(posy + " " + posx);
             callback.changedCursorPosition(window, posx, posy);
         });
         GLFW.glfwSetCursorPosCallback(this.context, this.cursorPosCallback);
     }
 
     @Override
-    public void setMouseButtonCallback(final MouseButtonCallback callback) {
-        if (this.mouseButtonCallback != null) {
+    public void setMouseButtonCallback(final MouseButtonCallback callback)
+    {
+        if (this.mouseButtonCallback != null)
+        {
             this.mouseButtonCallback.free();
         }
         this.mouseButtonCallback = GLFWMouseButtonCallback.create((window, button, action, mods) -> callback
@@ -125,12 +145,14 @@ public final class GLFWInput implements Input {
     }
 
     @Override
-    public double getCursorX() {
+    public double getCursorX()
+    {
         return this.mouseX;
     }
 
     @Override
-    public double getCursorY() {
+    public double getCursorY()
+    {
         return this.mouseY;
     }
 

@@ -4,14 +4,16 @@ package vine.event;
  * @author Steffen
  * 
  */
-public interface Event {
+public interface Event
+{
     /**
      * Used to identify different types of events.
      * 
      * @author Steffen
      *
      */
-    enum EventType {
+    enum EventType
+    {
         /**
          * 
          */

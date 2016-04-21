@@ -8,7 +8,8 @@ package vine.display;
  * @author Steffen
  *
  */
-public interface Display {
+public interface Display
+{
 
     /**
      * @return The system name of the currently active monitor.

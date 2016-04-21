@@ -9,9 +9,10 @@ import vine.assets.Asset;
  * @author Steffen
  *
  */
-public class SoundClip implements Asset {
+public class SoundClip implements Asset
+{
 
-    final Clip clip;
+    final Clip             clip;
     final AudioInputStream audioIn;
 
     /**
@@ -20,7 +21,8 @@ public class SoundClip implements Asset {
      * @param audioIn
      *            The audio stream
      */
-    public SoundClip(Clip clip, AudioInputStream audioIn) {
+    public SoundClip(final Clip clip, final AudioInputStream audioIn)
+    {
         this.clip = clip;
         this.audioIn = audioIn;
     }

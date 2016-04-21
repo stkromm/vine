@@ -7,7 +7,8 @@ import vine.math.geometry.ray.Ray;
  * @author steffen
  *
  */
-public interface Shape {
+public interface Shape
+{
     /**
      * Returns true, if the given point is contained in the convex shape.
      * 

@@ -11,12 +11,14 @@ import vine.math.geometry.Rectangle;
  * @author Steffen
  *
  */
-public class ShapeContainTest {
+public class ShapeContainTest
+{
     /**
      * 
      */
     @Test
-    public void testCircleContainsPoint() {
+    public void testCircleContainsPoint()
+    {
         final Circle circle = new Circle(0, 0, 1);
         assertTrue(circle.contains(0.1f, 0.5f));
         assertTrue(!circle.contains(1.1f, 0.5f));

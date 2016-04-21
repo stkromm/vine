@@ -8,7 +8,8 @@ import java.util.Iterator;
  * @author Steffen
  *
  */
-public final class EventDispatcher {
+public final class EventDispatcher
+{
     /**
      * Stores all event layers of the game.
      */
@@ -17,7 +18,8 @@ public final class EventDispatcher {
     /**
      * 
      */
-    public EventDispatcher() {
+    public EventDispatcher()
+    {
         this.layers = new ArrayDeque<>();
     }
 
@@ -25,7 +27,8 @@ public final class EventDispatcher {
      * @param layer
      *            The event layer, that will be used to receive events.
      */
-    public void registerListener(final EventListener layer) {
+    public void registerListener(final EventListener layer)
+    {
         this.layers.addLast(layer);
     }
 
@@ -34,10 +37,13 @@ public final class EventDispatcher {
      *            An event, that will be assigned to each handler of each event
      *            layer, until a handler in a layer consumes the event.
      */
-    public void dispatch(final Event event) {
+    public void dispatch(final Event event)
+    {
         final Iterator<EventListener> it = this.layers.descendingIterator();
-        while (it.hasNext()) {
-            if (it.next().onEvent(event)) {
+        while (it.hasNext())
+        {
+            if (it.next().onEvent(event))
+            {
                 return;
             }
         }

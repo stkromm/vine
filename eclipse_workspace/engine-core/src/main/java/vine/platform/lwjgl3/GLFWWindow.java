@@ -17,41 +17,44 @@ import vine.window.WindowMode;
  * @author Steffen
  *
  */
-public final class GLFWWindow implements Window {
-    private static final int GL_TRUE = 1;
+public final class GLFWWindow implements Window
+{
+    private static final int            GL_TRUE = 1;
 
-    private int xPos;
-    private int yPos;
+    private int                         xPos;
+    private int                         yPos;
 
-    private int width;
-    private int height;
+    private int                         width;
+    private int                         height;
 
-    private int bufferWidth;
-    private int bufferHeight;
+    private int                         bufferWidth;
+    private int                         bufferHeight;
 
-    private long window;
+    private long                        window;
 
-    private WindowMode mode;
+    private WindowMode                  mode;
 
-    private String title = "My Game";
+    private String                      title   = "My Game";
 
     // Need hard references, otherwise the callbacks get garbage collected
-    private final GLFWErrorCallback errorCallback;
+    private final GLFWErrorCallback     errorCallback;
     private GLFWFramebufferSizeCallback framebufferCallback;
-    private GLFWWindowCloseCallback closeCallback;
-    private GLFWWindowPosCallback positionCallback;
-    private GLFWWindowSizeCallback resizeCallback;
+    private GLFWWindowCloseCallback     closeCallback;
+    private GLFWWindowPosCallback       positionCallback;
+    private GLFWWindowSizeCallback      resizeCallback;
 
-    private WindowContextCallback contextChangeCallback;
+    private WindowContextCallback       contextChangeCallback;
 
-    private final Display display;
+    private final Display               display;
 
     /**
      * Initializes GLFW.
      */
-    public GLFWWindow(final Display display) {
+    public GLFWWindow(final Display display)
+    {
         // Initialize GLFW. Most GLFW functions will not work before doing this.
-        if (GLFW.glfwInit() != GLFW.GLFW_TRUE) {
+        if (GLFW.glfwInit() != GLFW.GLFW_TRUE)
+        {
             throw new IllegalStateException("Failed to init glfw");
         }
         this.display = display;
@@ -60,97 +63,119 @@ public final class GLFWWindow implements Window {
         // Create GLFW window
         GLFW.glfwWindowHint(GLFW.GLFW_VISIBLE, GLFW.GLFW_FALSE);
         GLFW.glfwWindowHint(GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE);
-        if (this.window == 0) {
+        if (this.window == 0)
+        {
             this.window = GLFW.glfwCreateWindow(display.getWidth() / 2, display.getHeight() / 2, this.title, 0, 0);
         }
-        if (this.window == 0) {
+        if (this.window == 0)
+        {
             throw new IllegalStateException("Failed to init glfw window");
         }
         GLFW.glfwSetInputMode(this.window, GLFW.GLFW_CURSOR, GLFW.GLFW_CURSOR_DISABLED);
+        GLFW.glfwMakeContextCurrent(this.window);
+        GLFW.glfwSwapInterval(1);
     }
 
     @Override
-    public final boolean isResizeable() {
+    public boolean isResizeable()
+    {
         return GLFWWindow.GL_TRUE == GLFW.glfwGetWindowAttrib(this.window, GLFW.GLFW_RESIZABLE);
     }
 
     @Override
-    public final boolean isVisible() {
+    public boolean isVisible()
+    {
         return GLFWWindow.GL_TRUE == GLFW.glfwGetWindowAttrib(this.window, GLFW.GLFW_VISIBLE);
     }
 
     @Override
-    public final boolean isFocused() {
+    public boolean isFocused()
+    {
         return GLFWWindow.GL_TRUE == GLFW.glfwGetWindowAttrib(this.window, GLFW.GLFW_FOCUSED);
     }
 
     @Override
-    public final boolean isDecorated() {
+    public boolean isDecorated()
+    {
         return GLFWWindow.GL_TRUE == GLFW.glfwGetWindowAttrib(this.window, GLFW.GLFW_DECORATED);
     }
 
     @Override
-    public boolean isIconified() {
+    public boolean isIconified()
+    {
         return GLFWWindow.GL_TRUE == GLFW.glfwGetWindowAttrib(this.window, GLFW.GLFW_ICONIFIED);
     }
 
     @Override
-    public boolean requestedClose() {
+    public boolean requestedClose()
+    {
         return GLFW.glfwWindowShouldClose(this.window) == GLFWWindow.GL_TRUE;
     }
 
     @Override
-    public int getWidth() {
+    public int getWidth()
+    {
         return this.width;
     }
 
     @Override
-    public int getHeight() {
+    public int getHeight()
+    {
         return this.height;
     }
 
     @Override
-    public int getPosX() {
+    public int getPosX()
+    {
         return this.xPos;
     }
 
     @Override
-    public int getPosY() {
+    public int getPosY()
+    {
         return this.yPos;
     }
 
     @Override
-    public int getFramebufferWidth() {
+    public int getFramebufferWidth()
+    {
         return this.bufferWidth;
     }
 
     @Override
-    public int getFramebufferHeight() {
+    public int getFramebufferHeight()
+    {
         return this.bufferHeight;
     }
 
     @Override
-    public long getContext() {
+    public long getContext()
+    {
         return this.window;
     }
 
     @Override
-    public String getTitle() {
+    public String getTitle()
+    {
         return this.title;
     }
 
     @Override
-    public void setTitle(final String title) {
+    public void setTitle(final String title)
+    {
         GLFW.glfwSetWindowTitle(this.window, title);
         this.title = title;
     }
 
     @Override
-    public void setSizeCallback(final SizeCallback callback) {
-        if (this.resizeCallback != null) {
+    public void setSizeCallback(final SizeCallback callback)
+    {
+        if (this.resizeCallback != null)
+        {
             this.resizeCallback.free();
         }
-        this.resizeCallback = GLFWWindowSizeCallback.create((win, w, h) -> {
+        this.resizeCallback = GLFWWindowSizeCallback.create((win, w, h) ->
+        {
             callback.onSizeChange(w, h);
             this.width = w;
             this.height = h;
@@ -159,11 +184,14 @@ public final class GLFWWindow implements Window {
     }
 
     @Override
-    public void setPositionCallback(final PositionCallback callback) {
-        if (this.positionCallback != null) {
+    public void setPositionCallback(final PositionCallback callback)
+    {
+        if (this.positionCallback != null)
+        {
             this.positionCallback.free();
         }
-        this.positionCallback = GLFWWindowPosCallback.create((win, w, h) -> {
+        this.positionCallback = GLFWWindowPosCallback.create((win, w, h) ->
+        {
             callback.onPositionChange(w, h);
             this.xPos = w;
             this.yPos = h;
@@ -172,11 +200,14 @@ public final class GLFWWindow implements Window {
     }
 
     @Override
-    public void setFramebufferSizeCallback(final FramebufferSizeCallback callback) {
-        if (this.framebufferCallback != null) {
+    public void setFramebufferSizeCallback(final FramebufferSizeCallback callback)
+    {
+        if (this.framebufferCallback != null)
+        {
             this.framebufferCallback.free();
         }
-        this.framebufferCallback = GLFWFramebufferSizeCallback.create((win, w, h) -> {
+        this.framebufferCallback = GLFWFramebufferSizeCallback.create((win, w, h) ->
+        {
             callback.onFramebufferSizeChange(w, h);
             this.bufferWidth = w;
             this.bufferHeight = h;
@@ -185,8 +216,10 @@ public final class GLFWWindow implements Window {
     }
 
     @Override
-    public void setCloseCallback(final CloseCallback callback) {
-        if (this.closeCallback != null) {
+    public void setCloseCallback(final CloseCallback callback)
+    {
+        if (this.closeCallback != null)
+        {
             this.closeCallback.free();
         }
         this.closeCallback = GLFWWindowCloseCallback.create(context -> callback.onCloseRequest());
@@ -194,62 +227,71 @@ public final class GLFWWindow implements Window {
     }
 
     @Override
-    public void show() {
+    public void show()
+    {
         GLFW.glfwShowWindow(this.window);
     }
 
     @Override
-    public void setWindowSize(final int width, final int height) {
+    public void setWindowSize(final int width, final int height)
+    {
         GLFW.glfwSetWindowSize(this.window, width, height);
         this.width = width;
         this.height = height;
     }
 
     @Override
-    public void setWindowPosition(final int x, final int y) {
+    public void setWindowPosition(final int x, final int y)
+    {
         GLFW.glfwSetWindowPos(this.window, x, y);
         this.xPos = x;
         this.yPos = y;
     }
 
     @Override
-    public void setWindowContextCallback(final WindowContextCallback callback) {
+    public void setWindowContextCallback(final WindowContextCallback callback)
+    {
         this.contextChangeCallback = callback;
     }
 
     @Override
-    public void close() {
+    public void close()
+    {
         GLFW.glfwDestroyWindow(this.window);
         // Terminate GLFW and release the GLFWErrorCallback
         GLFW.glfwTerminate();
     }
 
     @Override
-    public void hide() {
+    public void hide()
+    {
         GLFW.glfwHideWindow(this.window);
     }
 
     @Override
-    public void setWindowMode(final WindowMode mode) {
-        if (this.mode == mode) {
+    public void setWindowMode(final WindowMode mode)
+    {
+        if (this.mode == mode)
+        {
             return;
         }
         switch (mode) {
         case FULLSCREEN:
             this.goFullscreen();
-            break;
+        break;
         case WINDOWED:
             this.goWindowed();
-            break;
+        break;
         case WINDOWED_FULLSCREEN:
             this.goWindowed();
-            break;
+        break;
         default:
-            break;
+        break;
         }
     }
 
-    private void goWindowed() {
+    private void goWindowed()
+    {
         GLFW.glfwWindowHint(GLFW.GLFW_DECORATED, GLFW.GLFW_TRUE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_TRUE);
         this.width = this.display.getWidth() / 3 * 2;
@@ -260,7 +302,8 @@ public final class GLFWWindow implements Window {
         GLFW.glfwSetWindowPos(this.window, this.display.getWidth() / 3, this.display.getHeight() / 3);
     }
 
-    private void goFullscreen() {
+    private void goFullscreen()
+    {
         GLFW.glfwWindowHint(GLFW.GLFW_DECORATED, GLFW.GLFW_FALSE);
         GLFW.glfwWindowHint(GLFW.GLFW_RESIZABLE, GLFW.GLFW_FALSE);
         this.width = this.display.getWidth();
@@ -271,12 +314,15 @@ public final class GLFWWindow implements Window {
         GLFW.glfwSetWindowPos(this.window, 0, 0);
     }
 
-    private void switchToNewWindow(final int width, final int height) {
+    private void switchToNewWindow(final int width, final int height)
+    {
         // Release callbacks of the old window
-        if (this.framebufferCallback != null) {
+        if (this.framebufferCallback != null)
+        {
             this.framebufferCallback.free();
         }
-        if (this.closeCallback != null) {
+        if (this.closeCallback != null)
+        {
             this.closeCallback.free();
         }
         GLFW.glfwWindowHint(GLFW.GLFW_ACCUM_RED_BITS, 0);
@@ -311,7 +357,8 @@ public final class GLFWWindow implements Window {
         GLFW.glfwSetWindowSizeCallback(this.window, this.resizeCallback);
         GLFW.glfwSetWindowCloseCallback(this.window, this.closeCallback);
 
-        if (this.contextChangeCallback != null) {
+        if (this.contextChangeCallback != null)
+        {
             this.contextChangeCallback.onContextChange(this.window);
         }
     }

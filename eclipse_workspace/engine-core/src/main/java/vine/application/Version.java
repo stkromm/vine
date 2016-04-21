@@ -1,6 +1,7 @@
 package vine.application;
 
-public class Version {
-    public static final String name = "vine-engine";
-    public static final String version = "0.1a";
+public class Version
+{
+    public static final String NAME           = "vine-engine";
+    public static final String ENGINE_VERSION = "0.1a";
 }

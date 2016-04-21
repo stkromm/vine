@@ -9,45 +9,56 @@ import vine.event.EventListener.EventHandler;
 import vine.event.KeyEvent;
 import vine.game.Layer;
 import vine.game.screen.Screen;
-import vine.graphics.GUIRenderer;
+import vine.graphics.renderer.GUIRenderer;
 
 /**
  * @author Steffen
  *
  */
-public class GameUserInterface implements Layer {
+public class GameUserInterface implements Layer
+{
     private final EventListener listener = new EventListener();
-    private final List<Widget> widgets = new ArrayList<>();
-    private final GUIRenderer renderer = new GUIRenderer();
+    private final List<Widget>  widgets  = new ArrayList<>();
+    private final Screen        screen;
+    private final GUIRenderer   renderer = new GUIRenderer();
 
-    public GameUserInterface() {
-        final EventHandler keyHandler = event -> {
-            for (final Widget widget : this.widgets) {
-                if (widget.isSelected()) {
+    public GameUserInterface(Screen screen)
+    {
+        this.screen = screen;
+        final EventHandler keyHandler = event ->
+        {
+            for (final Widget widget : this.widgets)
+            {
+                if (widget.isSelected())
+                {
                     widget.onKeyEvent((KeyEvent) event);
                 }
             }
             return false;
         };
         this.listener.addEventHandler(EventType.KEY, keyHandler);
-        final EventHandler mouseMoveHandler = event -> {
+        final EventHandler mouseMoveHandler = event ->
+        {
             return false;
         };
         this.listener.addEventHandler(EventType.MOUSE_MOVE, mouseMoveHandler);
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return "vine.GUI";
     }
 
     @Override
-    public void render(Screen screen) {
+    public void render(Screen screen)
+    {
         this.renderer.renderGUI(this.widgets, screen);
     }
 
     @Override
-    public EventListener getListener() {
+    public EventListener getListener()
+    {
         return this.listener;
     }
 
@@ -55,7 +66,13 @@ public class GameUserInterface implements Layer {
      * @param widget
      *            Widget that is added to the screen
      */
-    public void addWidget(Widget widget) {
+    public void addWidget(Widget widget)
+    {
         this.widgets.add(widget);
+    }
+
+    public Screen getScreen()
+    {
+        return this.screen;
     }
 }

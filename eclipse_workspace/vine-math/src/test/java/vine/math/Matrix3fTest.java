@@ -8,13 +8,15 @@ import org.junit.Test;
  * @author Steffen
  *
  */
-public class Matrix3fTest {
+public class Matrix3fTest
+{
 
     /**
      * 
      */
     @Test
-    public void testEquality() {
+    public void testEquality()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 1.f, 0.f, 0.f);
         matrix.setRow(1, 0.f, 0.f, 1.f);
@@ -38,15 +40,18 @@ public class Matrix3fTest {
      * Tests the performance of matrix operations.
      */
     @Test
-    public void testPerformance() {
+    public void testPerformance()
+    {
 
         Matrix3f matrix = new Matrix3f().setRow(0, 1.f, 0.f, 0.f).setRow(1, 0.f, 1.f, 0.f).setRow(2, 0.f, 0.f, 1.f);
 
         int count = 0;
         int times = 100;
-        while (times > 0) {
+        while (times > 0)
+        {
             long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() - time < 33) {
+            while (System.currentTimeMillis() - time < 33)
+            {
                 matrix.inverse();
                 count++;
             }
@@ -57,9 +62,11 @@ public class Matrix3fTest {
 
         count = 0;
         times = 100;
-        while (times > 0) {
+        while (times > 0)
+        {
             long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() - time < 33) {
+            while (System.currentTimeMillis() - time < 33)
+            {
                 matrix.rightMultiply(matrix);
                 count++;
             }
@@ -71,9 +78,11 @@ public class Matrix3fTest {
 
         count = 0;
         times = 100;
-        while (times > 0) {
+        while (times > 0)
+        {
             long time = System.currentTimeMillis();
-            while (System.currentTimeMillis() - time < 33) {
+            while (System.currentTimeMillis() - time < 33)
+            {
                 Matrix3f matrix2 = new Matrix3f();
                 matrix2.setRow(0, 1.f, 0.f, 0.f);
                 matrix2.setRow(1, 0.f, 1.f, 0.f);
@@ -90,7 +99,8 @@ public class Matrix3fTest {
      * 
      */
     @Test
-    public void testPropertyAccess() {
+    public void testPropertyAccess()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setA11(1);
         matrix.setA12(1);
@@ -120,7 +130,8 @@ public class Matrix3fTest {
      * transposed Matrix creates the identity matrix.
      */
     @Test
-    public void testOrthogonalInversed() {
+    public void testOrthogonalInversed()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 1.f, 0.f, 0.f);
         matrix.setRow(1, 0.f, 0.f, 1.f);
@@ -135,7 +146,8 @@ public class Matrix3fTest {
      * Tests transpose of Matrix3f.
      */
     @Test
-    public void testTranspose() {
+    public void testTranspose()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
@@ -152,7 +164,8 @@ public class Matrix3fTest {
      * 
      */
     @Test
-    public void testIdentity() {
+    public void testIdentity()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 2.f, 0.f, 0.f);
         matrix.setRow(1, 0.f, 2.f, 0.f);
@@ -166,7 +179,8 @@ public class Matrix3fTest {
      * correct.
      */
     @Test
-    public void testCalculateDeterminant() {
+    public void testCalculateDeterminant()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
@@ -185,7 +199,8 @@ public class Matrix3fTest {
      * Tests, that Matrix3f invert is correct.
      */
     @Test
-    public void testInvert() {
+    public void testInvert()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
@@ -211,7 +226,8 @@ public class Matrix3fTest {
      * 
      */
     @Test
-    public void testAddition() {
+    public void testAddition()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
@@ -230,7 +246,8 @@ public class Matrix3fTest {
      * 
      */
     @Test
-    public void testMultiply() {
+    public void testMultiply()
+    {
         Matrix3f matrix = new Matrix3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);

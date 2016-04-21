@@ -4,7 +4,8 @@ package vine.input;
  * @author Steffen
  *
  */
-public enum InputModifier {
+public enum InputModifier
+{
     /**
      * 
      */
@@ -24,7 +25,8 @@ public enum InputModifier {
 
     private final int flag;
 
-    InputModifier(final int flag) {
+    InputModifier(final int flag)
+    {
         this.flag = flag;
     }
 
@@ -33,7 +35,8 @@ public enum InputModifier {
      *            Int that is checked, if the corresponding flag is set
      * @return true, if the flag bit is 1.
      */
-    public static final boolean isAlt(final int mods) {
+    public static final boolean isAlt(final int mods)
+    {
         return (mods & ALT.flag) == 1;
     }
 
@@ -42,7 +45,8 @@ public enum InputModifier {
      *            Int that is checked, if the corresponding flag is set
      * @return true, if the flag bit is 1.
      */
-    public static final boolean isControl(final int mods) {
+    public static final boolean isControl(final int mods)
+    {
         return (mods & CONTROL.flag) == 1;
     }
 
@@ -51,7 +55,8 @@ public enum InputModifier {
      *            Int that is checked, if the corresponding flag is set
      * @return true, if the flag bit is 1.
      */
-    public static final boolean isSuper(final int mods) {
+    public static final boolean isSuper(final int mods)
+    {
         return (mods & SUPER.flag) == 1;
     }
 
@@ -60,7 +65,8 @@ public enum InputModifier {
      *            Int that is checked, if the corresponding flag is set
      * @return true, if the flag bit is 1.
      */
-    public static final boolean isShift(final int mods) {
+    public static final boolean isShift(final int mods)
+    {
         return (mods & SHIFT.flag) == 1;
     }
 }

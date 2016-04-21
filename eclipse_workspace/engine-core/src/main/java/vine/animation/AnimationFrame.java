@@ -1,19 +1,23 @@
 package vine.animation;
 
-public class AnimationFrame {
+public class AnimationFrame
+{
     private final float[] value;
-    private final float duration;
+    private final float   timepoint;
 
-    public AnimationFrame(final float[] value, final float duration) {
-        this.value = value;
-        this.duration = duration;
+    public AnimationFrame(final float[] value, final float timepoint)
+    {
+        this.value = value.clone();
+        this.timepoint = timepoint;
     }
 
-    public final float[] getUvs() {
+    public final float[] getFramedValues()
+    {
         return this.value;
     }
 
-    public final float getDuration() {
-        return this.duration;
+    public final float getTimepoint()
+    {
+        return this.timepoint;
     }
 }

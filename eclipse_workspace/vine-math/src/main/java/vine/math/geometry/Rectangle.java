@@ -8,10 +8,11 @@ import vine.math.geometry.ray.Ray;
  * @author Steffen
  *
  */
-public class Rectangle implements Shape {
+public class Rectangle implements Shape
+{
     private static final float SKIN_WIDTH = -0.000001f;
-    private final Vector2f origin;
-    private final Vector2f diagonal;
+    private final Vector2f     origin;
+    private final Vector2f     diagonal;
 
     /**
      * Creates a new rectangle object, that represent the geometric structure.
@@ -21,32 +22,38 @@ public class Rectangle implements Shape {
      * @param width
      * @param height
      */
-    public Rectangle(float x, float y, float width, float height) {
+    public Rectangle(float x, float y, float width, float height)
+    {
         origin = new Vector2f(x, y);
         diagonal = new Vector2f(width, height);
     }
 
-    public float getWidth() {
+    public float getWidth()
+    {
         return diagonal.getX();
     }
 
-    public float getHeight() {
+    public float getHeight()
+    {
         return diagonal.getY();
     }
 
-    public final boolean contains(float x, float y) {
+    public final boolean contains(float x, float y)
+    {
         float a = (x - origin.getX()) / diagonal.getX();
         float b = (y - origin.getY()) / diagonal.getY();
         return a > SKIN_WIDTH && a <= 1 - SKIN_WIDTH && b <= 1 - SKIN_WIDTH && b > SKIN_WIDTH;
     }
 
-    public Intersection intersect(Ray ray) {
+    public Intersection intersect(Ray ray)
+    {
         // Find min and max X for the segment
 
         double minX = ray.getOrigin().getX();
         double maxX = ray.getOrigin().getX() + ray.getDirection().getX();
 
-        if (minX > maxX) {
+        if (minX > maxX)
+        {
             double temp = minX;
             minX = maxX;
             maxX = temp;
@@ -54,11 +61,13 @@ public class Rectangle implements Shape {
 
         // Find the intersection of the segment's and rectangle's x-projections
 
-        if (maxX > origin.getX() + diagonal.getX()) {
+        if (maxX > origin.getX() + diagonal.getX())
+        {
             maxX = origin.getX() + diagonal.getX();
         }
 
-        if (minX < origin.getX()) {
+        if (minX < origin.getX())
+        {
             minX = origin.getX();
         }
 
@@ -74,14 +83,16 @@ public class Rectangle implements Shape {
 
         double dx = ray.getDirection().getX();
 
-        if (Math.abs(dx) > 0.0000001) {
+        if (Math.abs(dx) > 0.0000001)
+        {
             double a = ray.getDirection().getY() / dx;
             double b = ray.getOrigin().getY() - a * ray.getOrigin().getX();
             minY = a * minX + b;
             maxY = a * maxX + b;
         }
 
-        if (minY > maxY) {
+        if (minY > maxY)
+        {
             double tmp = maxY;
             maxY = minY;
             minY = tmp;
@@ -89,11 +100,13 @@ public class Rectangle implements Shape {
 
         // Find the intersection of the segment's and rectangle's y-projections
 
-        if (maxY > origin.getY() + diagonal.getY()) {
+        if (maxY > origin.getY() + diagonal.getY())
+        {
             maxY = origin.getY() + diagonal.getY();
         }
 
-        if (minY < origin.getY()) {
+        if (minY < origin.getY())
+        {
             minY = origin.getY();
         }
 
@@ -105,12 +118,16 @@ public class Rectangle implements Shape {
         return new Intersection(true, 0, ray, this);
     }
 
-    public boolean intersect(Rectangle rect) {
+    public boolean intersect(Rectangle rect)
+    {
         if (rect.origin.getX() < this.origin.getX() + this.diagonal.getX()
                 && this.origin.getX() < rect.origin.getX() + rect.diagonal.getX()
                 && rect.origin.getY() < this.origin.getY() + this.diagonal.getY())
+        {
             return this.origin.getY() < rect.origin.getY() + rect.diagonal.getY();
-        else
+        } else
+        {
             return false;
+        }
     }
 }

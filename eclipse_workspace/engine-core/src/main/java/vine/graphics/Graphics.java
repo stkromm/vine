@@ -10,39 +10,22 @@ import vine.math.Vector3f;
  * @author Steffen
  *
  */
-public interface Graphics {
+public interface Graphics
+{
 
     // RENDER FUNCTIONS
-    /**
-     * @param l
-     * @param context
-     */
     void makeContext(long l);
 
-    /**
-     * 
-     */
     void clearBuffer();
 
-    /**
-     * 
-     */
     void swapBuffer();
 
-    /**
-     * 
-     */
     void init();
 
-    /**
-     * @param x
-     * @param y
-     * @param width
-     * @param height
-     */
     void setViewport(int x, int y, int width, int height);
 
     // TEXTURE FUNCTIONS
+
     int generateTexture();
 
     void bindTexture2D(int id);
@@ -71,9 +54,13 @@ public interface Graphics {
 
     void bindElementArrayBuffer(int id);
 
-    void bindVertexData(int bufferId, FloatBuffer vertices, VertexAttribute usage);
+    void bindVertexAttribute(int bufferId, FloatBuffer vertices, VertexAttribute usage);
 
     void bindIndexData(int bufferId, IntBuffer indices);
+
+    void reallocateAttributeData(int vbo, FloatBuffer vertices);
+
+    void reallocateIndicesData(int ibo, IntBuffer indicesBuffer);
 
     int generateVertexArray();
 
@@ -84,8 +71,4 @@ public interface Graphics {
     void drawElements(int count);
 
     void drawArrays(int count);
-
-    void reallocateVerticeData(int vbo, FloatBuffer vertices);
-
-    void reallocateIndicesData(int ibo, IntBuffer indicesBuffer);
 }

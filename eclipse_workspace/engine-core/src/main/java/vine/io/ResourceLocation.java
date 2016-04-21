@@ -1,7 +1,8 @@
 
 package vine.io;
 
-public enum ResourceLocation {
+public enum ResourceLocation
+{
 
     Project_Folder,
 

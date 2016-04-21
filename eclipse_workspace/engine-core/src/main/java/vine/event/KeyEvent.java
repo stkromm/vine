@@ -6,15 +6,16 @@ import vine.input.InputAction;
  * @author Steffen
  *
  */
-public class KeyEvent implements Event {
+public class KeyEvent implements Event
+{
     /**
      * 
      */
-    private final int key;
+    private final int         key;
     /**
      * 
      */
-    private final int scancode;
+    private final int         scancode;
     /**
      * 
      */
@@ -22,7 +23,7 @@ public class KeyEvent implements Event {
     /**
      * 
      */
-    private final int mods;
+    private final int         mods;
 
     /**
      * @param key
@@ -30,7 +31,8 @@ public class KeyEvent implements Event {
      * @param action
      * @param mods
      */
-    public KeyEvent(final int key, final int scancode, final InputAction action, final int mods) {
+    public KeyEvent(final int key, final int scancode, final InputAction action, final int mods)
+    {
         super();
         this.key = key;
         this.scancode = scancode;
@@ -41,38 +43,44 @@ public class KeyEvent implements Event {
     /**
      * @return
      */
-    public final int getKey() {
+    public final int getKey()
+    {
         return this.key;
     }
 
     /**
      * @return
      */
-    public final int getScancode() {
+    public final int getScancode()
+    {
         return this.scancode;
     }
 
     /**
      * @return
      */
-    public final InputAction getAction() {
+    public final InputAction getAction()
+    {
         return this.action;
     }
 
     /**
      * @return
      */
-    public final int getMods() {
+    public final int getMods()
+    {
         return this.mods;
     }
 
     @Override
-    public final EventType getType() {
+    public final EventType getType()
+    {
         return EventType.KEY;
     }
 
     @Override
-    public final String toString() {
+    public final String toString()
+    {
         return "KeyEvent:" + this.getAction().toString() + " Key:" + this.getKey() + " with Mods:" + this.getMods()
                 + " and Scancode:" + this.scancode;
     }

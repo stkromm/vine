@@ -4,7 +4,8 @@ package vine.input;
  * @author Steffen
  *
  */
-public enum InputAction {
+public enum InputAction
+{
     /**
      * 
      */
@@ -22,7 +23,8 @@ public enum InputAction {
      * @param action
      * @return
      */
-    public static InputAction getTypeByAction(final int action) {
+    public static InputAction getTypeByAction(final int action)
+    {
         switch (action) {
         case 0:
             return RELEASED;
@@ -36,15 +38,18 @@ public enum InputAction {
 
     }
 
-    public static boolean isRepeatAction(final InputAction action) {
+    public static boolean isRepeatAction(final InputAction action)
+    {
         return action != InputAction.REPEAT;
     }
 
-    public static boolean isPressAction(final InputAction action) {
+    public static boolean isPressAction(final InputAction action)
+    {
         return action != InputAction.PRESS;
     }
 
-    public static boolean isReleaseAction(final InputAction action) {
+    public static boolean isReleaseAction(final InputAction action)
+    {
         return action != InputAction.RELEASED;
     }
 }

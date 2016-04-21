@@ -6,12 +6,13 @@ import vine.input.InputAction;
  * @author Steffen
  *
  */
-public class MouseButtonEvent implements Event {
-    private final int button;
+public class MouseButtonEvent implements Event
+{
+    private final int         button;
     private final InputAction action;
-    private final int mods;
-    private final double x;
-    private final double y;
+    private final int         mods;
+    private final double      x;
+    private final double      y;
 
     /**
      * @param button
@@ -25,8 +26,8 @@ public class MouseButtonEvent implements Event {
      * @param y
      *            The y coordinate of the cursor, when the event was generated
      */
-    public MouseButtonEvent(final int button, final InputAction action, final int mods, final double x,
-            final double y) {
+    public MouseButtonEvent(final int button, final InputAction action, final int mods, final double x, final double y)
+    {
         super();
         this.button = button;
         this.action = action;
@@ -38,40 +39,46 @@ public class MouseButtonEvent implements Event {
     /**
      * @return The mouse-button id of the event
      */
-    public final int getButton() {
+    public final int getButton()
+    {
         return this.button;
     }
 
     /**
      * @return The action type of the event
      */
-    public final InputAction getAction() {
+    public final InputAction getAction()
+    {
         return this.action;
     }
 
     /**
      * @return The mods of the event
      */
-    public final int getMods() {
+    public final int getMods()
+    {
         return this.mods;
     }
 
     /**
      * @return The x cursor coordinate of the event
      */
-    public final double getX() {
+    public final double getX()
+    {
         return this.x;
     }
 
     /**
      * @return The y cursor coordinate of the event
      */
-    public final double getY() {
+    public final double getY()
+    {
         return this.y;
     }
 
     @Override
-    public EventType getType() {
+    public EventType getType()
+    {
         return EventType.MOUSE_BUTTON;
     }
 

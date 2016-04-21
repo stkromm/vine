@@ -1,13 +1,16 @@
 package vine.assets;
 
-public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>> {
+public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>>
+{
     @FunctionalInterface
-    public interface FinishCallback<A> {
+    public interface FinishCallback<A>
+    {
         void finished(A asset);
     }
 
     @FunctionalInterface
-    public interface ProgressCallback {
+    public interface ProgressCallback
+    {
         void onProgressUpdate(float percent);
     }
 
@@ -23,7 +26,10 @@ public abstract class AssetLoader<A, P extends AssetLoaderParameters<A>> {
      * @param parameter
      *            the parameters to use for loading the asset
      */
-    public abstract void loadAsync(AssetPointer pointer, P parameter, FinishCallback<A> callback,
+    public abstract void loadAsync(
+            AssetPointer pointer,
+            P parameter,
+            FinishCallback<A> callback,
             ProgressCallback progessCallback);
 
     /**

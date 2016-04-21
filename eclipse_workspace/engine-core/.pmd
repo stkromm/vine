@@ -2,6 +2,8 @@
 <pmd>
     <useProjectRuleSet>false</useProjectRuleSet>
     <ruleSetFile>.ruleset</ruleSetFile>
+    <excludePatterns/>
+    <includePatterns/>
     <rules>
         <rule>
             <name>IfStmtsMustUseBraces</name>
@@ -289,11 +291,11 @@
         </rule>
         <rule>
             <name>AvoidDeeplyNestedIfStmts</name>
-            <ruleset>Basic Velocity</ruleset>
+            <ruleset>Design</ruleset>
         </rule>
         <rule>
             <name>CollapsibleIfStatements</name>
-            <ruleset>Basic Velocity</ruleset>
+            <ruleset>Basic</ruleset>
         </rule>
         <rule>
             <name>ExcessiveTemplateLength</name>
@@ -301,7 +303,7 @@
         </rule>
         <rule>
             <name>AvoidReassigningParameters</name>
-            <ruleset>Basic Velocity</ruleset>
+            <ruleset>Design</ruleset>
         </rule>
         <rule>
             <name>EmptyIfStmt</name>
@@ -457,7 +459,7 @@
         </rule>
         <rule>
             <name>UnnecessaryParentheses</name>
-            <ruleset>Controversial</ruleset>
+            <ruleset>Unnecessary</ruleset>
         </rule>
         <rule>
             <name>DefaultPackage</name>
@@ -661,11 +663,11 @@
         </rule>
         <rule>
             <name>AvoidDeeplyNestedIfStmts</name>
-            <ruleset>Basic Velocity</ruleset>
+            <ruleset>Design</ruleset>
         </rule>
         <rule>
             <name>AvoidReassigningParameters</name>
-            <ruleset>Basic Velocity</ruleset>
+            <ruleset>Design</ruleset>
         </rule>
         <rule>
             <name>SwitchDensity</name>
@@ -789,10 +791,6 @@
         </rule>
         <rule>
             <name>NonThreadSafeSingleton</name>
-            <ruleset>Design</ruleset>
-        </rule>
-        <rule>
-            <name>UncommentedEmptyMethod</name>
             <ruleset>Design</ruleset>
         </rule>
         <rule>
@@ -1041,7 +1039,7 @@
         </rule>
         <rule>
             <name>UnnecessaryParentheses</name>
-            <ruleset>Controversial</ruleset>
+            <ruleset>Unnecessary</ruleset>
         </rule>
         <rule>
             <name>UnnecessaryBlock</name>
@@ -1229,7 +1227,7 @@
         </rule>
         <rule>
             <name>CollapsibleIfStatements</name>
-            <ruleset>Basic Velocity</ruleset>
+            <ruleset>Basic</ruleset>
         </rule>
         <rule>
             <name>ClassCastExceptionWithToArray</name>

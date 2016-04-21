@@ -1,70 +1,72 @@
 package vine.game.gui;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import vine.application.PerformanceMonitor;
 import vine.assets.AssetManager;
-import vine.graphics.BindableTexture;
 import vine.graphics.Font;
-import vine.time.TimerManager;
+import vine.graphics.Texture;
+import vine.util.time.TimerManager;
 
-public class Text extends Widget {
-    static final Logger LOGGER = LoggerFactory.getLogger(Text.class);
-    Font font;
-    String content = "";
-    int count;
+public class Text extends Widget
+{
+    Font    font;
+    String  content = "";
+    int     count;
 
     float[] positions;
     float[] uvs;
-    float[] colors = new float[this.content.length() * 16];
+    float[] colors  = new float[this.content.length() * 4];
 
-    public void construct() {
-        try {
-            this.font = AssetManager.loadSync("font", Font.class);
-            AssetManager.loadAsync("font", Font.class, font -> this.font = font);
-        } catch (final Exception exception) {
-            Text.LOGGER.debug("Failed to load font");
-        }
+    @Override
+    public void construct()
+    {
+        this.font = AssetManager.loadSync("font", Font.class);
         this.positions = this.getPositions(this.content, 0, 100);
         this.uvs = this.getUVs(this.content);
-        TimerManager.get().createTimer(1, -1, () -> {
+        TimerManager.get().createTimer(1, -1, () ->
+        {
             this.setText("Current fps:" + PerformanceMonitor.getFPS());
         });
     }
 
-    public void setText(String text) {
+    public void setText(final String text)
+    {
         this.count = text.length();
         this.content = text;
-        this.colors = new float[this.content.length() * 16];
+        this.colors = new float[this.content.length() * 4];
         this.positions = this.getPositions(this.content, 0, 100);
         this.uvs = this.getUVs(this.content);
     }
 
     @Override
-    public float[] getPosition() {
+    public float[] getPosition()
+    {
         return this.positions;
     }
 
     @Override
-    public float[] getColor() {
+    public float[] getColor()
+    {
         return this.colors;
     }
 
     @Override
-    public float[] getTextureCoords() {
+    public float[] getTextureCoords()
+    {
         return this.uvs;
     }
 
     @Override
-    public int getCount() {
-        return 64;
+    public int getCount()
+    {
+        return this.content.length();
     }
 
-    private float[] getUVs(String text) {
+    private float[] getUVs(final String text)
+    {
         final float[] uvs = new float[8 * text.toCharArray().length];
         int i = 0;
-        for (final char c : text.toCharArray()) {
+        for (final char c : text.toCharArray())
+        {
             final float cw = this.font.getCharWidth(c);
             final float ch = this.font.getCharHeight();
             final float cx = this.font.getCharX(c);
@@ -79,21 +81,30 @@ public class Text extends Widget {
             uvs[i * 8 + 7] = cy + ch;
             i++;
         }
-        for (int a = uvs.length - 1; a >= 0; a--) {
-            if (a % 2 == 0) {
+        for (int a = uvs.length - 1; a >= 0; a--)
+        {
+            if (a % 2 == 0)
+            {
                 uvs[a] /= this.font.getFontImageWidth();
-            } else {
+            } else
+            {
                 uvs[a] /= this.font.getFontImageHeight();
             }
+        }
+        for (int i1 = uvs.length - 1; i1 >= 0; i1--)
+        {
+            uvs[i1] *= 1000;
         }
         return uvs;
     }
 
-    private float[] getPositions(String text, int x, int y) {
+    private float[] getPositions(final String text, final int x, final int y)
+    {
         final float[] uvs = new float[12 * text.toCharArray().length];
         int i = 0;
         float xTmp = x;
-        for (final char c : text.toCharArray()) {
+        for (final char c : text.toCharArray())
+        {
             final float width = this.font.getCharWidth(c);
             final float height = this.font.getCharHeight();
             uvs[i * 12 + 0] = xTmp;
@@ -115,7 +126,8 @@ public class Text extends Widget {
     }
 
     @Override
-    public BindableTexture getTexture() {
+    public Texture getTexture()
+    {
         return this.font;
     }
 }

@@ -1,15 +1,26 @@
 package vine.graphics;
 
-public class GraphicsProvider {
-
+public final class GraphicsProvider
+{
     private static Graphics graphics;
 
-    public static final Graphics getGraphics() {
-        return graphics;
+    private GraphicsProvider()
+    {
 
     }
 
-    public static final void setGraphics(Graphics graphics) {
+    public static Graphics getGraphics()
+    {
+        return GraphicsProvider.graphics;
+
+    }
+
+    public static void setGraphics(final Graphics graphics)
+    {
+        if (graphics == null)
+        {
+            throw new IllegalArgumentException("Can't pass null as graphics");
+        }
         GraphicsProvider.graphics = graphics;
     }
 }

@@ -12,12 +12,14 @@ import java.util.Random;
  * @author Steffen
  *
  */
-public class Vector3fTest {
+public class Vector3fTest
+{
     /**
      * 
      */
     @Test
-    public void testAdd() {
+    public void testAdd()
+    {
         Vector3f vector = new Vector3f(1.f, 2.f, 3.f);
         vector.add(new Vector3f(2, 2.f, 2.f));
         assertTrue(vector.equals(new Vector3f(3, 4, 5)));
@@ -38,7 +40,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testPropertyAccess() {
+    public void testPropertyAccess()
+    {
         Vector3f vector = new Vector3f(0, 0, 0);
         assertTrue(vector.getX() == 0);
         vector.setX(1);
@@ -53,7 +56,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testNormalize() {
+    public void testNormalize()
+    {
         Vector3f vector = new Vector3f(2, 2, 1);
         vector.normalize();
         System.out.println(Math.abs(vector.getX()));
@@ -66,7 +70,8 @@ public class Vector3fTest {
         nullVector.normalize();
         assertTrue(nullVector.length() == 0);
         Random rn = new Random();
-        for (int i = 0; i <= 100000; i++) {
+        for (int i = 0; i <= 100000; i++)
+        {
             Vector3f vec = new Vector3f(rn.nextFloat() * 10000, rn.nextFloat() * System.currentTimeMillis() - 12345,
                     System.nanoTime());
             vec.normalize();
@@ -78,7 +83,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testDotProduct() {
+    public void testDotProduct()
+    {
         Vector3f vector = new Vector3f(1, 0, 0);
         assertTrue(vector.dot(vector) == 1.f);
         assertTrue(vector.dot(null) == 0);
@@ -88,7 +94,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testCrossProduct() {
+    public void testCrossProduct()
+    {
         Vector3f vector = new Vector3f(1, 0, 0);
         Vector3f vector2 = new Vector3f(0, 1, 0);
         assertTrue(vector.cross(vector2).equals(new Vector3f(0, 0, 1)));
@@ -100,7 +107,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testGetElement() {
+    public void testGetElement()
+    {
         Vector3f vector = new Vector3f(1, 2.f, 5);
         assertTrue(vector.getY() == 2.f);
         assertTrue(vector.getZ() == 5.f);
@@ -111,7 +119,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testScaling() {
+    public void testScaling()
+    {
         Vector3f vector = new Vector3f(1, 2, 1);
         vector.scale(0);
         assertTrue(vector.equals(new Vector3f(0, 0, 0)));
@@ -121,7 +130,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testAngleBetween() {
+    public void testAngleBetween()
+    {
         Vector3f vector = new Vector3f(3.f, 4.f, 0);
         Vector3f vector2 = new Vector3f(-8.f, 6.f, 0);
         assertTrue(Math.toDegrees(Math.acos(vector.getAngle(vector2))) == 90.f);
@@ -136,7 +146,8 @@ public class Vector3fTest {
      * 
      */
     @Test
-    public void testLength() {
+    public void testLength()
+    {
         Vector3f vector = new Vector3f(0.f, 3.f, 0.f);
         assertTrue(vector.length() == 3.f);
     }

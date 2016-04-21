@@ -1,9 +1,11 @@
 package vine.event;
 
-public class CharModEvent implements Event {
+public class CharModEvent implements Event
+{
 
     @Override
-    public EventType getType() {
+    public EventType getType()
+    {
         // TODO Auto-generated method stub
         return null;
     }
