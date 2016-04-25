@@ -1,6 +1,6 @@
 package vine.game;
 
-import vine.gameplay.entity.PlayerPawn;
+import vine.gameplay.PlayerPawn;
 
 public class Player
 {

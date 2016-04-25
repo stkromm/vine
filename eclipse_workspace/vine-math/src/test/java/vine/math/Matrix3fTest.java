@@ -17,12 +17,12 @@ public class Matrix3fTest
     @Test
     public void testEquality()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 1.f, 0.f, 0.f);
         matrix.setRow(1, 0.f, 0.f, 1.f);
         matrix.setRow(2, 0.f, 1.f, 0.f);
         assertTrue(!matrix.equals(null));
-        Matrix3f matrix2 = new Matrix3f();
+        Mat3f matrix2 = new Mat3f();
         assertTrue(!matrix.equals(matrix2));
         matrix2.setRow(0, 1.f, 0.f, 0.f);
         assertTrue(!matrix.equals(matrix2));
@@ -43,7 +43,7 @@ public class Matrix3fTest
     public void testPerformance()
     {
 
-        Matrix3f matrix = new Matrix3f().setRow(0, 1.f, 0.f, 0.f).setRow(1, 0.f, 1.f, 0.f).setRow(2, 0.f, 0.f, 1.f);
+        Mat3f matrix = new Mat3f().setRow(0, 1.f, 0.f, 0.f).setRow(1, 0.f, 1.f, 0.f).setRow(2, 0.f, 0.f, 1.f);
 
         int count = 0;
         int times = 100;
@@ -83,7 +83,7 @@ public class Matrix3fTest
             long time = System.currentTimeMillis();
             while (System.currentTimeMillis() - time < 33)
             {
-                Matrix3f matrix2 = new Matrix3f();
+                Mat3f matrix2 = new Mat3f();
                 matrix2.setRow(0, 1.f, 0.f, 0.f);
                 matrix2.setRow(1, 0.f, 1.f, 0.f);
                 matrix2.setRow(2, 0.f, 0.f, 1.f);
@@ -101,7 +101,7 @@ public class Matrix3fTest
     @Test
     public void testPropertyAccess()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setA11(1);
         matrix.setA12(1);
         matrix.setA13(1);
@@ -120,7 +120,7 @@ public class Matrix3fTest
         assertTrue(matrix.getA31() == 1);
         assertTrue(matrix.getA32() == 1);
         assertTrue(matrix.getA33() == 1);
-        Matrix3f matrix2 = new Matrix3f(matrix);
+        Mat3f matrix2 = new Mat3f(matrix);
         matrix2.setRow(-1, 1, 3, 4);
         assertTrue(matrix.equals(matrix2));
     }
@@ -132,13 +132,13 @@ public class Matrix3fTest
     @Test
     public void testOrthogonalInversed()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 1.f, 0.f, 0.f);
         matrix.setRow(1, 0.f, 0.f, 1.f);
         matrix.setRow(2, 0.f, 1.f, 0.f);
         matrix.transpose();
         matrix.rightMultiply(matrix);
-        Matrix3f mat = Matrix3f.getIdentity();
+        Mat3f mat = Mat3f.getIdentity();
         assertTrue(mat.equals(matrix));
     }
 
@@ -148,11 +148,11 @@ public class Matrix3fTest
     @Test
     public void testTranspose()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
         matrix.setRow(2, 1.f, 1.f, 0.f);
-        Matrix3f transposedMatrix = new Matrix3f();
+        Mat3f transposedMatrix = new Mat3f();
         transposedMatrix.setRow(0, 1.f, 6.f, 1.f);
         transposedMatrix.setRow(1, 1.f, 5.f, 1.f);
         transposedMatrix.setRow(2, 1.f, 4.f, 0.f);
@@ -166,7 +166,7 @@ public class Matrix3fTest
     @Test
     public void testIdentity()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 2.f, 0.f, 0.f);
         matrix.setRow(1, 0.f, 2.f, 0.f);
         matrix.setRow(2, 0.f, 0.f, 2.f);
@@ -181,16 +181,16 @@ public class Matrix3fTest
     @Test
     public void testCalculateDeterminant()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
         matrix.setRow(2, 1.f, 1.f, 0.f);
-        Matrix3f mat = matrix;
+        Mat3f mat = matrix;
         assertTrue(mat.determinant() == 1.f);
-        matrix = new Matrix3f();
+        matrix = new Mat3f();
         mat = matrix;
         assertTrue(mat.determinant() == 0.f);
-        Matrix3f notInvertable = new Matrix3f(matrix);
+        Mat3f notInvertable = new Mat3f(matrix);
         mat.inverse();
         assertTrue(matrix.equals(notInvertable));
     }
@@ -201,25 +201,25 @@ public class Matrix3fTest
     @Test
     public void testInvert()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
         matrix.setRow(2, 1.f, 1.f, 0.f);
-        Matrix3f invertedMatrix = new Matrix3f();
+        Mat3f invertedMatrix = new Mat3f();
         invertedMatrix.setRow(0, 1.f, 1.f, 1.f);
         invertedMatrix.setRow(1, 6.f, 5.f, 4.f);
         invertedMatrix.setRow(2, 1.f, 1.f, 0.f);
         invertedMatrix.inverse();
         invertedMatrix.rightMultiply(matrix);
-        assertTrue(Matrix3f.getIdentity().equals(invertedMatrix));
-        matrix = new Matrix3f();
+        assertTrue(Mat3f.getIdentity().equals(invertedMatrix));
+        matrix = new Mat3f();
         matrix.setRow(0, 8.f, 1.f, .4f);
         matrix.setRow(1, 6.f, 5.1f, 4.5f);
         matrix.setRow(2, 1.f, 11.1f, 0.3f);
-        invertedMatrix = new Matrix3f(matrix);
+        invertedMatrix = new Mat3f(matrix);
         invertedMatrix.inverse();
         matrix.rightMultiply(invertedMatrix);
-        assertTrue(Matrix3f.getIdentity().equals(matrix));
+        assertTrue(Mat3f.getIdentity().equals(matrix));
     }
 
     /**
@@ -228,12 +228,12 @@ public class Matrix3fTest
     @Test
     public void testAddition()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
         matrix.setRow(2, 1.f, 1.f, 0.f);
         matrix.add(matrix);
-        Matrix3f resultMatrix = new Matrix3f();
+        Mat3f resultMatrix = new Mat3f();
         resultMatrix.setRow(0, 2.f, 2.f, 2.f);
         resultMatrix.setRow(1, 12.f, 10.f, 8.f);
         resultMatrix.setRow(2, 2.f, 2.f, 0.f);
@@ -248,13 +248,13 @@ public class Matrix3fTest
     @Test
     public void testMultiply()
     {
-        Matrix3f matrix = new Matrix3f();
+        Mat3f matrix = new Mat3f();
         matrix.setRow(0, 1.f, 1.f, 1.f);
         matrix.setRow(1, 6.f, 5.f, 4.f);
         matrix.setRow(2, 1.f, 1.f, 0.f);
         matrix.rightMultiply(matrix);
 
-        Matrix3f resultMatrix = new Matrix3f();
+        Mat3f resultMatrix = new Mat3f();
         resultMatrix.setRow(0, 8.f, 7.f, 5.f);
         resultMatrix.setRow(1, 40.f, 35.f, 26.f);
         resultMatrix.setRow(2, 7.f, 6.f, 5.f);

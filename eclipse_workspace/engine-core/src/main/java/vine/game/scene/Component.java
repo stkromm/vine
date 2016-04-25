@@ -1,15 +1,19 @@
 package vine.game.scene;
 
+import vine.graphics.renderer.SpriteBatch;
+import vine.math.MutableVec2f;
+
 /**
  * @author Steffen
  *
  */
-public class Component
+public abstract class Component
 {
     /**
      * 
      */
-    protected GameEntity entity;
+    protected GameEntity   entity;
+    protected MutableVec2f worldOffset = new MutableVec2f();
 
     /**
      * @return The entity this component is attached to
@@ -17,6 +21,16 @@ public class Component
     public final GameEntity getEntity()
     {
         return this.entity;
+    }
+
+    public void addWorldOffset(final float x, final float y)
+    {
+        this.worldOffset.set(x, y);
+    }
+
+    public void setWorldOffset(final float x, final float y)
+    {
+        this.worldOffset.set(x, y);
     }
 
     /**
@@ -57,31 +71,17 @@ public class Component
         return false;
     }
 
-    public void updatePhysics(final float delta)
-    {
-        // override to add logic
-    }
+    public abstract void onUpdatePhysics(final float delta);
 
-    public void onUpdate(final float delta)
-    {
-        // TODO Auto-generated method stub
+    public abstract void onUpdate(final float delta);
 
-    }
+    public abstract void onAttach();
 
-    public void onAttach()
-    {
-        // TODO Auto-generated method stub
+    public abstract void onDetach();
 
-    }
+    public abstract void onDeactivation();
 
-    public void onDeactivation()
-    {
-        // TODO Auto-generated method stub
+    public abstract void onActivation();
 
-    }
-
-    public void onActivation()
-    {
-        //
-    }
+    public abstract void onRender(SpriteBatch batcher);
 }

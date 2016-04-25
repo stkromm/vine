@@ -1,20 +1,19 @@
 package vine.game.scene;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import vine.animation.AnimationClip;
 import vine.animation.AnimationFrame;
 import vine.animation.AnimationState;
 import vine.animation.AnimationStateManager;
 import vine.assets.AssetManager;
-import vine.event.Event.EventType;
 import vine.event.EventListener;
-import vine.event.EventListener.EventHandler;
-import vine.event.KeyEvent;
-import vine.event.MouseButtonEvent;
 import vine.game.Camera;
 import vine.game.Layer;
 import vine.game.World;
@@ -22,18 +21,21 @@ import vine.game.screen.Screen;
 import vine.game.tilemap.Tile;
 import vine.game.tilemap.TileMapObject;
 import vine.game.tilemap.UniformTileMap;
-import vine.gameplay.component.AnimatedSprite;
-import vine.gameplay.component.PhysicsComponent;
-import vine.gameplay.component.StaticSprite;
-import vine.gameplay.entity.PlayerPawn;
+import vine.gameplay.AnimatedSprite;
+import vine.gameplay.EnemyAI;
+import vine.gameplay.PhysicsComponent;
+import vine.gameplay.PlayerPawn;
+import vine.gameplay.StaticSprite;
 import vine.graphics.Color;
 import vine.graphics.Image;
 import vine.graphics.Sprite;
-import vine.graphics.renderer.SpriteRenderer;
+import vine.graphics.renderer.PrimitiveRenderer;
+import vine.graphics.renderer.SpriteBatch;
 import vine.graphics.renderer.TileMapRenderer;
-import vine.math.Vector2f;
+import vine.math.Vec2f;
+import vine.math.VineMath;
+import vine.physics.Intersection2D;
 import vine.util.Log;
-import vine.util.reflection.VineClass;
 
 /**
  * @author Steffen
@@ -41,27 +43,38 @@ import vine.util.reflection.VineClass;
  */
 public class Scene implements Layer
 {
+    interface RenderCallback
+    {
+        void onScreen();
+    }
 
-    private long                  time;
-    private final EventListener   listener                  = new EventListener();
-    private static final String   KEY_EVENT_METHOD          = "onKeyEvent";
-    private static final String   MOUSE_BUTTON_EVENT_METHOD = "onMouseButtonEvent";
-    private static final int      HALF_CHUNK_WIDTH          = 700;
-    private static final int      HALF_CHUNK_HEIGHT         = 400;
-    private SpriteRenderer        renderer;
-    private TileMapRenderer       tileMapRenderer;
-    private Chunk[][]             chunks;
-    private final Set<GameEntity> entities                  = new HashSet<>();
-    private final Set<GameEntity> visibleSet                = new HashSet<>();
-    private TileMapObject         map;
-    private World                 world;
+    public Map<RenderCallback, RenderCallback> addedCallbacks    = new ConcurrentHashMap<>();
+    public Map<RenderCallback, RenderCallback> removedCallbacks  = new ConcurrentHashMap<>();
+    public Set<RenderCallback>                 renderCallbacks   = new HashSet<>();
+    private long                               time;
+    private final EventListener                listener          = new EventListener();
+    private static final int                   HALF_CHUNK_WIDTH  = 700;
+    private static final int                   HALF_CHUNK_HEIGHT = 400;
+    private SpriteBatch                        renderer;
+    private TileMapRenderer                    tileMapRenderer;
+    private final PrimitiveRenderer            primitiveRenderer = new PrimitiveRenderer();
+    private Chunk[][]                          chunks;
+    private final Set<GameEntity>              entities          = new HashSet<>();
+    private final Set<GameEntity>              visibleSet        = new HashSet<>();
+    private TileMapObject                      map;
+    private World                              world;
     /**
      * 
      */
-    public final CameraManager    cameras                   = new CameraManager();
+    public final CameraManager                 cameras           = new CameraManager();
 
     public Scene()
     {
+    }
+
+    protected Chunk[][] getChunks()
+    {
+        return this.chunks;
     }
 
     public void addToWorld(World world)
@@ -77,7 +90,12 @@ public class Scene implements Layer
         return this.entities;
     }
 
-    public <T extends GameEntity> T spawn(Class<T> type, float x, float y, boolean spawnIfBlocked, Object... e)
+    public <T extends GameEntity> WeakReference<T> spawn(
+            Class<T> type,
+            float x,
+            float y,
+            boolean spawnIfBlocked,
+            Object... e)
     {
         if (!spawnIfBlocked)
         {
@@ -87,10 +105,10 @@ public class Scene implements Layer
                 return null;
             }
         }
-        final GameEntity entity = this.getWorld().instantiate(type, e);
+        final GameEntity entity = this.getWorld().instantiate(type, e).get();
         entity.setPosition(x, y);
         this.add(entity);
-        return type.cast(entity);
+        return new WeakReference<>(type.cast(entity));
     }
 
     /**
@@ -121,53 +139,28 @@ public class Scene implements Layer
 
     /**
      */
-    public boolean calculateVisibleEntities()
+    public void calculateVisibleEntities()
     {
         if (System.currentTimeMillis() - this.time > 120)
         {
-            int x = (int) this.cameras.getActiveCamera().getEntity().getXPosition() / (Scene.HALF_CHUNK_WIDTH * 2);
-            int y = (int) this.cameras.getActiveCamera().getEntity().getYPosition() / (Scene.HALF_CHUNK_HEIGHT * 2);
-            x = 10 <= x ? 10 - 1 : x;
-            y = 10 <= y ? 10 - 1 : y;
-            x = x < 0 ? 0 : x;
-            y = y < 0 ? 0 : y;
-            final int xMod = (int) this.cameras.getActiveCamera().getEntity().getXPosition()
-                    % (Scene.HALF_CHUNK_WIDTH * 2);
-            final int yMod = (int) this.cameras.getActiveCamera().getEntity().getYPosition()
-                    % (Scene.HALF_CHUNK_HEIGHT * 2);
+            final int x = (int) VineMath.clamp(
+                    this.cameras.getActiveCamera().getEntity().getXPosition() / (Scene.HALF_CHUNK_WIDTH * 2) - 1,
+                    0,
+                    9);
+            final int y = (int) VineMath.clamp(
+                    this.cameras.getActiveCamera().getEntity().getYPosition() / (Scene.HALF_CHUNK_HEIGHT * 2) - 1,
+                    0,
+                    9);
             this.visibleSet.clear();
-            this.visibleSet.addAll(this.chunks[x][y].entities.values());
-            if (Scene.HALF_CHUNK_WIDTH > xMod && x > 0)
+            for (int j = 9; j >= 0; j--)
             {
-                this.visibleSet.addAll(this.chunks[x - 1][y].entities.values());
-            } else if (x < 9)
-            {
-                this.visibleSet.addAll(this.chunks[x + 1][y].entities.values());
-            }
-            if (Scene.HALF_CHUNK_HEIGHT > yMod && y > 0)
-            {
-                this.visibleSet.addAll(this.chunks[x][y - 1].entities.values());
-            } else if (y < 9)
-            {
-                this.visibleSet.addAll(this.chunks[x][y + 1].entities.values());
-            }
-            if (xMod <= Scene.HALF_CHUNK_WIDTH && yMod <= Scene.HALF_CHUNK_HEIGHT && x > 0 && y > 0)
-            {
-                this.visibleSet.addAll(this.chunks[x - 1][y - 1].entities.values());
-            } else if (xMod <= Scene.HALF_CHUNK_WIDTH && yMod > Scene.HALF_CHUNK_HEIGHT && x > 0 && y < 9)
-            {
-                this.visibleSet.addAll(this.chunks[x - 1][y + 1].entities.values());
-            } else if (xMod > Scene.HALF_CHUNK_WIDTH && yMod > Scene.HALF_CHUNK_HEIGHT && x < 9 && y < 9)
-            {
-                this.visibleSet.addAll(this.chunks[x + 1][y + 1].entities.values());
-            } else if (x < 9 && y > 0)
-            {
-                this.visibleSet.addAll(this.chunks[x + 1][y - 1].entities.values());
+                for (int i = 9; i >= 0; i--)
+                {
+                    this.chunks[i][j].active = i >= x && i <= x + 2 && j >= y && j <= y + 2;
+                }
             }
             this.time = System.currentTimeMillis();
-            return true;
         }
-        return false;
     }
 
     /**
@@ -183,19 +176,6 @@ public class Scene implements Layer
             this.entities.add(entity);
             entity.registerDestructionCallback(e -> this.entities.remove(e));
             entity.setScene(this);
-            final VineClass<?> entityClass = new VineClass<>(entity.getClass());
-            if (entityClass.hasMethodImplemented(Scene.KEY_EVENT_METHOD, KeyEvent.class))
-            {
-                final EventHandler handler = event -> entity.onKeyEvent((KeyEvent) event);
-                this.listener.addEventHandler(EventType.KEY, handler);
-                entity.registerDestructionCallback(o -> this.listener.remove(handler));
-            }
-            if (entityClass.hasMethodImplemented(Scene.MOUSE_BUTTON_EVENT_METHOD, MouseButtonEvent.class))
-            {
-                // GamePlayer.getRunningGame().getEventDispatcher().registerHandler(object,
-                // event -> object.onMouseButtonEvent((MouseButtonEvent) event),
-                // EventType.MOUSE_BUTTON);
-            }
         }
     }
 
@@ -238,13 +218,13 @@ public class Scene implements Layer
                 indices[i] = new Tile(water, new Color(0, 0, 0, 0), true, 0.5f);
             }
         }
-        this.map = this.world.instantiate(TileMapObject.class, new UniformTileMap(200, indices, chipset));
+        this.map = this.world.instantiate(TileMapObject.class, new UniformTileMap(200, indices, chipset)).get();
         this.map.attachComponent(water);
-        this.renderer = new SpriteRenderer();
+        this.renderer = new SpriteBatch();
         this.tileMapRenderer = new TileMapRenderer(this.world.getScreen());
         this.tileMapRenderer.submit(this.map.getMap(), this.world.getScreen());
 
-        final PlayerPawn entity = this.world.instantiate(PlayerPawn.class, "player");
+        final PlayerPawn entity = this.world.instantiate(PlayerPawn.class, "player").get();
 
         final Camera camera = this.cameras.instantiateCamera();
         entity.attachComponent(camera);
@@ -285,21 +265,30 @@ public class Scene implements Layer
         animation1.changeState("idle-down");
         final AnimatedSprite sprite = new AnimatedSprite(animation1, tex, 48, 64);
         entity.attachComponent(sprite);
-        entity.setSprite(sprite);
         entity.attachComponent(new PhysicsComponent());
         this.add(entity);
 
         for (int i = 0; i < 500; i++)
         {
-            final GameEntity entity1 = this.spawn(GameEntity.class, (int) (Math.random() * 5000),
-                    (int) (Math.random() * 5000), false);
-            final StaticSprite sprite1 = new StaticSprite(AssetManager.loadSync("hero", Image.class), 0, 0, 16, 32, 32,
-                    64);
-            entity1.attachComponent(sprite1);
-            entity1.setSprite(sprite1);
-            entity1.setZ(0.1f);
-            this.add(entity1);
+            this.spawnEntity();
         }
+    }
+
+    public final void spawnEntity()
+    {
+        final GameEntity entity1 = this
+                .spawn(GameEntity.class, (int) (Math.random() * 5000), (int) (Math.random() * 5000), false).get();
+        final StaticSprite sprite1 = new StaticSprite(AssetManager.loadSync("hero", Image.class), 0, 0, 16, 32, 32, 64);
+        entity1.attachComponent(sprite1);
+        entity1.setZ(0.1f);
+        entity1.attachComponent(new PhysicsComponent());
+        if (Math.random() > 0.99)
+        {
+            entity1.attachComponent(new EnemyAI());
+        }
+        entity1.setLifetime((float) (Math.random() * 1000000));
+        entity1.registerDestructionCallback(entity -> this.spawnEntity());
+        entity1.addSpeed(100, 100);
     }
 
     /**
@@ -316,11 +305,74 @@ public class Scene implements Layer
         return "Scene";
     }
 
-    @Override
-    public void render(Screen screen)
+    public void addRenderCallback(RenderCallback render)
     {
+        this.addedCallbacks.put(render, render);
+    }
+
+    public void removeRenderCallback(RenderCallback render)
+    {
+        this.removedCallbacks.put(render, render);
+    }
+
+    @Override
+    public void render(final Screen screen)
+    {
+        final GameEntity cameraEntity = this.cameras.getActiveCamera().getEntity();
+        final float posX = cameraEntity.getXPosition() - this.getWorld().getScreen().getWidth() / 2;
+        final float posY = cameraEntity.getYPosition() - this.getWorld().getScreen().getHeight() / 2 - 50;
+        this.primitiveRenderer.prepare(this);
+        this.renderer.prepare(this);
+        for (int i = this.chunks.length - 1; i >= 0; i--)
+        {
+            for (int j = this.chunks[i].length - 1; j >= 0; j--)
+            {
+                if (this.chunks[i][j].isActive())
+                {
+                    for (final GameEntity entity : this.chunks[i][j].getEntities())
+                    {
+                        if (Intersection2D.doesAabbIntersectAabb(
+                                posX,
+                                posY,
+                                this.getWorld().getScreen().getWidth(),
+                                this.getWorld().getScreen().getHeight() + 100,
+                                entity.getPosition().getX(),
+                                entity.getPosition().getY(),
+                                entity.getBoundingBoxExtends().getX(),
+                                entity.getBoundingBoxExtends().getY()))
+                        {
+                            entity.onRender(this.renderer);
+                        }
+                    }
+                }
+            }
+        }
+        this.renderer.finish();
         this.tileMapRenderer.renderScene(this);
-        this.renderer.render(this);
+        if (!this.addedCallbacks.isEmpty())
+        {
+            for (final RenderCallback callback : this.addedCallbacks.values())
+            {
+                this.renderCallbacks.add(callback);
+            }
+            this.addedCallbacks.clear();
+        }
+        if (!this.renderCallbacks.isEmpty())
+        {
+            for (final RenderCallback callback : this.renderCallbacks)
+            {
+                callback.onScreen();
+            }
+        }
+        if (!this.removedCallbacks.isEmpty())
+        {
+            for (final RenderCallback callback : this.removedCallbacks.values())
+            {
+                this.renderCallbacks.remove(callback);
+            }
+            this.removedCallbacks.clear();
+        }
+        this.primitiveRenderer.finish();
     }
 
     @Override
@@ -334,15 +386,58 @@ public class Scene implements Layer
         return PlayerPawn.class;
     }
 
-    public Vector2f getStartPoint()
+    public Vec2f getStartPoint()
     {
-        return new Vector2f(100, 100);
+        return new Vec2f(100, 100);
     }
 
     /**
-     * @author Steffen
-     *
+     * Traces for entities in the scene that intersect the given ray from the
+     * origin in the given direction with the given length (in world-units).
      */
+    public GameEntity lineTrace(GameEntity tracer, boolean ignoreSelf, Vec2f origin, Vec2f direction, float f)
+    {
+        final long startTime = System.nanoTime();
+        final int startChunkX = (int) VineMath.clamp(origin.getX() / 1400f, 0, 9);
+        final int startChunkY = (int) (origin.getY() * (1f / 800));
+        final int endChunkX = (int) VineMath.clamp((origin.getX() + f) / 1400f, 0, 9);
+
+        final float iLength = 1f / (float) direction.length();
+        final float iDirecX = 1 / direction.getX() * iLength;
+        final float iDirecY = 1 / direction.getY() * iLength;
+
+        GameEntity result = null;
+        float smallestDistance = Float.MAX_VALUE;
+
+        for (int i = endChunkX - startChunkX; i >= 0; i--)
+        {
+            for (final GameEntity entity : this.chunks[startChunkX + i][startChunkY].getEntities())
+            {
+                if (!ignoreSelf || !tracer.equals(entity))
+                {
+                    final float length = Intersection2D.whereDoesRayIntersectAabb(
+                            origin.getX(),
+                            origin.getY(),
+                            iDirecX,
+                            iDirecY,
+                            entity.getPosition().getX(),
+                            entity.getPosition().getY(),
+                            entity.getBoundingBoxExtends().getX(),
+                            entity.getBoundingBoxExtends().getY());
+                    if (length < f && length < smallestDistance)
+                    {
+                        smallestDistance = length;
+                        result = entity;
+                    }
+                }
+            }
+        }
+
+        Log.debug("LineTrace took " + (System.nanoTime() - startTime) / 1000000f + "milliseconds");
+        Log.debug("Traced distance " + smallestDistance);
+        return result;
+    }
+
     public class CameraManager
     {
         private final List<Camera> managedCameras = new ArrayList<>();

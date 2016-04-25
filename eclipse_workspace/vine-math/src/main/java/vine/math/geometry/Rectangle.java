@@ -1,6 +1,6 @@
 package vine.math.geometry;
 
-import vine.math.Vector2f;
+import vine.math.Vec2f;
 import vine.math.geometry.ray.Intersection;
 import vine.math.geometry.ray.Ray;
 
@@ -11,8 +11,8 @@ import vine.math.geometry.ray.Ray;
 public class Rectangle implements Shape
 {
     private static final float SKIN_WIDTH = -0.000001f;
-    private final Vector2f     origin;
-    private final Vector2f     diagonal;
+    private final Vec2f     origin;
+    private final Vec2f     diagonal;
 
     /**
      * Creates a new rectangle object, that represent the geometric structure.
@@ -24,8 +24,8 @@ public class Rectangle implements Shape
      */
     public Rectangle(float x, float y, float width, float height)
     {
-        origin = new Vector2f(x, y);
-        diagonal = new Vector2f(width, height);
+        origin = new Vec2f(x, y);
+        diagonal = new Vec2f(width, height);
     }
 
     public float getWidth()

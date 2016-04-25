@@ -19,7 +19,7 @@ import vine.window.Window;
  */
 public class Engine implements EngineLifecycle
 {
-    private static final long  MAX_UPDATE_DURATION = 33L * (long) 1e6;
+    private static final long  MAX_UPDATE_DURATION = 16L * (long) 1e6;
     private static final long  MAX_FRAME_DURATION  = 33L * (long) 1e6;
 
     private final World        world;

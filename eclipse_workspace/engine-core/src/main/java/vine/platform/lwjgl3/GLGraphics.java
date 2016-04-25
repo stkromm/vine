@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL30;
 
 import vine.graphics.Graphics;
 import vine.graphics.VertexAttribute;
-import vine.math.Matrix4f;
-import vine.math.Vector3f;
+import vine.math.Mat4f;
+import vine.math.Vec3f;
 import vine.util.BufferConverter;
 import vine.util.TypeSize;
 
@@ -83,7 +83,15 @@ public final class GLGraphics implements Graphics
     @Override
     public void createRgbaTexture2D(final int width, final int height, final int[] data)
     {
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA, width, height, 0, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE,
+        GL11.glTexImage2D(
+                GL11.GL_TEXTURE_2D,
+                0,
+                GL11.GL_RGBA,
+                width,
+                height,
+                0,
+                GL11.GL_RGBA,
+                GL11.GL_UNSIGNED_BYTE,
                 BufferConverter.createIntBuffer(data));
         GL30.glGenerateMipmap(GL11.GL_TEXTURE_2D);
     }
@@ -107,13 +115,13 @@ public final class GLGraphics implements Graphics
     }
 
     @Override
-    public void storeUniformVector3f(final int location, final Vector3f vector)
+    public void storeUniformVector3f(final int location, final Vec3f vector)
     {
         GL20.glUniform3f(location, vector.getX(), vector.getY(), vector.getZ());
     }
 
     @Override
-    public void storeUniformMatrix4f(final int location, final Matrix4f matrix)
+    public void storeUniformMatrix4f(final int location, final Mat4f matrix)
     {
         GL20.glUniformMatrix4fv(location, false, BufferConverter.createFloatBuffer(matrix.getElements()));
     }
@@ -142,8 +150,13 @@ public final class GLGraphics implements Graphics
     {
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, bufferId);
         GL15.glBufferData(GL15.GL_ARRAY_BUFFER, data, GL15.GL_DYNAMIC_DRAW);
-        GL20.glVertexAttribPointer(attribute.getId(), attribute.getDimension(),
-                GLGraphics.getTypeId(attribute.getType()), false, 0, 0);
+        GL20.glVertexAttribPointer(
+                attribute.getId(),
+                attribute.getDimension(),
+                GLGraphics.getTypeId(attribute.getType()),
+                false,
+                0,
+                0);
         GL20.glEnableVertexAttribArray(attribute.getId());
     }
 
@@ -185,6 +198,7 @@ public final class GLGraphics implements Graphics
     @Override
     public void drawElements(final int count)
     {
+        // GL11.glPolygonMode(GL11.GL_BACK, GL11.GL_LINE);
         GL11.glDrawElements(GL11.GL_TRIANGLES, count, GL11.GL_UNSIGNED_INT, 0);
     }
 
@@ -213,4 +227,5 @@ public final class GLGraphics implements Graphics
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo);
         GL15.glBufferSubData(GL15.GL_ELEMENT_ARRAY_BUFFER, 0, indicesBuffer);
     }
+
 }

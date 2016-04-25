@@ -6,8 +6,8 @@ import java.util.WeakHashMap;
 import vine.assets.Asset;
 import vine.graphics.Graphics;
 import vine.graphics.GraphicsProvider;
-import vine.math.Matrix4f;
-import vine.math.Vector3f;
+import vine.math.Mat4f;
+import vine.math.Vec3f;
 import vine.util.Log;
 
 /**
@@ -65,9 +65,9 @@ public class Shader implements Asset
     private void setProperties()
     {
         this.setUniform1i("tex", 1);
-        final Matrix4f mat = Matrix4f.orthographic(0, Shader.VIEWPORT_WIDTH, 0, Shader.VIEWPORT_HEIGHT, -1, 1);
+        final Mat4f mat = Mat4f.orthographic(0, Shader.VIEWPORT_WIDTH, 0, Shader.VIEWPORT_HEIGHT, -1, 1);
         this.setUniformMat4f("pr_matrix", mat);
-        this.setUniformMat4f("vw_matrix", Matrix4f.translate(new Vector3f(0.f, 0.0f, 0.0f)));
+        this.setUniformMat4f("vw_matrix", Mat4f.translate(new Vec3f(0.f, 0.0f, 0.0f)));
     }
 
     /**
@@ -119,7 +119,7 @@ public class Shader implements Asset
      * @param vector
      *            the vector that should be stored in the uniform
      */
-    public void setUniform3f(final String name, final Vector3f vector)
+    public void setUniform3f(final String name, final Vec3f vector)
     {
         if (!this.enabled)
         {
@@ -134,7 +134,7 @@ public class Shader implements Asset
      * @param matrix
      *            the matrix that should be stored in the uniform
      */
-    public void setUniformMat4f(final String name, final Matrix4f matrix)
+    public void setUniformMat4f(final String name, final Mat4f matrix)
     {
         if (!this.enabled)
         {
@@ -143,7 +143,7 @@ public class Shader implements Asset
         this.graphics.storeUniformMatrix4f(this.getUniform(name), matrix);
     }
 
-    public void setUniformMat4f(final ShaderUniforms name, final Matrix4f matrix)
+    public void setUniformMat4f(final ShaderUniforms name, final Mat4f matrix)
     {
         if (!this.enabled)
         {

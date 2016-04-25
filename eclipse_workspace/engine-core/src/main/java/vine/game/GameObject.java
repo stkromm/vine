@@ -1,15 +1,12 @@
 package vine.game;
 
+import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import vine.event.KeyEvent;
-import vine.event.MouseButtonEvent;
-import vine.event.MouseMoveEvent;
-import vine.event.ScrollEvent;
-import vine.event.SensorChangeEvent;
+import vine.util.Log;
 import vine.util.reflection.VineClass;
 import vine.util.reflection.VineMethodUtils;
 import vine.util.time.TimerManager;
@@ -21,7 +18,7 @@ import vine.util.time.TimerManager;
  * @author Steffen
  *
  */
-public abstract class GameObject
+public abstract class GameObject implements Comparable<GameObject>
 {
     private final Set<GameObjectCallback> onDestroyCallbacks = new HashSet<>();
     static final String                   UPDATE_METHOD      = "onUpdate";
@@ -220,42 +217,8 @@ public abstract class GameObject
             }
             // Remove the hardreference of the gameobject
             ReferenceManager.OBJECTS.remove(this.name);
+            Log.debug("Destroyed GameObject: " + this.name);
         }
-    }
-
-    /**
-     * @param event
-     *            the event to react to
-     * @return true if the event is consumned
-     */
-    public boolean onKeyEvent(final KeyEvent event)
-    {
-        return false;
-    }
-
-    /**
-     * @param keyEvent
-     *            The key event reacted to
-     * @return true, if the event is consumed by this handler
-     */
-    public boolean onMouseButtonEvent(final MouseButtonEvent mouseButtonEvent)
-    {
-        return false;
-    }
-
-    public boolean onMouseMoveEvent(final MouseMoveEvent mouseMoveEvent)
-    {
-        return false;
-    }
-
-    public boolean onScrollEvent(final ScrollEvent scrollEvent)
-    {
-        return false;
-    }
-
-    public boolean onSensorEvent(final SensorChangeEvent sensorEvent)
-    {
-        return false;
     }
 
     @Override
@@ -268,9 +231,29 @@ public abstract class GameObject
     }
 
     @Override
+    public int compareTo(GameObject o)
+    {
+        if (o.getName().equals(this.getName()))
+        {
+            return 0;
+        }
+        if (o.hashCode() > this.hashCode())
+        {
+            return -1;
+        }
+        return 1;
+    }
+
+    @Override
     public int hashCode()
     {
         return this.name.hashCode();
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.getClass().getSimpleName() + "@" + this.name;
     }
 
     /**
@@ -301,7 +284,7 @@ public abstract class GameObject
          */
         protected static final synchronized <T extends GameObject> String generateObjectName(final Class<T> type)
         {
-            final String name = type.getName() + ReferenceManager.ID_QUALIFIER + ReferenceManager.nameGenCount;
+            final String name = type.getSimpleName() + ReferenceManager.ID_QUALIFIER + ReferenceManager.nameGenCount;
             ReferenceManager.nameGenCount++;
             return name;
         }
@@ -316,7 +299,7 @@ public abstract class GameObject
          *            instantiated type.
          * @return The instantated gameobject or null on failure
          */
-        protected static final <T extends GameObject> T instantiate(
+        protected static final <T extends GameObject> WeakReference<T> instantiate(
                 final World world,
                 final Class<T> type,
                 final String name,
@@ -328,14 +311,14 @@ public abstract class GameObject
             {
                 object.setName(name);
                 ReferenceManager.OBJECTS.put(name, object);
-                objectClass.getMethodByName(GameObject.CONSTRUCT_METHOD)
+                objectClass.getMethod(GameObject.CONSTRUCT_METHOD)
                         .ifPresent(method -> VineMethodUtils.invokeMethodOn(method, object, params));
                 if (objectClass.hasMethodImplemented(GameObject.UPDATE_METHOD, float.class))
                 {
                     world.addObject(object);
                 }
             }
-            return object;
+            return new WeakReference<>(object);
         }
 
         /**

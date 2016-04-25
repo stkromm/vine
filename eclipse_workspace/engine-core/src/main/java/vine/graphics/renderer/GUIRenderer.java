@@ -1,5 +1,6 @@
 package vine.graphics.renderer;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import vine.assets.AssetManager;
@@ -12,7 +13,7 @@ import vine.graphics.VertexAttributeBuffer;
 import vine.graphics.VertexBufferObject;
 import vine.graphics.shader.Shader;
 import vine.graphics.shader.ShaderUniforms;
-import vine.math.Matrix4f;
+import vine.math.Mat4f;
 
 public class GUIRenderer
 {
@@ -21,7 +22,7 @@ public class GUIRenderer
      */
     public static final Shader          DEFAULT_SHADER       = AssetManager.loadSync("frag", Shader.class);
 
-    private final Matrix4f              cameraTransformation = Matrix4f.identity();
+    private final Mat4f                 cameraTransformation = Mat4f.identity();
     private VertexBufferObject          opaqueSpriteVBO;
     private final VertexAttributeBuffer vertexPositions      = new VertexAttributeBuffer(new float[12],
             VertexAttribute.POSITION);
@@ -58,7 +59,7 @@ public class GUIRenderer
      * @param screen
      *            The screen, that is used to contain the rendered image
      */
-    public final void renderGUI(final List<Widget> widgets, final Screen screen)
+    public final void renderGUI(final List<WeakReference<Widget>> widgets, final Screen screen)
     {
         GUIRenderer.DEFAULT_SHADER.bind();
         this.cameraTransformation.getElements()[0 + 3 * 4] = -screen.getWidth() / 2f;
@@ -66,9 +67,9 @@ public class GUIRenderer
         GUIRenderer.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.VIEW_MATRIX, this.cameraTransformation);
         GUIRenderer.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.PROJECTION_MATRIX, screen.getProjection());
         int sum = 1;
-        for (final Widget widget : widgets)
+        for (final WeakReference<Widget> widget : widgets)
         {
-            sum += widget.getCount();
+            sum += widget.get().getCount();
         }
         if (this.size < sum)
         {
@@ -81,9 +82,9 @@ public class GUIRenderer
                     this.vertexColors);
         }
         this.opaqueSpriteVBO.bind();
-        for (final Widget entity : widgets)
+        for (final WeakReference<Widget> entity : widgets)
         {
-            this.submit(entity);
+            this.submit(entity.get());
         }
         this.flush();
         GUIRenderer.DEFAULT_SHADER.unbind();

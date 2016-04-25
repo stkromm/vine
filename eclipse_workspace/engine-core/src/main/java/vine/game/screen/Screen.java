@@ -1,6 +1,6 @@
 package vine.game.screen;
 
-import vine.math.Matrix4f;
+import vine.math.Mat4f;
 
 /**
  * @author Steffen
@@ -32,7 +32,7 @@ public interface Screen
     /**
      * @return
      */
-    Matrix4f getProjection();
+    Mat4f getProjection();
 
     /**
      * @param width

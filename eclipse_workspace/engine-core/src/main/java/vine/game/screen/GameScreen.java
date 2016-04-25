@@ -1,6 +1,6 @@
 package vine.game.screen;
 
-import vine.math.Matrix4f;
+import vine.math.Mat4f;
 import vine.util.Log;
 import vine.window.Window;
 
@@ -11,12 +11,12 @@ import vine.window.Window;
 public class GameScreen implements Screen
 {
 
-    private final Window      window;
-    private final Viewport    viewport;
-    private int               height;
-    private int               width;
-    private final float       aspect;
-    private volatile Matrix4f projection;
+    private final Window   window;
+    private final Viewport viewport;
+    private int            height;
+    private int            width;
+    private final float    aspect;
+    private volatile Mat4f projection;
 
     /**
      * @param window
@@ -38,9 +38,9 @@ public class GameScreen implements Screen
         this.projection = GameScreen.calculateProjection(width, height);
     }
 
-    private final static Matrix4f calculateProjection(final float width, final float height)
+    private final static Mat4f calculateProjection(final float width, final float height)
     {
-        return Matrix4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
+        return Mat4f.orthographic(-width / 2.f, width / 2.f, -height / 2.f, height / 2.f, -1.0f, 1.0f);
     }
 
     @Override
@@ -86,7 +86,7 @@ public class GameScreen implements Screen
     }
 
     @Override
-    public final Matrix4f getProjection()
+    public final Mat4f getProjection()
     {
         return this.projection;
     }

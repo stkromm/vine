@@ -2,7 +2,7 @@ package vine.game.gui;
 
 import vine.game.GameObject;
 import vine.graphics.Texture;
-import vine.math.Vector2f;
+import vine.math.Vec2f;
 
 public class Widget extends GameObject
 {
@@ -38,14 +38,14 @@ public class Widget extends GameObject
         return 0;
     }
 
-    public Vector2f getSize()
+    public Vec2f getSize()
     {
-        return new Vector2f(0, 0);
+        return new Vec2f(0, 0);
     }
 
-    public Vector2f getScale()
+    public Vec2f getScale()
     {
-        return new Vector2f(0, 0);
+        return new Vec2f(0, 0);
     }
 
     public int getCount()
@@ -57,4 +57,5 @@ public class Widget extends GameObject
     {
         return false;
     }
+
 }

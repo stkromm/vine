@@ -16,7 +16,20 @@ public class VineMath
      */
     public static final float clamp(float value, float min, float max)
     {
-        return Math.min(max, Math.max(min, value));
+        if (value <= min)
+            return min;
+        if (value >= max)
+            return max;
+        return value;
+    }
+
+    public static final int clamp(int value, int min, int max)
+    {
+        if (value <= min)
+            return min;
+        if (value >= max)
+            return max;
+        return value;
     }
 
     /**
@@ -28,12 +41,16 @@ public class VineMath
      */
     public static final float clampPositive(float value)
     {
-        return Math.max(0, value);
+        if (value <= 0)
+            return 0;
+        return value;
     }
 
     public static final int clampPositive(int value)
     {
-        return Math.max(0, value);
+        if (value <= 0)
+            return 0;
+        return value;
     }
 
     /**
@@ -45,6 +62,11 @@ public class VineMath
      */
     public static final int randomInteger(int max)
     {
-        return Math.round((float) Math.random() * max);
+        return Math.round(randomFloat(max));
+    }
+
+    public static final float randomFloat(int max)
+    {
+        return (float) Math.random() * max;
     }
 }

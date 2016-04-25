@@ -10,14 +10,14 @@ import vine.graphics.VertexAttribute;
 import vine.graphics.VertexAttributeBuffer;
 import vine.graphics.VertexBufferObject;
 import vine.graphics.shader.ShaderUniforms;
-import vine.math.Matrix4f;
-import vine.math.Vector3f;
+import vine.math.Mat4f;
+import vine.math.Vec3f;
 import vine.math.VineMath;
 import vine.util.GridCalculator;
 
 public class TileMapRenderer
 {
-    private final Matrix4f              cameraTransformation = Matrix4f.identity();
+    private final Mat4f                 cameraTransformation = Mat4f.identity();
     private final VertexBufferObject    vertexBuffer;
     private final VertexAttributeBuffer verts;
     private final VertexAttributeBuffer tcs;
@@ -56,15 +56,15 @@ public class TileMapRenderer
 
     public final void renderScene(final Scene scene)
     {
-        SpriteRenderer.DEFAULT_SHADER.bind();
+        SpriteBatch.DEFAULT_SHADER.bind();
         final Screen screen = scene.getWorld().getScreen();
-        final Vector3f vector = scene.cameras.getActiveCamera().getTranslation();
+        final Vec3f vector = scene.cameras.getActiveCamera().getTranslation();
         this.cameraTransformation.setTranslation(//
                 -screen.getWidth() / 2 - vector.getX() % 32f, //
                 -screen.getHeight() / 2f - vector.getY() % 32f, //
                 0);
-        SpriteRenderer.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.PROJECTION_MATRIX, screen.getProjection());
-        SpriteRenderer.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.VIEW_MATRIX, this.cameraTransformation);
+        SpriteBatch.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.PROJECTION_MATRIX, screen.getProjection());
+        SpriteBatch.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.VIEW_MATRIX, this.cameraTransformation);
         //
         final int cameraX = (int) vector.getX() / 32 - this.screenxTiles / 2 + 1;
         final int cameraY = (int) vector.getY() / 32 - this.screenyTiles / 2 + 1;
@@ -94,6 +94,6 @@ public class TileMapRenderer
         this.tileMap.getTexture().bind();
         this.vertexBuffer.bind();
         this.vertexBuffer.draw();
-        SpriteRenderer.DEFAULT_SHADER.unbind();
+        SpriteBatch.DEFAULT_SHADER.unbind();
     }
 }

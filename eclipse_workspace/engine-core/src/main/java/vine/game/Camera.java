@@ -1,7 +1,8 @@
 package vine.game;
 
 import vine.game.scene.Component;
-import vine.math.Vector3f;
+import vine.graphics.renderer.SpriteBatch;
+import vine.math.Vec3f;
 
 /**
  * @author Steffen
@@ -10,12 +11,12 @@ import vine.math.Vector3f;
 public class Camera extends Component
 {
 
-    private final Vector3f translation  = new Vector3f(0, 0, 0);
-    private float          shakeIntensity;
-    private double         shakeScaling = 1;
-    private float          shakeDuration;
-    private float          remainingShakeDuration;
-    private boolean        smooth;
+    private final Vec3f translation  = new Vec3f(0, 0, 0);
+    private float       shakeIntensity;
+    private double      shakeScaling = 1;
+    private float       shakeDuration;
+    private float       remainingShakeDuration;
+    private boolean     smooth;
 
     @Override
     public void onUpdate(final float delta)
@@ -50,7 +51,7 @@ public class Camera extends Component
     /**
      * @return The world translation of the camera.
      */
-    public final Vector3f getTranslation()
+    public final Vec3f getTranslation()
     {
         if (this.entity == null)
         {
@@ -69,10 +70,53 @@ public class Camera extends Component
                         + 1;
                 shakeOffset *= easeInEaseOut;
             }
-            this.translation.setX((float) (shakeOffset * Math.sin(this.remainingShakeDuration * this.shakeScaling)
-                    + this.entity.getXPosition()));
+            this.translation.setX(
+                    (float) (shakeOffset * Math.sin(this.remainingShakeDuration * this.shakeScaling)
+                            + this.entity.getXPosition()));
         }
         this.translation.setY(this.entity.getYPosition());
         return this.translation;
+    }
+
+    @Override
+    public void onUpdatePhysics(float delta)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onAttach()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onDetach()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onDeactivation()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onActivation()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onRender(SpriteBatch batcher)
+    {
+        // TODO Auto-generated method stub
+
     }
 }

@@ -1,12 +1,10 @@
 package vine.game.gui;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-import vine.event.Event.EventType;
 import vine.event.EventListener;
-import vine.event.EventListener.EventHandler;
-import vine.event.KeyEvent;
 import vine.game.Layer;
 import vine.game.screen.Screen;
 import vine.graphics.renderer.GUIRenderer;
@@ -17,31 +15,14 @@ import vine.graphics.renderer.GUIRenderer;
  */
 public class GameUserInterface implements Layer
 {
-    private final EventListener listener = new EventListener();
-    private final List<Widget>  widgets  = new ArrayList<>();
-    private final Screen        screen;
-    private final GUIRenderer   renderer = new GUIRenderer();
+    private final EventListener               listener = new EventListener();
+    private final List<WeakReference<Widget>> widgets  = new ArrayList<>();
+    private final Screen                      screen;
+    private final GUIRenderer                 renderer = new GUIRenderer();
 
     public GameUserInterface(Screen screen)
     {
         this.screen = screen;
-        final EventHandler keyHandler = event ->
-        {
-            for (final Widget widget : this.widgets)
-            {
-                if (widget.isSelected())
-                {
-                    widget.onKeyEvent((KeyEvent) event);
-                }
-            }
-            return false;
-        };
-        this.listener.addEventHandler(EventType.KEY, keyHandler);
-        final EventHandler mouseMoveHandler = event ->
-        {
-            return false;
-        };
-        this.listener.addEventHandler(EventType.MOUSE_MOVE, mouseMoveHandler);
     }
 
     @Override
@@ -66,9 +47,9 @@ public class GameUserInterface implements Layer
      * @param widget
      *            Widget that is added to the screen
      */
-    public void addWidget(Widget widget)
+    public <T extends Widget> void addWidget(WeakReference<T> widget)
     {
-        this.widgets.add(widget);
+        this.widgets.add(new WeakReference<Widget>(widget.get()));
     }
 
     public Screen getScreen()

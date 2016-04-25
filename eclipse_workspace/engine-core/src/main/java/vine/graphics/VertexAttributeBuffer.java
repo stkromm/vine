@@ -27,6 +27,7 @@ public class VertexAttributeBuffer
 
     public void append(final float[] values)
     {
+
         if (this.data.remaining() < values.length)
         {
             Log.debug(this, "Resized unintentionally");
@@ -39,6 +40,7 @@ public class VertexAttributeBuffer
             this.resize(this.data.capacity() * 2);
             this.append(copy);
         }
+
         this.data.put(values, 0, values.length);
     }
 
@@ -48,12 +50,17 @@ public class VertexAttributeBuffer
         {
             Log.lifecycle("Resized attribute buffer with size " + this.attribute.name() + size);
         }
+        final float[] copy = new float[this.data.position()];
+        this.data.clear();
+        this.data.get(copy);
         this.data = BufferConverter.createFloatBuffer(new float[size]);
+        this.append(copy);
     }
 
     public void reallocate()
     {
         this.data.flip();
+        this.data.rewind();
         this.graphics.reallocateAttributeData(this.bufferId, this.data);
         this.data.clear();
     }

@@ -4,16 +4,16 @@ package vine.math;
  * @author Steffen
  *
  */
-public class Matrix4f
+public class Mat4f
 {
 
     private static final int SIZE     = 4 * 4;
-    private float[]          elements = new float[SIZE];
+    private final float[]    elements = new float[SIZE];
 
     /**
      * 
      */
-    public Matrix4f()
+    public Mat4f()
     {
 
     }
@@ -23,7 +23,7 @@ public class Matrix4f
      *            Matrix3f, that should be a 2d transformation matrix, so the
      *            Conversion is valid.
      */
-    public Matrix4f(Matrix3f matrix)
+    public Mat4f(Mat3f matrix)
     {
         // TODO Implement
     }
@@ -36,9 +36,9 @@ public class Matrix4f
     /**
      * @return The identity Matrix4f
      */
-    public static Matrix4f identity()
+    public static Mat4f identity()
     {
-        Matrix4f result = new Matrix4f();
+        Mat4f result = new Mat4f();
         for (int i = 0; i < SIZE; i++)
         {
             result.elements[i] = 0.0f;
@@ -53,18 +53,10 @@ public class Matrix4f
 
     /**
      * Creates a orthographic projection matrix.
-     * 
-     * @param left
-     * @param right
-     * @param bottom
-     * @param top
-     * @param near
-     * @param far
-     * @return
      */
-    public static Matrix4f orthographic(float left, float right, float bottom, float top, float near, float far)
+    public static Mat4f orthographic(float left, float right, float bottom, float top, float near, float far)
     {
-        Matrix4f result = identity();
+        Mat4f result = identity();
 
         result.elements[0 + 0 * 4] = 2.0f / (right - left);
 
@@ -83,9 +75,9 @@ public class Matrix4f
      * @param vector
      * @return
      */
-    public static Matrix4f translate(Vector3f vector)
+    public static Mat4f translate(Vec3f vector)
     {
-        Matrix4f result = identity();
+        Mat4f result = identity();
         result.elements[0 + 3 * 4] = vector.getX();
         result.elements[1 + 3 * 4] = vector.getY();
         result.elements[2 + 3 * 4] = vector.getZ();
@@ -103,9 +95,9 @@ public class Matrix4f
      * @param angle
      * @return
      */
-    public static Matrix4f rotate(float angle)
+    public static Mat4f rotate(float angle)
     {
-        final Matrix4f result = identity();
+        final Mat4f result = identity();
         float r = (float) Math.toRadians(angle);
         float cos = (float) Math.cos(r);
         float sin = (float) Math.sin(r);
@@ -123,9 +115,9 @@ public class Matrix4f
      * @param matrix
      * @return
      */
-    public Matrix4f multiply(Matrix4f matrix)
+    public Mat4f multiply(Mat4f matrix)
     {
-        final Matrix4f result = new Matrix4f();
+        final Mat4f result = new Mat4f();
         for (int y = 0; y < 4; y++)
         {
             for (int x = 0; x < 4; x++)

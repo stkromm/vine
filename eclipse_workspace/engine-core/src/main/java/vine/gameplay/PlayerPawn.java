@@ -1,14 +1,14 @@
-package vine.gameplay.entity;
+package vine.gameplay;
 
 import org.lwjgl.glfw.GLFW;
 
 import vine.animation.AnimationStateManager;
 import vine.assets.AssetManager;
+import vine.event.Event.EventType;
 import vine.event.KeyEvent;
 import vine.game.scene.GameEntity;
-import vine.gameplay.component.AnimatedSprite;
-import vine.graphics.Color;
 import vine.input.InputAction;
+import vine.math.Vec2f;
 import vine.sound.AudioPlayer;
 import vine.sound.SoundClip;
 
@@ -24,7 +24,14 @@ public class PlayerPawn extends GameEntity
     @Override
     public void onUpdate(final float delta)
     {
-        super.onUpdate(delta * 1);
+        super.onUpdate(delta * 1.5f);
+    }
+
+    @Override
+    public void setCurrentChunk()
+    {
+        super.setCurrentChunk();
+        this.getScene().calculateVisibleEntities();
     }
 
     @Override
@@ -32,6 +39,7 @@ public class PlayerPawn extends GameEntity
     {
         final AnimatedSprite sprite = this.getComponent(AnimatedSprite.class);
         this.animation = sprite.getAnimationManager();
+        this.getScene().getListener().addEventHandler(EventType.KEY, event -> this.onKeyEvent((KeyEvent) event));
     }
 
     private void onMoveButtonReleased(final int button)
@@ -48,6 +56,14 @@ public class PlayerPawn extends GameEntity
         break;
         case GLFW.GLFW_KEY_S:
             this.setSpeedY(this.getYSpeed() < 64 ? this.getYSpeed() + 64 : 64);
+        break;
+        case GLFW.GLFW_KEY_F:
+            final GameEntity currentCollidingEntity = this.getScene()
+                    .lineTrace(this, true, this.getPosition(), new Vec2f(1, 0), 1000f);
+            if (currentCollidingEntity != null && currentCollidingEntity != this)
+            {
+                currentCollidingEntity.destroy();
+            }
         break;
         default:
         break;
@@ -105,17 +121,12 @@ public class PlayerPawn extends GameEntity
         case GLFW.GLFW_KEY_W:
             this.setSpeedY(this.getYSpeed() > 64 ? 64 : this.getYSpeed() + 64);
         break;
-        case GLFW.GLFW_KEY_F:
-            this.flash(new Color(256, 256, 0, 0), 2, false);
-            this.wait(5.f);
-        break;
         default:
         break;
         }
         this.setAnimationState();
     }
 
-    @Override
     public boolean onKeyEvent(final KeyEvent keyEvent)
     {
         if (keyEvent.getAction() == InputAction.RELEASED)

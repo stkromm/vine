@@ -145,6 +145,12 @@ public class Color
     }
 
     @Override
+    public int hashCode()
+    {
+        return 31 * this.getBlue() + 13 * this.getGreen() + 7 * this.getRed();
+    }
+
+    @Override
     public boolean equals(final Object object)
     {
         if (this == object)

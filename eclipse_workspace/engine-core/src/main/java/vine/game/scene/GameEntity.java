@@ -2,14 +2,18 @@ package vine.game.scene;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import vine.game.GameObject;
 import vine.game.World;
 import vine.graphics.Color;
-import vine.graphics.Sprite;
-import vine.math.Vector2f;
+import vine.graphics.renderer.SpriteBatch;
+import vine.math.MutableVec2f;
+import vine.math.Vec2f;
+import vine.math.VineMath;
 import vine.util.time.TimerManager;
 
 /**
@@ -33,7 +37,7 @@ public class GameEntity extends GameObject
      * The components of this entity. The components dynamically extend the
      * functionality of this entity.
      */
-    private final List<Component>          components         = new ArrayList<>(5);
+    private final Set<Component>           components         = new HashSet<>(5);
     private final Map<Class<?>, Component> componentCache     = new HashMap<>(10);
     /**
      * The lifetime of this entity. This value is literally the time the entity
@@ -56,7 +60,7 @@ public class GameEntity extends GameObject
     /**
      * The world position of this entity. Unit is World-Units.
      */
-    private final Vector2f                 position           = new Vector2f(32, 32);
+    private final MutableVec2f             position           = new MutableVec2f(32, 32);
     /**
      * The z order of this entity. A higher value means it will be rendered on
      * top of entity with a lower value.
@@ -66,7 +70,7 @@ public class GameEntity extends GameObject
      * The extends of the collision box. Origin is the world space position of
      * this entity.
      */
-    private final Vector2f                 boundingBoxExtends = new Vector2f(24, 31.9f);
+    private final MutableVec2f             boundingBoxExtends = new MutableVec2f(24, 31.9f);
 
     // Appearance
     private final Color                    color              = new Color(0, 0, 0, 0);
@@ -75,14 +79,13 @@ public class GameEntity extends GameObject
     /**
      * The speed of this entity. Unit is World-Units / second.
      */
-    private final Vector2f                 speed              = new Vector2f(0, 0);
+    private final MutableVec2f             speed              = new MutableVec2f(0, 0);
     /**
      * The acceleration of this entity. Unit is Speed / second.
      */
-    private final Vector2f                 acceleration       = new Vector2f(1, 1);
+    private final MutableVec2f             acceleration       = new MutableVec2f(1, 1);
     // Collision Handling
     private final boolean                  moveable           = true;
-    private Sprite                         sprite;
 
     public final boolean isMoveable()
     {
@@ -113,7 +116,7 @@ public class GameEntity extends GameObject
         return this.zPosition;
     }
 
-    public final Vector2f getPosition()
+    public final Vec2f getPosition()
     {
         return this.position;
     }
@@ -137,6 +140,11 @@ public class GameEntity extends GameObject
         this.position.setY(y);
     }
 
+    public void setZ(final float z)
+    {
+        this.zPosition = z;
+    }
+
     public final float getXSpeed()
     {
         return this.speed.getX();
@@ -147,7 +155,7 @@ public class GameEntity extends GameObject
         return this.speed.getY();
     }
 
-    public final Vector2f getSpeed()
+    public final Vec2f getSpeed()
     {
         return this.speed;
     }
@@ -173,7 +181,7 @@ public class GameEntity extends GameObject
         this.speed.add(x, y);
     }
 
-    protected final Vector2f getAcceleration()
+    protected final Vec2f getAcceleration()
     {
         return this.acceleration;
     }
@@ -243,7 +251,7 @@ public class GameEntity extends GameObject
     /**
      * @return The size of the collision box
      */
-    public final Vector2f getBoundingBoxExtends()
+    public final Vec2f getBoundingBoxExtends()
     {
         return this.boundingBoxExtends;
     }
@@ -286,7 +294,7 @@ public class GameEntity extends GameObject
             scene.getEntities().remove(this);
         }
         this.scene = scene;
-        this.setCurrentChunk((int) this.position.getX() / 1400, (int) this.position.getY() / 800);
+        this.setCurrentChunk();
     }
 
     public final World getWorld()
@@ -404,24 +412,7 @@ public class GameEntity extends GameObject
      */
     public final boolean containsComponent(final Component component)
     {
-        if (component == null || component.getEntity() == null)
-        {
-            return false;
-        }
-        return component.getEntity().equals(this);
-    }
-
-    /**
-     * @return True, if the given component is saved in the thread of this
-     *         entity.
-     */
-    public final boolean componentIsCached(final Component component)
-    {
-        if (this.componentCache.containsKey(component.getClass()))
-        {
-            return this.componentCache.get(component.getClass()).equals(component);
-        }
-        return false;
+        return this.components.contains(component);
     }
 
     /**
@@ -432,18 +423,20 @@ public class GameEntity extends GameObject
         this.componentCache.clear();
     }
 
-    private final void setCurrentChunk(final int x, final int y)
+    public void setCurrentChunk()
     {
+        final int x = (int) this.position.getX() / 1400;
+        final int y = (int) this.position.getY() / 800;
         if (this.chunkX != x || this.chunkY != y)
         {
             if (this.currentChunk != null)
             {
-                this.currentChunk.entities.remove(this);
+                this.currentChunk.remove(this);
             }
-            this.chunkX = Math.max(0, Math.min(this.numberOfChunks - 1, x));
-            this.chunkY = Math.max(0, Math.min(this.numberOfChunks - 1, y));
+            this.chunkX = VineMath.clamp(x, 0, this.numberOfChunks - 1);
+            this.chunkY = VineMath.clamp(y, 0, this.numberOfChunks - 1);
             this.currentChunk = this.scene.getChunk(this.chunkX, this.chunkY);
-            this.currentChunk.entities.put(this.getName(), this);
+            this.currentChunk.add(this);
         }
     }
 
@@ -521,39 +514,39 @@ public class GameEntity extends GameObject
         // Physics
         for (final Component component : this.components)
         {
-            component.updatePhysics(delta / 1000);
+            component.onUpdatePhysics(delta / 1000);
             component.onUpdate(delta);
         }
+    }
 
-        // Scene
-        this.setCurrentChunk((int) this.position.getX() / 1400, (int) this.position.getY() / 800);
+    public void onRender(SpriteBatch batcher)
+    {
+        if (this.isDestroyed() || this.color.getAlpha() > 0.99f)
+        {
+            return;
+        }
+        for (final Component component : this.components)
+        {
+            component.onRender(batcher);
+        }
     }
 
     @Override
     public void construct()
     {
         super.construct();
-        this.addSpeed(100, 100);
     }
 
     @Override
     protected void onDestroy()
     {
-        this.currentChunk.entities.remove(this.getName());
+        this.currentChunk.remove(this);
+        this.scene.getEntities().remove(this);
     }
 
-    public void setSprite(final Sprite sprite)
+    @Override
+    public String toString()
     {
-        this.sprite = sprite;
-    }
-
-    public Sprite getSprite()
-    {
-        return this.sprite;
-    }
-
-    public void setZ(final float z)
-    {
-        this.zPosition = z;
+        return super.toString() + ":Position(" + this.getXPosition() + "," + this.getYPosition() + ")";
     }
 }

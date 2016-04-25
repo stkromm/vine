@@ -5,7 +5,7 @@ public final class RuntimeInfo
     public static final String RENDER_THREAD_NAME   = "render";
     public static final String LOGIC_THREAD_NAME    = "logic";
     public static final String SHUTDOWN_THREAD_NAME = "shutdown";
-    public static final String STARTUP_THREAD_NAME  = "startup";
+    public static final String STARTUP_THREAD_NAME  = "main";
 
     private RuntimeInfo()
     {

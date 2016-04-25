@@ -1,6 +1,6 @@
 package vine.math.geometry.ray;
 
-import vine.math.Vector2f;
+import vine.math.Vec2f;
 import vine.math.geometry.Shape;
 
 public class Intersection
@@ -9,8 +9,8 @@ public class Intersection
     float    directionMultiplier;
     Ray      ray;
     Shape    shape;
-    Vector2f point;
-    Vector2f secondHit;
+    Vec2f point;
+    Vec2f secondHit;
 
     /**
      * Initializes the intersection fields.

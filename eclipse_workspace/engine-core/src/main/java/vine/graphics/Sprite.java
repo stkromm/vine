@@ -1,6 +1,6 @@
 package vine.graphics;
 
-import vine.math.Vector2f;
+import vine.math.Vec2f;
 
 /**
  * @author Steffen
@@ -16,6 +16,6 @@ public interface Sprite
 
     Image getTexture();
 
-    Vector2f getSize();
+    Vec2f getSize();
 
 }

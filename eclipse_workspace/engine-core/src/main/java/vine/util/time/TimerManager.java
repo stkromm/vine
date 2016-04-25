@@ -59,7 +59,7 @@ public final class TimerManager
             final Timer timer = this.timers.get(i);
             if (timer.isRunning())
             {
-                timer.tick(delta / 1000f);
+                timer.tick(delta * 0.001f);
             } else
             {
                 this.timers.remove(i);

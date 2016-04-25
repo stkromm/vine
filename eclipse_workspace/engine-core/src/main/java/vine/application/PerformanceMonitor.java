@@ -79,6 +79,7 @@ public final class PerformanceMonitor
                 @Override
                 public void handleNotification(final Notification notification, final Object handback)
                 {
+                    Thread.currentThread().setName("garbage-collection");
                     if (notification.getType()
                             .equals(GarbageCollectionNotificationInfo.GARBAGE_COLLECTION_NOTIFICATION))
                     {

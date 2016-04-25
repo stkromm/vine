@@ -4,8 +4,8 @@ import vine.assets.AssetManager;
 import vine.game.screen.Screen;
 import vine.graphics.Image;
 import vine.graphics.Texture;
-import vine.math.Vector2f;
-import vine.math.Vector3f;
+import vine.math.Vec2f;
+import vine.math.Vec3f;
 
 /**
  * @author Steffen
@@ -13,21 +13,21 @@ import vine.math.Vector3f;
  */
 public class Box extends Widget
 {
-    private final Vector2f   size         = new Vector2f(0.1f, 0.1f);
-    private final Vector2f   position     = new Vector2f(0.5f, 0.5f);
+    private final Vec2f   size         = new Vec2f(0.1f, 0.1f);
+    private final Vec2f   position     = new Vec2f(0.5f, 0.5f);
 
     /**
      * 
      */
-    final Vector2f           scale        = new Vector2f(1, 1);
+    final Vec2f           scale        = new Vec2f(1, 1);
 
-    protected final Vector3f color        = new Vector3f(0, 0, 0);
+    protected final Vec3f color        = new Vec3f(0, 0, 0);
 
-    private float            transparency;
+    private float         transparency;
 
-    boolean                  selected;
+    boolean               selected;
 
-    float[]                  tempVertices = new float[12];
+    float[]               tempVertices = new float[12];
 
     @Override
     public float[] getPosition()
@@ -97,13 +97,13 @@ public class Box extends Widget
     }
 
     @Override
-    public Vector2f getSize()
+    public Vec2f getSize()
     {
         return this.size;
     }
 
     @Override
-    public Vector2f getScale()
+    public Vec2f getScale()
     {
         return this.scale;
     }

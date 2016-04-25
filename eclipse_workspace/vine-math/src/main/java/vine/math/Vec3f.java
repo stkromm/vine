@@ -4,20 +4,20 @@ package vine.math;
  * @author Steffen
  *
  */
-public class Vector3f
+public class Vec3f
 {
     /**
      * Maximum difference two floating point values can differ and still count
      * as equal.
      */
     protected static final float EPSILON = 0.000001f;
-    private float                x;
-    private float                y;
-    private float                z;
+    protected float              x;
+    protected float              y;
+    protected float              z;
 
-    private double               length;
+    protected double             length;
 
-    private void invalidate()
+    protected void invalidate()
     {
         length = -1;
     }
@@ -32,7 +32,7 @@ public class Vector3f
      * @param z
      *            The z element of the new vector
      */
-    public Vector3f(float x, float y, float z)
+    public Vec3f(float x, float y, float z)
     {
         this.x = x;
         this.y = y;
@@ -49,31 +49,11 @@ public class Vector3f
     }
 
     /**
-     * @param x
-     *            The new x element value
-     */
-    public void setX(float x)
-    {
-        this.x = x;
-        invalidate();
-    }
-
-    /**
      * @return y element value
      */
     public float getY()
     {
         return y;
-    }
-
-    /**
-     * @param y
-     *            The new y element value
-     */
-    public void setY(float y)
-    {
-        this.y = y;
-        invalidate();
     }
 
     /**
@@ -85,51 +65,6 @@ public class Vector3f
     }
 
     /**
-     * @param z
-     *            The new z element value
-     */
-    public void setZ(float z)
-    {
-        this.z = z;
-        invalidate();
-    }
-
-    /**
-     * Adds the given values to the corresponding elements of this Vector3f.
-     * 
-     * @param x
-     *            The addition to the x element
-     * @param y
-     *            The addition to the y element
-     * @param z
-     *            The addition to the z element
-     */
-    public void add(float x, float y, float z)
-    {
-        this.x += x;
-        this.y += y;
-        this.z += z;
-        invalidate();
-    }
-
-    /**
-     * Adds the elements of the given vector the elements of this Vector3f.
-     * 
-     * @param vector
-     *            The vector, which elements are added to the corresponding
-     *            elements of this vector.
-     */
-    public void add(Vector3f vector)
-    {
-        if (vector == null)
-        {
-            return;
-        }
-        add(vector.getX(), vector.getY(), vector.getZ());
-        invalidate();
-    }
-
-    /**
      * Returns the dot product of this Vector2f and the given. Callers guarantee
      * that the given vector is a valid object.
      * 
@@ -137,7 +72,7 @@ public class Vector3f
      *            The vector used to calculate a dot product with this vector
      * @return The dot product of this and the given vector
      */
-    public strictfp float dot(Vector3f vector)
+    public strictfp float dot(Vec3f vector)
     {
         return vector == null ? 0 : vector.getX() * x + vector.getY() * y + z * vector.getZ();
     }
@@ -154,7 +89,7 @@ public class Vector3f
         x *= factor;
         y *= factor;
         z *= factor;
-        invalidate();
+        length *= factor;
     }
 
     /**
@@ -178,7 +113,7 @@ public class Vector3f
      *            The vector, which angle between this vector is calculated
      * @return The angle between this and the given vector.
      */
-    public double getAngle(Vector3f vector)
+    public double getAngle(Vec3f vector)
     {
         if (vector == null)
         {
@@ -205,29 +140,14 @@ public class Vector3f
      * @return The cross product of this and the given vector, which is a
      *         Vector3f object.
      */
-    public Vector3f cross(Vector3f vector)
+    public Vec3f cross(Vec3f vector)
     {
         if (vector == null)
         {
-            return new Vector3f(0, 0, 0);
+            return new Vec3f(0, 0, 0);
         }
-        return new Vector3f(y * vector.getZ() - z * vector.getY(), z * vector.getX() - x * vector.getZ(),
+        return new Vec3f(y * vector.getZ() - z * vector.getY(), z * vector.getX() - x * vector.getZ(),
                 x * vector.getY() - y * vector.getX());
-    }
-
-    /**
-     * Normalizes this vector.
-     */
-    public void normalize()
-    {
-        final float length = dot(this);
-        if (length <= EPSILON)
-        {
-            return;
-        }
-        final float inversedLength = (float) (1 / Math.sqrt(dot(this)));
-        scale(inversedLength);
-        this.length = 1;
     }
 
     @Override
@@ -237,11 +157,11 @@ public class Vector3f
         {
             return false;
         }
-        if (!(object instanceof Vector3f))
+        if (!(object instanceof Vec3f))
         {
             return false;
         }
-        final Vector3f vector = (Vector3f) object;
+        final Vec3f vector = (Vec3f) object;
         return Math.abs(vector.getX() - x + vector.getY() - y + vector.getZ() - z) <= 3 * EPSILON;
     }
 

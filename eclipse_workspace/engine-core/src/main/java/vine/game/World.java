@@ -1,5 +1,6 @@
 package vine.game;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -184,7 +185,7 @@ public final class World
      *            instantiated type.
      * @return Returns all GameObjects in the Game of the given type.
      */
-    public <T extends GameObject> T instantiate(final Class<T> type, final Object... params)
+    public <T extends GameObject> WeakReference<T> instantiate(final Class<T> type, final Object... params)
     {
         return type == null ? null
                 : ReferenceManager.instantiate(this, type, ReferenceManager.generateObjectName(type), params);
@@ -202,7 +203,10 @@ public final class World
      *            instantiated type.
      * @return the newly created gameobject
      */
-    public <T extends GameObject> T instantiate(final Class<T> type, final String name, final Object... params)
+    public <T extends GameObject> WeakReference<T> instantiate(
+            final Class<T> type,
+            final String name,
+            final Object... params)
     {
         return !GameObject.ReferenceManager.isValidGameObjectName(name) || type == null ? null
                 : ReferenceManager.instantiate(this, type, name, params);

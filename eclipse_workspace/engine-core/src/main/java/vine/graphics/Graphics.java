@@ -3,8 +3,8 @@ package vine.graphics;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import vine.math.Matrix4f;
-import vine.math.Vector3f;
+import vine.math.Mat4f;
+import vine.math.Vec3f;
 
 /**
  * @author Steffen
@@ -40,9 +40,9 @@ public interface Graphics
 
     void storeUniformInt(int location, int value);
 
-    void storeUniformVector3f(int location, Vector3f vector);
+    void storeUniformVector3f(int location, Vec3f vector);
 
-    void storeUniformMatrix4f(int location, Matrix4f matrix);
+    void storeUniformMatrix4f(int location, Mat4f matrix);
 
     void bindShader(int id);
 
@@ -71,4 +71,5 @@ public interface Graphics
     void drawElements(int count);
 
     void drawArrays(int count);
+
 }

@@ -1,6 +1,7 @@
 package vine.math.geometry;
 
-import vine.math.Vector2f;
+import vine.math.Vec2f;
+import vine.math.MutableVec2f;
 import vine.math.geometry.ray.Intersection;
 import vine.math.geometry.ray.Ray;
 
@@ -13,7 +14,7 @@ public class Circle implements Shape
     private float          x;
     private float          y;
     private float          radius;
-    private final Vector2f distanceVector = new Vector2f(0, 0);
+    private final MutableVec2f distanceVector = new MutableVec2f(0, 0);
 
     /**
      * Constructs a new circle object, that represents the geometric object.
@@ -38,9 +39,9 @@ public class Circle implements Shape
 
     public Intersection intersect(Ray ray)
     {
-        Vector2f rayOrigin = ray.getOrigin();
-        Vector2f rayDirection = ray.getDirection();
-        Vector2f f = new Vector2f(-x, -y);
+        Vec2f rayOrigin = ray.getOrigin();
+        Vec2f rayDirection = ray.getDirection();
+        MutableVec2f f = new MutableVec2f(-x, -y);
         f.add(rayOrigin);
         float a = rayDirection.dot(rayDirection);
         float b = 2 * f.dot(rayDirection);

@@ -1,23 +1,25 @@
-package vine.gameplay.component;
+package vine.gameplay;
+
+import java.lang.ref.WeakReference;
 
 import vine.game.scene.Component;
 import vine.game.scene.GameEntity;
 import vine.game.tilemap.UniformTileMap;
-import vine.math.Vector2f;
-import vine.physics.BoxCollision;
+import vine.graphics.renderer.SpriteBatch;
+import vine.math.Vec2f;
+import vine.physics.Intersection2D;
 
 public class PhysicsComponent extends Component
 {
-    private GameEntity     lastCollidedEntity = this.getEntity();
-    private final Vector2f moveCache          = new Vector2f(0, 0);
+    private WeakReference<GameEntity> lastCollidedEntity = new WeakReference<>(this.getEntity());
     /**
      * Does this entity get blocked by dynamic entities.
      */
-    private final boolean  blockDynamic       = false;
+    private final boolean             blockDynamic       = true;
     /**
      * Does this entity get blocked by static objects.
      */
-    private final boolean  blockStatic        = true;
+    private final boolean             blockStatic        = true;
 
     public final boolean blocksStatic()
     {
@@ -31,8 +33,11 @@ public class PhysicsComponent extends Component
 
     public final boolean intersect(final GameEntity e)
     {
-        return BoxCollision.collide(this.getEntity().getPosition(), this.getEntity().getBoundingBoxExtends(),
-                e.getPosition(), e.getBoundingBoxExtends())//
+        return Intersection2D.doesAabbIntersectAabb(
+                this.getEntity().getPosition(),
+                this.getEntity().getBoundingBoxExtends(),
+                e.getPosition(),
+                e.getBoundingBoxExtends())//
                 && e != this.getEntity();
     }
 
@@ -63,7 +68,9 @@ public class PhysicsComponent extends Component
         if (this.entity.getAccelerationX() != 0 || this.entity.getAccelerationY() != 0)
         {
             this.entity.addSpeed(this.entity.getAccelerationX() * delta, this.entity.getAccelerationY() * delta);
-            this.entity.getSpeed().scale(1 - 0.5f * delta);
+            final float xSpeed = (1 - 0.5f * delta) * this.entity.getXSpeed();
+            final float ySpeed = (1 - 0.5f * delta) * this.entity.getYSpeed();
+            this.entity.setSpeed(xSpeed, ySpeed);
             this.entity.addAcceleration(-this.entity.getAccelerationX() * 0.8f, -this.entity.getAccelerationY() * 0.8f);
         }
     }
@@ -79,9 +86,7 @@ public class PhysicsComponent extends Component
     {
         if (Math.abs(x) + Math.abs(y) > 0.0001f)
         {
-            this.moveCache.setX(x);
-            this.moveCache.setY(y);
-            if (this.moveCache.length() >= this.entity.getBoundingBoxExtends().length())
+            if (Vec2f.length(x, y) >= this.entity.getBoundingBoxExtends().length())
             {
                 return this.move(x / 2, y / 2) && this.move(x / 2, y / 2);
             }
@@ -103,10 +108,10 @@ public class PhysicsComponent extends Component
             }
             if (this.blockDynamic())
             {
-                if (this.lastCollidedEntity == null || this.lastCollidedEntity.isDestroyed())
+                if (this.lastCollidedEntity.get() == null || this.lastCollidedEntity.get().isDestroyed())
                 {
-                    this.lastCollidedEntity = this.entity;
-                } else if (this.intersect(this.lastCollidedEntity))
+                    this.lastCollidedEntity = new WeakReference<>(this.entity);
+                } else if (this.intersect(this.lastCollidedEntity.get()))
                 {
                     this.entity.addPosition(-x, -y);
                     boolean result = false;
@@ -123,23 +128,65 @@ public class PhysicsComponent extends Component
                 {
                     if (this.intersect(e))
                     {
-                        this.lastCollidedEntity = e;
+                        this.lastCollidedEntity = new WeakReference<>(e);
                         this.entity.addPosition(-x, -y);
                         return false;
                     }
                 }
             }
+            this.entity.setCurrentChunk();
             return true;
         }
         return false;
     }
 
     @Override
-    public void updatePhysics(final float delta)
+    public void onUpdatePhysics(final float delta)
     {
         // Physics
         this.accelerate(delta);
         this.move(this.getEntity().getXSpeed() * delta, this.getEntity().getYSpeed() * delta);
     }
 
+    @Override
+    public void onUpdate(float delta)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onAttach()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onDetach()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onDeactivation()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onActivation()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onRender(SpriteBatch batcher)
+    {
+        // TODO Auto-generated method stub
+
+    }
 }

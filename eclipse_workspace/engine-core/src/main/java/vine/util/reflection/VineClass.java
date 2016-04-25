@@ -35,7 +35,7 @@ public class VineClass<T>
      * @return optional wrapper, that contains the method, if the class contains
      *         the a method with the given name.
      */
-    public final Optional<Method> getMethodByName(final String methodName)
+    public final Optional<Method> getMethod(final String methodName)
     {
         return Arrays.stream(this.type.getMethods()).filter(method -> method.getName().equals(methodName)).findFirst();
     }
@@ -46,7 +46,7 @@ public class VineClass<T>
      * @return The constructor, if a constructor is defined, that takes the
      *         parameters.
      */
-    public final Constructor<T> getConstructorWithParams(final Object... params)
+    public final Constructor<T> getConstructor(final Object... params)
     {
         final int size = params == null ? 0 : params.length;
         final Class<?>[] types = new Class<?>[size];

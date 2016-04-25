@@ -1,29 +1,30 @@
 package vine.math.geometry.ray;
 
-import vine.math.Vector2f;
+import vine.math.Vec2f;
 
 public class Ray
 {
-    Vector2f origin;
-    Vector2f direction;
+    Vec2f origin;
+    Vec2f direction;
 
     /**
      * Creates a ray with the given origin, that goes to the given direction.
      * The direction object is going to be normalized.
      */
-    public Ray(Vector2f origin, Vector2f direction)
+    public Ray(Vec2f origin, Vec2f direction)
     {
         this.origin = origin;
-        direction.normalize();
+        if (!direction.isNormalized())
+            throw new IllegalArgumentException("Ray direction has to be normalized.");
         this.direction = direction;
     }
 
-    public Vector2f getOrigin()
+    public Vec2f getOrigin()
     {
         return origin;
     }
 
-    public Vector2f getDirection()
+    public Vec2f getDirection()
     {
         return direction;
     }
