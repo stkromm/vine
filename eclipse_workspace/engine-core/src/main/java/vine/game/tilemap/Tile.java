@@ -1,11 +1,9 @@
 package vine.game.tilemap;
 
-import vine.game.GameObject;
-import vine.game.scene.GameEntity;
 import vine.graphics.Color;
 import vine.graphics.Sprite;
 
-public class Tile extends GameObject
+public class Tile
 {
     Sprite  sprite;
     boolean blockDynamic = false;
@@ -31,18 +29,4 @@ public class Tile extends GameObject
         return this.sprite;
     }
 
-    protected void onCollision(final GameEntity entity)
-    {
-        //
-    }
-
-    protected void onEnter(final GameEntity entity)
-    {
-        //
-    }
-
-    protected void onLeave(final GameEntity entity)
-    {
-        //
-    }
 }

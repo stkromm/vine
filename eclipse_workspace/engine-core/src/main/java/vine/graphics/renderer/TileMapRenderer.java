@@ -2,7 +2,7 @@ package vine.graphics.renderer;
 
 import java.util.Arrays;
 
-import vine.game.scene.Scene;
+import vine.game.World;
 import vine.game.screen.Screen;
 import vine.game.tilemap.Tile;
 import vine.game.tilemap.UniformTileMap;
@@ -10,33 +10,44 @@ import vine.graphics.VertexAttribute;
 import vine.graphics.VertexAttributeBuffer;
 import vine.graphics.VertexBufferObject;
 import vine.graphics.shader.ShaderUniforms;
-import vine.math.Mat4f;
-import vine.math.Vec3f;
 import vine.math.VineMath;
+import vine.math.matrix.Mat4f;
+import vine.math.vector.Vec3f;
 import vine.util.GridCalculator;
 
-public class TileMapRenderer
+public class TileMapRenderer implements Renderer
 {
-    private final Mat4f                 cameraTransformation = Mat4f.identity();
-    private final VertexBufferObject    vertexBuffer;
-    private final VertexAttributeBuffer verts;
-    private final VertexAttributeBuffer tcs;
-    private UniformTileMap              tileMap;
+    private final Mat4f           cameraTransformation = Mat4f.identity();
+    private VertexBufferObject    vertexBuffer;
+    private VertexAttributeBuffer verts;
+    private VertexAttributeBuffer tcs;
+    private UniformTileMap        tileMap;
 
-    private final int                   screenxTiles;
-    private final int                   screenyTiles;
+    private final int             screenxTiles;
+    private final int             screenyTiles;
 
-    private final float[]               zeroUvs;
-    private final float[]               uvs;
-    private final float[]               colors;
-    private final VertexAttributeBuffer cols;
-    private final float[]               colorTemp            = new float[4];
+    private final World           world;
+    private float[]               zeroUvs;
+    private float[]               uvs;
+    private float[]               colors;
+    private VertexAttributeBuffer cols;
+    private final float[]         colorTemp            = new float[4];
 
-    public TileMapRenderer(final Screen screen)
+    public TileMapRenderer(final Screen screen, final World world)
     {
         this.screenxTiles = screen.getWidth() / 32 + 2;
         this.screenyTiles = screen.getHeight() / 32 + 2;
         //
+        this.world = world;
+    }
+
+    public void submit(final UniformTileMap map)
+    {
+        if (this.tileMap != null)
+        {
+            return;
+        }
+        this.tileMap = map;
         this.uvs = new float[8 * this.screenxTiles * this.screenyTiles];
         this.colors = new float[4 * this.screenxTiles * this.screenyTiles];
         this.verts = new VertexAttributeBuffer(
@@ -49,16 +60,17 @@ public class TileMapRenderer
         this.zeroUvs = new float[this.uvs.length];
     }
 
-    public final void submit(final UniformTileMap map, final Screen screen)
+    @Override
+    public void finish()
     {
-        this.tileMap = map;
+        // TODO Auto-generated method stub
     }
 
-    public final void renderScene(final Scene scene)
+    @Override
+    public void prepare(final Screen screen)
     {
         SpriteBatch.DEFAULT_SHADER.bind();
-        final Screen screen = scene.getWorld().getScreen();
-        final Vec3f vector = scene.cameras.getActiveCamera().getTranslation();
+        final Vec3f vector = this.world.getScene().getCameras().getActiveCamera().getTranslation();
         this.cameraTransformation.setTranslation(//
                 -screen.getWidth() / 2 - vector.getX() % 32f, //
                 -screen.getHeight() / 2f - vector.getY() % 32f, //
@@ -95,5 +107,11 @@ public class TileMapRenderer
         this.vertexBuffer.bind();
         this.vertexBuffer.draw();
         SpriteBatch.DEFAULT_SHADER.unbind();
+    }
+
+    @Override
+    public void render()
+    {
+        //
     }
 }

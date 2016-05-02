@@ -1,8 +1,9 @@
 package vine.game;
 
 import vine.game.scene.Component;
-import vine.graphics.renderer.SpriteBatch;
-import vine.math.Vec3f;
+import vine.math.vector.MutableVec3f;
+import vine.math.vector.Vec3f;
+import vine.util.time.TimerManager;
 
 /**
  * @author Steffen
@@ -11,21 +12,12 @@ import vine.math.Vec3f;
 public class Camera extends Component
 {
 
-    private final Vec3f translation  = new Vec3f(0, 0, 0);
-    private float       shakeIntensity;
-    private double      shakeScaling = 1;
-    private float       shakeDuration;
-    private float       remainingShakeDuration;
-    private boolean     smooth;
-
-    @Override
-    public void onUpdate(final float delta)
-    {
-        if (this.remainingShakeDuration > 0)
-        {
-            this.remainingShakeDuration = Math.max(this.remainingShakeDuration - delta / 1000, 0);
-        }
-    }
+    private final MutableVec3f translation  = new MutableVec3f(0, 0, 0);
+    private float              shakeIntensity;
+    private double             shakeScaling = 1;
+    private float              shakeDuration;
+    private boolean            smooth;
+    private int                shakeTimer;
 
     /**
      * @param duration
@@ -41,7 +33,7 @@ public class Camera extends Component
      */
     public void shake(final float duration, final float shakeIntensity, final int shakes, final boolean smooth)
     {
-        this.remainingShakeDuration = duration;
+        TimerManager.get().createTimer(duration, 1, () -> this.shakeTimer = 0);
         this.shakeIntensity = Math.min(5, Math.max(0, shakeIntensity));
         this.shakeScaling = Math.PI * shakes / duration * 2;
         this.shakeDuration = duration;
@@ -57,32 +49,24 @@ public class Camera extends Component
         {
             return this.translation;
         }
-        if (this.remainingShakeDuration == 0)
+        if (this.shakeTimer == 0)
         {
             this.translation.setX(this.entity.getXPosition());
 
         } else
         {
-            float shakeOffset = this.getEntity().getWorld().getScreen().getWidth() * 0.01f * this.shakeIntensity;
+            final float remainingShakeDuration = TimerManager.get().getElapsedTime(this.shakeTimer);
+            float shakeOffset = getEntity().getWorld().getScreen().getWidth() * 0.01f * this.shakeIntensity;
             if (this.smooth)
             {
-                final double easeInEaseOut = -Math.pow((this.remainingShakeDuration / this.shakeDuration - 0.5f) * 2, 2)
-                        + 1;
-                shakeOffset *= easeInEaseOut;
+                shakeOffset *= -Math.pow((remainingShakeDuration / this.shakeDuration - 0.5f) * 2, 2) + 1;
             }
             this.translation.setX(
-                    (float) (shakeOffset * Math.sin(this.remainingShakeDuration * this.shakeScaling)
+                    (float) (shakeOffset * Math.sin(remainingShakeDuration * this.shakeScaling)
                             + this.entity.getXPosition()));
         }
         this.translation.setY(this.entity.getYPosition());
         return this.translation;
-    }
-
-    @Override
-    public void onUpdatePhysics(float delta)
-    {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -114,7 +98,7 @@ public class Camera extends Component
     }
 
     @Override
-    public void onRender(SpriteBatch batcher)
+    public void onUpdate(final float delta)
     {
         // TODO Auto-generated method stub
 

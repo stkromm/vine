@@ -4,7 +4,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Semaphore;
@@ -12,6 +12,7 @@ import java.util.concurrent.Semaphore;
 import vine.game.GameObject.ReferenceManager;
 import vine.game.scene.Scene;
 import vine.game.screen.Screen;
+import vine.physics.Physics;
 import vine.settings.Configuration;
 import vine.util.Log;
 
@@ -36,11 +37,12 @@ public final class World
     private final Configuration   configuration;
     private final Screen          screen;
     private final Scene           scene;
+    private final Physics         physics;
     private final Player          player;
     private final GameState       gameState;
     private final WorldSettings   worldSettings;
 
-    private final Set<GameObject> updatableObjects = new LinkedHashSet<>(1000);
+    private final Set<GameObject> updatableObjects = new HashSet<>(1000);
     final Deque<GameObject>       addList          = new ArrayDeque<>(100);
     final Deque<GameObject>       removeList       = new ArrayDeque<>(100);
     private final Semaphore       available        = new Semaphore(1, true);
@@ -55,11 +57,17 @@ public final class World
     {
         this.screen = screen;
         this.scene = new Scene();
-        this.scene.addToWorld(this);
+        this.scene.setWorld(this);
+        this.physics = new Physics();
         this.player = new Player();
         this.gameState = new GameState();
         this.worldSettings = new WorldSettings();
         this.configuration = new Configuration("res/settings.ini");
+    }
+
+    public final Physics getPhysics()
+    {
+        return this.physics;
     }
 
     public Configuration getGameSettings()
@@ -144,12 +152,13 @@ public final class World
      */
     public void update(final float delta)
     {
-        this.preUpdate();
+        preUpdate();
+        this.scene.prepareUpdate();
         for (final GameObject object : this.updatableObjects)
         {
             object.update(delta);
         }
-        this.postUpdate();
+        postUpdate();
     }
 
     private void postUpdate()
@@ -174,7 +183,7 @@ public final class World
                 object.destroy();
             }
         });
-        this.scene.loadScene(level);
+        LevelLoader.loadScene(level, this);
     }
 
     /**
@@ -238,5 +247,9 @@ public final class World
     public static GameObject getObjectByName(final String name)
     {
         return ReferenceManager.OBJECTS.get(name);
+    }
+
+    public void simulatePhysics(final float delta)
+    {
     }
 }

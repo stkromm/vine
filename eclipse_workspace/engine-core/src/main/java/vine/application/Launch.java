@@ -18,6 +18,7 @@ import vine.game.screen.Screen;
 import vine.graphics.Graphics;
 import vine.graphics.GraphicsProvider;
 import vine.graphics.RenderStack;
+import vine.graphics.SpriteLayer;
 import vine.input.Input;
 import vine.settings.Configuration;
 import vine.util.Log;
@@ -46,7 +47,7 @@ public final class Launch
         Launch.run(args);
     }
 
-    private static EngineMode parseEngineMode(String... commandLine)
+    private static EngineMode parseEngineMode(final String... commandLine)
     {
         return EngineMode.DEBUG;
     }
@@ -54,7 +55,7 @@ public final class Launch
     /**
      * Begin the game loop.
      */
-    private static void run(String... commandLine)
+    private static void run(final String... commandLine)
     {
         Thread.currentThread().setName(RuntimeInfo.STARTUP_THREAD_NAME);
         switch (Launch.parseEngineMode(commandLine)) {
@@ -101,8 +102,9 @@ public final class Launch
 
         final World game = new World(screen);
         final Scene scene = game.getScene();
+        final Layer sceneLayer = new SpriteLayer(game);
         final GameUserInterface gui = new GameUserInterface(screen);
-        final RenderStack renderStack = new RenderStack(new Layer[] { scene, gui }, window, screen, input);
+        final RenderStack renderStack = new RenderStack(new Layer[] { sceneLayer, gui }, window, screen, input);
         Log.lifecycle("Setting up event dispatcher.");
         final EventDispatcher dispatcher = new EventDispatcher();
         input.setKeyCallback((win, key, scancode, action, mods) ->

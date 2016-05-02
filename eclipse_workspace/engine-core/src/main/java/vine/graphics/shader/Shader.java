@@ -6,8 +6,8 @@ import java.util.WeakHashMap;
 import vine.assets.Asset;
 import vine.graphics.Graphics;
 import vine.graphics.GraphicsProvider;
-import vine.math.Mat4f;
-import vine.math.Vec3f;
+import vine.math.matrix.Mat4f;
+import vine.math.vector.Vec3f;
 import vine.util.Log;
 
 /**
@@ -59,12 +59,12 @@ public class Shader implements Asset
     {
         this.id = id;
         this.graphics = GraphicsProvider.getGraphics();
-        this.setProperties();
+        setProperties();
     }
 
     private void setProperties()
     {
-        this.setUniform1i("tex", 1);
+        setUniform1i("tex", 1);
         final Mat4f mat = Mat4f.orthographic(0, Shader.VIEWPORT_WIDTH, 0, Shader.VIEWPORT_HEIGHT, -1, 1);
         this.setUniformMat4f("pr_matrix", mat);
         this.setUniformMat4f("vw_matrix", Mat4f.translate(new Vec3f(0.f, 0.0f, 0.0f)));
@@ -108,7 +108,7 @@ public class Shader implements Asset
         {
             this.graphics.bindShader(this.id);
         }
-        this.graphics.storeUniformInt(this.getUniform(name), value);
+        this.graphics.storeUniformInt(getUniform(name), value);
     }
 
     /**
@@ -125,7 +125,7 @@ public class Shader implements Asset
         {
             this.graphics.bindShader(this.id);
         }
-        this.graphics.storeUniformVector3f(this.getUniform(name), vector);
+        this.graphics.storeUniformVector3f(getUniform(name), vector);
     }
 
     /**
@@ -140,7 +140,7 @@ public class Shader implements Asset
         {
             this.graphics.bindShader(this.id);
         }
-        this.graphics.storeUniformMatrix4f(this.getUniform(name), matrix);
+        this.graphics.storeUniformMatrix4f(getUniform(name), matrix);
     }
 
     public void setUniformMat4f(final ShaderUniforms name, final Mat4f matrix)
@@ -149,7 +149,7 @@ public class Shader implements Asset
         {
             this.graphics.bindShader(this.id);
         }
-        this.graphics.storeUniformMatrix4f(this.getUniform(name.toString()), matrix);
+        this.graphics.storeUniformMatrix4f(getUniform(name.toString()), matrix);
     }
 
     public void bind()

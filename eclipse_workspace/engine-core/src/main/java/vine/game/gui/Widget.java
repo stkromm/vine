@@ -2,7 +2,7 @@ package vine.game.gui;
 
 import vine.game.GameObject;
 import vine.graphics.Texture;
-import vine.math.Vec2f;
+import vine.math.vector.Vec2f;
 
 public class Widget extends GameObject
 {
@@ -56,6 +56,34 @@ public class Widget extends GameObject
     public boolean isSelected()
     {
         return false;
+    }
+
+    @Override
+    public void onUpdate(final float delta)
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void begin()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void construct()
+    {
+        // TODO Auto-generated method stub
+
     }
 
 }

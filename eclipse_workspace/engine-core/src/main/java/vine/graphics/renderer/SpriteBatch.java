@@ -10,8 +10,8 @@ import vine.graphics.VertexAttributeBuffer;
 import vine.graphics.VertexBufferObject;
 import vine.graphics.shader.Shader;
 import vine.graphics.shader.ShaderUniforms;
-import vine.math.Mat4f;
-import vine.math.Vec3f;
+import vine.math.matrix.Mat4f;
+import vine.math.vector.Vec3f;
 
 /**
  * @author Steffen
@@ -50,13 +50,13 @@ public class SpriteBatch
     {
         if (!texture.equals(this.currentTexture))
         {
-            this.flush();
+            flush();
             this.currentTexture = texture;
         }
         this.position += 2;
         if (this.vbo.getCount() < this.position)
         {
-            this.ensureCapacity();
+            ensureCapacity();
         }
         this.tempVertices[0] = x;
         this.tempVertices[1] = y;
@@ -97,7 +97,7 @@ public class SpriteBatch
     {
         final Screen screen = scene.getWorld().getScreen();
         SpriteBatch.DEFAULT_SHADER.bind();
-        final Vec3f vector = scene.cameras.getActiveCamera().getTranslation();
+        final Vec3f vector = scene.getCameras().getActiveCamera().getTranslation();
         this.cameraTransformation.setTranslation(-vector.getX(), -vector.getY(), -vector.getZ());
         SpriteBatch.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.VIEW_MATRIX, this.cameraTransformation);
         SpriteBatch.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.PROJECTION_MATRIX, screen.getProjection());
@@ -106,9 +106,7 @@ public class SpriteBatch
 
     public void finish()
     {
-        this.flush();
-        SpriteBatch.DEFAULT_SHADER.unbind();
-        this.currentTexture = null;
+        flush();
     }
 
     private void flush()

@@ -3,8 +3,8 @@ package vine.graphics;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
-import vine.math.Mat4f;
-import vine.math.Vec3f;
+import vine.math.matrix.Mat4f;
+import vine.math.vector.Vec3f;
 
 /**
  * @author Steffen

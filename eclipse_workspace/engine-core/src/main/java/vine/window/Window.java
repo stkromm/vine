@@ -2,7 +2,7 @@ package vine.window;
 
 /**
  * A window, represents a system window, that exists within a display and is
- * used, to display a application.
+ * used, to display an application.
  * 
  * @author Steffen
  *

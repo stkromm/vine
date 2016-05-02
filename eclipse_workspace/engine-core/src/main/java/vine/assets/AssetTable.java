@@ -10,7 +10,7 @@ public class AssetTable
     public AssetTable(final String pointerListPath)
     {
         this.pointer = new HashMap<>();
-        this.pointer.put("frag", new AssetPointer("res/test/frag.shader", 0, 0));
+        this.pointer.put("frag", new AssetPointer("res/shader/default-sprite", 0, 0));
         this.pointer.put("hero", new AssetPointer("res/test/hero.png", 0, 0));
         this.pointer.put("chipset", new AssetPointer("res/test/chipset.png", 0, 0));
         this.pointer.put("font", new AssetPointer("res/font.ttf", 0, 0));

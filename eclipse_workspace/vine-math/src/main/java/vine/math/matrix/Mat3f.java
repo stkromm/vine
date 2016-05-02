@@ -1,13 +1,16 @@
-package vine.math;
+package vine.math.matrix;
 
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import vine.math.Messages;
+
 /**
  * Represents a 3x3 Matrix, with floating point values as elements.
- * 
+ *
  * @author stkromm
+ *
  *
  */
 public class Mat3f implements Serializable
@@ -20,19 +23,19 @@ public class Mat3f implements Serializable
      */
     protected static final float EPSILON          = 0.0015f;
 
-    private float                a11              = 0;
-    private float                a12              = 0;
-    private float                a13              = 0;
-    private float                a21              = 0;
-    private float                a22              = 0;
-    private float                a23              = 0;
-    private float                a31              = 0;
-    private float                a32              = 0;
-    private float                a33              = 0;
+    private float                a11;
+    private float                a12;
+    private float                a13;
+    private float                a21;
+    private float                a22;
+    private float                a23;
+    private float                a31;
+    private float                a32;
+    private float                a33;
 
     /**
      * Creates a new matrix identical to the given matrix.
-     * 
+     *
      * @param matrix
      *            The matrix to copy.
      */
@@ -137,7 +140,7 @@ public class Mat3f implements Serializable
      * @param a11
      *            row 1 column 1
      */
-    public void setA11(float a11)
+    public void setA11(final float a11)
     {
         this.a11 = a11;
     }
@@ -146,7 +149,7 @@ public class Mat3f implements Serializable
      * @param a12
      *            row 1 column 2
      */
-    public void setA12(float a12)
+    public void setA12(final float a12)
     {
         this.a12 = a12;
     }
@@ -155,7 +158,7 @@ public class Mat3f implements Serializable
      * @param a13
      *            row 1 column 3
      */
-    public void setA13(float a13)
+    public void setA13(final float a13)
     {
         this.a13 = a13;
     }
@@ -164,7 +167,7 @@ public class Mat3f implements Serializable
      * @param a21
      *            row 2 column 1
      */
-    public void setA21(float a21)
+    public void setA21(final float a21)
     {
         this.a21 = a21;
     }
@@ -173,7 +176,7 @@ public class Mat3f implements Serializable
      * @param a22
      *            row 2 column 2
      */
-    public void setA22(float a22)
+    public void setA22(final float a22)
     {
         this.a22 = a22;
     }
@@ -182,7 +185,7 @@ public class Mat3f implements Serializable
      * @param a23
      *            row 2 column 3
      */
-    public void setA23(float a23)
+    public void setA23(final float a23)
     {
         this.a23 = a23;
     }
@@ -191,7 +194,7 @@ public class Mat3f implements Serializable
      * @param a31
      *            row 3 column 1
      */
-    public void setA31(float a31)
+    public void setA31(final float a31)
     {
         this.a31 = a31;
     }
@@ -200,7 +203,7 @@ public class Mat3f implements Serializable
      * @param a32
      *            row 3 column 2
      */
-    public void setA32(float a32)
+    public void setA32(final float a32)
     {
         this.a32 = a32;
     }
@@ -209,14 +212,14 @@ public class Mat3f implements Serializable
      * @param a33
      *            row 3 column 3
      */
-    public void setA33(float a33)
+    public void setA33(final float a33)
     {
         this.a33 = a33;
     }
 
     /**
      * Creates a identity matrix.
-     * 
+     *
      * @return A new identity matrix
      */
     public static final Mat3f getIdentity()
@@ -230,7 +233,7 @@ public class Mat3f implements Serializable
 
     /**
      * Sets the elements of the row that responds to the given index.
-     * 
+     *
      * @param rowIndex
      *            Valid values are in [0,2].
      * @param e1
@@ -267,7 +270,7 @@ public class Mat3f implements Serializable
 
     /**
      * Calculates the determinant of this matrix and returns it.
-     * 
+     *
      * @return The determinant value of this matrix.
      */
     public final strictfp float determinant()
@@ -278,7 +281,7 @@ public class Mat3f implements Serializable
 
     /**
      * Transposes this matrix.
-     * 
+     *
      * @return TODO
      */
     public final Mat3f transpose()
@@ -298,7 +301,7 @@ public class Mat3f implements Serializable
     /**
      * Transforms this matrix into its inversed matrix. Does nothin, if the
      * matrix is not invertable.
-     * 
+     *
      * @return this
      */
     public final strictfp Mat3f inverse()
@@ -340,13 +343,13 @@ public class Mat3f implements Serializable
 
     /**
      * Multiplies the given matrix from the right with this Matrix3f.
-     * 
+     *
      * @param matrix
      *            Matrix which is multiplied with this matrix.
-     * 
+     *
      * @return this
      */
-    public final strictfp Mat3f rightMultiply(Mat3f matrix)
+    public final strictfp Mat3f rightMultiply(final Mat3f matrix)
     {
         if (matrix == null)
         {
@@ -378,12 +381,12 @@ public class Mat3f implements Serializable
 
     /**
      * Multiplies every element of the matrix with the given scale value.
-     * 
+     *
      * @param scale
      *            Uniform scale factor, that scales all element of this matrix
      * @return this
      */
-    public final Mat3f scale(float scale)
+    public final Mat3f scale(final float scale)
     {
         a11 *= scale;
         a12 *= scale;
@@ -406,7 +409,7 @@ public class Mat3f implements Serializable
      *            Scales the a22 element
      * @return this
      */
-    public Mat3f scale(float x, float y)
+    public Mat3f scale(final float x, final float y)
     {
         a11 *= x;
         a22 *= y;
@@ -415,13 +418,13 @@ public class Mat3f implements Serializable
 
     /**
      * Adds the entries of the given matrix to the elements of this matrix.
-     * 
+     *
      * @param matrix
      *            The matrix, which is added to this matrix.
-     * 
+     *
      * @return this
      */
-    public final Mat3f add(Mat3f matrix)
+    public final Mat3f add(final Mat3f matrix)
     {
         if (matrix == null)
         {
@@ -444,13 +447,13 @@ public class Mat3f implements Serializable
     /**
      * Returns true, if every element of this matrix is equal to the equivalent
      * element of the given matrix.
-     * 
+     *
      * @param object
      *            Matrix, which is compared with this matrix.
      * @return true, if the matrix is equivalent to the given.
      */
     @Override
-    public final boolean equals(Object object)
+    public final boolean equals(final Object object)
     {
         if (object == null)
         {
@@ -460,7 +463,7 @@ public class Mat3f implements Serializable
         {
             return false;
         }
-        Mat3f matrix = (Mat3f) object;
+        final Mat3f matrix = (Mat3f) object;
         final boolean isFirstRowCorrect = Math
                 .abs(a11 - matrix.getA11() + a12 - matrix.getA12() + a13 - matrix.getA13()) <= 3 * EPSILON;
         final boolean isSecondRowCorrect = Math
@@ -472,13 +475,13 @@ public class Mat3f implements Serializable
 
     /**
      * Rotates this matrix with the given angle
-     * 
+     *
      * @param angle
      *            Angle about which the matrix is rotated
      * @return this
-     * 
+     *
      */
-    public Mat3f rotate(float angle)
+    public Mat3f rotate(final float angle)
     {
         final Mat3f rotator = Mat3f.getIdentity();
         final double rotation = Math.toRadians(angle);
@@ -495,14 +498,14 @@ public class Mat3f implements Serializable
     /**
      * Adds the vector given by the two values as an translation. That is adds
      * the x to the a13 element and the y to the a23 element.
-     * 
+     *
      * @param x
      *            x Value of the translation vector
      * @param y
      *            y Value of the translation vector
      * @return this
      */
-    public Mat3f translate(float x, float y)
+    public Mat3f translate(final float x, final float y)
     {
         a13 += x;
         a23 += y;

@@ -4,7 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import vine.math.Vec3f;
+import vine.math.vector.MutableVec3f;
+import vine.math.vector.Vec3f;
 
 import java.util.Random;
 

@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
  * @author Steffen
  *
  */
-class Messages
+public final class Messages
 {
     private static final String         BUNDLE_NAME     = "vine.math.messages";                 //$NON-NLS-1$
 
@@ -21,7 +21,7 @@ class Messages
      *            key of the string
      * @return The string of the property file
      */
-    public static String getString(String key)
+    public static String getString(final String key)
     {
         return RESOURCE_BUNDLE.getString(key);
     }

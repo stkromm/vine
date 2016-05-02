@@ -1,4 +1,4 @@
-package vine.math;
+package vine.math.vector;
 
 /**
  * @author Steffen
@@ -10,12 +10,11 @@ public class Vec3f
      * Maximum difference two floating point values can differ and still count
      * as equal.
      */
-    protected static final float EPSILON = 0.000001f;
-    protected float              x;
-    protected float              y;
-    protected float              z;
-
-    protected double             length;
+    public static final float EPSILON = 0.000001f;
+    protected float           x;
+    protected float           y;
+    protected float           z;
+    protected double          length;
 
     protected void invalidate()
     {
@@ -24,7 +23,7 @@ public class Vec3f
 
     /**
      * Creates a new Vector3f with the given x,y and z elements.
-     * 
+     *
      * @param x
      *            The x element of the new vector
      * @param y
@@ -32,7 +31,7 @@ public class Vec3f
      * @param z
      *            The z element of the new vector
      */
-    public Vec3f(float x, float y, float z)
+    public Vec3f(final float x, final float y, final float z)
     {
         this.x = x;
         this.y = y;
@@ -67,24 +66,24 @@ public class Vec3f
     /**
      * Returns the dot product of this Vector2f and the given. Callers guarantee
      * that the given vector is a valid object.
-     * 
+     *
      * @param vector
      *            The vector used to calculate a dot product with this vector
      * @return The dot product of this and the given vector
      */
-    public strictfp float dot(Vec3f vector)
+    public strictfp float dot(final Vec3f vector)
     {
         return vector == null ? 0 : vector.getX() * x + vector.getY() * y + z * vector.getZ();
     }
 
     /**
      * Multiplies the elements of this vector with the given scale float value.
-     * 
+     *
      * @param factor
      *            The factor that is multiplied with the elements of this
      *            vector.
      */
-    public void scale(double factor)
+    public void scale(final double factor)
     {
         x *= factor;
         y *= factor;
@@ -94,7 +93,7 @@ public class Vec3f
 
     /**
      * Returns the length of this Vector2f.
-     * 
+     *
      * @return The length of this vector
      */
     public double length()
@@ -108,12 +107,12 @@ public class Vec3f
 
     /**
      * Calculates the inner angle between this and the given vector.
-     * 
+     *
      * @param vector
      *            The vector, which angle between this vector is calculated
      * @return The angle between this and the given vector.
      */
-    public double getAngle(Vec3f vector)
+    public double getAngle(final Vec3f vector)
     {
         if (vector == null)
         {
@@ -134,13 +133,13 @@ public class Vec3f
 
     /**
      * Calculates the cross product of this and the given vector.
-     * 
+     *
      * @param vector
      *            The vector which is cross multiplied with this vector
      * @return The cross product of this and the given vector, which is a
      *         Vector3f object.
      */
-    public Vec3f cross(Vec3f vector)
+    public Vec3f cross(final Vec3f vector)
     {
         if (vector == null)
         {

@@ -43,13 +43,15 @@ public final class TimerManager
         return timer == null ? 0 : timer.getElapsedTime();
     }
 
-    public void resetTimer(final float timerId)
+    public boolean resetTimer(final float timerId)
     {
         final Timer timer = this.mappedTimers.get(Float.valueOf(timerId));
         if (timer != null)
         {
             timer.reset();
+            return true;
         }
+        return false;
     }
 
     public void tick(final float delta)

@@ -4,17 +4,19 @@ import java.lang.ref.WeakReference;
 
 import vine.game.World;
 import vine.game.scene.Component;
-import vine.graphics.renderer.SpriteBatch;
-import vine.math.Vec2f;
+import vine.math.vector.Vec2f;
+import vine.physics.PhysicsComponent;
 
 public class EnemyAI extends Component
 {
     WeakReference<PlayerPawn> player;
+    PhysicsComponent          movement;
 
     @Override
     public void onAttach()
     {
         this.player = new WeakReference<>((PlayerPawn) World.getObjectByName("player"));
+        this.movement = this.entity.getComponent(PhysicsComponent.class);
     }
 
     @Override
@@ -27,18 +29,11 @@ public class EnemyAI extends Component
             // this.entity.getXPosition(),
             // playerPosition.getY() - this.entity.getYPosition()) > 200)
             // {
-            this.entity.setAcceleration(
+            this.movement.setAcceleration(
                     playerPosition.getX() - this.entity.getXPosition(),
                     playerPosition.getY() - this.entity.getYPosition());
             // }
         }
-    }
-
-    @Override
-    public void onUpdatePhysics(float delta)
-    {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -57,13 +52,6 @@ public class EnemyAI extends Component
 
     @Override
     public void onActivation()
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onRender(SpriteBatch batcher)
     {
         // TODO Auto-generated method stub
 

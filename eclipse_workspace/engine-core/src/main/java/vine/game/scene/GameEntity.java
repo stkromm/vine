@@ -1,6 +1,7 @@
 package vine.game.scene;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,10 +11,12 @@ import java.util.Set;
 import vine.game.GameObject;
 import vine.game.World;
 import vine.graphics.Color;
-import vine.graphics.renderer.SpriteBatch;
-import vine.math.MutableVec2f;
-import vine.math.Vec2f;
+import vine.graphics.Renderable;
 import vine.math.VineMath;
+import vine.math.vector.MutableVec2f;
+import vine.math.vector.Vec2f;
+import vine.physics.Collider;
+import vine.util.ConcurrentManagedSet;
 import vine.util.time.TimerManager;
 
 /**
@@ -22,74 +25,96 @@ import vine.util.time.TimerManager;
  */
 public class GameEntity extends GameObject
 {
-    // Scene
+    /**
+     * Lifetime constant that signals that this entity lives forever.
+     */
+    public static final float                            LIVE_FOREVER        = -1;
+    /**
+     * The lifetime of this entity. This value is literally the time the entity
+     * will live.
+     */
+    private float                                        lifetime            = GameEntity.LIVE_FOREVER;
     /**
      * The scene that contains this entity.
      */
-    private Scene                          scene;
+    private Scene                                        scene;
     /**
      * The gameplay tags of this entity. It's faster to search after a amount of
      * entity that share the same tag than search after objects of the same
      * class.
      */
-    private final List<String>             tags               = new ArrayList<>();
+    private final List<String>                           tags                = new ArrayList<>();
     /**
      * The components of this entity. The components dynamically extend the
      * functionality of this entity.
      */
-    private final Set<Component>           components         = new HashSet<>(5);
-    private final Map<Class<?>, Component> componentCache     = new HashMap<>(10);
-    /**
-     * The lifetime of this entity. This value is literally the time the entity
-     * will live.
-     */
-    private float                          lifetime           = GameEntity.LIVE_FOREVER;
-    /**
-     * Lifetime constant that signals that this entity lives forever.
-     */
-    public static final float              LIVE_FOREVER       = -1;
+    private final Set<Component>                         components          = new HashSet<>(10);
+    private final Map<Class<?>, Component>               componentCache      = new HashMap<>();
+    private final ConcurrentManagedSet<Renderable>       renderables         = new ConcurrentManagedSet<>(
+            new HashSet<>());
     /**
      * The Chunk that the entity exists in.
      */
-    private Chunk                          currentChunk;
-    private int                            chunkX             = -1;
-    private int                            chunkY             = -1;
-    private final int                      numberOfChunks     = 10;
+    private Chunk                                        currentChunk;
+    private int                                          chunkX              = -1;
+    private int                                          chunkY              = -1;
+    private final int                                    numberOfChunks      = 10;
 
     // Position
     /**
      * The world position of this entity. Unit is World-Units.
      */
-    private final MutableVec2f             position           = new MutableVec2f(32, 32);
+    private final MutableVec2f                           position            = new MutableVec2f(32, 32);
     /**
      * The z order of this entity. A higher value means it will be rendered on
      * top of entity with a lower value.
      */
-    private float                          zPosition          = 0.2f;
+    private float                                        zPosition           = 0.2f;
     /**
      * The extends of the collision box. Origin is the world space position of
      * this entity.
      */
-    private final MutableVec2f             boundingBoxExtends = new MutableVec2f(24, 31.9f);
+    private final MutableVec2f                           boundingBoxExtends  = new MutableVec2f(32, 32);
 
     // Appearance
-    private final Color                    color              = new Color(0, 0, 0, 0);
+    private final Color                                  color               = new Color(0, 0, 0, 0);
 
-    // Physics
-    /**
-     * The speed of this entity. Unit is World-Units / second.
-     */
-    private final MutableVec2f             speed              = new MutableVec2f(0, 0);
-    /**
-     * The acceleration of this entity. Unit is Speed / second.
-     */
-    private final MutableVec2f             acceleration       = new MutableVec2f(1, 1);
     // Collision Handling
-    private final boolean                  moveable           = true;
+    private boolean                                      moveable            = true;
+
+    private final ConcurrentManagedSet<ExecutionPayload> executionList       = new ConcurrentManagedSet<>(
+            new HashSet<>());
+    private final Set<Collider>                          collisionComponents = new HashSet<>();
+
+    @FunctionalInterface
+    public interface ExecutionPayload
+    {
+        boolean tick(float delta);
+    }
+
+    public void addExecutionPayload(final ExecutionPayload payload)
+    {
+        this.executionList.add(payload);
+    }
 
     public final boolean isMoveable()
     {
         return this.moveable;
+    }
+
+    public final void setMoveable(final boolean moveable)
+    {
+        this.moveable = moveable;
+    }
+
+    public ConcurrentManagedSet<Renderable> getRenderables()
+    {
+        return this.renderables;
+    }
+
+    public final Set<Collider> getCollisionComponents()
+    {
+        return this.collisionComponents;
     }
 
     /**
@@ -145,69 +170,6 @@ public class GameEntity extends GameObject
         this.zPosition = z;
     }
 
-    public final float getXSpeed()
-    {
-        return this.speed.getX();
-    }
-
-    public final float getYSpeed()
-    {
-        return this.speed.getY();
-    }
-
-    public final Vec2f getSpeed()
-    {
-        return this.speed;
-    }
-
-    public final void setSpeed(final float x, final float y)
-    {
-        this.speed.setX(x);
-        this.speed.setY(y);
-    }
-
-    public final void setSpeedX(final float x)
-    {
-        this.speed.setX(x);
-    }
-
-    public final void setSpeedY(final float y)
-    {
-        this.speed.setY(y);
-    }
-
-    public final void addSpeed(final float x, final float y)
-    {
-        this.speed.add(x, y);
-    }
-
-    protected final Vec2f getAcceleration()
-    {
-        return this.acceleration;
-    }
-
-    public final float getAccelerationX()
-    {
-        return this.acceleration.getX();
-    }
-
-    public final float getAccelerationY()
-    {
-        return this.acceleration.getY();
-    }
-
-    public final void addAcceleration(final float x, final float y)
-    {
-        this.acceleration.setX(this.getAccelerationX() + x);
-        this.acceleration.setY(this.getAccelerationY() + y);
-    }
-
-    public final void setAcceleration(final float x, final float y)
-    {
-        this.acceleration.setX(x);
-        this.acceleration.setY(y);
-    }
-
     // Color
     public final Color getColor()
     {
@@ -228,8 +190,8 @@ public class GameEntity extends GameObject
         } else
         {
             final Color originColor = this.color;
-            TimerManager.get().createTimer(duration, 1, () -> this.dye(originColor));
-            this.dye(color);
+            TimerManager.get().createTimer(duration, 1, () -> dye(originColor));
+            dye(color);
         }
     }
 
@@ -291,15 +253,15 @@ public class GameEntity extends GameObject
             {
                 return;
             }
-            scene.getEntities().remove(this);
+            scene.removeEntity(this);
         }
         this.scene = scene;
-        this.setCurrentChunk();
+        setCurrentChunk();
     }
 
     public final World getWorld()
     {
-        return this.getScene().getWorld();
+        return getScene().getWorld();
     }
 
     /**
@@ -318,7 +280,7 @@ public class GameEntity extends GameObject
      */
     public final void addTag(final String tag)
     {
-        if (tag != null && !this.containsTag(tag))
+        if (tag != null && !containsTag(tag))
         {
             this.tags.add(tag);
         }
@@ -356,6 +318,22 @@ public class GameEntity extends GameObject
 
     /**
      * @param type
+     *            The type by which components are searched
+     * @return all components found of this type
+     */
+    public <T extends Component> void getComponents(final Class<T> type, final List<T> list)
+    {
+        for (final Component component : this.components)
+        {
+            if (type.isInstance(component))
+            {
+                list.add(type.cast(component));
+            }
+        }
+    }
+
+    /**
+     * @param type
      *            The type of searched component
      * @return the reference to a component, that is of the given type or null
      *         if there is non
@@ -382,7 +360,7 @@ public class GameEntity extends GameObject
      */
     public final void attachComponent(final Component component)
     {
-        if (component == null || this.isDestroyed())
+        if (component == null || isDestroyed())
         {
             return;
         }
@@ -390,6 +368,14 @@ public class GameEntity extends GameObject
         component.attachTo(this);
         this.componentCache.put(component.getClass(), component);
         component.onAttach();
+        if (component instanceof Renderable)
+        {
+            this.renderables.add((Renderable) component);
+        }
+        if (component instanceof Collider)
+        {
+            this.collisionComponents.add((Collider) component);
+        }
     }
 
     /**
@@ -404,6 +390,14 @@ public class GameEntity extends GameObject
         if (this.components.remove(component) && this.componentCache.containsValue(component))
         {
             this.componentCache.remove(component.getClass());
+        }
+        if (component instanceof Renderable)
+        {
+            this.renderables.remove((Renderable) component);
+        }
+        if (component instanceof Collider)
+        {
+            this.collisionComponents.remove(component);
         }
     }
 
@@ -468,10 +462,10 @@ public class GameEntity extends GameObject
             return;
         }
         this.lifetime += lifetime;
-        if (this.getLifetime() <= 0)
+        if (getLifetime() <= 0)
         {
             this.lifetime = GameEntity.LIVE_FOREVER;
-            this.destroy();
+            destroy();
         }
     }
 
@@ -483,14 +477,14 @@ public class GameEntity extends GameObject
     @Override
     public void wait(final float seconds)
     {
-        this.deactivate();
+        deactivate();
         for (final Component component : this.components)
         {
             component.onDeactivation();
         }
         TimerManager.get().createTimer(seconds, 1, () ->
         {
-            this.activate();
+            activate();
             for (final Component component : this.components)
             {
                 component.onActivation();
@@ -502,51 +496,53 @@ public class GameEntity extends GameObject
     public void onUpdate(final float delta)
     {
         // Lifetime
-        if (this.isAging())
+        if (isAging())
         {
-            this.addLifetime(-delta);
-            if (this.isDestroyed())
+            addLifetime(-delta);
+            if (isDestroyed())
             {
                 return;
             }
         }
 
-        // Physics
-        for (final Component component : this.components)
+        for (final ExecutionPayload payload : this.executionList.getIterable())
         {
-            component.onUpdatePhysics(delta / 1000);
-            component.onUpdate(delta);
+            if (payload.tick(delta))
+            {
+                this.executionList.remove(payload);
+            }
         }
-    }
 
-    public void onRender(SpriteBatch batcher)
-    {
-        if (this.isDestroyed() || this.color.getAlpha() > 0.99f)
-        {
-            return;
-        }
         for (final Component component : this.components)
         {
-            component.onRender(batcher);
+            component.onUpdate(delta);
         }
     }
 
     @Override
     public void construct()
     {
-        super.construct();
+        //
     }
 
     @Override
     protected void onDestroy()
     {
         this.currentChunk.remove(this);
-        this.scene.getEntities().remove(this);
+        this.scene.removeEntity(this);
     }
 
     @Override
     public String toString()
     {
-        return super.toString() + ":Position(" + this.getXPosition() + "," + this.getYPosition() + ")";
+        String result = super.toString() + ":Position(" + getXPosition() + "," + getYPosition() + ")";
+        result += "Components:" + Arrays.toString(this.components.toArray());
+        return result;
+    }
+
+    @Override
+    public void begin()
+    {
+        //
     }
 }

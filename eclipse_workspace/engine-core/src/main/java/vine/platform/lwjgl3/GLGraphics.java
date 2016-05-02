@@ -13,8 +13,8 @@ import org.lwjgl.opengl.GL30;
 
 import vine.graphics.Graphics;
 import vine.graphics.VertexAttribute;
-import vine.math.Mat4f;
-import vine.math.Vec3f;
+import vine.math.matrix.Mat4f;
+import vine.math.vector.Vec3f;
 import vine.util.BufferConverter;
 import vine.util.TypeSize;
 

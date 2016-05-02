@@ -2,16 +2,17 @@ package vine.gameplay;
 
 import vine.game.scene.Component;
 import vine.graphics.Image;
+import vine.graphics.Renderable;
 import vine.graphics.Sprite;
 import vine.graphics.renderer.SpriteBatch;
-import vine.math.MutableVec2f;
-import vine.math.Vec2f;
+import vine.math.vector.MutableVec2f;
+import vine.math.vector.Vec2f;
 
 /**
  * @author Steffen
  *
  */
-public class StaticSprite extends Component implements Sprite
+public class StaticSprite extends Component implements Sprite, Renderable
 {
     private final MutableVec2f size = new MutableVec2f(0, 0);
     private final Image        texture;
@@ -61,28 +62,21 @@ public class StaticSprite extends Component implements Sprite
     }
 
     @Override
-    public void onRender(SpriteBatch batcher)
+    public void onRender(final SpriteBatch batcher)
     {
         batcher.submit(
-                this.getTexture(),
-                this.getUVCoordinates(),
+                getTexture(),
+                getUVCoordinates(),
                 this.entity.getXPosition() + this.worldOffset.getX(),
                 this.entity.getYPosition() + this.worldOffset.getY(),
-                this.getSize().getX(),
-                this.getSize().getY(),
+                getSize().getX(),
+                getSize().getY(),
                 this.entity.getZPosition(),
                 this.entity.getColor().getColor());
     }
 
     @Override
-    public void onUpdatePhysics(float delta)
-    {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void onUpdate(float delta)
+    public void onUpdate(final float delta)
     {
         // TODO Auto-generated method stub
 

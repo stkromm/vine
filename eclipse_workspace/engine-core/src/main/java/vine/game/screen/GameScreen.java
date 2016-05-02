@@ -1,6 +1,6 @@
 package vine.game.screen;
 
-import vine.math.Mat4f;
+import vine.math.matrix.Mat4f;
 import vine.util.Log;
 import vine.window.Window;
 
@@ -34,7 +34,7 @@ public class GameScreen implements Screen
         this.viewport = new Viewport();
         this.height = height;
         this.width = width;
-        this.calculateViewport(window.getHeight(), window.getWidth(), (float) height / width);
+        calculateViewport(window.getHeight(), window.getWidth(), (float) height / width);
         this.projection = GameScreen.calculateProjection(width, height);
     }
 
@@ -95,7 +95,7 @@ public class GameScreen implements Screen
     public final void setWidth(final int width)
     {
         this.width = width;
-        this.calculateViewport(this.window.getHeight(), this.window.getWidth(), this.aspect);
+        calculateViewport(this.window.getHeight(), this.window.getWidth(), this.aspect);
         this.projection = GameScreen.calculateProjection(this.width, this.height);
     }
 
@@ -103,13 +103,13 @@ public class GameScreen implements Screen
     public final void setHeight(final int height)
     {
         this.height = height;
-        this.calculateViewport(this.window.getHeight(), this.window.getWidth(), this.aspect);
+        calculateViewport(this.window.getHeight(), this.window.getWidth(), this.aspect);
         this.projection = GameScreen.calculateProjection(this.width, this.height);
     }
 
     @Override
     public final float worldToScreenCoord(final float x)
     {
-        return x * this.getUnitsPerPixel();
+        return x * getUnitsPerPixel();
     }
 }

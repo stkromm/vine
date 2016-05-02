@@ -21,7 +21,7 @@ public class UniformTileMap
      * @param height
      *            Number of tiles in the height
      */
-    public UniformTileMap(final int width, final Tile[] tiles, Texture chipset)
+    public UniformTileMap(final int width, final Tile[] tiles, final Texture chipset)
     {
         this.chipset = chipset;
         this.xTiles = width;
@@ -29,6 +29,7 @@ public class UniformTileMap
         this.tileWidth = 32;
         this.tileHeight = 32;
         this.tiles = tiles;
+        System.out.println(this.xTiles);
     }
 
     /**
@@ -54,7 +55,7 @@ public class UniformTileMap
 
     public boolean blocksDynamic(final int i, final int j)
     {
-        final Tile tile = this.getTile(i, j);
+        final Tile tile = getTile(i, j);
         if (tile == null)
         {
             return true;

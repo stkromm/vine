@@ -13,7 +13,7 @@ import vine.graphics.VertexAttributeBuffer;
 import vine.graphics.VertexBufferObject;
 import vine.graphics.shader.Shader;
 import vine.graphics.shader.ShaderUniforms;
-import vine.math.Mat4f;
+import vine.math.matrix.Mat4f;
 
 public class GUIRenderer
 {
@@ -44,7 +44,7 @@ public class GUIRenderer
         {
             if (this.vertexPositions.getPosition() != 0)
             {
-                this.flush();
+                flush();
             }
             this.currentTexture = widget.getTexture();
         }
@@ -84,9 +84,9 @@ public class GUIRenderer
         this.opaqueSpriteVBO.bind();
         for (final WeakReference<Widget> entity : widgets)
         {
-            this.submit(entity.get());
+            submit(entity.get());
         }
-        this.flush();
+        flush();
         GUIRenderer.DEFAULT_SHADER.unbind();
         this.currentTexture = null;
     }

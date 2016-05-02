@@ -1,4 +1,4 @@
-package vine.math;
+package vine.math.matrix;
 
 public class MutableMat4f
 {

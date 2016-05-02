@@ -7,8 +7,11 @@ import vine.assets.AssetManager;
 import vine.event.Event.EventType;
 import vine.event.KeyEvent;
 import vine.game.scene.GameEntity;
+import vine.game.scene.MultiTraceResult;
+import vine.graphics.Image;
 import vine.input.InputAction;
-import vine.math.Vec2f;
+import vine.physics.CollisionBox;
+import vine.physics.PhysicsComponent;
 import vine.sound.AudioPlayer;
 import vine.sound.SoundClip;
 
@@ -18,8 +21,10 @@ import vine.sound.SoundClip;
  */
 public class PlayerPawn extends GameEntity
 {
-    AnimationStateManager animation;
-    AudioPlayer           player = new AudioPlayer();
+    AnimationStateManager          animation;
+    AudioPlayer                    player         = new AudioPlayer();
+    PhysicsComponent               movement;
+    private final MultiTraceResult tmpTraceResult = new MultiTraceResult();
 
     @Override
     public void onUpdate(final float delta)
@@ -28,52 +33,60 @@ public class PlayerPawn extends GameEntity
     }
 
     @Override
-    public void setCurrentChunk()
-    {
-        super.setCurrentChunk();
-        this.getScene().calculateVisibleEntities();
-    }
-
-    @Override
     public void begin()
     {
         final AnimatedSprite sprite = this.getComponent(AnimatedSprite.class);
         this.animation = sprite.getAnimationManager();
-        this.getScene().getListener().addEventHandler(EventType.KEY, event -> this.onKeyEvent((KeyEvent) event));
+        getScene().getListener().addEventHandler(EventType.KEY, event -> onKeyEvent((KeyEvent) event));
+        this.movement = this.getComponent(PhysicsComponent.class);
     }
 
     private void onMoveButtonReleased(final int button)
     {
+        this.movement.setAcceleration(0, 0);
         switch (button) {
         case GLFW.GLFW_KEY_W:
-            this.setSpeedY(this.getYSpeed() > -64 ? this.getYSpeed() - 64 : -64);
+            this.movement.addSpeed(0, -64);
         break;
         case GLFW.GLFW_KEY_A:
-            this.setSpeedX(this.getXSpeed() < 64 ? this.getXSpeed() + 64 : 64);
+            this.movement.addSpeed(64, 0);
         break;
         case GLFW.GLFW_KEY_D:
-            this.setSpeedX(this.getXSpeed() > -64 ? this.getXSpeed() - 64 : -64);
+            this.movement.addSpeed(-64, 0);
         break;
         case GLFW.GLFW_KEY_S:
-            this.setSpeedY(this.getYSpeed() < 64 ? this.getYSpeed() + 64 : 64);
+            this.movement.addSpeed(0, 64);
         break;
         case GLFW.GLFW_KEY_F:
-            final GameEntity currentCollidingEntity = this.getScene()
-                    .lineTrace(this, true, this.getPosition(), new Vec2f(1, 0), 1000f);
-            if (currentCollidingEntity != null && currentCollidingEntity != this)
+            if (getScene().getTracer()
+                    .multiRayTrace(this, getPosition().getX(), getPosition().getY(), 1, 0, 500, this.tmpTraceResult))
             {
-                currentCollidingEntity.destroy();
+                for (final GameEntity entity : this.tmpTraceResult.getEntities())
+                {
+                    entity.destroy();
+                }
             }
+        break;
+        case GLFW.GLFW_KEY_G:
+            final StaticSprite sprite1 = new StaticSprite(AssetManager.loadSync("hero", Image.class), 0, 0, 16, 32, 32,
+                    64);
+            attachComponent(sprite1);
+            final float x = (float) Math.random() * 200;
+            final float y = (float) Math.random() * 200;
+            sprite1.addWorldOffset(x, y);
+            final CollisionBox box = new CollisionBox();
+            attachComponent(box);
+            box.addWorldOffset(x, y);
         break;
         default:
         break;
         }
-        this.setAnimationState();
+        setAnimationState();
     }
 
     private void setAnimationState()
     {
-        if (this.getXSpeed() == 0 && this.getYSpeed() == 0)
+        if (this.movement.getSpeedX() == 0 && this.movement.getSpeedY() == 0)
         {
             switch (this.animation.getCurrentState().getName()) {
             case "down":
@@ -91,16 +104,16 @@ public class PlayerPawn extends GameEntity
             default:
             }
 
-        } else if (this.getXSpeed() > 0)
+        } else if (this.movement.getSpeedX() > 0)
         {
             this.animation.changeState("right");
-        } else if (this.getXSpeed() < 0)
+        } else if (this.movement.getSpeedX() < 0)
         {
             this.animation.changeState("left");
-        } else if (this.getYSpeed() < 0)
+        } else if (this.movement.getSpeedY() < 0)
         {
             this.animation.changeState("down");
-        } else if (this.getYSpeed() > 0)
+        } else if (this.movement.getSpeedY() > 0)
         {
             this.animation.changeState("up");
         }
@@ -109,32 +122,32 @@ public class PlayerPawn extends GameEntity
     private void onMoveButtonPressed(final int button)
     {
         switch (button) {
+        case GLFW.GLFW_KEY_W:
+            this.movement.addSpeed(0, 64);
+        break;
         case GLFW.GLFW_KEY_A:
-            this.setSpeedX(this.getXSpeed() > 64 ? 64 : this.getXSpeed() - 64);
+            this.movement.addSpeed(-64, 0);
         break;
         case GLFW.GLFW_KEY_D:
-            this.setSpeedX(this.getXSpeed() < -64 ? -64 : this.getXSpeed() + 64);
+            this.movement.addSpeed(64, 0);
         break;
         case GLFW.GLFW_KEY_S:
-            this.setSpeedY(this.getYSpeed() < -64 ? -64 : this.getYSpeed() - 64);
-        break;
-        case GLFW.GLFW_KEY_W:
-            this.setSpeedY(this.getYSpeed() > 64 ? 64 : this.getYSpeed() + 64);
+            this.movement.addSpeed(0, -64);
         break;
         default:
         break;
         }
-        this.setAnimationState();
+        setAnimationState();
     }
 
     public boolean onKeyEvent(final KeyEvent keyEvent)
     {
         if (keyEvent.getAction() == InputAction.RELEASED)
         {
-            this.onMoveButtonReleased(keyEvent.getKey());
+            onMoveButtonReleased(keyEvent.getKey());
         } else if (keyEvent.getAction() == InputAction.PRESS)
         {
-            this.onMoveButtonPressed(keyEvent.getKey());
+            onMoveButtonPressed(keyEvent.getKey());
         }
         return true;
     }
@@ -142,7 +155,6 @@ public class PlayerPawn extends GameEntity
     @Override
     public void construct()
     {
-        this.setAcceleration(0, 0);
         this.player.setClip(AssetManager.loadSync("music", SoundClip.class));
         // this.player.playLooped();
     }

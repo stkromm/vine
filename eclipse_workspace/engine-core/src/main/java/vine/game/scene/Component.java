@@ -1,7 +1,6 @@
 package vine.game.scene;
 
-import vine.graphics.renderer.SpriteBatch;
-import vine.math.MutableVec2f;
+import vine.math.vector.MutableVec2f;
 
 /**
  * @author Steffen
@@ -71,8 +70,6 @@ public abstract class Component
         return false;
     }
 
-    public abstract void onUpdatePhysics(final float delta);
-
     public abstract void onUpdate(final float delta);
 
     public abstract void onAttach();
@@ -82,6 +79,4 @@ public abstract class Component
     public abstract void onDeactivation();
 
     public abstract void onActivation();
-
-    public abstract void onRender(SpriteBatch batcher);
 }

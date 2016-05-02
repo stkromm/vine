@@ -1,6 +1,6 @@
 package vine.game.particle;
 
-import vine.math.Vec2f;
+import vine.math.vector.Vec2f;
 
 public class Particle
 {

@@ -96,13 +96,13 @@ public class Engine implements EngineLifecycle
     {
         this.world.changeLevel("default-level");
         GraphicsProvider.getGraphics().makeContext(0L);
-        if (RuntimeInfo.getProcessorCoreCount() > 3)
+        if (RuntimeInfo.getProcessorCoreCount() > 2)
         {
-            this.workThreads.add(this.createLogicThread());
-            this.workThreads.add(this.createRenderThread());
+            this.workThreads.add(createLogicThread());
+            this.workThreads.add(createRenderThread());
         } else
         {
-            this.workThreads.add(this.createSingleThreadExecution());
+            this.workThreads.add(createSingleThreadExecution());
         }
 
     }
@@ -110,7 +110,7 @@ public class Engine implements EngineLifecycle
     @Override
     public synchronized void destroy()
     {
-        this.stop();
+        stop();
         this.workThreads.forEach(thread ->
         {
             try
@@ -150,6 +150,7 @@ public class Engine implements EngineLifecycle
                     final float delta = stopwatch.stop() / 1000000f;
                     TimerManager.get().tick(delta);
                     this.world.update(delta);
+                    this.world.simulatePhysics(delta);
                 }
                 Engine.waitTick(Engine.MAX_UPDATE_DURATION - stopwatch.layover());
             }
@@ -186,14 +187,15 @@ public class Engine implements EngineLifecycle
             final Stopwatch stopwatch = new Stopwatch(true);
             while (this.running)
             {
+                PerformanceMonitor.startFrame();
                 if (!this.idle)
                 {
                     final long delta = stopwatch.stop();
                     TimerManager.get().tick(delta / (float) 1e6);
                     this.world.update(delta / (float) 1e6);
-                    PerformanceMonitor.endFrame();
                     this.renderStack.render();
                 }
+                PerformanceMonitor.endFrame();
                 Engine.waitTick(Engine.MAX_UPDATE_DURATION - stopwatch.layover());
             }
         });

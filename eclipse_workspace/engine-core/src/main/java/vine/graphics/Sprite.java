@@ -1,6 +1,6 @@
 package vine.graphics;
 
-import vine.math.Vec2f;
+import vine.math.vector.Vec2f;
 
 /**
  * @author Steffen

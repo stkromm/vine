@@ -12,10 +12,10 @@ import vine.platform.lwjgl3.GLFWDisplay;
 public class DisplayTest
 {
 
-    Display display = null;
+    Display display;
 
     @Before
-    public void setup()
+    public void setUp()
     {
         this.display = new GLFWDisplay();
     }
@@ -32,7 +32,8 @@ public class DisplayTest
     public void testBitValues()
     {
         final GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Assert.assertTrue(env.getDefaultScreenDevice().getDisplayMode().getBitDepth() == this.display.getBlueBits()
-                + this.display.getGreenBits() + this.display.getRedBits() + this.display.getRedBits());
+        Assert.assertTrue(
+                env.getDefaultScreenDevice().getDisplayMode().getBitDepth() == this.display.getBlueBits()
+                        + this.display.getGreenBits() + this.display.getRedBits() + this.display.getRedBits());
     }
 }

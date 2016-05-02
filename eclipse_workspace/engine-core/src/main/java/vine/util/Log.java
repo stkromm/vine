@@ -3,6 +3,15 @@ package vine.util;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Provides a proxy for logging with a smarter syntax.
+ * 
+ * Use the unchecked methods to place a guard if statement around logs with
+ * concatenation. The regular log methods should not be guarded.
+ * 
+ * @author Steffen
+ *
+ */
 public final class Log
 {
     private static final Logger LOGGER         = LoggerFactory.getLogger(Log.class);
@@ -30,6 +39,11 @@ public final class Log
         {
             Log.LOGGER.debug(Log.DEBUG_MARK + context.getClass().getSimpleName() + " " + message, context);
         }
+    }
+
+    public static void debugUnchecked(final String message)
+    {
+        Log.LOGGER.debug(Log.DEBUG_MARK + message);
     }
 
     public static void exception(final String message, final Throwable throwable)
@@ -98,5 +112,10 @@ public final class Log
     public static boolean isLifecycleEnabled()
     {
         return Log.LOGGER.isInfoEnabled();
+    }
+
+    public static boolean isDebugEnabled()
+    {
+        return Log.LOGGER.isDebugEnabled();
     }
 }

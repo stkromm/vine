@@ -1,25 +1,31 @@
-package vine.math;
+package vine.math.vector;
 
 import java.io.Serializable;
 
 /**
  * Represents a mathematical vector 2d and performs transformations on this
  * object with its methods.
- * 
+ *
  * @author Steffen
  *
  */
 public class Vec2f implements Serializable
 {
-    private static final long    serialVersionUID = -48013626869712862L;
-    public static final Vec2f    X_AXIS           = new Vec2f(1, 0);
+    private static final long serialVersionUID = -48013626869712862L;
+    public static final Vec2f X_AXIS           = new Vec2f(1, 0);
     /**
-     * Maximum difference two floating point values can differ and still count
-     * as equal.
+     * Maximum difference two floating point values can have and still count as
+     * equal.
      */
-    protected static final float EPSILON          = 0.000001f;
-    protected float              x;
-    protected float              y;
+    public static final float EPSILON          = 0.000001f;
+    /**
+     * x Value of the vector.
+     */
+    protected float           x;
+    /**
+     * y Value of the vector.
+     */
+    protected float           y;
 
     /**
      * Creates a zero vector.
@@ -32,7 +38,7 @@ public class Vec2f implements Serializable
     /**
      * Creates a new Vector2f object, that represents the mathematical vector 2d
      * with the given float element.
-     * 
+     *
      * @param x
      *            The x value of the vector
      * @param y
@@ -47,10 +53,10 @@ public class Vec2f implements Serializable
     /**
      * Creates a copy of the given vector.
      */
-    public Vec2f(Vec2f vector)
+    public Vec2f(final Vec2f vector)
     {
-        this.x = vector.x;
-        this.x = vector.y;
+        x = vector.x;
+        x = vector.y;
     }
 
     /**
@@ -73,7 +79,7 @@ public class Vec2f implements Serializable
      * Returns a perpendicular Vector2f for this vector. Returns the 0-Vector if
      * there is no perpendicular vector (simply because this vector has length
      * zero).
-     * 
+     *
      * @return The new created perpendicular vector.
      */
     public final Vec2f getPerpendicular()
@@ -83,13 +89,13 @@ public class Vec2f implements Serializable
 
     /**
      * Calculates the dot product with 2 vectors.
-     * 
+     *
      * @param vector
      *            The vector, that is used to calculate a dot product with this
      *            vector.
-     * 
+     *
      * @return The dot product of this vector and the given.
-     * 
+     *
      */
     public final strictfp float dot(final Vec2f vector)
     {
@@ -107,7 +113,7 @@ public class Vec2f implements Serializable
 
     /**
      * Calculates the length of this Vector2f.
-     * 
+     *
      * @return the length of this Vector2f
      */
     public final strictfp double length()
@@ -125,7 +131,7 @@ public class Vec2f implements Serializable
 
     /**
      * Calculates the inner angle between this and the given vector.
-     * 
+     *
      * @param vector
      *            The vector that angle between this vector is calculated
      * @return The angle between this and the given vector
@@ -197,24 +203,23 @@ public class Vec2f implements Serializable
     }
 
     @Override
-    public final boolean equals(Object object)
+    public final boolean equals(final Object object)
     {
-        if (object == null)
-        {
-            return false;
-        }
         if (!(object instanceof Vec2f))
         {
             return false;
         }
         final Vec2f vector = (Vec2f) object;
-        return Math.abs(vector.getX() - x + vector.getY() - y) <= 2 * EPSILON;
+        return equal(vector);
     }
 
     @Override
     public int hashCode()
     {
-        return (int) (Math.round(31 * length()) + x * 13 + y * 17);
+        int result = 1;
+        result = 31 * result + Float.floatToIntBits(x);
+        result = 7 * result + Float.floatToIntBits(y);
+        return result;
     }
 
     @Override

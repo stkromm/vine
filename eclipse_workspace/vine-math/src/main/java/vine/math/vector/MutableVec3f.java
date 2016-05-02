@@ -1,4 +1,4 @@
-package vine.math;
+package vine.math.vector;
 
 public class MutableVec3f extends Vec3f
 {

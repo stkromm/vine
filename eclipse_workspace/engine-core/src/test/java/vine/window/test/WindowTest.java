@@ -12,16 +12,15 @@ import vine.window.Window;
 
 public class WindowTest
 {
-    Window window = null;
+    Window                         window;
+    @Rule
+    public final ExpectedException exception = ExpectedException.none();
 
     @Before
-    public void setup()
+    public void setUp()
     {
         this.window = new GLFWWindow(new GLFWDisplay());
     }
-
-    @Rule
-    public final ExpectedException exception = ExpectedException.none();
 
     @Test
     public void testWindowTitle()

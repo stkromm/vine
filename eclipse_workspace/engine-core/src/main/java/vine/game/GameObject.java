@@ -8,7 +8,7 @@ import java.util.WeakHashMap;
 
 import vine.util.Log;
 import vine.util.reflection.VineClass;
-import vine.util.reflection.VineMethodUtils;
+import vine.util.reflection.VineMethods;
 import vine.util.time.TimerManager;
 
 /**
@@ -72,7 +72,7 @@ public abstract class GameObject implements Comparable<GameObject>
      */
     protected final void enableFlags(final byte newFlags)
     {
-        if (!this.isDestroyed())
+        if (!isDestroyed())
         {
             this.flags |= newFlags;
         }
@@ -86,7 +86,7 @@ public abstract class GameObject implements Comparable<GameObject>
      */
     protected final void disableFlags(final byte newFlags)
     {
-        if (!this.isDestroyed())
+        if (!isDestroyed())
         {
             this.flags &= ~newFlags;
         }
@@ -94,18 +94,18 @@ public abstract class GameObject implements Comparable<GameObject>
 
     public final void activate()
     {
-        this.enableFlags(GameObject.ACTIVE_FLAG);
+        enableFlags(GameObject.ACTIVE_FLAG);
     }
 
     public final void deactivate()
     {
-        this.disableFlags(GameObject.ACTIVE_FLAG);
+        disableFlags(GameObject.ACTIVE_FLAG);
     }
 
     public void wait(final float seconds)
     {
-        this.disableFlags(GameObject.ACTIVE_FLAG);
-        TimerManager.get().createTimer(seconds, 1, () -> this.enableFlags(GameObject.ACTIVE_FLAG));
+        disableFlags(GameObject.ACTIVE_FLAG);
+        TimerManager.get().createTimer(seconds, 1, () -> enableFlags(GameObject.ACTIVE_FLAG));
     }
 
     public boolean isActive()
@@ -131,12 +131,12 @@ public abstract class GameObject implements Comparable<GameObject>
 
     public void makePersistent()
     {
-        this.enableFlags(GameObject.PERSISTENCE_FLAG);
+        enableFlags(GameObject.PERSISTENCE_FLAG);
     }
 
     public void makeTemporary()
     {
-        this.disableFlags(GameObject.PERSISTENCE_FLAG);
+        disableFlags(GameObject.PERSISTENCE_FLAG);
     }
 
     /**
@@ -145,7 +145,7 @@ public abstract class GameObject implements Comparable<GameObject>
      */
     public final void registerDestructionCallback(final GameObjectCallback callback)
     {
-        if (!this.isDestroyed() && callback != null)
+        if (!isDestroyed() && callback != null)
         {
             this.onDestroyCallbacks.add(callback);
         }
@@ -157,7 +157,7 @@ public abstract class GameObject implements Comparable<GameObject>
      */
     public final void unregisterDestructionCallback(final GameObjectCallback callback)
     {
-        if (!this.isDestroyed() && callback != null)
+        if (!isDestroyed() && callback != null)
         {
             this.onDestroyCallbacks.remove(callback);
         }
@@ -169,36 +169,21 @@ public abstract class GameObject implements Comparable<GameObject>
      */
     public final void update(final float delta)
     {
-        if ((this.flags & GameObject.ACTIVE_FLAG) != GameObject.ACTIVE_FLAG
-                || (this.flags & GameObject.DESTROYED_FLAG) == GameObject.DESTROYED_FLAG)
+        if ((this.flags & (GameObject.ACTIVE_FLAG | GameObject.DESTROYED_FLAG)) == (GameObject.DESTROYED_FLAG
+                | GameObject.ACTIVE_FLAG))
         {
             return;
         }
-        this.onUpdate(delta);
+        onUpdate(delta);
     }
 
-    public void onUpdate(final float delta)
-    {
-        //
-    }
+    public abstract void onUpdate(final float delta);
 
-    /**
-     * 
-     */
-    public void begin()
-    {
-        // Doesn't need to be overridden
-    }
+    public abstract void begin();
 
-    protected void onDestroy()
-    {
-        //
-    }
+    protected abstract void onDestroy();
 
-    public void construct()
-    {
-        //
-    }
+    public abstract void construct();
 
     /**
      * Use this method to destroy a GameObject that you don't need anymore. If
@@ -207,8 +192,8 @@ public abstract class GameObject implements Comparable<GameObject>
      */
     public final void destroy()
     {
-        this.enableFlags(GameObject.DESTROYED_FLAG);
-        this.onDestroy();
+        enableFlags(GameObject.DESTROYED_FLAG);
+        onDestroy();
         synchronized (this)
         {
             for (final GameObjectCallback callback : this.onDestroyCallbacks)
@@ -217,7 +202,7 @@ public abstract class GameObject implements Comparable<GameObject>
             }
             // Remove the hardreference of the gameobject
             ReferenceManager.OBJECTS.remove(this.name);
-            Log.debug("Destroyed GameObject: " + this.name);
+            Log.debug("Destroyed GameObject: " + toString());
         }
     }
 
@@ -231,13 +216,13 @@ public abstract class GameObject implements Comparable<GameObject>
     }
 
     @Override
-    public int compareTo(GameObject o)
+    public int compareTo(final GameObject o)
     {
-        if (o.getName().equals(this.getName()))
+        if (o.getName().equals(getName()))
         {
             return 0;
         }
-        if (o.hashCode() > this.hashCode())
+        if (o.hashCode() > hashCode())
         {
             return -1;
         }
@@ -312,7 +297,7 @@ public abstract class GameObject implements Comparable<GameObject>
                 object.setName(name);
                 ReferenceManager.OBJECTS.put(name, object);
                 objectClass.getMethod(GameObject.CONSTRUCT_METHOD)
-                        .ifPresent(method -> VineMethodUtils.invokeMethodOn(method, object, params));
+                        .ifPresent(method -> VineMethods.invokeMethodOn(method, object, params));
                 if (objectClass.hasMethodImplemented(GameObject.UPDATE_METHOD, float.class))
                 {
                     world.addObject(object);

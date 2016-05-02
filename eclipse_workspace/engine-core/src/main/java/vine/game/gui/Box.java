@@ -4,8 +4,8 @@ import vine.assets.AssetManager;
 import vine.game.screen.Screen;
 import vine.graphics.Image;
 import vine.graphics.Texture;
-import vine.math.Vec2f;
-import vine.math.Vec3f;
+import vine.math.vector.Vec2f;
+import vine.math.vector.Vec3f;
 
 /**
  * @author Steffen
@@ -33,8 +33,8 @@ public class Box extends Widget
     public float[] getPosition()
     {
         final Screen screen = this.gui.getScreen();
-        final float worldHeight = this.getSize().getY();
-        final float worldWidth = this.getSize().getX();
+        final float worldHeight = getSize().getY();
+        final float worldWidth = getSize().getX();
         this.tempVertices[0] = this.position.getX() * screen.getWidth();
         this.tempVertices[1] = this.position.getY() * screen.getHeight();
         this.tempVertices[2] = 0.9f;

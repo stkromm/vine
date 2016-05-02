@@ -1,6 +1,6 @@
 package vine.game.screen;
 
-import vine.math.Mat4f;
+import vine.math.matrix.Mat4f;
 
 /**
  * @author Steffen

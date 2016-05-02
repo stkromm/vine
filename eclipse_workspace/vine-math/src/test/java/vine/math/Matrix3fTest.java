@@ -4,6 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import vine.math.matrix.Mat3f;
+
 /**
  * @author Steffen
  *

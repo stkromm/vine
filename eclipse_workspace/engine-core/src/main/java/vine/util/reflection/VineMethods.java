@@ -10,9 +10,9 @@ import vine.util.Log;
  * @author Steffen
  *
  */
-public final class VineMethodUtils
+public final class VineMethods
 {
-    private VineMethodUtils()
+    private VineMethods()
     {
     }
 

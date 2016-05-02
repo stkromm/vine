@@ -6,6 +6,9 @@ import java.util.Random;
 
 import org.junit.Test;
 
+import vine.math.vector.MutableVec2f;
+import vine.math.vector.Vec2f;
+
 /**
  * @author Steffen
  *
@@ -37,18 +40,18 @@ public class Vector2fTest
     @Test
     public void testNormalize()
     {
-        Vec2f vector = new Vec2f(3, 0);
+        MutableVec2f vector = new MutableVec2f(3, 0);
         vector.normalize();
         assertTrue(Math.abs(Math.abs(vector.getX()) - 1.f) <= Vec2f.EPSILON);
         assertTrue(Math.abs(vector.getY()) <= Vec2f.EPSILON);
         assertTrue(Math.abs(Math.abs(vector.length()) - 1) <= Vec2f.EPSILON);
-        Vec2f nullVector = new Vec2f(0, 0);
+        MutableVec2f nullVector = new MutableVec2f(0, 0);
         nullVector.normalize();
         assertTrue(nullVector.length() == 0);
         Random rn = new Random();
         for (int i = 0; i <= 100000; i++)
         {
-            Vec2f vec = new Vec2f(rn.nextFloat() * System.currentTimeMillis() - 12345, System.nanoTime());
+            MutableVec2f vec = new MutableVec2f(rn.nextFloat() * System.currentTimeMillis() - 12345, System.nanoTime());
             vec.normalize();
             assertTrue(Math.abs(vec.length() - 1) <= Vec2f.EPSILON);
         }
@@ -105,7 +108,7 @@ public class Vector2fTest
     @Test
     public void testScaling()
     {
-        Vec2f vector = new Vec2f(1, 2);
+        MutableVec2f vector = new MutableVec2f(1, 2);
         vector.scale(0);
         assertTrue(vector.equals(new Vec2f(0, 0)));
     }

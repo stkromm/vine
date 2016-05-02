@@ -10,8 +10,8 @@ import vine.graphics.VertexAttributeBuffer;
 import vine.graphics.VertexBufferObject;
 import vine.graphics.shader.Shader;
 import vine.graphics.shader.ShaderUniforms;
-import vine.math.Mat4f;
-import vine.math.Vec3f;
+import vine.math.matrix.Mat4f;
+import vine.math.vector.Vec3f;
 
 public class PrimitiveRenderer
 {
@@ -33,9 +33,9 @@ public class PrimitiveRenderer
             this.vertexTextureCoords, this.vertexColors);
     public Texture                      currentTexture       = SpriteBatch.DEFAULT_TEXTURE;
 
-    public void drawLine(float startX, float startY, float endX, float endY)
+    public void drawLine(final float startX, final float startY, final float endX, final float endY)
     {
-        this.ensureCapacity(2);
+        ensureCapacity(2);
         this.tempVertices[0] = startX;
         this.tempVertices[1] = startY;
         this.tempVertices[2] = 1;
@@ -47,7 +47,7 @@ public class PrimitiveRenderer
         this.vertexPositions.append(this.tempVertices);
     }
 
-    private void ensureCapacity(int newElements)
+    private void ensureCapacity(final int newElements)
     {
         if (this.vbo.getCount() <= this.vertexPositions.getPosition() + newElements)
         {
@@ -60,7 +60,7 @@ public class PrimitiveRenderer
         }
     }
 
-    public void drawCircle(float pointX, float pointY, float radius)
+    public void drawCircle(final float pointX, final float pointY, final float radius)
     {
         // TODO Implement
     }
@@ -69,7 +69,7 @@ public class PrimitiveRenderer
     {
         final Screen screen = scene.getWorld().getScreen();
         SpriteBatch.DEFAULT_SHADER.bind();
-        final Vec3f vector = scene.cameras.getActiveCamera().getTranslation();
+        final Vec3f vector = scene.getCameras().getActiveCamera().getTranslation();
         this.cameraTransformation.setTranslation(-vector.getX(), -vector.getY(), -vector.getZ());
         SpriteBatch.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.VIEW_MATRIX, this.cameraTransformation);
         SpriteBatch.DEFAULT_SHADER.setUniformMat4f(ShaderUniforms.PROJECTION_MATRIX, screen.getProjection());
@@ -78,7 +78,7 @@ public class PrimitiveRenderer
 
     public void finish()
     {
-        this.flush();
+        flush();
         SpriteBatch.DEFAULT_SHADER.unbind();
     }
 
