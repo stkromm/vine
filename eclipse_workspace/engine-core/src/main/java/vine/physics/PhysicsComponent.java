@@ -9,8 +9,9 @@ import vine.math.geometry.Intersection2D;
 import vine.math.vector.MutableVec2f;
 import vine.math.vector.Vec2f;
 
-public class PhysicsComponent extends Component implements PhysicsBody
+public class PhysicsComponent extends Component
 {
+    private final RigidBody           rigidBody          = new RigidBody();
     private WeakReference<GameEntity> lastCollidedEntity = new WeakReference<>(getEntity());
     // Physics
     // private float weight;
@@ -191,15 +192,6 @@ public class PhysicsComponent extends Component implements PhysicsBody
         }
     }
 
-    @Override
-    public void onPhysicsUpdate(final float delta)
-    {
-        accelerate(delta);
-        move(getSpeedX() * delta, getSpeedY() * delta);
-        //
-        calculateCollision();
-    }
-
     private void calculateCollision()
     {
         if (blocksStatic() && this.intersect(this.entity.getScene().getMap()))
@@ -238,20 +230,19 @@ public class PhysicsComponent extends Component implements PhysicsBody
     @Override
     public void onUpdate(final float delta)
     {
-        // TODO Auto-generated method stub
-
+        this.entity.setPosition(this.rigidBody.position.getX(), this.rigidBody.position.getY());
     }
 
     @Override
     public void onAttach()
     {
-        this.entity.getScene().getWorld().getPhysics().addPhysicBody(this);
+        this.entity.getScene().getWorld().getPhysics().addPhysicBody(this.rigidBody);
     }
 
     @Override
     public void onDetach()
     {
-        this.entity.getScene().getWorld().getPhysics().removePhysicBody(this);
+        this.entity.getScene().getWorld().getPhysics().removePhysicBody(this.rigidBody);
     }
 
     @Override

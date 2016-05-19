@@ -1,7 +1,12 @@
 package vine.math.vector;
 
+import vine.math.VineMath;
+
 /**
- * @author Steffen
+ * Represents a immutable three-dimensional vector with single floating point
+ * precision.
+ *
+ * @author Steffen Kromm, first created on 04.05.2016
  *
  */
 public class Vec3f
@@ -11,14 +16,31 @@ public class Vec3f
      * as equal.
      */
     public static final float EPSILON = 0.000001f;
+    /**
+     * The x coordinate of the vector.
+     */
     protected float           x;
+    /**
+     * The y coordinate of the vector.
+     */
     protected float           y;
+    /**
+     * The z coordinate of the vector.
+     */
     protected float           z;
-    protected double          length;
+    /**
+     * Cached value so length is only calculated once (when the vector changes).
+     * -1 means the length is invalid and must be calculated.
+     */
+    protected double          calculatedLength;
 
-    protected void invalidate()
+    /**
+     * Signals that the calculated values (length of the vector) are out of date
+     * have to be recalculated.
+     */
+    protected final void invalidate()
     {
-        length = -1;
+        calculatedLength = -1;
     }
 
     /**
@@ -39,7 +61,17 @@ public class Vec3f
         invalidate();
     }
 
+    public Vec3f(final Vec3f vector)
+    {
+        x = vector.x;
+        y = vector.y;
+        z = vector.z;
+        invalidate();
+    }
+
     /**
+     * Getter.
+     *
      * @return The x element value
      */
     public float getX()
@@ -48,6 +80,8 @@ public class Vec3f
     }
 
     /**
+     * Getter.
+     *
      * @return y element value
      */
     public float getY()
@@ -56,6 +90,8 @@ public class Vec3f
     }
 
     /**
+     * Getter.
+     *
      * @return The z element value
      */
     public float getZ()
@@ -71,9 +107,9 @@ public class Vec3f
      *            The vector used to calculate a dot product with this vector
      * @return The dot product of this and the given vector
      */
-    public strictfp float dot(final Vec3f vector)
+    public float dot(final Vec3f vector)
     {
-        return vector == null ? 0 : vector.getX() * x + vector.getY() * y + z * vector.getZ();
+        return vector == null ? 0 : vector.x * x + vector.y * y + z * vector.z;
     }
 
     /**
@@ -88,7 +124,7 @@ public class Vec3f
         x *= factor;
         y *= factor;
         z *= factor;
-        length *= factor;
+        calculatedLength *= factor;
     }
 
     /**
@@ -98,11 +134,21 @@ public class Vec3f
      */
     public double length()
     {
-        if (length == -1)
+        if (calculatedLength == -1)
         {
-            length = Math.sqrt(dot(this));
+            calculatedLength = VineMath.sqrt(dot(this));
         }
-        return length;
+        return calculatedLength;
+    }
+
+    /**
+     * Returns the squared length of this Vector2f.
+     *
+     * @return The squared length of this vector
+     */
+    public float squaredLength()
+    {
+        return dot(this);
     }
 
     /**
@@ -145,23 +191,34 @@ public class Vec3f
         {
             return new Vec3f(0, 0, 0);
         }
-        return new Vec3f(y * vector.getZ() - z * vector.getY(), z * vector.getX() - x * vector.getZ(),
-                x * vector.getY() - y * vector.getX());
+        return new Vec3f(y * vector.z - z * vector.y, z * vector.x - x * vector.z, x * vector.y - y * vector.x);
     }
 
     @Override
     public boolean equals(final Object object)
     {
-        if (object == null)
-        {
-            return false;
-        }
         if (!(object instanceof Vec3f))
         {
             return false;
         }
         final Vec3f vector = (Vec3f) object;
-        return Math.abs(vector.getX() - x + vector.getY() - y + vector.getZ() - z) <= 3 * EPSILON;
+        final float diff = vector.x - x + vector.y - y + vector.z - z;
+        return VineMath.abs(diff) <= 3 * EPSILON;
     }
 
+    @Override
+    public int hashCode()
+    {
+        int result = 1;
+        result = 31 * result + Float.floatToIntBits(x);
+        result = 11 * result + Float.floatToIntBits(y);
+        result = 7 * result + Float.floatToIntBits(z);
+        return result;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Vector3f(" + x + "," + y + "," + z + ")";
+    }
 }

@@ -11,7 +11,7 @@ import vine.game.scene.MultiTraceResult;
 import vine.graphics.Image;
 import vine.input.InputAction;
 import vine.physics.CollisionBox;
-import vine.physics.PhysicsComponent;
+import vine.physics.RigidBody;
 import vine.sound.AudioPlayer;
 import vine.sound.SoundClip;
 
@@ -23,7 +23,7 @@ public class PlayerPawn extends GameEntity
 {
     AnimationStateManager          animation;
     AudioPlayer                    player         = new AudioPlayer();
-    PhysicsComponent               movement;
+    RigidBody                      movement;
     private final MultiTraceResult tmpTraceResult = new MultiTraceResult();
 
     @Override
@@ -38,24 +38,19 @@ public class PlayerPawn extends GameEntity
         final AnimatedSprite sprite = this.getComponent(AnimatedSprite.class);
         this.animation = sprite.getAnimationManager();
         getScene().getListener().addEventHandler(EventType.KEY, event -> onKeyEvent((KeyEvent) event));
-        this.movement = this.getComponent(PhysicsComponent.class);
+        this.movement = this.getComponent(RigidBody.class);
     }
 
     private void onMoveButtonReleased(final int button)
     {
-        this.movement.setAcceleration(0, 0);
         switch (button) {
         case GLFW.GLFW_KEY_W:
-            this.movement.addSpeed(0, -64);
         break;
         case GLFW.GLFW_KEY_A:
-            this.movement.addSpeed(64, 0);
         break;
         case GLFW.GLFW_KEY_D:
-            this.movement.addSpeed(-64, 0);
         break;
         case GLFW.GLFW_KEY_S:
-            this.movement.addSpeed(0, 64);
         break;
         case GLFW.GLFW_KEY_F:
             if (getScene().getTracer()
@@ -86,58 +81,32 @@ public class PlayerPawn extends GameEntity
 
     private void setAnimationState()
     {
-        if (this.movement.getSpeedX() == 0 && this.movement.getSpeedY() == 0)
-        {
-            switch (this.animation.getCurrentState().getName()) {
-            case "down":
-                this.animation.changeState("idle-down");
-            break;
-            case "up":
-                this.animation.changeState("idle-up");
-            break;
-            case "left":
-                this.animation.changeState("idle-left");
-            break;
-            case "right":
-                this.animation.changeState("idle-right");
-            break;
-            default:
-            }
-
-        } else if (this.movement.getSpeedX() > 0)
-        {
-            this.animation.changeState("right");
-        } else if (this.movement.getSpeedX() < 0)
-        {
-            this.animation.changeState("left");
-        } else if (this.movement.getSpeedY() < 0)
-        {
-            this.animation.changeState("down");
-        } else if (this.movement.getSpeedY() > 0)
-        {
-            this.animation.changeState("up");
-        }
+        /*
+         * if (this.movement.getSpeedX() == 0 && this.movement.getSpeedY() == 0)
+         * { switch (this.animation.getCurrentState().getName()) { case "down":
+         * this.animation.changeState("idle-down"); break; case "up":
+         * this.animation.changeState("idle-up"); break; case "left":
+         * this.animation.changeState("idle-left"); break; case "right":
+         * this.animation.changeState("idle-right"); break; default: }
+         * 
+         * } else if (this.movement.getSpeedX() > 0) {
+         * this.animation.changeState("right"); } else if
+         * (this.movement.getSpeedX() < 0) { this.animation.changeState("left");
+         * } else if (this.movement.getSpeedY() < 0) {
+         * this.animation.changeState("down"); } else if
+         * (this.movement.getSpeedY() > 0) { this.animation.changeState("up"); }
+         */
     }
 
     private void onMoveButtonPressed(final int button)
     {
-        switch (button) {
-        case GLFW.GLFW_KEY_W:
-            this.movement.addSpeed(0, 64);
-        break;
-        case GLFW.GLFW_KEY_A:
-            this.movement.addSpeed(-64, 0);
-        break;
-        case GLFW.GLFW_KEY_D:
-            this.movement.addSpeed(64, 0);
-        break;
-        case GLFW.GLFW_KEY_S:
-            this.movement.addSpeed(0, -64);
-        break;
-        default:
-        break;
-        }
-        setAnimationState();
+        /*
+         * switch (button) { case GLFW.GLFW_KEY_W: this.movement.addSpeed(0,
+         * 64); break; case GLFW.GLFW_KEY_A: this.movement.addSpeed(-64, 0);
+         * break; case GLFW.GLFW_KEY_D: this.movement.addSpeed(64, 0); break;
+         * case GLFW.GLFW_KEY_S: this.movement.addSpeed(0, -64); break; default:
+         * break; } setAnimationState();
+         */
     }
 
     public boolean onKeyEvent(final KeyEvent keyEvent)

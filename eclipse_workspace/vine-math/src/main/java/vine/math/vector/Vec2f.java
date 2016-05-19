@@ -1,10 +1,15 @@
 package vine.math.vector;
 
+import static vine.math.VineMath.abs;
+import static vine.math.VineMath.sqrt;
+import static vine.math.vector.Vec2Util.VEC2_EPSILON;
+
 import java.io.Serializable;
 
 /**
- * Represents a mathematical vector 2d and performs transformations on this
- * object with its methods.
+ * Represents a mathematical immutable vector 2d.
+ *
+ * Thread-safe.
  *
  * @author Steffen
  *
@@ -12,12 +17,26 @@ import java.io.Serializable;
 public class Vec2f implements Serializable
 {
     private static final long serialVersionUID = -48013626869712862L;
+    /**
+     * Vector that represents the x axis;
+     */
     public static final Vec2f X_AXIS           = new Vec2f(1, 0);
     /**
-     * Maximum difference two floating point values can have and still count as
-     * equal.
+     * Vector that represents the y axis;
      */
-    public static final float EPSILON          = 0.000001f;
+    public static final Vec2f Y_AXIS           = new Vec2f(0, 1);
+    /**
+     * Vector that represents the x axis in negative direction;
+     */
+    public static final Vec2f NEGATIV_X_AXIS   = new Vec2f(-1, 0);
+    /**
+     * Vector that represents the y axis in negative direction;
+     */
+    public static final Vec2f NEGATIVE_Y_AXIS  = new Vec2f(0, -1);
+    /**
+     * Zero vector.
+     */
+    public static final Vec2f ZERO             = new Vec2f(0, 0);
     /**
      * x Value of the vector.
      */
@@ -32,7 +51,8 @@ public class Vec2f implements Serializable
      */
     public Vec2f()
     {
-
+        // Empty constructor if you don't need to initialize the vector by
+        // construction.
     }
 
     /**
@@ -52,14 +72,19 @@ public class Vec2f implements Serializable
 
     /**
      * Creates a copy of the given vector.
+     *
+     * @param vector
+     *            the vector added to this vector.
      */
     public Vec2f(final Vec2f vector)
     {
         x = vector.x;
-        x = vector.y;
+        y = vector.y;
     }
 
     /**
+     * Getter.
+     *
      * @return the float value of the x element.
      */
     public final float getX()
@@ -68,6 +93,8 @@ public class Vec2f implements Serializable
     }
 
     /**
+     * Getter.
+     *
      * @return the float value of the y element.
      */
     public final float getY()
@@ -97,36 +124,55 @@ public class Vec2f implements Serializable
      * @return The dot product of this vector and the given.
      *
      */
-    public final strictfp float dot(final Vec2f vector)
+    public final float dot(final Vec2f vector)
     {
-
-        return vector == null ? 0 : dot(x, vector.getX(), y, vector.getY());
-    }
-
-    /**
-     * Calculates the dot product of the given 2 elementwise given vectors.
-     */
-    public static final strictfp float dot(final float x1, final float y1, final float x2, final float y2)
-    {
-        return x2 * x1 + y2 * y1;
+        return vector == null ? 0 : Vec2Util.dot(x, y, vector.getX(), vector.getY());
     }
 
     /**
      * Calculates the length of this Vector2f.
      *
-     * @return the length of this Vector2f
+     * @return the length of this Vector2f.
      */
-    public final strictfp double length()
+    public final double length()
     {
-        return length(x, y);
+        return Vec2Util.length(x, y);
     }
 
     /**
-     * @return The length of the given elementwise vector.
+     * Calculates the squared length of this Vector2f.
+     *
+     * @return the squared length of this Vector2f.
      */
-    public static final strictfp double length(final float x, final float y)
+    public final float squaredLength()
     {
-        return Math.sqrt(x * x + y * y);
+        return Vec2Util.squaredLength(x, y);
+    }
+
+    /**
+     * Returns the squared distance from the point defined by this Vec2f to the
+     * point defined by the given Vec2f.
+     *
+     * @param vector
+     *            Point to which the squared distance is calculated
+     * @return The squared distance to the given point
+     */
+    public final float squaredDistance(final Vec2f vector)
+    {
+        return Vec2Util.squaredLength(vector.getX() - x, vector.getY() - y);
+    }
+
+    /**
+     * Returns the distance from the point defined by this Vec2f to the point
+     * defined by the given Vec2f.
+     *
+     * @param vector
+     *            Point to which the distance is calculated
+     * @return The distance to the given point
+     */
+    public final double distance(final Vec2f vector)
+    {
+        return sqrt(squaredDistance(vector));
     }
 
     /**
@@ -136,70 +182,54 @@ public class Vec2f implements Serializable
      *            The vector that angle between this vector is calculated
      * @return The angle between this and the given vector
      */
-    public final strictfp double getAngle(final Vec2f vector)
+    public final double getAngle(final Vec2f vector)
     {
         if (vector == null)
         {
             return 0;
         }
-        return getAngle(x, y, vector.x, vector.y);
-    }
-
-    public static final strictfp double getAngle(final float x1, final float y1, final float x2, final float y2)
-    {
-        final double length1 = length(x1, y1);
-        if (length1 <= EPSILON)
-        {
-            return 0;
-        }
-        final double length2 = length(x2, y2);
-        if (length2 <= EPSILON)
-        {
-            return 0;
-        }
-        return dot(x1, x2, y1, y2) / (length1 * length2);
+        return Vec2Util.getAngle(x, y, vector.x, vector.y);
     }
 
     /**
-     * @param factor
-     *            factor, that is multiplied element wise with the vector.
+     * @return True, if the vector is normalized, that is, length == 1
      */
-    protected strictfp void scale(final double factor)
-    {
-        x *= factor;
-        y *= factor;
-    }
-
-    /**
-     * Normalizes this vector.
-     */
-    protected void normalize()
-    {
-        if (Math.abs(x) + Math.abs(y) <= 2 * EPSILON)
-        {
-            return;
-        }
-        final double inversedLength = 1 / length();
-        scale(inversedLength);
-    }
-
     public final boolean isNormalized()
     {
-        return this.length() - 1 < EPSILON;
+        return abs(squaredLength() - 1) < VEC2_EPSILON;
     }
 
-    public final boolean equal(final Vec2f vector)
+    /**
+     * @param vector
+     *            The vector that is checked for equality.
+     * @return True, if the vector is numerical equal.
+     *
+     * @see #equalWithEpsilon(float, float)
+     */
+    public final boolean equalWithEpsilon(final Vec2f vector)
     {
         if (vector == null)
         {
             return false;
         }
-        return equal(vector.getX(), vector.getY());
+        return equalWithEpsilon(vector.getX(), vector.getY());
     }
 
-    public final boolean equal(final float x, final float y)
+    /**
+     * Returns true, if the given vector is numerical equal to this vector (with
+     * error tolerance).
+     *
+     * @param x
+     *            x Coordinate of the compared vector.
+     * @param y
+     *            y Coordinate of the compared vector.
+     * @return True, if the vectors are numerical equal.
+     */
+    public final boolean equalWithEpsilon(final float x, final float y)
     {
-        return Math.abs(x - this.x + y - this.y) <= 2 * EPSILON;
+        final float xDif = x - this.x;
+        final float yDif = y - this.y;
+        return abs(xDif) + abs(yDif) <= 2 * VEC2_EPSILON;
     }
 
     @Override
@@ -210,7 +240,7 @@ public class Vec2f implements Serializable
             return false;
         }
         final Vec2f vector = (Vec2f) object;
-        return equal(vector);
+        return vector.x == x && vector.y == y;
     }
 
     @Override
@@ -225,6 +255,6 @@ public class Vec2f implements Serializable
     @Override
     public String toString()
     {
-        return getClass().getSimpleName() + "(" + x + "," + y + ")";
+        return "Vector2f(" + x + "," + y + ")";
     }
 }

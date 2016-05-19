@@ -152,6 +152,7 @@ public final class World
      */
     public void update(final float delta)
     {
+        this.physics.update(delta);
         preUpdate();
         this.scene.prepareUpdate();
         for (final GameObject object : this.updatableObjects)

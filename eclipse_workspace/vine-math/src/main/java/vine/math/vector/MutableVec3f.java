@@ -1,9 +1,11 @@
 package vine.math.vector;
 
+import vine.math.VineMath;
+
 public class MutableVec3f extends Vec3f
 {
 
-    public MutableVec3f(float x, float y, float z)
+    public MutableVec3f(final float x, final float y, final float z)
     {
         super(x, y, z);
     }
@@ -12,7 +14,7 @@ public class MutableVec3f extends Vec3f
      * @param z
      *            The new z element value
      */
-    public void setZ(float z)
+    public void setZ(final float z)
     {
         this.z = z;
         invalidate();
@@ -22,7 +24,7 @@ public class MutableVec3f extends Vec3f
      * @param y
      *            The new y element value
      */
-    public void setY(float y)
+    public void setY(final float y)
     {
         this.y = y;
         invalidate();
@@ -32,7 +34,7 @@ public class MutableVec3f extends Vec3f
      * @param x
      *            The new x element value
      */
-    public void setX(float x)
+    public void setX(final float x)
     {
         this.x = x;
         invalidate();
@@ -40,7 +42,7 @@ public class MutableVec3f extends Vec3f
 
     /**
      * Adds the given values to the corresponding elements of this Vector3f.
-     * 
+     *
      * @param x
      *            The addition to the x element
      * @param y
@@ -48,7 +50,7 @@ public class MutableVec3f extends Vec3f
      * @param z
      *            The addition to the z element
      */
-    public void add(float x, float y, float z)
+    public void add(final float x, final float y, final float z)
     {
         this.x += x;
         this.y += y;
@@ -58,12 +60,12 @@ public class MutableVec3f extends Vec3f
 
     /**
      * Adds the elements of the given vector the elements of this Vector3f.
-     * 
+     *
      * @param vector
      *            The vector, which elements are added to the corresponding
      *            elements of this vector.
      */
-    public void add(Vec3f vector)
+    public void add(final Vec3f vector)
     {
         if (vector == null)
         {
@@ -83,8 +85,23 @@ public class MutableVec3f extends Vec3f
         {
             return;
         }
-        final float inversedLength = (float) (1 / Math.sqrt(dot(this)));
+        final float inversedLength = (float) (1 / VineMath.sqrt(dot(this)));
         scale(inversedLength);
-        this.length = 1;
+        calculatedLength = 1;
+    }
+
+    /**
+     * Updates the values of this Vec3f to be the cross product of this vector
+     * and the given.
+     */
+    public void crossInThis(final Vec3f vector)
+    {
+        final float newX = y * vector.z - z * vector.y;
+        final float newY = z * vector.x - x * vector.z;
+        final float newZ = x * vector.y - y * vector.x;
+        x = newX;
+        y = newY;
+        z = newZ;
+        invalidate();
     }
 }

@@ -16,7 +16,7 @@ public class EnemyAI extends Component
     public void onAttach()
     {
         this.player = new WeakReference<>((PlayerPawn) World.getObjectByName("player"));
-        this.movement = this.entity.getComponent(PhysicsComponent.class);
+        // this.movement = this.entity.getComponent(PhysicsComponent.class);
     }
 
     @Override
@@ -29,9 +29,9 @@ public class EnemyAI extends Component
             // this.entity.getXPosition(),
             // playerPosition.getY() - this.entity.getYPosition()) > 200)
             // {
-            this.movement.setAcceleration(
-                    playerPosition.getX() - this.entity.getXPosition(),
-                    playerPosition.getY() - this.entity.getYPosition());
+            // this.movement.setAcceleration(
+            // playerPosition.getX() - this.entity.getXPosition(),
+            // playerPosition.getY() - this.entity.getYPosition());
             // }
         }
     }

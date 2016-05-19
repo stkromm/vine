@@ -1,5 +1,6 @@
 package vine.math.matrix;
 
+import vine.math.VineMath;
 import vine.math.vector.Vec3f;
 
 /**
@@ -9,22 +10,21 @@ import vine.math.vector.Vec3f;
 public class Mat4f
 {
 
-    private static final int SIZE     = 4 * 4;
-    private final float[]    elements = new float[SIZE];
+    private static final int SIZE = 4 * 4;
+    private final float[]    elements;
 
     public Mat4f()
     {
-
+        elements = new float[SIZE];
     }
 
-    /**
-     * @param matrix
-     *            Matrix3f, that should be a 2d transformation matrix, so the
-     *            Conversion is valid.
-     */
-    public Mat4f(final Mat3f matrix)
+    public Mat4f(final Mat4f matrix)
     {
-        // TODO Implement
+        if (matrix == null)
+        {
+            throw new IllegalArgumentException("Tried to copy construct a Mat4f from null");
+        }
+        elements = matrix.elements.clone();
     }
 
     public float[] getElements()
@@ -103,9 +103,9 @@ public class Mat4f
     public static Mat4f rotate(final float angle)
     {
         final Mat4f result = identity();
-        final float r = (float) Math.toRadians(angle);
-        final float cos = (float) Math.cos(r);
-        final float sin = (float) Math.sin(r);
+        final float r = VineMath.toRadians(angle);
+        final float cos = VineMath.cos(r);
+        final float sin = VineMath.sin(r);
 
         result.elements[0 + 0 * 4] = cos;
         result.elements[1 + 0 * 4] = sin;
@@ -113,6 +113,12 @@ public class Mat4f
         result.elements[1 + 1 * 4] = cos;
 
         return result;
+    }
+
+    public void setTransform(final Mat3f matrix)
+    {
+        setTranslation(matrix.getA13(), matrix.getA23(), 0);
+
     }
 
     /**
@@ -136,5 +142,4 @@ public class Mat4f
         }
         return result;
     }
-
 }

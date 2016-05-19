@@ -79,7 +79,6 @@ public class GameEntity extends GameObject
     // Appearance
     private final Color                                  color               = new Color(0, 0, 0, 0);
 
-    // Collision Handling
     private boolean                                      moveable            = true;
 
     private final ConcurrentManagedSet<ExecutionPayload> executionList       = new ConcurrentManagedSet<>(

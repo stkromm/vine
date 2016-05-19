@@ -1,15 +1,47 @@
 package vine.math;
 
-import vine.math.vector.Vec2f;
+import vine.math.auxilliary.FactorialLookup;
+import vine.math.auxilliary.Icecore;
+import vine.math.auxilliary.LookupSinCos;
 
 public final class VineMath
 {
-    public static final float PIf     = 3.14159265359f;
-    public static final float TWO_PIf = PIf * 2;
+    private static final VineRandom RANDOM   = new VineRandom();
+    private static final int        ONE_BIT  = 1;
 
-    public static float getSlope(final Vec2f direction)
+    public static final float       PIF      = 3.14159265358979323846f;
+    public static final double      PI       = 3.14159265358979323846;
+    public static final float       TWO_PIF  = PIF * 2;
+    public static final float       HALF_PIF = 3.14159265358979323846f * 0.5f;
+
+    private VineMath()
     {
-        return direction.getY() / direction.getX();
+        // Utility class
+    }
+
+    public static float abs(final float value)
+    {
+        return value <= 0.0f ? 0.0f - value : value;
+    }
+
+    public static double abs(final double value)
+    {
+        return value <= 0.0 ? 0.0 - value : value;
+    }
+
+    public static int abs(final int value)
+    {
+        return value >= 0 ? value : -value;
+    }
+
+    public static float max(final float t3, final float t4)
+    {
+        return t3 >= t4 ? t3 : t4;
+    }
+
+    public static float min(final float t3, final float t4)
+    {
+        return t3 <= t4 ? t3 : t4;
     }
 
     public static boolean isEven(final int value)
@@ -17,7 +49,7 @@ public final class VineMath
         return value % 2 == 0;
     }
 
-    public static final boolean isOdd(final int value)
+    public static boolean isOdd(final int value)
     {
         return value % 2 == 1;
     }
@@ -106,17 +138,17 @@ public final class VineMath
      */
     public static int randomInteger(final int max)
     {
-        return Math.round(randomFloat(max));
+        return StrictMath.round(randomFloat(max));
     }
 
     public static float randomFloat(final int max)
     {
-        return (float) Math.random() * max;
+        return RANDOM.nextFloat() * max;
     }
 
-    public static long binominalCoefficient(final int n, final int k)
+    public static double binominalCoefficient(final int n, final int k)
     {
-        return factorial(n) / (factorial(k) * factorial(n - k));
+        return factorial(n) / (double) (factorial(k) * factorial(n - k));
     }
 
     public static long factorial(final int n)
@@ -125,11 +157,69 @@ public final class VineMath
         {
             throw new IllegalArgumentException(n + " is no valid value to calculate a factorial.");
         }
+        return FactorialLookup.factorial(n);
+    }
+
+    public static double sqrt(final double value)
+    {
+        return StrictMath.sqrt(value);
+    }
+
+    public static double pow(final double a, final double b)
+    {
+        return StrictMath.pow(a, b);
+    }
+
+    public static int pow(final int a, final int b)
+    {
+        int base = a;
+        int power = b;
         int result = 1;
-        for (int i = n; i > 0; i--)
+        for (; power != 0; power >>= 1)
         {
-            result *= i;
+            if ((power & ONE_BIT) == ONE_BIT)
+            {
+                result *= base;
+            }
+            base *= base;
         }
+
         return result;
+    }
+
+    public static float exp(final float val)
+    {
+        final long tmp = (long) (1512775 * val + 1072632447);
+        return Float.intBitsToFloat((int) (tmp << 32));
+    }
+
+    public static float log(final float x)
+    {
+        return 6 * (x - 1) / (x + 1 + 4 * (float) VineMath.sqrt(x));
+    }
+
+    public static float sin(final float rad)
+    {
+        return LookupSinCos.sin(rad);
+    }
+
+    public static float cos(final float rad)
+    {
+        return LookupSinCos.cos(rad);
+    }
+
+    public static float atan2(final float y, final float x)
+    {
+        return Icecore.atan2(y, x);
+    }
+
+    public static float toDegress(final float radians)
+    {
+        return radians * 180.0f * (1 / PIF);
+    }
+
+    public static float toRadians(final float angle)
+    {
+        return angle * (1 / 180.f) * PIF;
     }
 }

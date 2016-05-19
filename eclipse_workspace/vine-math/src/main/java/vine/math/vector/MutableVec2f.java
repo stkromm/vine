@@ -1,6 +1,24 @@
 package vine.math.vector;
 
-public class MutableVec2f extends Vec2f
+import static vine.math.vector.Vec2Util.VEC2_EPSILON;
+
+import vine.math.VineMath;
+import vine.math.geometry.Transformable;
+
+/*
+ * Why does non method return this? This can be ambiguous if the returned vector is the same
+ * instance or a new instance.
+ * I think the convenience of method chaining is in this case not worth this danger of not
+ * knowing when new objects are created.
+ */
+/**
+ * Mutable version of Vec2f.
+ *
+ * @see Vec2f
+ * @author Steffen Kromm, first created on 04.05.2016
+ *
+ */
+public class MutableVec2f extends Vec2f implements Transformable
 {
     private static final long serialVersionUID = 7194729065343295239L;
 
@@ -9,6 +27,7 @@ public class MutableVec2f extends Vec2f
      */
     public MutableVec2f()
     {
+        super();
     }
 
     /**
@@ -22,16 +41,18 @@ public class MutableVec2f extends Vec2f
      */
     public MutableVec2f(final float x, final float y)
     {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
 
     /**
      * Creates a copy of the given vector.
+     *
+     * @param vector
+     *            The vector which is copied by the newly created.
      */
     public MutableVec2f(final Vec2f vector)
     {
-        this.set(vector);
+        super(vector);
     }
 
     /**
@@ -54,6 +75,9 @@ public class MutableVec2f extends Vec2f
 
     /**
      * Sets the x and y value of this vector equal to the given.
+     *
+     * @param vec
+     *            The vector with which the values of this vector are setted.
      */
     public final void set(final Vec2f vec)
     {
@@ -61,6 +85,13 @@ public class MutableVec2f extends Vec2f
         y = vec.y;
     }
 
+    /**
+     *
+     * @param x
+     *            The new x Coordinate of this vector.
+     * @param y
+     *            The new y Coordinate of this vector.
+     */
     public final void set(final float x, final float y)
     {
         this.x = x;
@@ -92,83 +123,123 @@ public class MutableVec2f extends Vec2f
     {
         if (vector != null)
         {
-            add(vector.getX(), vector.getY());
+            add(vector.x, vector.y);
         }
     }
 
     /**
-     * Substracts the elements of the given vector from the elements of this
+     * Adds the given vector multiplied by the given factor.
+     *
+     * @param scale
+     *            The factor with which the added vector is scaled.
+     * @param vector
+     *            The added vector.
+     */
+    public final void addScaled(final float scale, final Vec2f vector)
+    {
+        if (vector != null)
+        {
+            add(vector.x * scale, vector.y * scale);
+        }
+    }
+
+    /**
+     * Subtracts the elements of the given vector from the elements of this
      * Vector2f.
+     *
+     * @param vector
+     *            The vector which is subtracted from this.
      */
     public final void sub(final Vec2f vector)
     {
         if (vector != null)
         {
-            add(-vector.getX(), -vector.getY());
+            add(-vector.x, -vector.y);
         }
     }
 
-    /**
-     * @param factor
-     *            factor, that is multiplied element wise with the vector.
-     */
     @Override
-    public final strictfp void scale(final double factor)
+    public final void rotate(final float degrees)
     {
-        x *= factor;
-        y *= factor;
+        rotateRadians(VineMath.toRadians(degrees));
     }
 
-    public final strictfp void scale(final double xFactor, final double yFactor)
+    /**
+     * Rotates this vector by the given radian angle. (positive value means
+     * counterclockwise)
+     *
+     * @param radians
+     *            The angle of rotation.
+     */
+    public final void rotateRadians(final float radians)
     {
-        x *= xFactor;
-        y *= yFactor;
+        final float cos = VineMath.cos(radians);
+        final float sin = VineMath.sin(radians);
+
+        final float newX = x * cos - y * sin;
+        final float newY = x * sin + y * cos;
+        x = newX;
+        y = newY;
     }
 
-    public final strictfp void rotate(final float degrees)
-    {
-        rotateRadians((float) Math.toRadians(degrees));
-    }
-
-    public final strictfp void rotateRadians(final float radians)
-    {
-        final float cos = (float) Math.cos(radians);
-        final float sin = (float) Math.sin(radians);
-        x = x * cos - y * sin;
-        y = x * sin + y * cos;
-    }
-
+    /**
+     * Rotates this vector by 180 degree.
+     */
     public final void rotate180()
     {
-        this.scale(-1);
+        uniformScale(-1);
     }
 
+    /**
+     * Rotates this vector by 90 degrees.
+     *
+     * @param clockwise
+     *            If true, the rotation is clockwise, false counterclockwise.
+     */
     public final void rotate90(final boolean clockwise)
     {
         final float tmpX = x;
         if (clockwise)
         {
-            x = -y;
-            y = tmpX;
-        } else
-        {
             x = y;
             y = -tmpX;
+        } else
+        {
+            x = -y;
+            y = tmpX;
         }
     }
 
     /**
      * Normalizes this vector.
      */
-    @Override
     public final void normalize()
     {
-        if (Math.abs(x) + Math.abs(y) <= 2 * EPSILON)
+        if (VineMath.abs(x) + VineMath.abs(y) <= 2 * VEC2_EPSILON)
         {
             return;
         }
         final double inversedLength = 1 / length();
-        scale(inversedLength);
+        x *= inversedLength;
+        y *= inversedLength;
     }
 
+    @Override
+    public final void translate(final float x, final float y)
+    {
+        add(x, y);
+    }
+
+    @Override
+    public final void scale(final float x, final float y)
+    {
+        this.x *= x;
+        this.y *= y;
+    }
+
+    @Override
+    public final void uniformScale(final float factor)
+    {
+        scale(factor, factor);
+    }
 }
