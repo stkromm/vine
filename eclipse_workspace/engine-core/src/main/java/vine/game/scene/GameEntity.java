@@ -9,13 +9,14 @@ import java.util.Map;
 import java.util.Set;
 
 import vine.game.GameObject;
+import vine.game.Transform;
 import vine.game.World;
+import vine.game.primitive.Primitive;
 import vine.graphics.Color;
 import vine.graphics.Renderable;
-import vine.math.VineMath;
+import vine.math.GMath;
 import vine.math.vector.MutableVec2f;
 import vine.math.vector.Vec2f;
-import vine.physics.Collider;
 import vine.util.ConcurrentManagedSet;
 import vine.util.time.TimerManager;
 
@@ -50,7 +51,7 @@ public class GameEntity extends GameObject
      */
     private final Set<Component>                         components          = new HashSet<>(10);
     private final Map<Class<?>, Component>               componentCache      = new HashMap<>();
-    private final ConcurrentManagedSet<Renderable>       renderables         = new ConcurrentManagedSet<>(
+    private final Set<Renderable>                        renderables         = new ConcurrentManagedSet<>(
             new HashSet<>());
     /**
      * The Chunk that the entity exists in.
@@ -61,10 +62,7 @@ public class GameEntity extends GameObject
     private final int                                    numberOfChunks      = 10;
 
     // Position
-    /**
-     * The world position of this entity. Unit is World-Units.
-     */
-    private final MutableVec2f                           position            = new MutableVec2f(32, 32);
+    private final Transform                              transform           = new Transform();
     /**
      * The z order of this entity. A higher value means it will be rendered on
      * top of entity with a lower value.
@@ -83,7 +81,7 @@ public class GameEntity extends GameObject
 
     private final ConcurrentManagedSet<ExecutionPayload> executionList       = new ConcurrentManagedSet<>(
             new HashSet<>());
-    private final Set<Collider>                          collisionComponents = new HashSet<>();
+    private final List<Primitive>                        collisionComponents = new ArrayList<>();
 
     @FunctionalInterface
     public interface ExecutionPayload
@@ -93,12 +91,12 @@ public class GameEntity extends GameObject
 
     public void addExecutionPayload(final ExecutionPayload payload)
     {
-        this.executionList.add(payload);
+        executionList.add(payload);
     }
 
     public final boolean isMoveable()
     {
-        return this.moveable;
+        return moveable;
     }
 
     public final void setMoveable(final boolean moveable)
@@ -106,14 +104,14 @@ public class GameEntity extends GameObject
         this.moveable = moveable;
     }
 
-    public ConcurrentManagedSet<Renderable> getRenderables()
+    public Set<Renderable> getRenderables()
     {
-        return this.renderables;
+        return renderables;
     }
 
-    public final Set<Collider> getCollisionComponents()
+    public final List<Primitive> getPrimitives()
     {
-        return this.collisionComponents;
+        return collisionComponents;
     }
 
     /**
@@ -121,7 +119,7 @@ public class GameEntity extends GameObject
      */
     public final float getXPosition()
     {
-        return this.position.getX();
+        return transform.getWorldPosition().getX();
     }
 
     /**
@@ -129,7 +127,7 @@ public class GameEntity extends GameObject
      */
     public final float getYPosition()
     {
-        return this.position.getY();
+        return transform.getWorldPosition().getY();
     }
 
     /**
@@ -137,22 +135,22 @@ public class GameEntity extends GameObject
      */
     public final float getZPosition()
     {
-        return this.zPosition;
+        return zPosition;
     }
 
     public final Vec2f getPosition()
     {
-        return this.position;
+        return transform.getWorldPosition();
     }
 
     public final void addPosition(final float x, final float y)
     {
-        this.position.add(x, y);
+        transform.translate(x, y);
     }
 
     public final Chunk getChunk()
     {
-        return this.currentChunk;
+        return currentChunk;
     }
 
     /**
@@ -160,19 +158,18 @@ public class GameEntity extends GameObject
      */
     public final void setPosition(final float x, final float y)
     {
-        this.position.setX(x);
-        this.position.setY(y);
+        transform.translate(x - transform.getWorldPosition().getX(), y - transform.getWorldPosition().getY());
     }
 
     public void setZ(final float z)
     {
-        this.zPosition = z;
+        zPosition = z;
     }
 
     // Color
     public final Color getColor()
     {
-        return this.color;
+        return color;
     }
 
     public final void dye(final Color color)
@@ -196,17 +193,17 @@ public class GameEntity extends GameObject
 
     public final void addTransparency(final float percent)
     {
-        this.color.addTransparency(Math.round(percent * 256));
+        color.addTransparency(Math.round(percent * 256));
     }
 
     public final void setVisible()
     {
-        this.color.setColor(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), 0);
+        color.setColor(color.getRed(), color.getGreen(), color.getBlue(), 0);
     }
 
     public final void setInvisible()
     {
-        this.color.setColor(this.color.getRed(), this.color.getGreen(), this.color.getBlue(), 1);
+        color.setColor(color.getRed(), color.getGreen(), color.getBlue(), 1);
     }
 
     /**
@@ -214,23 +211,23 @@ public class GameEntity extends GameObject
      */
     public final Vec2f getBoundingBoxExtends()
     {
-        return this.boundingBoxExtends;
+        return boundingBoxExtends;
     }
 
     public final float getXExtends()
     {
-        return this.boundingBoxExtends.getX();
+        return boundingBoxExtends.getX();
     }
 
     public final float getYExtends()
     {
-        return this.boundingBoxExtends.getY();
+        return boundingBoxExtends.getY();
     }
 
     public final void setBoundingBox(final float x, final float y)
     {
-        this.boundingBoxExtends.setX(x);
-        this.boundingBoxExtends.setY(y);
+        boundingBoxExtends.setX(x);
+        boundingBoxExtends.setY(y);
     }
 
     /**
@@ -238,7 +235,7 @@ public class GameEntity extends GameObject
      */
     public final Scene getScene()
     {
-        return this.scene;
+        return scene;
     }
 
     /**
@@ -255,7 +252,6 @@ public class GameEntity extends GameObject
             scene.removeEntity(this);
         }
         this.scene = scene;
-        setCurrentChunk();
     }
 
     public final World getWorld()
@@ -270,7 +266,7 @@ public class GameEntity extends GameObject
      */
     public final boolean containsTag(final String tag)
     {
-        return tag == null ? false : this.tags.contains(tag);
+        return tag == null ? false : tags.contains(tag);
     }
 
     /**
@@ -281,7 +277,7 @@ public class GameEntity extends GameObject
     {
         if (tag != null && !containsTag(tag))
         {
-            this.tags.add(tag);
+            tags.add(tag);
         }
     }
 
@@ -293,7 +289,7 @@ public class GameEntity extends GameObject
     {
         if (tag != null)
         {
-            this.tags.remove(tag);
+            tags.remove(tag);
         }
     }
 
@@ -322,7 +318,7 @@ public class GameEntity extends GameObject
      */
     public <T extends Component> void getComponents(final Class<T> type, final List<T> list)
     {
-        for (final Component component : this.components)
+        for (final Component component : components)
         {
             if (type.isInstance(component))
             {
@@ -339,12 +335,12 @@ public class GameEntity extends GameObject
      */
     public final <T extends Component> T getComponent(final Class<T> type)
     {
-        final Component comp = this.componentCache.get(type);
+        final Component comp = componentCache.get(type);
         if (comp != null)
         {
             return type.cast(comp);
         }
-        for (final Component component : this.components)
+        for (final Component component : components)
         {
             if (type.isInstance(component))
             {
@@ -363,17 +359,17 @@ public class GameEntity extends GameObject
         {
             return;
         }
-        this.components.add(component);
+        components.add(component);
         component.attachTo(this);
-        this.componentCache.put(component.getClass(), component);
+        componentCache.put(component.getClass(), component);
         component.onAttach();
         if (component instanceof Renderable)
         {
-            this.renderables.add((Renderable) component);
+            renderables.add((Renderable) component);
         }
-        if (component instanceof Collider)
+        if (component instanceof Primitive)
         {
-            this.collisionComponents.add((Collider) component);
+            collisionComponents.add((Primitive) component);
         }
     }
 
@@ -386,17 +382,17 @@ public class GameEntity extends GameObject
         {
             return;
         }
-        if (this.components.remove(component) && this.componentCache.containsValue(component))
+        if (components.remove(component) && componentCache.containsValue(component))
         {
-            this.componentCache.remove(component.getClass());
+            componentCache.remove(component.getClass());
         }
         if (component instanceof Renderable)
         {
-            this.renderables.remove((Renderable) component);
+            renderables.remove(component);
         }
-        if (component instanceof Collider)
+        if (component instanceof Primitive)
         {
-            this.collisionComponents.remove(component);
+            collisionComponents.remove(component);
         }
     }
 
@@ -405,7 +401,7 @@ public class GameEntity extends GameObject
      */
     public final boolean containsComponent(final Component component)
     {
-        return this.components.contains(component);
+        return components.contains(component);
     }
 
     /**
@@ -413,29 +409,29 @@ public class GameEntity extends GameObject
      */
     public final void clearComponentCache()
     {
-        this.componentCache.clear();
+        componentCache.clear();
     }
 
     public void setCurrentChunk()
     {
-        final int x = (int) this.position.getX() / 1400;
-        final int y = (int) this.position.getY() / 800;
-        if (this.chunkX != x || this.chunkY != y)
+        final int x = (int) transform.getWorldPosition().getX() / 1400;
+        final int y = (int) transform.getWorldPosition().getY() / 800;
+        if (chunkX != x || chunkY != y)
         {
-            if (this.currentChunk != null)
+            if (currentChunk != null)
             {
-                this.currentChunk.remove(this);
+                currentChunk.remove(this);
             }
-            this.chunkX = VineMath.clamp(x, 0, this.numberOfChunks - 1);
-            this.chunkY = VineMath.clamp(y, 0, this.numberOfChunks - 1);
-            this.currentChunk = this.scene.getChunk(this.chunkX, this.chunkY);
-            this.currentChunk.add(this);
+            chunkX = GMath.clamp(x, 0, numberOfChunks - 1);
+            chunkY = GMath.clamp(y, 0, numberOfChunks - 1);
+            currentChunk = scene.getChunk(chunkX, chunkY);
+            currentChunk.add(this);
         }
     }
 
     public float getLifetime()
     {
-        return this.lifetime;
+        return lifetime;
     }
 
     /**
@@ -470,21 +466,21 @@ public class GameEntity extends GameObject
 
     public final boolean isAging()
     {
-        return this.lifetime != GameEntity.LIVE_FOREVER;
+        return lifetime != GameEntity.LIVE_FOREVER;
     }
 
     @Override
     public void wait(final float seconds)
     {
         deactivate();
-        for (final Component component : this.components)
+        for (final Component component : components)
         {
             component.onDeactivation();
         }
         TimerManager.get().createTimer(seconds, 1, () ->
         {
             activate();
-            for (final Component component : this.components)
+            for (final Component component : components)
             {
                 component.onActivation();
             }
@@ -504,15 +500,15 @@ public class GameEntity extends GameObject
             }
         }
 
-        for (final ExecutionPayload payload : this.executionList.getIterable())
+        for (final ExecutionPayload payload : executionList.getIterable())
         {
             if (payload.tick(delta))
             {
-                this.executionList.remove(payload);
+                executionList.remove(payload);
             }
         }
 
-        for (final Component component : this.components)
+        for (final Component component : components)
         {
             component.onUpdate(delta);
         }
@@ -527,15 +523,15 @@ public class GameEntity extends GameObject
     @Override
     protected void onDestroy()
     {
-        this.currentChunk.remove(this);
-        this.scene.removeEntity(this);
+        currentChunk.remove(this);
+        scene.removeEntity(this);
     }
 
     @Override
     public String toString()
     {
         String result = super.toString() + ":Position(" + getXPosition() + "," + getYPosition() + ")";
-        result += "Components:" + Arrays.toString(this.components.toArray());
+        result += "Components:" + Arrays.toString(components.toArray());
         return result;
     }
 
@@ -543,5 +539,10 @@ public class GameEntity extends GameObject
     public void begin()
     {
         //
+    }
+
+    public Transform getTransform()
+    {
+        return transform;
     }
 }

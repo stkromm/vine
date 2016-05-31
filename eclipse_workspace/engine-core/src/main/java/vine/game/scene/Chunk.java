@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import vine.math.VineMath;
+import vine.math.GMath;
 
 /**
  * @author Steffen
@@ -36,51 +36,48 @@ public class Chunk
         this.divisionY = divisionY;
         assert this.width % divisionX == 0
                 && this.height % divisionY == 0 : "Chunk can only be divided into even parts";
-        this.tileWidth = this.width / divisionX;
-        this.tileHeight = this.height / divisionY;
-        this.spatialGraph = new ArrayList<>(divisionX * divisionY);
+        tileWidth = this.width / divisionX;
+        tileHeight = this.height / divisionY;
+        spatialGraph = new ArrayList<>(divisionX * divisionY);
         for (int j = 0; j < divisionY; j++)
         {
             for (int i = 0; i < divisionX; i++)
             {
 
-                this.spatialGraph.add(new ArrayList<>(4));
+                spatialGraph.add(new ArrayList<>(4));
             }
         }
     }
 
     public List<GameEntity> getSubdivisonChunk(final float posX, final float posY)
     {
-        if (!this.isActive)
+        if (!isActive)
         {
             createSubdivisionGraph();
-
         }
-        final int x = (int) (posX % this.width);
-        final int y = (int) (posY % this.height);
-        final int index = VineMath
-                .clamp(x / this.tileWidth + y / this.tileHeight * this.divisionX, 0, this.divisionX * this.divisionY);
-        return this.spatialGraph.get(index);
+        final int x = (int) (posX % width);
+        final int y = (int) (posY % height);
+        final int index = GMath.clamp(x / tileWidth + y / tileHeight * divisionX, 0, divisionX * divisionY);
+        return spatialGraph.get(index);
     }
 
     public void createSubdivisionGraph()
     {
-        this.isActive = true;
-        for (final List<GameEntity> set : this.spatialGraph)
+        isActive = true;
+        for (final List<GameEntity> set : spatialGraph)
         {
             set.clear();
         }
-        for (final GameEntity entity : this.entities)
+        for (final GameEntity entity : entities)
         {
-            final int x = Math.round(entity.getBoundingBoxExtends().getX()) / this.tileWidth;
-            final int y = Math.round(entity.getBoundingBoxExtends().getX()) / this.tileHeight;
+            final int x = Math.round(entity.getBoundingBoxExtends().getX()) / tileWidth;
+            final int y = Math.round(entity.getBoundingBoxExtends().getX()) / tileHeight;
             for (int i = x + 1; i >= 0; i--)
             {
                 for (int j = y + 1; j >= 0; j--)
                 {
-                    getSubdivisonChunk(
-                            entity.getXPosition() + i * this.tileWidth,
-                            entity.getYPosition() + j * this.tileHeight).add(entity);
+                    getSubdivisonChunk(entity.getXPosition() + i * tileWidth, entity.getYPosition() + j * tileHeight)
+                            .add(entity);
                 }
             }
         }
@@ -88,28 +85,28 @@ public class Chunk
 
     public void add(final GameEntity entity)
     {
-        this.entitiesMapped.put(entity.getName(), entity);
-        this.entities = this.entitiesMapped.values();
+        entitiesMapped.put(entity.getName(), entity);
+        entities = entitiesMapped.values();
     }
 
     public void remove(final GameEntity entity)
     {
-        this.entitiesMapped.remove(entity.getName());
-        this.entities = this.entitiesMapped.values();
+        entitiesMapped.remove(entity.getName());
+        entities = entitiesMapped.values();
     }
 
     public Collection<GameEntity> getEntities()
     {
-        return this.entities;
+        return entities;
     }
 
     public int getTileHeight()
     {
-        return this.tileHeight;
+        return tileHeight;
     }
 
     public int getTileWidth()
     {
-        return this.tileWidth;
+        return tileWidth;
     }
 }

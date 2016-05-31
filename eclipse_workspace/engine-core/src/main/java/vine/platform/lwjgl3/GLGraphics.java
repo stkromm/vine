@@ -11,7 +11,10 @@ import org.lwjgl.opengl.GL15;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GL30;
 
+import vine.graphics.DrawPrimitive;
 import vine.graphics.Graphics;
+import vine.graphics.PolygonMode;
+import vine.graphics.TextureFilter;
 import vine.graphics.VertexAttribute;
 import vine.math.matrix.Mat4f;
 import vine.math.vector.Vec3f;
@@ -36,7 +39,7 @@ public final class GLGraphics implements Graphics
     @Override
     public void swapBuffer()
     {
-        GLFW.glfwSwapBuffers(this.context);
+        GLFW.glfwSwapBuffers(context);
     }
 
     @Override
@@ -196,16 +199,37 @@ public final class GLGraphics implements Graphics
     }
 
     @Override
-    public void drawElements(final int count)
+    public void drawElements(final int count, final DrawPrimitive p)
     {
-        // GL11.glPolygonMode(GL11.GL_BACK, GL11.GL_LINE);
-        GL11.glDrawElements(GL11.GL_TRIANGLES, count, GL11.GL_UNSIGNED_INT, 0);
+        GL11.glDrawElements(getPrimitiveId(p), count, GL11.GL_UNSIGNED_INT, 0);
     }
 
     @Override
-    public void drawArrays(final int count)
+    public void drawArrays(final int count, final DrawPrimitive p)
     {
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, count);
+        GL11.glDrawArrays(getPrimitiveId(p), 0, count);
+    }
+
+    private static int getPrimitiveId(final DrawPrimitive p)
+    {
+        switch (p) {
+        case TRIANGLE:
+            return GL11.GL_TRIANGLES;
+        case TRIANGLE_FAN:
+            return GL11.GL_TRIANGLE_FAN;
+        case TRIANGLE_STRIP:
+            return GL11.GL_TRIANGLE_STRIP;
+        case LINE:
+            return GL11.GL_LINE;
+        case LINE_STRIP:
+            return GL11.GL_LINE_STRIP;
+        case POINT:
+            return GL11.GL_POINT;
+        case LINE_LOOP:
+            return GL11.GL_LINE_LOOP;
+        default:
+            return GL11.GL_LINE;
+        }
     }
 
     @Override
@@ -226,6 +250,58 @@ public final class GLGraphics implements Graphics
     {
         GL15.glBindBuffer(GL15.GL_ELEMENT_ARRAY_BUFFER, ibo);
         GL15.glBufferSubData(GL15.GL_ELEMENT_ARRAY_BUFFER, 0, indicesBuffer);
+    }
+
+    @Override
+    public void setPolygonMode(final PolygonMode mode)
+    {
+        switch (mode) {
+        case WIREFRAME:
+            GL11.glPolygonMode(GL11.GL_BACK, GL11.GL_LINE);
+        break;
+        case POINTS:
+            GL11.glPolygonMode(GL11.GL_BACK, GL11.GL_POINTS);
+        break;
+        case FILLED:
+            GL11.glPolygonMode(GL11.GL_BACK, GL11.GL_FILL);
+        break;
+        default:
+        break;
+        }
+    }
+
+    private static final int getTextureFilterId(final TextureFilter filter)
+    {
+
+        switch (filter) {
+        case NEAREST:
+            return GL11.GL_NEAREST;
+        case LINEAR:
+            return GL11.GL_LINEAR;
+        case NEAREST_LINEAR:
+            return GL11.GL_NEAREST_MIPMAP_LINEAR;
+        case NEAREST_NEAREST:
+            return GL11.GL_NEAREST_MIPMAP_NEAREST;
+        case LINEAR_LINEAR:
+            return GL11.GL_LINEAR_MIPMAP_LINEAR;
+        case LINEAR_NEAREST:
+            return GL11.GL_LINEAR_MIPMAP_NEAREST;
+        default:
+            return GL11.GL_NEAREST;
+        }
+    }
+
+    @Override
+    public void setTextureFilter(final TextureFilter mag, final TextureFilter min)
+    {
+        if (mag != null)
+        {
+            GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, getTextureFilterId(min));
+        }
+        if (min != null)
+        {
+            GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, getTextureFilterId(mag));
+        }
     }
 
 }

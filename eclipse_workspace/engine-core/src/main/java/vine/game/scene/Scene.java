@@ -27,8 +27,8 @@ public class Scene
 
     public Scene()
     {
-        this.tracer = new SceneTracer(this);
-        this.chunks = new Chunk[10][10];
+        tracer = new SceneTracer(this);
+        chunks = new Chunk[10][10];
         initializeChunks();
     }
 
@@ -38,14 +38,14 @@ public class Scene
         {
             for (int j = 0; j < 10; j++)
             {
-                this.chunks[i][j] = new Chunk(1400, 700, 20, 14);
+                chunks[i][j] = new Chunk(1400, 700, 20, 14);
             }
         }
     }
 
     public World getWorld()
     {
-        return this.world;
+        return world;
     }
 
     public void setWorld(final World world)
@@ -55,17 +55,17 @@ public class Scene
 
     public CameraManager getCameras()
     {
-        return this.cameras;
+        return cameras;
     }
 
     protected Chunk[][] getChunks()
     {
-        return this.chunks;
+        return chunks;
     }
 
     public void prepareUpdate()
     {
-        for (final Chunk[] chunkArray : this.chunks)
+        for (final Chunk[] chunkArray : chunks)
         {
             for (final Chunk chunk : chunkArray)
             {
@@ -79,12 +79,12 @@ public class Scene
      */
     public Iterable<GameEntity> getEntities()
     {
-        return this.entities;
+        return entities;
     }
 
     public boolean removeEntity(final GameEntity entity)
     {
-        return this.entities.remove(entity);
+        return entities.remove(entity);
     }
 
     public <T extends GameEntity> WeakReference<T> spawn(
@@ -117,7 +117,7 @@ public class Scene
      */
     public Chunk getChunk(final int i, final int j)
     {
-        return this.chunks[i][j];
+        return chunks[i][j];
     }
 
     /**
@@ -128,10 +128,10 @@ public class Scene
      */
     public final void addEntity(final GameEntity entity)
     {
-        if (!this.entities.contains(entity))
+        if (!entities.contains(entity))
         {
-            this.entities.add(entity);
-            entity.registerDestructionCallback(e -> this.entities.remove(e));
+            entities.add(entity);
+            entity.registerDestructionCallback(e -> entities.remove(e));
             entity.setScene(this);
         }
     }
@@ -141,7 +141,7 @@ public class Scene
      */
     public final UniformTileMap getMap()
     {
-        return this.map.getMap();
+        return map.getMap();
     }
 
     public void addMap(final TileMapObject map)
@@ -161,11 +161,11 @@ public class Scene
 
     public SceneTracer getTracer()
     {
-        return this.tracer;
+        return tracer;
     }
 
     public EventListener getListener()
     {
-        return this.listener;
+        return listener;
     }
 }

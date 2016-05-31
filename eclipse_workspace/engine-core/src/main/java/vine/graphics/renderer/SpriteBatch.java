@@ -3,7 +3,7 @@ package vine.graphics.renderer;
 import vine.assets.AssetManager;
 import vine.game.scene.Scene;
 import vine.game.screen.Screen;
-import vine.graphics.Image;
+import vine.graphics.RgbaImage;
 import vine.graphics.Texture;
 import vine.graphics.VertexAttribute;
 import vine.graphics.VertexAttributeBuffer;
@@ -20,7 +20,7 @@ import vine.math.vector.Vec3f;
 public class SpriteBatch
 {
     public static final Shader          DEFAULT_SHADER       = AssetManager.loadSync("frag", Shader.class);
-    public static final Image           DEFAULT_TEXTURE      = AssetManager.loadSync("hero", Image.class);
+    public static final RgbaImage           DEFAULT_TEXTURE      = AssetManager.loadSync("hero", RgbaImage.class);
 
     private final Mat4f                 cameraTransformation = Mat4f.identity();
 

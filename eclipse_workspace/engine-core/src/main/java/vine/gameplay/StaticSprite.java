@@ -1,7 +1,9 @@
 package vine.gameplay;
 
+import vine.game.ITransform;
+import vine.game.Transform;
 import vine.game.scene.Component;
-import vine.graphics.Image;
+import vine.graphics.RgbaImage;
 import vine.graphics.Renderable;
 import vine.graphics.Sprite;
 import vine.graphics.renderer.SpriteBatch;
@@ -14,8 +16,9 @@ import vine.math.vector.Vec2f;
  */
 public class StaticSprite extends Component implements Sprite, Renderable
 {
-    private final MutableVec2f size = new MutableVec2f(0, 0);
-    private final Image        texture;
+    ITransform                 transform = new Transform();
+    private final MutableVec2f size      = new MutableVec2f(0, 0);
+    private final RgbaImage        texture;
     private final float[]      textureUVs;
 
     /**
@@ -24,7 +27,7 @@ public class StaticSprite extends Component implements Sprite, Renderable
     @Override
     public final float[] getUVCoordinates()
     {
-        return this.textureUVs;
+        return textureUVs;
     }
 
     /**
@@ -36,29 +39,29 @@ public class StaticSprite extends Component implements Sprite, Renderable
      * @param texWidth
      * @param texHeight
      */
-    public StaticSprite(final Image texture, final int texX, final int texY, final int texWidth, final int texHeight,
+    public StaticSprite(final RgbaImage texture, final int texX, final int texY, final int texWidth, final int texHeight,
             final float width, final float height)
     {
         super();
         this.texture = texture;
-        this.textureUVs = texture.getPackedUVSquad(texX, texY, texWidth, texHeight);
-        this.size.setX(width);
-        this.size.setY(height);
+        textureUVs = texture.getPackedUVSquad(texX, texY, texWidth, texHeight);
+        size.setX(width);
+        size.setY(height);
     }
 
     /**
      * @return
      */
     @Override
-    public Image getTexture()
+    public RgbaImage getTexture()
     {
-        return this.texture;
+        return texture;
     }
 
     @Override
     public Vec2f getSize()
     {
-        return this.size;
+        return size;
     }
 
     @Override
@@ -67,12 +70,12 @@ public class StaticSprite extends Component implements Sprite, Renderable
         batcher.submit(
                 getTexture(),
                 getUVCoordinates(),
-                this.entity.getXPosition() + this.worldOffset.getX(),
-                this.entity.getYPosition() + this.worldOffset.getY(),
+                entity.getXPosition(),
+                entity.getYPosition(),
                 getSize().getX(),
                 getSize().getY(),
-                this.entity.getZPosition(),
-                this.entity.getColor().getColor());
+                entity.getZPosition(),
+                entity.getColor().getColor());
     }
 
     @Override
@@ -85,15 +88,14 @@ public class StaticSprite extends Component implements Sprite, Renderable
     @Override
     public void onAttach()
     {
-        // TODO Auto-generated method stub
-
+        transform.setParent(entity.getTransform());
     }
 
     @Override
     public void onDetach()
     {
-        // TODO Auto-generated method stub
-
+        super.detach();
+        transform.setParent(null);
     }
 
     @Override

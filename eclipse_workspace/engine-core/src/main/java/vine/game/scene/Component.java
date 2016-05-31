@@ -1,35 +1,19 @@
 package vine.game.scene;
 
-import vine.math.vector.MutableVec2f;
-
 /**
  * @author Steffen
  *
  */
 public abstract class Component
 {
-    /**
-     * 
-     */
-    protected GameEntity   entity;
-    protected MutableVec2f worldOffset = new MutableVec2f();
+    protected GameEntity entity;
 
     /**
      * @return The entity this component is attached to
      */
     public final GameEntity getEntity()
     {
-        return this.entity;
-    }
-
-    public void addWorldOffset(final float x, final float y)
-    {
-        this.worldOffset.set(x, y);
-    }
-
-    public void setWorldOffset(final float x, final float y)
-    {
-        this.worldOffset.set(x, y);
+        return entity;
     }
 
     /**
@@ -38,24 +22,24 @@ public abstract class Component
      */
     public void attachTo(final GameEntity holder)
     {
-        if (holder != null && (this.entity == null || !this.entity.equals(holder)))
+        if (holder != null && (entity == null || !entity.equals(holder)))
         {
-            this.entity = holder;
+            entity = holder;
         }
     }
 
     public boolean isAttached()
     {
-        return this.entity == null;
+        return entity == null;
     }
 
     public void detach()
     {
-        if (this.entity != null)
+        if (entity != null)
         {
-            this.entity.detachComponent(this);
+            entity.detachComponent(this);
         }
-        this.entity = null;
+        entity = null;
     }
 
     /**

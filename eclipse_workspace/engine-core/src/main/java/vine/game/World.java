@@ -7,14 +7,13 @@ import java.util.Deque;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Semaphore;
 
 import vine.game.GameObject.ReferenceManager;
 import vine.game.scene.Scene;
 import vine.game.screen.Screen;
-import vine.physics.Physics;
+import vine.physics.PhysicsEngine;
 import vine.settings.Configuration;
-import vine.util.Log;
+import vine.util.ConcurrentManagedSet;
 
 /**
  * Manages the gameplay on a global level. That is managing level changer
@@ -37,15 +36,14 @@ public final class World
     private final Configuration   configuration;
     private final Screen          screen;
     private final Scene           scene;
-    private final Physics         physics;
+    private final PhysicsEngine   physics;
     private final Player          player;
     private final GameState       gameState;
     private final WorldSettings   worldSettings;
 
-    private final Set<GameObject> updatableObjects = new HashSet<>(1000);
+    private final Set<GameObject> updatableObjects = new ConcurrentManagedSet<>(new HashSet<>());
     final Deque<GameObject>       addList          = new ArrayDeque<>(100);
     final Deque<GameObject>       removeList       = new ArrayDeque<>(100);
-    private final Semaphore       available        = new Semaphore(1, true);
 
     /**
      * @param screen
@@ -56,43 +54,43 @@ public final class World
     public World(final Screen screen)
     {
         this.screen = screen;
-        this.scene = new Scene();
-        this.scene.setWorld(this);
-        this.physics = new Physics();
-        this.player = new Player();
-        this.gameState = new GameState();
-        this.worldSettings = new WorldSettings();
-        this.configuration = new Configuration("res/settings.ini");
+        scene = new Scene();
+        scene.setWorld(this);
+        physics = new PhysicsEngine();
+        player = new Player();
+        gameState = new GameState();
+        worldSettings = new WorldSettings();
+        configuration = new Configuration("res/settings.ini");
     }
 
-    public final Physics getPhysics()
+    public final PhysicsEngine getPhysics()
     {
-        return this.physics;
+        return physics;
     }
 
     public Configuration getGameSettings()
     {
-        return this.configuration;
+        return configuration;
     }
 
     public WorldSettings getWorldSettings()
     {
-        return this.worldSettings;
+        return worldSettings;
     }
 
     public Scene getScene()
     {
-        return this.scene;
+        return scene;
     }
 
     public Player getPlayer()
     {
-        return this.player;
+        return player;
     }
 
     public GameState getGameState()
     {
-        return this.gameState;
+        return gameState;
     }
 
     /**
@@ -100,7 +98,7 @@ public final class World
      */
     public Screen getScreen()
     {
-        return this.screen;
+        return screen;
     }
 
     /**
@@ -108,42 +106,26 @@ public final class World
      */
     public Configuration getSettings()
     {
-        return this.configuration;
+        return configuration;
     }
 
     private void preUpdate()
     {
-        if (!this.addList.isEmpty())
+        if (!addList.isEmpty())
         {
-            this.updatableObjects.addAll(this.addList);
-            try
-            {
-                this.available.acquire();
-            } catch (final InterruptedException exception)
-            {
-                Log.exception("Interrupted while waiting for add list semaphore", exception);
-            }
-            for (final GameObject o : this.addList)
+            updatableObjects.addAll(addList);
+            for (final GameObject o : addList)
             {
                 o.begin();
             }
-            this.available.release();
-            this.addList.clear();
+            addList.clear();
         }
     }
 
     public void addObject(final GameObject object)
     {
-        try
-        {
-            this.available.acquire();
-        } catch (final InterruptedException exception)
-        {
-            Log.exception("Interrupted while waiting for add list semaphore", exception);
-        }
-        this.addList.add(object);
-        this.available.release();
-        object.registerDestructionCallback(o -> this.removeList.add(object));
+        addList.add(object);
+        object.registerDestructionCallback(o -> removeList.add(object));
     }
 
     /**
@@ -152,10 +134,9 @@ public final class World
      */
     public void update(final float delta)
     {
-        this.physics.update(delta);
         preUpdate();
-        this.scene.prepareUpdate();
-        for (final GameObject object : this.updatableObjects)
+        scene.prepareUpdate();
+        for (final GameObject object : updatableObjects)
         {
             object.update(delta);
         }
@@ -164,10 +145,10 @@ public final class World
 
     private void postUpdate()
     {
-        if (!this.removeList.isEmpty())
+        if (!removeList.isEmpty())
         {
-            this.updatableObjects.removeAll(this.removeList);
-            this.removeList.clear();
+            updatableObjects.removeAll(removeList);
+            removeList.clear();
         }
     }
 
@@ -252,5 +233,6 @@ public final class World
 
     public void simulatePhysics(final float delta)
     {
+        physics.update(delta);
     }
 }

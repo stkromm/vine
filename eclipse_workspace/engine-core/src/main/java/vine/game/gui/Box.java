@@ -2,7 +2,7 @@ package vine.game.gui;
 
 import vine.assets.AssetManager;
 import vine.game.screen.Screen;
-import vine.graphics.Image;
+import vine.graphics.RgbaImage;
 import vine.graphics.Texture;
 import vine.math.vector.Vec2f;
 import vine.math.vector.Vec3f;
@@ -82,7 +82,7 @@ public class Box extends Widget
         return this.uvs;
     }
 
-    public static final Image DEFAULT_TEXTURE = AssetManager.loadSync("hero", Image.class);
+    public static final RgbaImage DEFAULT_TEXTURE = AssetManager.loadSync("hero", RgbaImage.class);
 
     @Override
     public Texture getTexture()

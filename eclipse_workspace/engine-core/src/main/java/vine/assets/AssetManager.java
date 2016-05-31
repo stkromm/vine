@@ -5,7 +5,7 @@ import java.util.Map;
 
 import vine.assets.AssetLoader.FinishCallback;
 import vine.graphics.Font;
-import vine.graphics.Image;
+import vine.graphics.RgbaImage;
 import vine.graphics.shader.Shader;
 import vine.sound.SoundClip;
 
@@ -16,7 +16,7 @@ public class AssetManager
     private static AssetTable                                       assetTable   = new AssetTable("res/assets");
     static
     {
-        AssetManager.ASSETS_BY_TYPE.put(Image.class.getName(), new HashMap<String, ObservedAsset<?>>());
+        AssetManager.ASSETS_BY_TYPE.put(RgbaImage.class.getName(), new HashMap<String, ObservedAsset<?>>());
         AssetManager.ASSETS_BY_TYPE.put(Shader.class.getName(), new HashMap<String, ObservedAsset<?>>());
         AssetManager.ASSETS_BY_TYPE.put(Font.class.getName(), new HashMap<String, ObservedAsset<?>>());
         AssetManager.ASSETS_BY_TYPE.put(SoundClip.class.getName(), new HashMap<String, ObservedAsset<?>>());
@@ -39,7 +39,7 @@ public class AssetManager
             } else if (type.equals(Shader.class))
             {
                 loadedAsset = type.cast(new ShaderLoader().loadSync(AssetManager.getAssetPointer(assetName), null));
-            } else if (type.equals(Image.class))
+            } else if (type.equals(RgbaImage.class))
             {
                 loadedAsset = type.cast(new TextureLoader().loadSync(AssetManager.getAssetPointer(assetName), null));
             } else if (type.equals(Font.class))

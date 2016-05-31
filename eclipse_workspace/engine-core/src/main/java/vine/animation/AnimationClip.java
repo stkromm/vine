@@ -2,7 +2,7 @@ package vine.animation;
 
 import java.util.Arrays;
 
-import vine.math.VineMath;
+import vine.math.GMath;
 
 public class AnimationClip
 {
@@ -18,7 +18,7 @@ public class AnimationClip
         super();
         Arrays.sort(frames, (o1, o2) -> o1.getTimepoint() >= o2.getTimepoint() ? 1 : -1);
         this.frames = frames;
-        this.duration = frames[frames.length - 1].getTimepoint();
+        duration = frames[frames.length - 1].getTimepoint();
     }
 
     /**
@@ -29,17 +29,17 @@ public class AnimationClip
      */
     public final AnimationFrame getFrame(final float time)
     {
-        final float clampedTime = VineMath.clamp(time, 0, this.duration);
+        final float clampedTime = GMath.clamp(time, 0, duration);
         int frameId = 0;
-        while (this.frames[frameId].getTimepoint() < clampedTime)
+        while (frames[frameId].getTimepoint() < clampedTime)
         {
             ++frameId;
         }
-        return this.frames[frameId];
+        return frames[frameId];
     }
 
     public final float getDuration()
     {
-        return this.duration;
+        return duration;
     }
 }

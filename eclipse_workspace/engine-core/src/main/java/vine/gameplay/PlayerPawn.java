@@ -6,11 +6,11 @@ import vine.animation.AnimationStateManager;
 import vine.assets.AssetManager;
 import vine.event.Event.EventType;
 import vine.event.KeyEvent;
+import vine.game.primitive.BoxPrimitive;
 import vine.game.scene.GameEntity;
 import vine.game.scene.MultiTraceResult;
-import vine.graphics.Image;
+import vine.graphics.RgbaImage;
 import vine.input.InputAction;
-import vine.physics.CollisionBox;
 import vine.physics.RigidBody;
 import vine.sound.AudioPlayer;
 import vine.sound.SoundClip;
@@ -29,6 +29,7 @@ public class PlayerPawn extends GameEntity
     @Override
     public void onUpdate(final float delta)
     {
+        setAnimationState();
         super.onUpdate(delta * 1.5f);
     }
 
@@ -36,77 +37,103 @@ public class PlayerPawn extends GameEntity
     public void begin()
     {
         final AnimatedSprite sprite = this.getComponent(AnimatedSprite.class);
-        this.animation = sprite.getAnimationManager();
+        animation = sprite.getAnimationManager();
         getScene().getListener().addEventHandler(EventType.KEY, event -> onKeyEvent((KeyEvent) event));
-        this.movement = this.getComponent(RigidBody.class);
+        movement = this.getComponent(RigidBody.class);
     }
 
     private void onMoveButtonReleased(final int button)
     {
         switch (button) {
         case GLFW.GLFW_KEY_W:
+            movement.addImpuls(0, -32);
         break;
         case GLFW.GLFW_KEY_A:
+            movement.addImpuls(32, 0);
         break;
         case GLFW.GLFW_KEY_D:
+            movement.addImpuls(-32, 0);
         break;
         case GLFW.GLFW_KEY_S:
+            movement.addImpuls(0, 32);
         break;
         case GLFW.GLFW_KEY_F:
             if (getScene().getTracer()
-                    .multiRayTrace(this, getPosition().getX(), getPosition().getY(), 1, 0, 500, this.tmpTraceResult))
+                    .multiRayTrace(this, getPosition().getX(), getPosition().getY(), 1, 0, 500, tmpTraceResult))
             {
-                for (final GameEntity entity : this.tmpTraceResult.getEntities())
+                for (final GameEntity entity : tmpTraceResult.getEntities())
                 {
                     entity.destroy();
                 }
             }
         break;
         case GLFW.GLFW_KEY_G:
-            final StaticSprite sprite1 = new StaticSprite(AssetManager.loadSync("hero", Image.class), 0, 0, 16, 32, 32,
+            final StaticSprite sprite1 = new StaticSprite(AssetManager.loadSync("hero", RgbaImage.class), 0, 0, 16, 32, 32,
                     64);
             attachComponent(sprite1);
-            final float x = (float) Math.random() * 200;
-            final float y = (float) Math.random() * 200;
-            sprite1.addWorldOffset(x, y);
-            final CollisionBox box = new CollisionBox();
+            final BoxPrimitive box = new BoxPrimitive();
             attachComponent(box);
-            box.addWorldOffset(x, y);
         break;
         default:
         break;
         }
-        setAnimationState();
+
     }
 
     private void setAnimationState()
     {
-        /*
-         * if (this.movement.getSpeedX() == 0 && this.movement.getSpeedY() == 0)
-         * { switch (this.animation.getCurrentState().getName()) { case "down":
-         * this.animation.changeState("idle-down"); break; case "up":
-         * this.animation.changeState("idle-up"); break; case "left":
-         * this.animation.changeState("idle-left"); break; case "right":
-         * this.animation.changeState("idle-right"); break; default: }
-         * 
-         * } else if (this.movement.getSpeedX() > 0) {
-         * this.animation.changeState("right"); } else if
-         * (this.movement.getSpeedX() < 0) { this.animation.changeState("left");
-         * } else if (this.movement.getSpeedY() < 0) {
-         * this.animation.changeState("down"); } else if
-         * (this.movement.getSpeedY() > 0) { this.animation.changeState("up"); }
-         */
+
+        if (movement.getVelocity().getX() == 0 && movement.getVelocity().getY() == 0)
+        {
+            switch (animation.getCurrentState().getName()) {
+            case "down":
+                animation.changeState("idle-down");
+            break;
+            case "up":
+                animation.changeState("idle-up");
+            break;
+            case "left":
+                animation.changeState("idle-left");
+            break;
+            case "right":
+                animation.changeState("idle-right");
+            break;
+            default:
+            }
+
+        } else if (movement.getVelocity().getX() > 0)
+        {
+            animation.changeState("right");
+        } else if (movement.getVelocity().getX() < 0)
+        {
+            animation.changeState("left");
+        } else if (movement.getVelocity().getY() < 0)
+        {
+            animation.changeState("down");
+        } else if (movement.getVelocity().getY() > 0)
+        {
+            animation.changeState("up");
+        }
     }
 
     private void onMoveButtonPressed(final int button)
     {
-        /*
-         * switch (button) { case GLFW.GLFW_KEY_W: this.movement.addSpeed(0,
-         * 64); break; case GLFW.GLFW_KEY_A: this.movement.addSpeed(-64, 0);
-         * break; case GLFW.GLFW_KEY_D: this.movement.addSpeed(64, 0); break;
-         * case GLFW.GLFW_KEY_S: this.movement.addSpeed(0, -64); break; default:
-         * break; } setAnimationState();
-         */
+        switch (button) {
+        case GLFW.GLFW_KEY_W:
+            movement.addImpuls(0, 32);
+        break;
+        case GLFW.GLFW_KEY_A:
+            movement.addImpuls(-32, 0);
+        break;
+        case GLFW.GLFW_KEY_D:
+            movement.addImpuls(32, 0);
+        break;
+        case GLFW.GLFW_KEY_S:
+            movement.addImpuls(0, -32);
+        break;
+        default:
+        break;
+        }
     }
 
     public boolean onKeyEvent(final KeyEvent keyEvent)
@@ -124,7 +151,7 @@ public class PlayerPawn extends GameEntity
     @Override
     public void construct()
     {
-        this.player.setClip(AssetManager.loadSync("music", SoundClip.class));
+        player.setClip(AssetManager.loadSync("music", SoundClip.class));
         // this.player.playLooped();
     }
 }

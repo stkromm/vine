@@ -1,8 +1,9 @@
 package vine.gameplay;
 
 import vine.animation.AnimationStateManager;
+import vine.game.Transform;
 import vine.game.scene.Component;
-import vine.graphics.Image;
+import vine.graphics.RgbaImage;
 import vine.graphics.Renderable;
 import vine.graphics.Sprite;
 import vine.graphics.renderer.SpriteBatch;
@@ -16,53 +17,55 @@ import vine.math.vector.Vec2f;
 public class AnimatedSprite extends Component implements Sprite, Renderable
 {
 
-    Image                      texture;
+    RgbaImage                      texture;
     AnimationStateManager      animation;
-    private final MutableVec2f size = new MutableVec2f(0, 0);
+    private final MutableVec2f size      = new MutableVec2f(0, 0);
+    private final Transform    transform = new Transform();
 
-    public AnimatedSprite(final AnimationStateManager animation, final Image texture, final float width,
+    public AnimatedSprite(final AnimationStateManager animation, final RgbaImage texture, final float width,
             final float height)
     {
         super();
         this.texture = texture;
         this.animation = animation;
-        this.size.setX(width);
-        this.size.setY(height);
+        size.setX(width);
+        size.setY(height);
+        transform.translate(8, 0);
     }
 
     public AnimationStateManager getAnimationManager()
     {
-        return this.animation;
+        return animation;
     }
 
     @Override
     public float[] getUVCoordinates()
     {
-        return this.animation.getCurrentFrame();
+        return animation.getCurrentFrame();
     }
 
     @Override
-    public Image getTexture()
+    public RgbaImage getTexture()
     {
-        return this.texture;
+        return texture;
     }
 
     @Override
     public Vec2f getSize()
     {
-        return this.size;
+        return size;
     }
 
     @Override
     public void onDeactivation()
     {
-        this.animation.stop();
+        animation.stop();
     }
 
     @Override
     public void onActivation()
     {
-        this.animation.start();
+        animation.start();
     }
 
     @Override
@@ -71,12 +74,12 @@ public class AnimatedSprite extends Component implements Sprite, Renderable
         batcher.submit(
                 getTexture(),
                 getUVCoordinates(),
-                this.entity.getXPosition() + this.worldOffset.getX(),
-                this.entity.getYPosition() + this.worldOffset.getY(),
+                transform.getWorldPosition().getX(),
+                transform.getWorldPosition().getY(),
                 getSize().getX(),
                 getSize().getY(),
-                this.entity.getZPosition(),
-                this.entity.getColor().getColor());
+                entity.getZPosition(),
+                entity.getColor().getColor());
     }
 
     @Override
@@ -90,6 +93,7 @@ public class AnimatedSprite extends Component implements Sprite, Renderable
     public void onAttach()
     {
         //
+        transform.setParent(entity.getTransform());
     }
 
     @Override

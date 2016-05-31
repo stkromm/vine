@@ -6,6 +6,7 @@ public final class RuntimeInfo
     public static final String LOGIC_THREAD_NAME    = "logic";
     public static final String SHUTDOWN_THREAD_NAME = "shutdown";
     public static final String STARTUP_THREAD_NAME  = "main";
+    public static final String PHYSIC_THREAD_NAME   = "physic";
 
     private RuntimeInfo()
     {

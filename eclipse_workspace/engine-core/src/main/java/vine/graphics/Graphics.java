@@ -32,6 +32,8 @@ public interface Graphics
 
     void setTextureParameter(int parameter, int value);
 
+    void setTextureFilter(TextureFilter mag, TextureFilter min);
+
     void createRgbaTexture2D(int width, int height, final int[] data);
 
     // SHADER FUNCTIONS
@@ -68,8 +70,10 @@ public interface Graphics
 
     // Drawing
 
-    void drawElements(int count);
+    void setPolygonMode(PolygonMode mode);
 
-    void drawArrays(int count);
+    void drawElements(int count, DrawPrimitive primitive);
+
+    void drawArrays(int count, DrawPrimitive primitive);
 
 }

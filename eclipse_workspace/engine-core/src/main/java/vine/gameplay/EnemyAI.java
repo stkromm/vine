@@ -4,35 +4,36 @@ import java.lang.ref.WeakReference;
 
 import vine.game.World;
 import vine.game.scene.Component;
+import vine.math.vector.VectorUtils;
 import vine.math.vector.Vec2f;
-import vine.physics.PhysicsComponent;
+import vine.physics.RigidBody;
 
 public class EnemyAI extends Component
 {
     WeakReference<PlayerPawn> player;
-    PhysicsComponent          movement;
+    RigidBody                 movement;
 
     @Override
     public void onAttach()
     {
-        this.player = new WeakReference<>((PlayerPawn) World.getObjectByName("player"));
-        // this.movement = this.entity.getComponent(PhysicsComponent.class);
+        player = new WeakReference<>((PlayerPawn) World.getObjectByName("player"));
+        movement = entity.getComponent(RigidBody.class);
     }
 
     @Override
     public void onUpdate(final float delta)
     {
-        if (this.player.get() != null)
+        if (player.get() != null)
         {
-            final Vec2f playerPosition = this.player.get().getPosition();
-            // if (Vector2f.length(playerPosition.getX() -
-            // this.entity.getXPosition(),
-            // playerPosition.getY() - this.entity.getYPosition()) > 200)
-            // {
-            // this.movement.setAcceleration(
-            // playerPosition.getX() - this.entity.getXPosition(),
-            // playerPosition.getY() - this.entity.getYPosition());
-            // }
+            final Vec2f playerPosition = player.get().getPosition();
+            if (VectorUtils.squaredLength(
+                    playerPosition.getX() - entity.getXPosition(),
+                    playerPosition.getY() - entity.getYPosition()) > 150 * 150)
+            {
+                movement.addForce(
+                        (playerPosition.getX() - entity.getXPosition()) / 3,
+                        (playerPosition.getY() - entity.getYPosition()) / 3);
+            }
         }
     }
 

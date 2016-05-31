@@ -1,9 +1,9 @@
 package vine.game.scene;
 
-import vine.math.VineMath;
-import vine.math.geometry.Intersection2D;
+import vine.math.GMath;
+import vine.math.Intersection;
 import vine.math.vector.Vec2f;
-import vine.math.vector.Vector2s;
+import vine.math.vector.VectorUtils;
 import vine.util.Log;
 
 public class SceneTracer
@@ -35,7 +35,7 @@ public class SceneTracer
         {
             for (int j = endChunkY - startChunkY; j >= 0; j--)
             {
-                for (final GameEntity entity : this.scene.getChunks()[startChunkX + i][startChunkY + j].getEntities())
+                for (final GameEntity entity : scene.getChunks()[startChunkX + i][startChunkY + j].getEntities())
                 {
                     traverser.traverseEntity(entity);
                 }
@@ -51,11 +51,11 @@ public class SceneTracer
             final TraceResult result)
     {
         final long startTime = System.nanoTime();
-        final int startChunkX = (int) VineMath.clamp(origin.getX() * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int startChunkY = (int) VineMath.clamp(origin.getY() * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
-        final int endChunkX = (int) VineMath
+        final int startChunkX = (int) GMath.clamp(origin.getX() * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
+        final int startChunkY = (int) GMath.clamp(origin.getY() * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
+        final int endChunkX = (int) GMath
                 .clamp((origin.getX() + extend.getX()) * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int endChunkY = (int) VineMath
+        final int endChunkY = (int) GMath
                 .clamp((origin.getY() + extend.getY()) * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
 
         GameEntity nearestEntity = null;
@@ -65,15 +65,15 @@ public class SceneTracer
         {
             for (int j = endChunkY - startChunkY; j >= 0; j--)
             {
-                for (final GameEntity entity : this.scene.getChunks()[startChunkX + i][startChunkY + j].getEntities())
+                for (final GameEntity entity : scene.getChunks()[startChunkX + i][startChunkY + j].getEntities())
                 {
-                    if ((!ignoreSelf || !tracer.equals(entity)) && Intersection2D.doesAabbIntersectAabb(
+                    if ((!ignoreSelf || !tracer.equals(entity)) && Intersection.doesAABBIntersectAABB(
                             entity.getPosition(),
                             entity.getBoundingBoxExtends(),
                             origin,
                             extend))
                     {
-                        final double length = Vector2s
+                        final double length = VectorUtils
                                 .length(origin.getX() - entity.getXPosition(), origin.getY() - entity.getYPosition());
                         if (length < smallestDistance)
                         {
@@ -84,10 +84,7 @@ public class SceneTracer
                 }
             }
         }
-        if (Log.isDebugEnabled())
-        {
-            Log.debugUnchecked("CircleTrace took " + (System.nanoTime() - startTime) * (1 / 1000000f) + "milliseconds");
-        }
+        Log.debug("CircleTrace took %d milliseconds", Float.valueOf((System.nanoTime() - startTime) * (1 / 1000000f)));
         return nearestEntity != null;
     }
 
@@ -100,19 +97,19 @@ public class SceneTracer
         result.prepare();
 
         final long startTime = System.nanoTime();
-        final int startChunkX = (int) VineMath.clamp(origin.getX() * (1 / 1400f), 0, 9);
-        final int startChunkY = (int) VineMath.clamp(origin.getY() * (1f / 800), 0, 9);
-        final int endChunkX = (int) VineMath.clamp((origin.getX() + extend.getX()) * (1 / 1400f), 0, 9);
-        final int endChunkY = (int) VineMath.clamp((origin.getY() + extend.getY()) * (1 / 800), 0, 9);
+        final int startChunkX = (int) GMath.clamp(origin.getX() * (1 / 1400f), 0, 9);
+        final int startChunkY = (int) GMath.clamp(origin.getY() * (1f / 800), 0, 9);
+        final int endChunkX = (int) GMath.clamp((origin.getX() + extend.getX()) * (1 / 1400f), 0, 9);
+        final int endChunkY = (int) GMath.clamp((origin.getY() + extend.getY()) * (1 / 800), 0, 9);
 
         final boolean ignoreSelf = tracer != null;
         traverseScene(startChunkX, startChunkY, endChunkX, endChunkY, entity ->
         {
-            if (ignoreSelf && entity.compareTo(tracer) != 0 && Intersection2D
-                    .doesAabbIntersectAabb(entity.getPosition(), entity.getBoundingBoxExtends(), origin, extend))
+            if (ignoreSelf && entity.compareTo(tracer) != 0 && Intersection
+                    .doesAABBIntersectAABB(entity.getPosition(), entity.getBoundingBoxExtends(), origin, extend))
             {
                 result.getEntities().add(entity);
-                final double length = Vector2s
+                final double length = VectorUtils
                         .length(origin.getX() - entity.getXPosition(), origin.getY() - entity.getYPosition());
                 if (length < result.getNearestHitDistance())
                 {
@@ -120,10 +117,7 @@ public class SceneTracer
                 }
             }
         });
-        if (Log.isDebugEnabled())
-        {
-            Log.debugUnchecked("multiAabbTrace took " + (System.nanoTime() - startTime) / 1000000f + "milliseconds");
-        }
+        Log.debug("multiAabbTrace took %d milliseconds", Float.valueOf((System.nanoTime() - startTime) / 1000000f));
         return !result.getEntities().isEmpty();
     }
 
@@ -155,22 +149,22 @@ public class SceneTracer
         assert result != null : "Passed null reference to circleTrace. Traces need a valid result object passed.";
         result.prepare();
 
-        final int startChunkX = (int) VineMath
+        final int startChunkX = (int) GMath
                 .clamp((center.getX() - radius) * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int startChunkY = (int) VineMath
+        final int startChunkY = (int) GMath
                 .clamp((center.getY() - radius) * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
-        final int endChunkX = (int) VineMath
+        final int endChunkX = (int) GMath
                 .clamp((center.getX() + radius) * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int endChunkY = (int) VineMath
+        final int endChunkY = (int) GMath
                 .clamp((center.getY() + radius) * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
 
         final boolean ignoreSelf = tracer != null;
         traverseScene(startChunkX, startChunkY, endChunkX, endChunkY, entity ->
         {
-            if (ignoreSelf && entity.compareTo(tracer) != 0 && Intersection2D
-                    .doesAabbIntersectCircle(entity.getPosition(), entity.getBoundingBoxExtends(), center, radius))
+            if (ignoreSelf && entity.compareTo(tracer) != 0 && Intersection
+                    .doesAABBIntersectCircle(entity.getPosition(), entity.getBoundingBoxExtends(), center, radius))
             {
-                final double length = Vector2s
+                final double length = VectorUtils
                         .length(center.getX() - entity.getXPosition(), center.getY() - entity.getYPosition());
                 if (length < result.getDistance())
                 {
@@ -180,10 +174,7 @@ public class SceneTracer
             }
         });
 
-        if (Log.isDebugEnabled())
-        {
-            Log.debugUnchecked("CircleTrace took " + (System.nanoTime() - startTime) * (1 / 1000000f) + "milliseconds");
-        }
+        Log.debug("CircleTrace took %d milliseconds", Float.valueOf((System.nanoTime() - startTime) * (1 / 1000000f)));
         return result.getDistance() < Float.MAX_VALUE;
     }
 
@@ -214,23 +205,23 @@ public class SceneTracer
 
         final long startTime = System.nanoTime();
         result.prepare();
-        final int startChunkX = (int) VineMath
+        final int startChunkX = (int) GMath
                 .clamp((center.getX() - radius) * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int startChunkY = (int) VineMath
+        final int startChunkY = (int) GMath
                 .clamp((center.getY() - radius) * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
-        final int endChunkX = (int) VineMath
+        final int endChunkX = (int) GMath
                 .clamp((center.getX() + radius) * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int endChunkY = (int) VineMath
+        final int endChunkY = (int) GMath
                 .clamp((center.getY() + radius) * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
 
         final boolean ignoreSelf = tracer != null;
         traverseScene(startChunkX, startChunkY, endChunkX, endChunkY, entity ->
         {
-            if (ignoreSelf && entity.compareTo(tracer) != 0 && Intersection2D
-                    .doesAabbIntersectCircle(entity.getPosition(), entity.getBoundingBoxExtends(), center, radius))
+            if (ignoreSelf && entity.compareTo(tracer) != 0 && Intersection
+                    .doesAABBIntersectCircle(entity.getPosition(), entity.getBoundingBoxExtends(), center, radius))
             {
                 result.getEntities().add(entity);
-                final double length = Vector2s
+                final double length = VectorUtils
                         .length(center.getX() - entity.getXPosition(), center.getY() - entity.getYPosition());
                 if (length < result.getNearestHitDistance())
                 {
@@ -238,10 +229,7 @@ public class SceneTracer
                 }
             }
         });
-        if (Log.isDebugEnabled())
-        {
-            Log.debugUnchecked("CircleTrace took " + (System.nanoTime() - startTime) / 1000000f + "milliseconds");
-        }
+        Log.debug("CircleTrace took %d milliseconds", Float.valueOf((System.nanoTime() - startTime) / 1000000f));
         return result.nearestHitDistance < Float.MAX_VALUE;
     }
 
@@ -296,7 +284,7 @@ public class SceneTracer
         assert result != null : "Passed null reference to rayTrace. Traces need a valid result object passed.";
         result.prepare();
 
-        final double directionLength = Vector2s.length(directionX, directionY);
+        final double directionLength = VectorUtils.length(directionX, directionY);
         assert directionLength != .0 : "Passed a direction vector with zero length to rayTrace.";
         final float iLength = 1f / (float) directionLength;
         final float direcX = directionX * iLength;
@@ -304,11 +292,11 @@ public class SceneTracer
         final float direcY = directionY * iLength;
         final float iDirecY = 1 / direcY;
 
-        final int startChunkX = (int) VineMath.clamp(originX * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int startChunkY = (int) VineMath.clamp(originY * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
-        final int endChunkX = (int) VineMath
+        final int startChunkX = (int) GMath.clamp(originX * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
+        final int startChunkY = (int) GMath.clamp(originY * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
+        final int endChunkX = (int) GMath
                 .clamp((originX + distance * directionX * iLength) * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int endChunkY = (int) VineMath
+        final int endChunkY = (int) GMath
                 .clamp((originY + distance * directionY * iLength) * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
 
         final boolean ignoreSelf = tracer != null;
@@ -316,7 +304,7 @@ public class SceneTracer
         {
             if (!ignoreSelf || entity.compareTo(tracer) != 0)
             {
-                final float length = Intersection2D.whereDoesRayIntersectAabb(
+                final float length = Intersection.intersectRayAABB(
                         originX,
                         originY,
                         iDirecX,
@@ -332,10 +320,7 @@ public class SceneTracer
                 }
             }
         });
-        if (Log.isDebugEnabled())
-        {
-            Log.debugUnchecked("LineTrace took " + (System.nanoTime() - startTime) / 1000000f + "milliseconds");
-        }
+        Log.debug("LineTrace took %d milliseconds", Float.valueOf((System.nanoTime() - startTime) / 1000000f));
         return result.getEntity() != null;
     }
 
@@ -390,19 +375,19 @@ public class SceneTracer
         final long startTime = System.nanoTime();
         result.prepare();
 
-        final double directionLength = Vector2s.length(directionX, directionY);
+        final double directionLength = VectorUtils.length(directionX, directionY);
         assert directionLength != .0 : "Passed a direction vector with zero length to multiRayTrace.";
         final float inversedDirectionLength = 1f / (float) directionLength;
         final float iDirectionX = 1 / (directionX * inversedDirectionLength);
         final float iDirectionY = 1 / (directionY * inversedDirectionLength);
 
-        final int startChunkX = (int) VineMath.clamp(originX * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
-        final int startChunkY = (int) VineMath.clamp(originY * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
-        final int endChunkX = (int) VineMath.clamp(
+        final int startChunkX = (int) GMath.clamp(originX * SceneTracer.I_CHUNK_WIDTH, 0, SceneTracer.CHUNKS);
+        final int startChunkY = (int) GMath.clamp(originY * SceneTracer.I_CHUNK_HEIGHT, 0, SceneTracer.CHUNKS);
+        final int endChunkX = (int) GMath.clamp(
                 (originX + distance * directionX * inversedDirectionLength) * SceneTracer.I_CHUNK_WIDTH,
                 0,
                 SceneTracer.CHUNKS);
-        final int endChunkY = (int) VineMath.clamp(
+        final int endChunkY = (int) GMath.clamp(
                 (originY + distance * directionY * inversedDirectionLength) * SceneTracer.I_CHUNK_HEIGHT,
                 0,
                 SceneTracer.CHUNKS);
@@ -414,7 +399,7 @@ public class SceneTracer
             {
                 return;
             }
-            final float tracedDistance = Intersection2D.whereDoesRayIntersectAabb(
+            final float tracedDistance = Intersection.intersectRayAABB(
                     originX,
                     originY,
                     iDirectionX,
@@ -433,11 +418,13 @@ public class SceneTracer
                 result.setNearestHitDistance(tracedDistance);
             }
         });
-        if (Log.isDebugEnabled())
-        {
-            Log.debugUnchecked("MultiLineTrace took " + (System.nanoTime() - startTime) / 1000000f + "milliseconds");
-            Log.debugUnchecked("Chunks x:" + startChunkX + "-" + endChunkX + " y:" + startChunkY + "-" + endChunkY);
-        }
+        Log.debug("MultiLineTrace took %d milliseconds", Float.valueOf((System.nanoTime() - startTime) / 1000000f));
+        Log.debug(
+                "Chunks x:%d-%d y:%d-%d",
+                Integer.valueOf(startChunkX),
+                Integer.valueOf(endChunkX),
+                Integer.valueOf(startChunkY),
+                Integer.valueOf(endChunkY));
         return result.getNearestHitDistance() < Float.MAX_VALUE;
     }
 }

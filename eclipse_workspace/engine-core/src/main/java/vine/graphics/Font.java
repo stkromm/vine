@@ -12,27 +12,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.lwjgl.opengl.GL11;
-
 import vine.assets.Asset;
+import vine.math.GMath;
 
 public class Font implements Texture, Asset
 {
-
-    // Constants
     private final Map<Integer, String> CHARS = new HashMap<Integer, String>()
                                              {
                                                  private static final long serialVersionUID = 1L;
                                                  {
-                                                     this.put(Integer.valueOf(0), "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-                                                     this.put(Integer.valueOf(1), "abcdefghijklmnopqrstuvwxyz");
-                                                     this.put(Integer.valueOf(2), "0123456789");
-                                                     this.put(Integer.valueOf(3), "ÄÖÜäöüß");
-                                                     this.put(Integer.valueOf(4), " $+-*/=%\"'#@&_(),.;:?!\\|<>[]§`^~");
+                                                     put(Integer.valueOf(0), "ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+                                                     put(Integer.valueOf(1), "abcdefghijklmnopqrstuvwxyz");
+                                                     put(Integer.valueOf(2), "0123456789");
+                                                     put(Integer.valueOf(3), "ÄÖÜäöüß");
+                                                     put(Integer.valueOf(4), " $+-*/=%\"'#@&_(),.;:?!\\|<>[]§`^~");
                                                  }
                                              };
 
-    // Variables
     private final java.awt.Font        font;
     private final FontMetrics          fontMetrics;
     private final BufferedImage        bufferedImage;
@@ -41,113 +37,111 @@ public class Font implements Texture, Asset
 
     public Font(final String path, final float size) throws FontFormatException, IOException
     {
-        this.font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File(path)).deriveFont(size);
+        font = java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new File(path)).deriveFont(size);
 
         // Generate buffered image
         final GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
                 .getDefaultConfiguration();
         final Graphics2D graphics = gc.createCompatibleImage(1, 1, Transparency.TRANSLUCENT).createGraphics();
-        graphics.setFont(this.font);
+        graphics.setFont(font);
 
-        this.fontMetrics = graphics.getFontMetrics();
-        this.bufferedImage = graphics.getDeviceConfiguration().createCompatibleImage((int) this.getFontImageWidth(),
-                (int) this.getFontImageHeight(), Transparency.TRANSLUCENT);
+        fontMetrics = graphics.getFontMetrics();
+        bufferedImage = graphics.getDeviceConfiguration()
+                .createCompatibleImage((int) getFontImageWidth(), (int) getFontImageHeight(), Transparency.TRANSLUCENT);
         // Draw the characters on our image
-        this.imageGraphics = (Graphics2D) this.bufferedImage.getGraphics();
-        this.imageGraphics.setFont(this.font);
+        imageGraphics = (Graphics2D) bufferedImage.getGraphics();
+        imageGraphics.setFont(font);
 
         // draw every CHAR by line...
-        this.imageGraphics.setColor(java.awt.Color.BLACK);
-        this.CHARS.keySet().stream().forEach(i -> this.imageGraphics.drawString(this.CHARS.get(i), 0,
-                this.fontMetrics.getMaxAscent() + this.getCharHeight() * i.floatValue()));
+        imageGraphics.setColor(java.awt.Color.BLACK);
+        CHARS.keySet().stream().forEach(
+                i -> imageGraphics
+                        .drawString(CHARS.get(i), 0, fontMetrics.getMaxAscent() + getCharHeight() * i.floatValue()));
 
         // Generate texture data
-        final int[] pixels = new int[this.bufferedImage.getWidth() * this.bufferedImage.getHeight()];
-        this.bufferedImage.getRGB(0, 0, this.bufferedImage.getWidth(), this.bufferedImage.getHeight(), pixels, 0,
-                this.bufferedImage.getWidth());
+        final int[] pixels = new int[bufferedImage.getWidth() * bufferedImage.getHeight()];
+        bufferedImage
+                .getRGB(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), pixels, 0, bufferedImage.getWidth());
         // Generate texture
 
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        this.fontTextureId = GraphicsProvider.getGraphics().generateTexture();
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.fontTextureId);
-        GraphicsProvider.getGraphics().createRgbaTexture2D(this.bufferedImage.getWidth(),
-                this.bufferedImage.getHeight(), pixels);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
+        fontTextureId = GraphicsProvider.getGraphics().generateTexture();
+        bind();
+        GraphicsProvider.getGraphics().createRgbaTexture2D(bufferedImage.getWidth(), bufferedImage.getHeight(), pixels);
+        GraphicsProvider.getGraphics().setTextureFilter(TextureFilter.LINEAR_LINEAR, TextureFilter.NEAREST);
     }
 
-    public final void changeColor(Color color)
+    public final void changeColor(final Color color)
     {
         // draw every CHAR by line...
-        this.imageGraphics.setColor(new java.awt.Color(color.getColor()));
-        this.CHARS.keySet().stream().forEach(i -> this.imageGraphics.drawString(this.CHARS.get(i), 0,
-                this.fontMetrics.getMaxAscent() + this.getCharHeight() * i.floatValue()));
+        imageGraphics.setColor(new java.awt.Color(color.getColor()));
+        CHARS.keySet().stream().forEach(
+                i -> imageGraphics
+                        .drawString(CHARS.get(i), 0, fontMetrics.getMaxAscent() + getCharHeight() * i.floatValue()));
 
         // Generate texture data
-        final int[] pixels = new int[this.bufferedImage.getWidth() * this.bufferedImage.getHeight()];
-        this.bufferedImage.getRGB(0, 0, this.bufferedImage.getWidth(), this.bufferedImage.getHeight(), pixels, 0,
-                this.bufferedImage.getWidth());
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.fontTextureId);
-        GraphicsProvider.getGraphics().createRgbaTexture2D(this.bufferedImage.getWidth(),
-                this.bufferedImage.getHeight(), pixels);
+        final int[] pixels = new int[bufferedImage.getWidth() * bufferedImage.getHeight()];
+        bufferedImage
+                .getRGB(0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), pixels, 0, bufferedImage.getWidth());
+        bind();
+        GraphicsProvider.getGraphics().createRgbaTexture2D(bufferedImage.getWidth(), bufferedImage.getHeight(), pixels);
     }
 
     public final float getFontImageWidth()
     {
-        return (float) this.CHARS.values().stream()
-                .mapToDouble(e -> this.fontMetrics.getStringBounds(e, null).getWidth()).max().getAsDouble();
+        return (float) CHARS.values().stream().mapToDouble(e -> fontMetrics.getStringBounds(e, null).getWidth()).max()
+                .getAsDouble();
     }
 
     public final float getFontImageHeight()
     {
-        return this.CHARS.keySet().size() * this.getCharHeight();
+        return CHARS.keySet().size() * getCharHeight();
     }
 
     public float getCharX(final char c)
     {
-        final String originStr = this.CHARS.values().stream().filter(e -> e.contains(String.valueOf(c))).findFirst()
+        final String originStr = CHARS.values().stream().filter(e -> e.contains(String.valueOf(c))).findFirst()
                 .orElse(String.valueOf(c));
-        return (float) this.fontMetrics.getStringBounds(originStr.substring(0, originStr.indexOf(c)), null).getWidth();
+        return (float) fontMetrics.getStringBounds(originStr.substring(0, originStr.indexOf(c)), null).getWidth();
     }
 
     public float getCharY(final char c)
     {
-        final float lineId = this.CHARS.keySet().stream().filter(i -> this.CHARS.get(i).contains(String.valueOf(c)))
-                .findFirst().orElse(Integer.valueOf(0)).floatValue();
-        return this.getCharHeight() * lineId;
+        final float lineId = CHARS.keySet().stream().filter(i -> CHARS.get(i).contains(String.valueOf(c))).findFirst()
+                .orElse(Integer.valueOf(0)).floatValue();
+        return getCharHeight() * lineId;
     }
 
     public final float getCharWidth(final char c)
     {
-        return this.fontMetrics.charWidth(c);
+        return fontMetrics.charWidth(c);
     }
 
     public final float getCharHeight()
     {
-        return this.fontMetrics.getMaxAscent() + this.fontMetrics.getMaxDescent();
+        return fontMetrics.getMaxAscent() + fontMetrics.getMaxDescent();
     }
 
     @Override
     public void bind()
     {
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.fontTextureId);
+        GraphicsProvider.getGraphics().bindTexture2D(fontTextureId);
     }
 
     @Override
     public void unbind()
     {
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+        GraphicsProvider.getGraphics().bindTexture2D(0);
     }
 
     @Override
     public int getWidth()
     {
-        return (int) this.getFontImageWidth();
+        return GMath.roundPositive(getFontImageWidth());
     }
 
     @Override
     public int getHeight()
     {
-        return (int) this.getFontImageHeight();
+        return GMath.roundPositive(getFontImageHeight());
     }
 }

@@ -10,7 +10,7 @@ import vine.graphics.VertexAttribute;
 import vine.graphics.VertexAttributeBuffer;
 import vine.graphics.VertexBufferObject;
 import vine.graphics.shader.ShaderUniforms;
-import vine.math.VineMath;
+import vine.math.GMath;
 import vine.math.matrix.Mat4f;
 import vine.math.vector.Vec3f;
 import vine.util.GridCalculator;
@@ -81,12 +81,12 @@ public class TileMapRenderer implements Renderer
         final int cameraX = (int) vector.getX() / 32 - this.screenxTiles / 2 + 1;
         final int cameraY = (int) vector.getY() / 32 - this.screenyTiles / 2 + 1;
         System.arraycopy(this.zeroUvs, 0, this.uvs, 0, this.uvs.length);
-        final int minX = VineMath.clampPositive(-cameraX);
-        final int minY = VineMath.clampPositive(-cameraY);
+        final int minX = GMath.clampPositive(-cameraX);
+        final int minY = GMath.clampPositive(-cameraY);
         final int width = this.screenxTiles
-                - VineMath.clampPositive(cameraX + this.screenxTiles - this.tileMap.getWidth());
+                - GMath.clampPositive(cameraX + this.screenxTiles - this.tileMap.getWidth());
         final int height = this.screenyTiles
-                - VineMath.clampPositive(cameraY + this.screenyTiles - this.tileMap.getHeight());
+                - GMath.clampPositive(cameraY + this.screenyTiles - this.tileMap.getHeight());
 
         for (int i = width - 1; i >= minX; i--)
         {

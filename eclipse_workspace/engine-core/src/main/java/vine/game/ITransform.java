@@ -111,4 +111,6 @@ public interface ITransform
      *            Angle of rotation in degree.
      */
     void rotate(float degrees);
+
+    void setDirty();
 }

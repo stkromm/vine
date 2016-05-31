@@ -13,6 +13,7 @@ import javax.management.openmbean.CompositeData;
 
 import com.sun.management.GarbageCollectionNotificationInfo;
 
+import vine.math.GMath;
 import vine.util.Log;
 import vine.util.time.Stopwatch;
 
@@ -53,8 +54,8 @@ public final class PerformanceMonitor
         PerformanceMonitor.capturedFrames++;
         final float frameDuration = PerformanceMonitor.stopwatch.stop();
         PerformanceMonitor.currentFps = 0.75f * PerformanceMonitor.currentFps + 0.25f * (1000000000 / frameDuration);
-        PerformanceMonitor.highestFps = Math.max(PerformanceMonitor.currentFps, PerformanceMonitor.highestFps);
-        PerformanceMonitor.lowestFps = Math.min(PerformanceMonitor.currentFps, PerformanceMonitor.lowestFps);
+        PerformanceMonitor.highestFps = GMath.max(PerformanceMonitor.currentFps, PerformanceMonitor.highestFps);
+        PerformanceMonitor.lowestFps = GMath.min(PerformanceMonitor.currentFps, PerformanceMonitor.lowestFps);
         PerformanceMonitor.averageFps = (PerformanceMonitor.averageFps * (PerformanceMonitor.capturedFrames - 1)
                 + PerformanceMonitor.currentFps) / PerformanceMonitor.capturedFrames;
     }
@@ -93,10 +94,11 @@ public final class PerformanceMonitor
                         {
                             gctype = "Old Gen GC";
                         }
-                        Log.benchmark(gctype + ": - " + info.getGcInfo().getId() + " " + info.getGcName() + " (from "
-                                + info.getGcCause() + ") " + info.getGcInfo().getDuration()
-                                + " microseconds; start-end times " + info.getGcInfo().getStartTime() + "-"
-                                + info.getGcInfo().getEndTime());
+                        Log.benchmark(
+                                gctype + ": - " + info.getGcInfo().getId() + " " + info.getGcName() + " (from "
+                                        + info.getGcCause() + ") " + info.getGcInfo().getDuration()
+                                        + " microseconds; start-end times " + info.getGcInfo().getStartTime() + "-"
+                                        + info.getGcInfo().getEndTime());
                         Log.benchmark("GcInfo CompositeType: " + info.getGcInfo().getCompositeType());
                         Log.benchmark("GcInfo MemoryUsageAfterGc: " + info.getGcInfo().getMemoryUsageAfterGc());
                         Log.benchmark("GcInfo MemoryUsageBeforeGc: " + info.getGcInfo().getMemoryUsageBeforeGc());
@@ -113,12 +115,14 @@ public final class PerformanceMonitor
                             final MemoryUsage before = membefore.get(name);
                             final long beforepercent = before.getUsed() * 1000L / before.getCommitted();
                             final long percent = memUsed * 1000L / before.getCommitted();
-                            Log.benchmark(name + (memCommitted == memMax ? "(fully expanded)" : "(still expandable)")
-                                    + "used: " + beforepercent / 10 + "." + beforepercent % 10 + "%->" + percent / 10
-                                    + "." + percent % 10 + "%(" + (memUsed / 1048576 + 1) + "MB) / ");
+                            Log.benchmark(
+                                    name + (memCommitted == memMax ? "(fully expanded)" : "(still expandable)")
+                                            + "used: " + beforepercent / 10 + "." + beforepercent % 10 + "%->"
+                                            + percent / 10 + "." + percent % 10 + "%(" + (memUsed / 1048576 + 1)
+                                            + "MB) / ");
                         }
-                        this.totalGcDuration += info.getGcInfo().getDuration();
-                        final long percent = this.totalGcDuration * 1000L / info.getGcInfo().getEndTime();
+                        totalGcDuration += info.getGcInfo().getDuration();
+                        final long percent = totalGcDuration * 1000L / info.getGcInfo().getEndTime();
                         Log.lifecycle("GC cumulated overhead " + percent / 10 + "." + percent % 10 + "%");
                     }
                 }

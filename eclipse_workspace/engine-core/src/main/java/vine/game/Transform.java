@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import vine.math.matrix.Mat3f;
+import vine.math.matrix.MutableMat3f;
 import vine.math.vector.MutableVec2f;
 import vine.math.vector.Vec2f;
 
@@ -19,9 +20,8 @@ public class Transform implements ITransform
     private ITransform            parent;
     private final Set<ITransform> children      = new HashSet<>();
 
-    private final Mat3f           parentToLocal = new Mat3f();
-    private final Mat3f           localToWorld  = new Mat3f();
-    private final Mat3f           worldToLocal  = new Mat3f();
+    private final MutableMat3f    localToWorld  = new MutableMat3f();
+    private final MutableMat3f    worldToLocal  = new MutableMat3f();
 
     private final MutableVec2f    localPosition = new MutableVec2f();
     private final MutableVec2f    worldPosition = new MutableVec2f();
@@ -33,59 +33,65 @@ public class Transform implements ITransform
     @Override
     public final ITransform getParent()
     {
-        return this.parent;
+        return parent;
     }
 
     @Override
     public final Iterable<ITransform> getChildren()
     {
-        return this.children;
+        return children;
     }
 
     @Override
     public final Mat3f getLocalToWorld()
     {
         recalculateLocalToWorld();
-        return this.localToWorld;
+        return localToWorld;
     }
 
     @Override
     public final Mat3f getWorldToLocal()
     {
         recalculateLocalToWorld();
-        return this.worldToLocal;
+        return worldToLocal;
     }
 
     @Override
     public final Vec2f getLocalPosition()
     {
-        return this.localPosition;
+        return localPosition;
     }
 
     @Override
     public final Vec2f getWorldPosition()
     {
-        recalculateLocalToWorld();
-        return this.worldPosition;
+        if (parent == null)
+        {
+            return localPosition;
+        } else
+        {
+            recalculateLocalToWorld();
+            return worldPosition;
+        }
     }
 
     @Override
     public final float getLocalRotation()
     {
-        return this.localRotation;
+        return localRotation;
     }
 
     @Override
     public final float getWorldRotation()
     {
         recalculateLocalToWorld();
-        return this.worldRotation;
+        return worldRotation;
     }
 
     @Override
     public final boolean addChild(final ITransform transform)
     {
-        this.children.add(transform);
+        children.add(transform);
         transform.setParent(this);
         return true;
     }
@@ -93,47 +99,68 @@ public class Transform implements ITransform
     @Override
     public final boolean setParent(final ITransform transform)
     {
-        if (this.parent.equals(transform))
+        if (transform.equals(parent))
         {
             return true;
         }
-        this.parent = transform;
+        parent = transform;
         transform.addChild(this);
-        this.dirty = true;
+        setDirty();
         return true;
     }
 
     @Override
     public final void translate(final float x, final float y)
     {
-        this.localPosition.add(x, y);
+        localPosition.add(x, y);
+        setDirty();
     }
 
     @Override
     public final void rotate(final float degrees)
     {
-        this.localRotation += degrees;
+        localRotation += degrees;
+        setDirty();
     }
 
     private final void recalculateLocalToWorld()
     {
-        if (!this.dirty)
+        if (!dirty)
         {
             return;
         }
+
         // Local to world
-        this.localToWorld.setRotation(this.localRotation);
-        this.localToWorld.setTranslation(this.localPosition.getX(), this.localPosition.getY());
-        final Mat3f parentToWorld = this.parent.getLocalToWorld();
-        this.localToWorld.rightMultiply(parentToWorld);
-
+        localToWorld.setRotation(localRotation);
+        localToWorld.setTranslation(localPosition.getX(), localPosition.getY());
+        if (parent != null)
+        {
+            final Mat3f parentToWorld = parent.getLocalToWorld();
+            localToWorld.rightMultiply(parentToWorld);
+            worldPosition.set(parent.getWorldPosition());
+            worldPosition.add(localPosition);
+            worldRotation = parent.getWorldRotation();
+            worldRotation += localRotation;
+        }
         // World to local
-        this.worldToLocal.setRotation(-this.localRotation);
-        this.worldToLocal.setTranslation(-this.localPosition.getX(), -this.localPosition.getY());
-        final Mat3f worldToParent = this.parent.getWorldToLocal();
-        worldToParent.leftMultiply(this.worldToLocal);
+        worldToLocal.setRotation(-localRotation);
+        worldToLocal.setTranslation(-localPosition.getX(), -localPosition.getY());
 
+        if (parent != null)
+        {
+            worldToLocal.leftMultiply(parent.getWorldToLocal());
+        }
         //
-        this.dirty = false;
+        dirty = false;
+    }
+
+    @Override
+    public final void setDirty()
+    {
+        dirty = true;
+        for (final ITransform t : children)
+        {
+            t.setDirty();
+        }
     }
 }

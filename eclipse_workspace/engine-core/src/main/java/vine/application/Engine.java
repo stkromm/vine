@@ -19,17 +19,18 @@ import vine.window.Window;
  */
 public class Engine implements EngineLifecycle
 {
-    private static final long  MAX_UPDATE_DURATION = 16L * (long) 1e6;
-    private static final long  MAX_FRAME_DURATION  = 33L * (long) 1e6;
+    private static final long  MAX_UPDATE_DURATION  = 64L * (long) 1e6;
+    private static final long  MAX_PHYSICS_DURATION = 16L * (long) 1e6;
+    private static final long  MAX_FRAME_DURATION   = 33L * (long) 1e6;
 
     private final World        world;
     private final Input        input;
 
-    private volatile boolean   running             = true;
+    private volatile boolean   running              = true;
     private volatile boolean   idle;
 
     private final RenderStack  renderStack;
-    private final List<Thread> workThreads         = new ArrayList<>(2);
+    private final List<Thread> workThreads          = new ArrayList<>(2);
     private final Window       window;
 
     /**
@@ -50,42 +51,42 @@ public class Engine implements EngineLifecycle
 
     public Window getWindow()
     {
-        return this.window;
+        return window;
     }
 
     public Input getInput()
     {
-        return this.input;
+        return input;
     }
 
     @Override
     public final synchronized void stop()
     {
-        this.running = false;
+        running = false;
     }
 
     @Override
     public final synchronized void pause()
     {
-        this.idle = true;
+        idle = true;
     }
 
     @Override
     public final synchronized void resume()
     {
-        this.idle = false;
+        idle = false;
     }
 
     @Override
     public final synchronized void start()
     {
-        this.workThreads.forEach(thread -> thread.start());
-        while (this.running)
+        workThreads.forEach(thread -> thread.start());
+        while (running)
         {
-            this.input.poll();
-            if (this.window.requestedClose())
+            input.poll();
+            if (window.requestedClose())
             {
-                this.running = false;
+                running = false;
             }
             Engine.waitTick(Engine.MAX_UPDATE_DURATION);
         }
@@ -94,15 +95,16 @@ public class Engine implements EngineLifecycle
     @Override
     public synchronized void create()
     {
-        this.world.changeLevel("default-level");
+        world.changeLevel("default-level");
         GraphicsProvider.getGraphics().makeContext(0L);
         if (RuntimeInfo.getProcessorCoreCount() > 2)
         {
-            this.workThreads.add(createLogicThread());
-            this.workThreads.add(createRenderThread());
+            workThreads.add(createLogicThread());
+            workThreads.add(createRenderThread());
+            workThreads.add(createPhysicThread());
         } else
         {
-            this.workThreads.add(createSingleThreadExecution());
+            workThreads.add(createSingleThreadExecution());
         }
 
     }
@@ -111,7 +113,7 @@ public class Engine implements EngineLifecycle
     public synchronized void destroy()
     {
         stop();
-        this.workThreads.forEach(thread ->
+        workThreads.forEach(thread ->
         {
             try
             {
@@ -143,16 +145,33 @@ public class Engine implements EngineLifecycle
         {
             Thread.currentThread().setName(RuntimeInfo.LOGIC_THREAD_NAME);
             final Stopwatch stopwatch = new Stopwatch(true);
-            while (this.running)
+            while (running)
             {
-                if (!this.idle)
+                if (!idle)
                 {
                     final float delta = stopwatch.stop() / 1000000f;
                     TimerManager.get().tick(delta);
-                    this.world.update(delta);
-                    this.world.simulatePhysics(delta);
+                    world.update(delta);
                 }
                 Engine.waitTick(Engine.MAX_UPDATE_DURATION - stopwatch.layover());
+            }
+        });
+    }
+
+    private final Thread createPhysicThread()
+    {
+        return new Thread(() ->
+        {
+            Thread.currentThread().setName(RuntimeInfo.PHYSIC_THREAD_NAME);
+            final Stopwatch stopwatch = new Stopwatch(true);
+            while (running)
+            {
+                if (!idle)
+                {
+                    final float delta = stopwatch.stop() / 1000000f;
+                    world.simulatePhysics(delta);
+                }
+                Engine.waitTick(Engine.MAX_PHYSICS_DURATION - stopwatch.layover());
             }
         });
     }
@@ -163,14 +182,14 @@ public class Engine implements EngineLifecycle
         {
             final Stopwatch stopwatch = new Stopwatch(true);
             Thread.currentThread().setName(RuntimeInfo.RENDER_THREAD_NAME);
-            this.renderStack.init();
+            renderStack.init();
             stopwatch.stop();
-            while (this.running)
+            while (running)
             {
                 PerformanceMonitor.startFrame();
-                if (!this.idle)
+                if (!idle)
                 {
-                    this.renderStack.render();
+                    renderStack.render();
                 }
                 PerformanceMonitor.endFrame();
                 Engine.waitTick(Engine.MAX_FRAME_DURATION - stopwatch.stop());
@@ -183,17 +202,17 @@ public class Engine implements EngineLifecycle
         return new Thread(() ->
         {
             Thread.currentThread().setName(RuntimeInfo.RENDER_THREAD_NAME);
-            this.renderStack.init();
+            renderStack.init();
             final Stopwatch stopwatch = new Stopwatch(true);
-            while (this.running)
+            while (running)
             {
                 PerformanceMonitor.startFrame();
-                if (!this.idle)
+                if (!idle)
                 {
                     final long delta = stopwatch.stop();
                     TimerManager.get().tick(delta / (float) 1e6);
-                    this.world.update(delta / (float) 1e6);
-                    this.renderStack.render();
+                    world.update(delta / (float) 1e6);
+                    renderStack.render();
                 }
                 PerformanceMonitor.endFrame();
                 Engine.waitTick(Engine.MAX_UPDATE_DURATION - stopwatch.layover());

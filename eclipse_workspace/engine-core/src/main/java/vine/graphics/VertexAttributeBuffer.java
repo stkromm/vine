@@ -14,64 +14,61 @@ public class VertexAttributeBuffer
 
     public VertexAttributeBuffer(final float[] data, final VertexAttribute attribute)
     {
-        this.graphics = GraphicsProvider.getGraphics();
-        this.bufferId = this.graphics.generateBuffer();
+        graphics = GraphicsProvider.getGraphics();
+        bufferId = graphics.generateBuffer();
         this.data = BufferConverter.createFloatBuffer(data);
         this.attribute = attribute;
     }
 
     public int getPosition()
     {
-        return this.data.position();
+        return data.position();
     }
 
     public void append(final float[] values)
     {
 
-        if (this.data.remaining() < values.length)
+        if (data.remaining() < values.length)
         {
             Log.debug(this, "Resized unintentionally");
-            Log.debug("Buffer-capacity:" + this.data.capacity());
-            Log.debug("Buffer-position:" + this.data.position());
+            Log.debug("Buffer-capacity:" + data.capacity());
+            Log.debug("Buffer-position:" + data.position());
             Log.debug("Appended values:" + values.length);
-            final float[] copy = new float[this.data.position()];
-            this.data.clear();
-            this.data.get(copy);
-            this.resize(this.data.capacity() * 2);
-            this.append(copy);
+            final float[] copy = new float[data.position()];
+            data.clear();
+            data.get(copy);
+            resize(data.capacity() * 2);
+            append(copy);
         }
 
-        this.data.put(values, 0, values.length);
+        data.put(values, 0, values.length);
     }
 
     public void resize(final int size)
     {
-        if (Log.isLifecycleEnabled())
-        {
-            Log.lifecycle("Resized attribute buffer with size " + this.attribute.name() + size);
-        }
-        final float[] copy = new float[this.data.position()];
-        this.data.clear();
-        this.data.get(copy);
-        this.data = BufferConverter.createFloatBuffer(new float[size]);
-        this.append(copy);
+        Log.lifecycle(this, "Resized attribute buffer with size %s %d", attribute.name(), Integer.valueOf(size));
+        final float[] copy = new float[data.position()];
+        data.clear();
+        data.get(copy);
+        data = BufferConverter.createFloatBuffer(new float[size]);
+        append(copy);
     }
 
     public void reallocate()
     {
-        this.data.flip();
-        this.data.rewind();
-        this.graphics.reallocateAttributeData(this.bufferId, this.data);
-        this.data.clear();
+        data.flip();
+        data.rewind();
+        graphics.reallocateAttributeData(bufferId, data);
+        data.clear();
     }
 
     public void bind()
     {
-        this.graphics.bindVertexAttribute(this.bufferId, this.data, this.attribute);
+        graphics.bindVertexAttribute(bufferId, data, attribute);
     }
 
     public VertexAttribute getAttribute()
     {
-        return this.attribute;
+        return attribute;
     }
 }

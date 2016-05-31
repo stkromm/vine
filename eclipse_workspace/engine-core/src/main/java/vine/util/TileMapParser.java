@@ -1,7 +1,9 @@
-package vine.game.tilemap;
+package vine.util;
 
 import vine.assets.AssetManager;
-import vine.graphics.Image;
+import vine.game.tilemap.Tile;
+import vine.game.tilemap.UniformTileMap;
+import vine.graphics.RgbaImage;
 import vine.graphics.Texture;
 
 public final class TileMapParser
@@ -20,13 +22,13 @@ public final class TileMapParser
     {
         final String[] parts = file.split("#");
         final int width = Integer.valueOf(parts[TileMapParser.WIDTH_FIELD]).intValue();
-        final Texture chipset = AssetManager.loadSync(parts[TileMapParser.CHIPSET_FIELD], Image.class);
+        final Texture chipset = AssetManager.loadSync(parts[TileMapParser.CHIPSET_FIELD], RgbaImage.class);
         final Tile[] tiles = TileMapParser.parseTiles(parts[TileMapParser.TILE_FIELD]);
         final UniformTileMap tileMap = new UniformTileMap(width, tiles, chipset);
         return tileMap;
     }
 
-    public static Tile[] parseTiles(String tiles)
+    public static Tile[] parseTiles(final String tiles)
     {
         return null;
     }

@@ -10,7 +10,7 @@ import vine.util.BufferConverter;
  */
 public class VertexBufferObject
 {
-    private static final int[] SQUAD_INDICE = new int[] { 0, 1, 2, 2, 3, 0 };
+    private static final int[] QUAD_INDICE = new int[] { 0, 1, 2, 2, 3, 0 };
     private final int          vao;
     private final int          ibo;
     private final int          count;
@@ -19,22 +19,22 @@ public class VertexBufferObject
 
     public VertexBufferObject(final int[] indices, final VertexAttributeBuffer... attributes)
     {
-        this.graphics = GraphicsProvider.getGraphics();
-        this.count = indices.length / 6;
-        this.vao = this.graphics.generateVertexArray();
-        this.graphics.bindVertexArray(this.vao);
+        graphics = GraphicsProvider.getGraphics();
+        count = indices.length / 6;
+        vao = graphics.generateVertexArray();
+        graphics.bindVertexArray(vao);
 
         for (final VertexAttributeBuffer attribute : attributes)
         {
             attribute.bind();
         }
 
-        this.ibo = this.graphics.generateBuffer();
-        this.indiceBuffer = BufferConverter.createIntBuffer(indices);
-        this.graphics.bindIndexData(this.ibo, this.indiceBuffer);
-        this.graphics.bindElementArrayBuffer(0);
-        this.graphics.bindArrayBuffer(0);
-        this.graphics.bindVertexArray(0);
+        ibo = graphics.generateBuffer();
+        indiceBuffer = BufferConverter.createIntBuffer(indices);
+        graphics.bindIndexData(ibo, indiceBuffer);
+        graphics.bindElementArrayBuffer(0);
+        graphics.bindArrayBuffer(0);
+        graphics.bindVertexArray(0);
     }
 
     /**
@@ -49,36 +49,36 @@ public class VertexBufferObject
      */
     public VertexBufferObject(final int size, final VertexAttributeBuffer... attributes)
     {
-        this.graphics = GraphicsProvider.getGraphics();
-        this.count = size;
-        this.vao = this.graphics.generateVertexArray();
-        this.graphics.bindVertexArray(this.vao);
+        graphics = GraphicsProvider.getGraphics();
+        count = size;
+        vao = graphics.generateVertexArray();
+        graphics.bindVertexArray(vao);
 
         for (final VertexAttributeBuffer attribute : attributes)
         {
             attribute.bind();
         }
 
-        final int[] indices = new int[this.count * 6];
-        for (int i = this.count - 1; i >= 0; i--)
+        final int[] indices = new int[count * 6];
+        for (int i = count - 1; i >= 0; i--)
         {
-            for (int b = 0; b < VertexBufferObject.SQUAD_INDICE.length; b++)
+            for (int b = 0; b < VertexBufferObject.QUAD_INDICE.length; b++)
             {
-                indices[i * VertexBufferObject.SQUAD_INDICE.length + b] = i * 4 + VertexBufferObject.SQUAD_INDICE[b];
+                indices[i * VertexBufferObject.QUAD_INDICE.length + b] = i * 4 + VertexBufferObject.QUAD_INDICE[b];
             }
         }
 
-        this.ibo = this.graphics.generateBuffer();
-        this.indiceBuffer = BufferConverter.createIntBuffer(indices);
-        this.graphics.bindIndexData(this.ibo, this.indiceBuffer);
-        this.graphics.bindElementArrayBuffer(0);
-        this.graphics.bindArrayBuffer(0);
-        this.graphics.bindVertexArray(0);
+        ibo = graphics.generateBuffer();
+        indiceBuffer = BufferConverter.createIntBuffer(indices);
+        graphics.bindIndexData(ibo, indiceBuffer);
+        graphics.bindElementArrayBuffer(0);
+        graphics.bindArrayBuffer(0);
+        graphics.bindVertexArray(0);
     }
 
     public int getCount()
     {
-        return this.count;
+        return count;
     }
 
     /**
@@ -86,8 +86,8 @@ public class VertexBufferObject
      */
     public void bind()
     {
-        this.graphics.bindVertexArray(this.vao);
-        this.graphics.bindElementArrayBuffer(this.ibo);
+        graphics.bindVertexArray(vao);
+        graphics.bindElementArrayBuffer(ibo);
     }
 
     /**
@@ -101,11 +101,11 @@ public class VertexBufferObject
 
     public void draw(final int numberOfQuads)
     {
-        this.graphics.drawElements(numberOfQuads * 6);
+        graphics.drawElements(numberOfQuads * 6, DrawPrimitive.TRIANGLE);
     }
 
     public void draw()
     {
-        this.graphics.drawElements(this.count * 6);
+        graphics.drawElements(count * 6, DrawPrimitive.TRIANGLE);
     }
 }

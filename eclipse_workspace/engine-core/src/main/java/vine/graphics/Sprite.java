@@ -14,7 +14,7 @@ public interface Sprite
 
     float[] getUVCoordinates();
 
-    Image getTexture();
+    RgbaImage getTexture();
 
     Vec2f getSize();
 

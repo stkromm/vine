@@ -6,15 +6,15 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import vine.graphics.Image;
+import vine.graphics.RgbaImage;
 import vine.util.FileUtils;
 import vine.util.Log;
 
-public class TextureLoader extends AssetLoader<Image, AssetLoaderParameters<Image>>
+public class TextureLoader extends AssetLoader<RgbaImage, AssetLoaderParameters<RgbaImage>>
 {
 
     @Override
-    public Image loadSync(final AssetPointer pointer, final AssetLoaderParameters<Image> parameter)
+    public RgbaImage loadSync(final AssetPointer pointer, final AssetLoaderParameters<RgbaImage> parameter)
     {
         BufferedImage image = null;
         try (ByteArrayInputStream stream = new ByteArrayInputStream(FileUtils.readBytes(pointer.getPath())))
@@ -42,14 +42,14 @@ public class TextureLoader extends AssetLoader<Image, AssetLoaderParameters<Imag
             final int blue = pixels[i] & 0xff;
             data[i] = alpha << 24 | blue << 16 | green << 8 | red;
         }
-        return new Image(data, width, height);
+        return new RgbaImage(data, width, height);
     }
 
     @Override
     public void loadAsync(
             final AssetPointer pointer,
-            final AssetLoaderParameters<Image> parameter,
-            final vine.assets.AssetLoader.FinishCallback<Image> callback,
+            final AssetLoaderParameters<RgbaImage> parameter,
+            final vine.assets.AssetLoader.FinishCallback<RgbaImage> callback,
             final vine.assets.AssetLoader.ProgressCallback progessCallback)
     {
         // TODO Auto-generated method stub

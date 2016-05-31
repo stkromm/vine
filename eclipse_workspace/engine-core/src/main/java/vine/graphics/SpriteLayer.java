@@ -1,14 +1,19 @@
 package vine.graphics;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import vine.event.EventListener;
 import vine.game.Layer;
 import vine.game.World;
+import vine.game.primitive.BoxPrimitive;
 import vine.game.scene.GameEntity;
 import vine.game.scene.Scene;
-import vine.game.scene.SceneTracer;
 import vine.game.screen.Screen;
+import vine.graphics.renderer.PrimitiveRenderer;
 import vine.graphics.renderer.SpriteBatch;
 import vine.graphics.renderer.TileMapRenderer;
+import vine.math.Intersection;
 
 public class SpriteLayer implements Layer
 {
@@ -18,9 +23,9 @@ public class SpriteLayer implements Layer
 
     public SpriteLayer(final World game)
     {
-        this.scene = game.getScene();
-        this.spriteBatch = new SpriteBatch();
-        this.terrainRenderer = new TileMapRenderer(game.getScreen(), game);
+        scene = game.getScene();
+        spriteBatch = new SpriteBatch();
+        terrainRenderer = new TileMapRenderer(game.getScreen(), game);
     }
 
     @Override
@@ -29,48 +34,74 @@ public class SpriteLayer implements Layer
         return "Scene";
     }
 
+    float[]            textureUVs = PrimitiveRenderer.DEFAULT_TEXTURE.getPackedUVSquad(24, 24, 1, 1);
+    List<BoxPrimitive> bps        = new ArrayList<>();
+
     @Override
     public void render(final Screen screen)
     {
-        this.terrainRenderer.submit(this.scene.getMap());
-        this.terrainRenderer.prepare(this.scene.getWorld().getScreen());
-        final GameEntity cameraEntity = this.scene.getCameras().getActiveCamera().getEntity();
-        final float posX = cameraEntity.getXPosition() - this.scene.getWorld().getScreen().getWidth() / 2;
-        final float posY = cameraEntity.getYPosition() - this.scene.getWorld().getScreen().getHeight() / 2 - 50;
-        this.spriteBatch.prepare(this.scene);
-        final int startChunkX = (int) (posX * SceneTracer.I_CHUNK_WIDTH);
-        final int startChunkY = (int) (posY * SceneTracer.I_CHUNK_HEIGHT);
-        final int endChunkX = (int) ((posX + this.scene.getWorld().getScreen().getWidth()) * SceneTracer.I_CHUNK_WIDTH);
-        final int endChunkY = (int) ((posY + this.scene.getWorld().getScreen().getHeight())
-                * SceneTracer.I_CHUNK_HEIGHT);
-        for (int i = endChunkX - startChunkX; i >= 0; i--)
+        terrainRenderer.submit(scene.getMap());
+        terrainRenderer.prepare(scene.getWorld().getScreen());
+        final GameEntity cameraEntity = scene.getCameras().getActiveCamera().getEntity();
+        final float posX = cameraEntity.getXPosition() - scene.getWorld().getScreen().getWidth() / 2;
+        final float posY = cameraEntity.getYPosition() - scene.getWorld().getScreen().getHeight() / 2 - 50;
+        spriteBatch.prepare(scene);
+        for (final GameEntity entity : scene.getEntities())
         {
-            for (int j = endChunkY - startChunkY; j >= 0; j--)
+            if (entity.isDestroyed() || entity.getColor().getAlpha() > 0.99f)
             {
-                for (final GameEntity entity : this.scene.getChunk(startChunkX + i, startChunkY + j).getEntities())
+                continue;
+            }
+
+            if (Intersection.doesAABBIntersectAABB(
+                    scene.getWorld().getScreen().getWidth(),
+                    scene.getWorld().getScreen().getHeight() + 100,
+                    entity.getPosition().getX() - posX,
+                    entity.getPosition().getY() - posY,
+                    entity.getBoundingBoxExtends().getX(),
+                    entity.getBoundingBoxExtends().getY()))
+            {
+                for (final Renderable renderable : entity.getRenderables())
                 {
-                    if (entity.isDestroyed() || entity.getColor().getAlpha() > 0.99f)
-                    {
-                        continue;
-                    }
-                    /*
-                     * if (Intersection2D.doesAabbIntersectAabb( posX, posY,
-                     * this.scene.getWorld().getScreen().getWidth(),
-                     * this.scene.getWorld().getScreen().getHeight() + 100,
-                     * entity.getPosition().getX(), entity.getPosition().getY(),
-                     * entity.getBoundingBoxExtends().getX(),
-                     * entity.getBoundingBoxExtends().getY())) {
-                     */
-                    for (final Renderable renderable : entity.getRenderables().getIterable())
-                    {
-                        renderable.onRender(this.spriteBatch);
-                    }
-                    // }
+                    renderable.onRender(spriteBatch);
                 }
             }
         }
-        this.spriteBatch.finish();
+        spriteBatch.finish();
+        spriteBatch.prepare(scene);
+        for (final GameEntity entity : scene.getEntities())
+        {
+            if (entity.isDestroyed() || entity.getColor().getAlpha() > 0.99f)
+            {
+                continue;
+            }
 
+            if (Intersection.doesAABBIntersectAABB(
+                    scene.getWorld().getScreen().getWidth(),
+                    scene.getWorld().getScreen().getHeight() + 100,
+                    entity.getPosition().getX() - posX,
+                    entity.getPosition().getY() - posY,
+                    entity.getBoundingBoxExtends().getX(),
+                    entity.getBoundingBoxExtends().getY()))
+            {
+                bps.clear();
+                entity.getComponents(BoxPrimitive.class, bps);
+                for (final BoxPrimitive c : bps)
+                {
+                    spriteBatch.submit(
+                            PrimitiveRenderer.DEFAULT_TEXTURE,
+                            textureUVs,
+                            c.getTransform().getWorldPosition().getX(),
+                            c.getTransform().getWorldPosition().getY(),
+                            c.getExtends().getX(),
+                            c.getExtends().getY(),
+                            0,
+                            entity.getColor().getColor());
+                }
+
+            }
+        }
+        spriteBatch.finish();
     }
 
     @Override

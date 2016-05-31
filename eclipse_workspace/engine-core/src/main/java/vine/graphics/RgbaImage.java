@@ -1,7 +1,5 @@
 package vine.graphics;
 
-import org.lwjgl.opengl.GL11;
-
 import vine.assets.Asset;
 
 /**
@@ -11,70 +9,79 @@ import vine.assets.Asset;
  * @author Steffen
  *
  */
-public class Image implements Texture, Asset
+public class RgbaImage implements Texture, Asset
 {
-
+    protected TextureFilter minFilter = TextureFilter.LINEAR_LINEAR;
+    protected TextureFilter magFilter = TextureFilter.NEAREST;
     /**
      * The width in number of texels
      */
-    protected final int    width;
+    protected final int     width;
     /**
      * The height in number of texels
      */
-    protected final int    height;
+    protected final int     height;
     /**
      * Stores the id of the texture in open gl.
      */
-    protected final int    textureId;
+    protected final int     textureId;
 
-    private final Graphics graphics;
+    private final int[]     pixel;
 
-    public Image(final int[] data, final int width, final int height)
+    public RgbaImage(final int[] data, final int width, final int height)
     {
-        this.graphics = GraphicsProvider.getGraphics();
         this.height = height;
         this.width = width;
-        this.textureId = this.graphics.generateTexture();
-        this.graphics.bindTexture2D(this.textureId);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR_MIPMAP_LINEAR);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST);
-        this.graphics.createRgbaTexture2D(width, height, data);
+        textureId = GraphicsProvider.getGraphics().generateTexture();
+        pixel = data;
+        applyChanges();
+    }
+
+    public void applyChanges()
+    {
+        bind();
+        GraphicsProvider.getGraphics().setTextureFilter(magFilter, minFilter);
+        GraphicsProvider.getGraphics().createRgbaTexture2D(width, height, pixel);
     }
 
     @Override
     public void bind()
     {
-        this.graphics.bindTexture2D(this.textureId);
+        GraphicsProvider.getGraphics().bindTexture2D(textureId);
     }
 
     @Override
     public void unbind()
     {
-        this.graphics.bindTexture2D(0);
+        GraphicsProvider.getGraphics().bindTexture2D(0);
     }
 
-    /**
-     * @return
-     */
     @Override
     public int getWidth()
     {
-        return this.width;
+        return width;
     }
 
-    /**
-     * @return
-     */
     @Override
     public int getHeight()
     {
-        return this.height;
+        return height;
+    }
+
+    public int getPixel(final int x, final int y)
+    {
+        return pixel[y * width + x];
+    }
+
+    public void setPixel(final int x, final int y, final int color)
+    {
+        pixel[y * width + x] = color;
     }
 
     public float[] getPackedUVSquad(final int texX, final int texY, final int texWidth, final int texHeight)
     {
-        final int textureWidth = this.getWidth();
-        final int textureHeight = this.getHeight();
+        final int textureWidth = getWidth();
+        final int textureHeight = getHeight();
         final float uvX = texX / (float) textureWidth;
         final float uvY = texY / (float) textureHeight;
         final float uvWidth = texWidth / (float) textureWidth;
